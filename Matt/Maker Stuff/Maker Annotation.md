@@ -124,7 +124,7 @@ Convert MAKER2 GFF predictions into Augustus HMM
     species=SpeciesName
     
     cd $base.hmm
-    zff2gff3.pl genome.ann | perl -plne 's/\t(\S+)$/\t\.\t$1/' >genome.gff3
+    /home/macmanes/maker/exe/snap/zff2gff3.pl genome.ann | perl -plne 's/\t(\S+)$/\t\.\t$1/' >genome.gff3
     # the perl one liner is needed to add an extra GFF column which is missing in the output of zff2gff3.pl
     
     # run augustus using autoAug:
