@@ -1,3 +1,12 @@
+---
+layout: post
+category : lessons
+tagline: "Supporting tagline"
+tags : [Maker, CEGMA, Augustus, GeneMark]
+---
+{% include JB/setup %}
+
+
 This is the code for running the training module of Augustus
 
 	~/augustus-3.0.2/scripts/autoAug.pl --genome=jelly.out.fasta --pasa --pasapolyAhints -singleCPU --cdna=augustus.complete.cds --species=peer --utr --hints=augustus.gff3 --optrounds=2
