@@ -21,3 +21,9 @@ This is what I really did: (in `/media/macmanes/hd3/maker/augustus`)
 
 	~/augustus-3.0.2/scripts/autoAug.pl --genome=../../pero-genome/jelly.out.fasta --species=peer \
 	--cdna=../augustus.complete.cds --trainingset=../cegma/genome.gff3 --singleCPU -v --useexisting
+	
+I got an error message: `Number of training genes is with 17 too low (at least 100 genes required)! Training aborted.`
+
+> I'll have to run maker on Blacklight a little *or maybe a lot* longer...
+
+
