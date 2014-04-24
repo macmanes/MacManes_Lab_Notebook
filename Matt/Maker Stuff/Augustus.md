@@ -1,11 +1,3 @@
----
-layout: post
-category : lessons
-tagline: "Supporting tagline"
-tags : [Maker, CEGMA, Augustus, GeneMark]
----
-{% include JB/setup %}
-
 
 This is the code for running the training module of Augustus
 
@@ -27,3 +19,16 @@ I got an error message: `Number of training genes is with 17 too low (at least 1
 > I'll have to run maker on Blacklight a little *or maybe a lot* longer...
 
 
+17 Apr 14
+--
+take 2 (in `/media/macmanes/hd3/maker/pero.genes.maker.output`):
+
+	~/maker/bin/gff3_merge -d pero.genes_master_datastore_index.log
+	~/maker/bin/maker2zff pero.genes.all.gff
+	/home/macmanes/maker/exe/snap/fathom genome.ann genome.dna -categorize 1000
+	/home/macmanes/maker/exe/snap/zff2gff3.pl genome.ann | perl -plne 's/\t(\S+)$/\t\.\t$1/' >for-augustus.gff3
+	
+nof for the actual training (in .
+
+	~/augustus-3.0.2/scripts/autoAug.pl --genome=../../pero-genome/jelly.out.fasta --species=peer \
+	--cdna=../augustus.complete.cds --trainingset=for-augustus.gff3 --singleCPU -v --useexisting
