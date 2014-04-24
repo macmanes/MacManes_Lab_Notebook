@@ -20,3 +20,12 @@ There are a few other settings that you might consider setting..
 > All contigs shorter then "min_contig" are excluded from training procedure.
 
 GeneMark will create many folders in working directory. The final file that you need to provide to MAKER is in `mod/es.mod`.
+
+
+---
+15 Apr 14
+---
+
+Repeat masker finished, I invoked genemark like this:
+
+	/home/macmanes/gm_es_bp_linux64_v2.3e/gmes/gm_es.pl --min_contig 20000 ../pero.genes.fa.masked --BP OFF

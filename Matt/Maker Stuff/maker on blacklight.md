@@ -38,4 +38,4 @@ After this, I need to make a single gff file using:
 Then this file I will use in augustus (in `/media/macmanes/hd3/maker/augustus`)
 
 	nohup ~/augustus-3.0.2/scripts/autoAug.pl --genome=../../pero-genome/jelly.out.fasta --species=peer \
-	--cdna=../augustus.complete.cds trainingset=pero.gff --singleCPU -v --useexisting
+	--cdna=../augustus.complete.cds --trainingset=pero.gff --singleCPU -v --useexisting
