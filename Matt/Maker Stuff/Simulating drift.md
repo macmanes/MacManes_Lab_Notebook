@@ -105,3 +105,15 @@ simulating drift in R
     theme(legend.position = "null")
     
     grid.arrange(p1,p2, p3, p4)
+    
+
+time to fixation:
+
+	n=1000
+	p=p=c(0, 0.1,0.2,.3, .4, .5, .6, .7, .8, .9, 1)
+	plot(-4*(n)*(p*log(p) + ((1-p)*log(1-p))), type='l', frame.plot='F', lwd=8, col='red', xaxt='n', xlab='Initial Allele Frequency', ylab='Expected time to fixation or loss (Number Generations)', ylim=c(0,3000))
+	axis(1, at=c(1,2,3,4,5,6,7,8,9,10,11), labels=c("0", ".1", '.2', '.3', ".4", '.5', '.6', '.7', '.8', '.9', '1'))
+	n=100
+	lines(-4*(n)*(p*log(p) + ((1-p)*log(1-p))), type='l', lwd=8, col='green', xaxt='n')
+	n=500
+	lines(-4*(n)*(p*log(p) + ((1-p)*log(1-p))), type='l', lwd=8, col='blue', xaxt='n')

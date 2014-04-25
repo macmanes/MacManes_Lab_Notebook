@@ -24,11 +24,20 @@ I got an error message: `Number of training genes is with 17 too low (at least 1
 take 2 (in `/media/macmanes/hd3/maker/pero.genes.maker.output`):
 
 	~/maker/bin/gff3_merge -d pero.genes_master_datastore_index.log
-	~/maker/bin/maker2zff pero.genes.all.gff
+	~/maker/bin/maker2zff pero.gff
 	/home/macmanes/maker/exe/snap/fathom genome.ann genome.dna -categorize 1000
-	/home/macmanes/maker/exe/snap/zff2gff3.pl genome.ann | perl -plne 's/\t(\S+)$/\t\.\t$1/' >for-augustus.gff3
+	/home/macmanes/maker/exe/snap/zff2gff3.pl genome.ann | perl -plne 's/\t(\S+)$/\t\.\t$1/' > for-augustus.gff3
 	
 nof for the actual training (in .
 
 	~/augustus-3.0.2/scripts/autoAug.pl --genome=../../pero-genome/jelly.out.fasta --species=peer \
 	--cdna=../augustus.complete.cds --trainingset=for-augustus.gff3 --singleCPU -v --useexisting
+
+
+25 Apr 14
+--
+
+I killed the last run, remade the `for-augustus.gff` file, and started with slightly different command. Specifically, I lost the --singleCPU command in hopes that this will run faster. 
+
+	nohup ~/augustus-3.0.2/scripts/autoAug.pl --genome=../../pero-genome/jelly.out.fasta --species=peer \
+	--cdna=../augustus.complete.cds --trainingset=for-augustus.gff3 --noninteractive --useexisting --optrounds=1 &
