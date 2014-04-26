@@ -3,7 +3,11 @@
 <plist version="1.0">
  <dict>
   <key>CreationDate</key>
+<<<<<<< HEAD
   <date>2014-04-24T01:12:48Z</date>
+=======
+  <date>2014-04-15T19:42:14Z</date>
+>>>>>>> FETCH_HEAD
   <key>Markdown</key>
   <string>OK</string>
  </dict>
