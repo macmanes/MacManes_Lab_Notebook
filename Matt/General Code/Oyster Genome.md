@@ -16,11 +16,11 @@ Trimming
 
 split
 
-	cat oyster_trim_* | split -l 80000000
+	cat /mnt/data3/macmanes/oyster_genome/oyster_trim_* | split -l 80000000
 	
 Assemble:
 
-	for k in 71 81 91 101
-		do ABYSS-P -k$k --coverage-hist=k$k.hist \
-		/reads/x*
+	for k in 61 65 71 75 81 91 101
+		do mpirun -np 64 ABYSS-P -k$k --coverage-hist=k$k.hist \
+		-o oyster$k reads/x*
 	done 

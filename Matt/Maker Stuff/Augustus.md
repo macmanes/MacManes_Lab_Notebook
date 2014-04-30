@@ -115,11 +115,46 @@ _______________________
 	/media/macmanes/hd3/maker/pero.genes.maker.output/autoAug/seq/split/genome_clean.split.7.fa > \
 	/media/macmanes/hd3/maker/pero.genes.maker.output/autoAug/autoAugPred_hints/shells/aug7.out &
 
-done to here
+these 4 above might be suspect..
 --
 
+_______________________
+
+	/home/macmanes/augustus-3.0.2/config//../src/augustus --UTR=off --hintsfile=../../hints/hints.gff \
+	--extrinsicCfgFile=/home/macmanes/augustus-3.0.2/config/extrinsic/extrinsic.E.cfg \
+	--AUGUSTUS_CONFIG_PATH=/home/macmanes/augustus-3.0.2/config/ --exonnames=on --species=peer \
+	/media/macmanes/hd3/maker/pero.genes.maker.output/autoAug/seq/split/genome_clean.split.8.fa > \
+	/media/macmanes/hd3/maker/pero.genes.maker.output/autoAug/autoAugPred_hints/shells/aug8.out &
+
+_______________________
+
+	/home/macmanes/augustus-3.0.2/config//../src/augustus --UTR=off --hintsfile=../../hints/hints.gff \
+	--extrinsicCfgFile=/home/macmanes/augustus-3.0.2/config/extrinsic/extrinsic.E.cfg \
+	--AUGUSTUS_CONFIG_PATH=/home/macmanes/augustus-3.0.2/config/ --exonnames=on --species=peer \
+	/media/macmanes/hd3/maker/pero.genes.maker.output/autoAug/seq/split/genome_clean.split.9.fa > \
+	/media/macmanes/hd3/maker/pero.genes.maker.output/autoAug/autoAugPred_hints/shells/aug9.out &
 
 
+_______________________
+
+	/home/macmanes/augustus-3.0.2/config//../src/augustus --UTR=off --hintsfile=../../hints/hints.gff \
+	--extrinsicCfgFile=/home/macmanes/augustus-3.0.2/config/extrinsic/extrinsic.E.cfg \
+	--AUGUSTUS_CONFIG_PATH=/home/macmanes/augustus-3.0.2/config/ --exonnames=on --species=peer \
+	/media/macmanes/hd3/maker/pero.genes.maker.output/autoAug/seq/split/genome_clean.split.10.fa > \
+	/media/macmanes/hd3/maker/pero.genes.maker.output/autoAug/autoAugPred_hints/shells/aug10.out &
+
+
+_______________________
+
+	/home/macmanes/augustus-3.0.2/config//../src/augustus --UTR=off --hintsfile=../../hints/hints.gff \
+	--extrinsicCfgFile=/home/macmanes/augustus-3.0.2/config/extrinsic/extrinsic.E.cfg \
+	--AUGUSTUS_CONFIG_PATH=/home/macmanes/augustus-3.0.2/config/ --exonnames=on --species=peer \
+	/media/macmanes/hd3/maker/pero.genes.maker.output/autoAug/seq/split/genome_clean.split.11.fa > \
+	/media/macmanes/hd3/maker/pero.genes.maker.output/autoAug/autoAugPred_hints/shells/aug11.out &
+
+
+done to here
+--
 
 
 
