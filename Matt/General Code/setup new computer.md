@@ -15,6 +15,7 @@ needed for samtools
 new users
 
 	sudo adduser --home /mnt/data2/lesser lesser
+	sudo adduser --home /mnt/data1/walker walker
 	
 raid array not showing up:
 
