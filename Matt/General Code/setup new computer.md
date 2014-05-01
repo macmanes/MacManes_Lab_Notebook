@@ -16,6 +16,7 @@ new users
 
 	sudo adduser --home /mnt/data2/lesser lesser
 	sudo adduser --home /mnt/data1/walker walker
+	sudo adduser --home /mnt/data0/lah lah
 	
 raid array not showing up:
 
@@ -55,3 +56,9 @@ Doh, drive was commented out in fstab
 for transferring files:
 
 	scp -r pero-genome/ macmanes@132.177.114.158:/mnt/data3/macmanes
+	
+Mounting USB drive
+	
+	sudo fdisk -l # to see where USB drive is located.
+	sudo mount -t ext4 /dev/sde /media/external
+	mv /media/external/pero_genome/ /mnt/data3/macmanes/ # for instance
