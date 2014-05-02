@@ -28,7 +28,7 @@ Assemble unitigs:
 Assemble scaffolds:
 
 	for k in 75 71 65
-		do cd $HOME/oyster/oyster$k; abyss-pe j=64 v=-v k=$k name=oyster$k n=5 lib='oyster' \
+		do cd $HOME/oyster/oyster$k; mpirun -np 32 abyss-pe j=32 v=-v k=$k name=oyster$k n=5 lib='oyster' \
 		oyster='$$RAID/macmanes/oyster_genome/oyster_trim_1P $$RAID/macmanes/oyster_genome/oyster_trim_2P' \
 		se='$$RAID/macmanes/oyster_genome/oyster_trim_1U $$RAID/macmanes/oyster_genome/oyster_trim_2U'
 	done 
