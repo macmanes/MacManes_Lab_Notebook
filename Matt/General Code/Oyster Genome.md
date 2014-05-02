@@ -33,3 +33,10 @@ Assemble scaffolds:
 		se='$$RAID/macmanes/oyster_genome/oyster_trim_1U $$RAID/macmanes/oyster_genome/oyster_trim_2U'
 	done 
 
+
+SGA preqc
+
+	sga preprocess --pe-mode 1 $RAID/macmanes/oyster_genome/oyster_trim_1P $RAID/macmanes/oyster_genome/oyster_trim_2P > clam.fq
+	sga index -a ropebwt --no-reverse -t 32 clam.fq
+	sga preqc -t 32 clam.fq > clam.preqc
+	/share/sga/src/bin/sga-preqc-report.py clam.preqc /share/sga/src/examples/preqc/*.preqc

@@ -62,3 +62,12 @@ Mounting USB drive
 	sudo fdisk -l # to see where USB drive is located.
 	sudo mount -t ext4 /dev/sde /media/external
 	mv /media/external/pero_genome/ /mnt/data3/macmanes/ # for instance
+	
+
+SGA
+
+	./configure --with-sparsehash=/share \
+	--with-bamtools=/share/bamtools \
+	--with-jemalloc=share/lib --prefix=/share
+	make -j12
+	make all install

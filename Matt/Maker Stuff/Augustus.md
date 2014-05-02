@@ -189,6 +189,51 @@ _______________________
 done to here
 --
 
+_______________________
+
+_______________________
+
+	/home/macmanes/augustus-3.0.2/config//../src/augustus --UTR=off --hintsfile=../../hints/hints.gff \
+	--extrinsicCfgFile=/home/macmanes/augustus-3.0.2/config/extrinsic/extrinsic.E.cfg \
+	--AUGUSTUS_CONFIG_PATH=/home/macmanes/augustus-3.0.2/config/ --exonnames=on --species=peer \
+	/media/macmanes/hd3/maker/pero.genes.maker.output/autoAug/seq/split/genome_clean.split.16.fa > \
+	/media/macmanes/hd3/maker/pero.genes.maker.output/autoAug/autoAugPred_hints/shells/aug16.out &
+
+_______________________
+
+	/home/macmanes/augustus-3.0.2/config//../src/augustus --UTR=off --hintsfile=../../hints/hints.gff \
+	--extrinsicCfgFile=/home/macmanes/augustus-3.0.2/config/extrinsic/extrinsic.E.cfg \
+	--AUGUSTUS_CONFIG_PATH=/home/macmanes/augustus-3.0.2/config/ --exonnames=on --species=peer \
+	/media/macmanes/hd3/maker/pero.genes.maker.output/autoAug/seq/split/genome_clean.split.17.fa > \
+	/media/macmanes/hd3/maker/pero.genes.maker.output/autoAug/autoAugPred_hints/shells/aug17.out &
+
+
+_______________________
+
+	/home/macmanes/augustus-3.0.2/config//../src/augustus --UTR=off --hintsfile=../../hints/hints.gff \
+	--extrinsicCfgFile=/home/macmanes/augustus-3.0.2/config/extrinsic/extrinsic.E.cfg \
+	--AUGUSTUS_CONFIG_PATH=/home/macmanes/augustus-3.0.2/config/ --exonnames=on --species=peer \
+	/media/macmanes/hd3/maker/pero.genes.maker.output/autoAug/seq/split/genome_clean.split.18.fa > \
+	/media/macmanes/hd3/maker/pero.genes.maker.output/autoAug/autoAugPred_hints/shells/aug18.out &
+
+
+_______________________
+
+	/home/macmanes/augustus-3.0.2/config//../src/augustus --UTR=off --hintsfile=../../hints/hints.gff \
+	--extrinsicCfgFile=/home/macmanes/augustus-3.0.2/config/extrinsic/extrinsic.E.cfg \
+	--AUGUSTUS_CONFIG_PATH=/home/macmanes/augustus-3.0.2/config/ --exonnames=on --species=peer \
+	/media/macmanes/hd3/maker/pero.genes.maker.output/autoAug/seq/split/genome_clean.split.19.fa > \
+	/media/macmanes/hd3/maker/pero.genes.maker.output/autoAug/autoAugPred_hints/shells/aug19.out &
+
+_______________________
+
+	/home/macmanes/augustus-3.0.2/config//../src/augustus --UTR=off --hintsfile=../../hints/hints.gff \
+	--extrinsicCfgFile=/home/macmanes/augustus-3.0.2/config/extrinsic/extrinsic.E.cfg \
+	--AUGUSTUS_CONFIG_PATH=/home/macmanes/augustus-3.0.2/config/ --exonnames=on --species=peer \
+	/media/macmanes/hd3/maker/pero.genes.maker.output/autoAug/seq/split/genome_clean.split.20.fa > \
+	/media/macmanes/hd3/maker/pero.genes.maker.output/autoAug/autoAugPred_hints/shells/aug20.out &
+
+
 
 
 
