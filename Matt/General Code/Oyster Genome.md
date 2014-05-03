@@ -20,18 +20,18 @@ split
 	
 Assemble unitigs:
 
-	for k in 61 65 71 75 81 91 101
-		do mpirun -np 64 ABYSS-P -k$k --coverage-hist=k$k.hist \
+	nohup for k in 75
+		do cd $HOME/oyster/oyster$k; mpirun -np 64 ABYSS-P -k$k --coverage-hist=k$k.hist \
 		-o oyster$k reads/x*
-	done 
+	done & 
 	
 Assemble scaffolds:
 
-	for k in 75 71 65
+	nohup for k in 75 71 65
 		do cd $HOME/oyster/oyster$k; mpirun -np 32 abyss-pe j=32 v=-v k=$k name=oyster$k n=5 lib='oyster' \
 		oyster='$$RAID/macmanes/oyster_genome/oyster_trim_1P $$RAID/macmanes/oyster_genome/oyster_trim_2P' \
 		se='$$RAID/macmanes/oyster_genome/oyster_trim_1U $$RAID/macmanes/oyster_genome/oyster_trim_2U'
-	done 
+	done &
 
 
 SGA preqc
