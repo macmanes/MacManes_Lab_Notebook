@@ -235,6 +235,12 @@ _______________________
 
 
 
+5 May 14
+--
+
+Augustus was killed, something about the `noninteractive` command. It is expecting some SGE type integration with that.  RESTARTED:
+
+	~/augustus-3.0.2/scripts/autoAug.pl --genome=../../pero-genome/jelly.out.fasta --species=peer --cdna=../augustus.complete.cds --trainingset=for-augustus.gff3 --useexisting --optrounds=2
 
 
 
