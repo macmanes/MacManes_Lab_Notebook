@@ -244,8 +244,38 @@ Augustus was killed, something about the `noninteractive` command. It is expecti
 
 
 
+6 May 14
+--
+
+1 ####### Finished step 1 at Tue May  6 08:07:35 2014. All files are stored in /media/macmanes/hd3/maker/pero.genes.maker.output/autoAug/autoAugTrain #######
 
 
+1 ####### Step 2: Preparing scripts for AUGUSTUS without hints and UTR #######
+2 perl /home/macmanes/augustus-3.0.2/scripts/autoAugPred.pl -g=/media/macmanes/hd3/maker/pero.genes.maker.output/autoAug/seq/genome_clean.fa --species=peer -w=/media/macmanes/hd3/maker/pero.genes.maker.output/autoAug  -v -v  --useexisting
+3 Created directory /media/macmanes/hd3/maker/pero.genes.maker.output/autoAug/autoAugPred_abinitio.
+3 All necessary directories have been created under /media/macmanes/hd3/maker/pero.genes.maker.output/autoAug/autoAugPred_abinitio
+2 splitting genome sequence into subsets of size >= 207291166 bp
+3 perl /home/macmanes/augustus-3.0.2/config//../scripts/splitMfasta.pl --minsize=207291166 /media/macmanes/hd3/maker/pero.genes.maker.output/autoAug/seq/genome_clean.fa --outputpath=/media/macmanes/hd3/maker/pero.genes.maker.output/autoAug/seq/split ...2 The splited fasta files have been placed under /media/macmanes/hd3/maker/pero.genes.maker.output/autoAug/seq/split
+2 The shell scripts for cluster have been prepared under /media/macmanes/hd3/maker/pero.genes.maker.output/autoAug/autoAugPred_abinitio/shells
+
+Please start the augustus jobs /media/macmanes/hd3/maker/pero.genes.maker.output/autoAug/autoAugPred_abinitio/shells/aug* manually now.
+Either by running them sequentially on a single PC or by submitting these jobs to a compute cluster. When the jobs are done, simply rerun your original command with --useexisting
+
+1 ####### Finished step 2. The scripts are stored in /media/macmanes/hd3/maker/pero.genes.maker.output/autoAug/autoAugPred_abinitio/shells #######
+
+
+When above jobs are finished, continue by running the command
+autoAug.pl --species=peer --genome=/media/macmanes/hd3/maker/pero.genes.maker.output/autoAug/seq/genome_clean.fa --useexisting --hints=/media/macmanes/hd3/maker/pero.genes.maker.output/autoAug/hints/hints.E.gff  -v -v  --index=1
+
+1-5 done.
+
+after all 20:
+
+	~/augustus-3.0.2/scripts/autoAug.pl --genome=../../pero-genome/jelly.out.fasta --species=peer --cdna=../augustus.complete.cds --trainingset=for-augustus.gff3 --useexisting --optrounds=2
+	
+then
+
+	~/augustus-3.0.2/scripts/autoAug.pl --species=peer --genome=/media/macmanes/hd3/maker/pero.genes.maker.output/autoAug/seq/genome_clean.fa --useexisting --hints=/media/macmanes/hd3/maker/pero.genes.maker.output/autoAug/hints/hints.E.gff  -v -v  --index=1
 
 
 
