@@ -1,7 +1,7 @@
  	
  	
  	
- 	nohup PrepareAllPathsInputs.pl DATA_DIR=/mnt/data0/macmanes/allpaths/peer/mydata/ &
+ 	nohup PrepareAllPathsInputs.pl DATA_DIR=$RAID/macmanes/allpaths/peer/mydata/ &
  	
 in_groups.csv
 --
@@ -41,10 +41,10 @@ in_libs.csv
 
 RunAllPaths
 --
-	RunAllPathsLG THREADS=32 FIX_ASSEMBLY_BASE_ERRORS=TRUE \
- 	PRE=/mnt/data0/macmanes/allpaths/ \
+	nohup RunAllPathsLG THREADS=32 FIX_ASSEMBLY_BASE_ERRORS=TRUE \
+ 	PRE=$RAID/macmanes/allpaths/ \
  	DATA_SUBDIR=mydata \
  	RUN=peer1 \
  	REFERENCE_NAME=peer \
  	TARGETS=standard \
- 	CONNECT_SCAFFOLDS=TRUE HAPLOIDIFY=TRUE
+ 	CONNECT_SCAFFOLDS=TRUE HAPLOIDIFY=TRUE &
