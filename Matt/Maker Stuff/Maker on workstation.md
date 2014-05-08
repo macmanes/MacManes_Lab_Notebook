@@ -34,3 +34,10 @@ in `/media/macmanes/hd3/maker/pero.genes.maker.output/snap_maker1`
 	~/snap/fathom -export 1000 -plus uni.ann uni.dna
 	~/snap/forge export.ann export.dna
 	/home/macmanes/maker/exe/snap/hmm-assembler.pl ../pero.genes.all.gff . > maker1.snap.hmm
+	
+8 May 14 11AM
+--
+
+Maker restarted with Augustus and retrained SNAP
+
+	nohup time mpirun -np 12 ~/maker/bin/maker -fix_nucleotides -base pero-aug-snap &> maker2.out &

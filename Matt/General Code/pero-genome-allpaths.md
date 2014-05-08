@@ -47,4 +47,20 @@ RunAllPaths
  	RUN=peer1 \
  	REFERENCE_NAME=peer \
  	TARGETS=standard \
- 	CONNECT_SCAFFOLDS=TRUE HAPLOIDIFY=TRUE &
+ 	CONNECT_SCAFFOLDS=TRUE HAPLOIDIFY=TRUE &
+ 	
+8 May
+--
+
+Run failed during the PathReads step after ~90 hours - ran out of memory. I was running a big-ish trinity assembly concurrantly.
+
+	nohup RunAllPathsLG THREADS=32 FIX_ASSEMBLY_BASE_ERRORS=TRUE \
+ 	PRE=$RAID/macmanes/allpaths/ \
+ 	DATA_SUBDIR=mydata \
+ 	RUN=peer1 \
+ 	REFERENCE_NAME=peer \
+ 	TARGETS=standard \
+ 	CONNECT_SCAFFOLDS=TRUE HAPLOIDIFY=TRUE OVERWRITE=TRUE&
+
+
+
