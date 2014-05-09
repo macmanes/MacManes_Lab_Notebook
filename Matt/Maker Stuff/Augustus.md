@@ -275,7 +275,7 @@ after all 20:
 	
 then
 
-	~/augustus-3.0.2/scripts/autoAug.pl --species=peer --genome=/media/macmanes/hd3/maker/pero.genes.maker.output/autoAug/seq/genome_clean.fa --useexisting --hints=/media/macmanes/hd3/maker/pero.genes.maker.output/autoAug/hints/hints.E.gff  -v -v  --index=1
+	~/augustus-3.0.2/scripts/autoAug.pl --species=peer2 --genome=/media/macmanes/hd3/maker/pero.genes.maker.output/autoAug/seq/genome_clean.fa --useexisting --hints=/media/macmanes/hd3/maker/pero.genes.maker.output/autoAug/hints/hints.E.gff  -v -v  --index=1
 
 
 
