@@ -1,7 +1,10 @@
  	
  	
  	
- 	nohup PrepareAllPathsInputs.pl DATA_DIR=$RAID/macmanes/allpaths/peer/mydata/ &
+ 	nohup PrepareAllPathsInputs.pl \
+ 	DATA_DIR=$RAID/macmanes/allpaths/peer/mydata/ \
+ 	GENOME_SIZE=2600000000 OVERWRITE=True PLOIDY=2 \
+ 	FRAG_COVERAGE=45 &
  	
 in_groups.csv
 --
