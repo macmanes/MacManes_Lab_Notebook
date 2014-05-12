@@ -22,8 +22,8 @@ Make config file:
 	
 Correct PacBio Reads
 
-	pacBioToCA -length 5000 -partitions 100 \
-	-l pacbio -t 32 -s pacbio.spec \
+	nohup /share/wgs-8.1/Linux-amd64/bin/pacBioToCA -length 5000 -partitions 100 \
+	-l pacbio -t 20 -s pacbio.spec \
 	-genomeSize 2600000000 \
 	-fastq /mnt/data3/macmanes/pacbio/raw.pacbio.reads/fastq/all.pb.fastq \
-	illumina.frg > pbcr.out 2>&1
+	illumina.frg > pbcr.out 2>&1 &

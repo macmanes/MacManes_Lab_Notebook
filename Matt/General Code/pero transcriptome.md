@@ -11,5 +11,5 @@ On Github, there is an omegav4.sh file for going the omega analyses.
 
 in `/mnt/data0/macmanes/pero_transcriptome`
 
-	/home/macmanes/pero_transcriptome/pero_trim_assembly.mk CPU=20 MEM=100 RUN=pero READ1=/mnt/data3/macmanes/pero_for_annont/Pero.1.fastq READ2=/mnt/data3/macmanes/pero_for_annont/Pero.2.fastq
+	nohup /home/macmanes/pero_transcriptome/pero_trim_assembly.mk CPU=20 MEM=10 RUN=pero READ1=/mnt/data3/macmanes/pero_for_annont/Pero.1.fastq READ2=/mnt/data3/macmanes/pero_for_annont/Pero.2.fastq &
 
