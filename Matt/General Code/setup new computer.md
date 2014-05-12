@@ -71,3 +71,18 @@ SGA
 	--with-jemalloc=share/lib --prefix=/share
 	make -j12
 	make all install
+	
+AMOS
+
+WARNING! nucmer was not found but is required to run AMOScmp and minimus2
+   install nucmer if planning on using these programs
+WARNING! delta-filter was not found but is required to run AMOScmp-shortReads-alignmentTrimmed
+   install delta-filter if planning on using AMOScmp-shortReads-alignmentTrimmed
+WARNING! show-coords was not found but is required to run minimus2
+   install show-coords if planning on using minimus2
+WARNING! BLAT was not found but is required to run minimus2-blat
+   install BLAT if planning on using minimus2-blat
+WARNING! Qt4 toolkit malfunctioning but is required to run AMOS GUIs
+   try compiling GUIs manually or reinstall Qt4 toolkit to build GUIs
+   see config.log for more information on what went wrong
+WARNING! Statistics::Descriptive Perl module was not found but is required to run some AMOS scripts
