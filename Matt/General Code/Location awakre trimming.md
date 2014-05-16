@@ -38,3 +38,12 @@ now Z10
 8.5G May 14 12:15 jellyfish.kmers.fa
 
 reads with at least one reported alignment: 15057015 (75.46%)
+
+Z2: Better, but? smaller assembly
+
+Trinity.fasta.pslx
+Sum =  64900
+align. size =  44.2741
+Num. error per Mb aligned =  1465.87
+
+3163 complete
