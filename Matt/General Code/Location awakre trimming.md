@@ -22,6 +22,7 @@ This is the code for generating the error plot in Fig 1 in Frontiers paper.
 
 now try:
 
+<<<<<<< HEAD
 	$HOME/kmer_paper/trimming.mk READ1=raw.10M.SRR797058_1.fastq READ2=raw.10M.SRR797058_2.fastq Z=10 RUN=Z10.10M CPU=32 MEM=20
 	
 Sum =  137947
@@ -35,3 +36,30 @@ Will try Z2
 
 
 	nohup $HOME/kmer_paper/trimming.mk READ1=raw.10M.SRR797058_1.fastq READ2=raw.10M.SRR797058_2.fastq Z=2 RUN=Z2.10M CPU=12 MEM=20 &
+=======
+	$HOME/kmer_paper/trimming.mk READ1=raw.10M.SRR797058_1.fastq READ2=raw.10M.SRR797058_2.fastq Z=10 RUN=Z1010M CPU=32 MEM=20
+	
+324M kmers counted in inchworm
+reads with at least one reported alignment: 14944323 (74.90%)
+
+now Z10
+
+	$HOME/kmer_paper/trimming.mk Z=10 READ1=raw.10M.SRR797058_1.fastq READ2=raw.10M.SRR797058_2.fastq RUN=Z10.10M CPU=32 MEM=100
+
+311M
+
+3.1G May 14 12:16 both.fa
+
+8.5G May 14 12:15 jellyfish.kmers.fa
+
+reads with at least one reported alignment: 15057015 (75.46%)
+
+Z2: Better, but? smaller assembly
+
+Trinity.fasta.pslx
+Sum =  64900
+align. size =  44.2741
+Num. error per Mb aligned =  1465.87
+
+3163 complete
+>>>>>>> FETCH_HEAD
