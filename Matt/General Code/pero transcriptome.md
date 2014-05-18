@@ -29,4 +29,13 @@ Will exrtact those from full assembly.
 
 	sed ':begin;$!N;/[ACTGNn-]\n[ACTGNn-]/s/\n//;tbegin;P;D' pero.Trinity.fasta > pero.Trinity.fa # unwrap fasta
 	
-	for i in `cat pero.xprs/list`; do  grep --max-count=1 -A1 -w $i pero.Trinity.fa >> pero.final.fa; done &
+	for i in `cat pero.xprs/list`; do  grep --max-count=1 -A1 $i pero.Trinity.fa >> pero.final.fa; done &
+	
+Run Transdecoder
+-
+	nohup TransDecoder --CPU 50 -t pero.Trinity.fasta -S --search_pfam /share/transdecoder_rel16JAN2014/pfam/Pfam-AB.hmm.bin
+	
+extract complete and 3prime (has start codon) CDS - 50k of these
+number contigs - used sed to remove extra characters.
+run mapping
+omega.sh
