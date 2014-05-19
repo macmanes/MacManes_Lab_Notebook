@@ -39,3 +39,10 @@ extract complete and 3prime (has start codon) CDS - 50k of these
 number contigs - used sed to remove extra characters.
 run mapping
 omega.sh
+
+omegaMap
+--
+
+
+	nohup /home/macmanes/pero_transcriptome/omega.sh -f pero.transdecoder.cds -o omega.ini -t 40 &
+
