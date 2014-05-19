@@ -17,6 +17,7 @@ new users
 	sudo adduser --home /mnt/data2/lesser lesser
 	sudo adduser --home /mnt/data1/walker walker
 	sudo adduser --home /mnt/data0/lah lah
+	sudo adduser --home /mnt/data1/amm amm
 	
 raid array not showing up:
 
