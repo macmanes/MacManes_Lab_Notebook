@@ -20,6 +20,9 @@ Make config file:
 	/mnt/data3/macmanes/pero_genome/131219/peroL5_2P.fq \
 	-libraryname illumina > illumina.frg
 	
+May 15
+--
+
 Correct PacBio Reads
 
 	nohup /share/wgs-8.1/Linux-amd64/bin/pacBioToCA -length 5000 -partitions 100 \

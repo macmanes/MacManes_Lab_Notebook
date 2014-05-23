@@ -36,13 +36,29 @@ Run Transdecoder
 	nohup TransDecoder --CPU 50 -t pero.Trinity.fasta -S --search_pfam /share/transdecoder_rel16JAN2014/pfam/Pfam-AB.hmm.bin
 	
 extract complete and 3prime (has start codon) CDS - 50k of these
-number contigs - used sed to remove extra characters.
-run mapping
-omega.sh
 
-omegaMap
---
+**number contigs - used sed to remove extra characters.**
+
+
+>>run mapping
+
+
+	$HOME/pero_transcriptome/pero_mapping.mk -j 4 CPU=10 REF=pero.transdecoder.cds
+
+
+>> run omega.sh
 
 
 	nohup /home/macmanes/pero_transcriptome/omega.sh -f pero.transdecoder.cds -o omega.ini -t 40 &
 
+
+
+angsd
+--
+	
+>> in `/mnt/data0/macmanes/pero_mapping_omega/bams`
+
+
+	angsd -bam list -doSaf 1 -anc ../pero.transdecoder.cds  -GL 2 -P 14 -out outFold -fold 1
+	/share/angsd0.598/misc/emOptim2 outFold.saf 11 -P 12 > outFold.sfs
+	angsd -bam list -out outFold -doThetas 1 -doSaf 1 -pest outFold.sfs -anc ../pero.transdecoder.cds -GL 2 -fold 1
