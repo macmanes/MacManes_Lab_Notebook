@@ -1,0 +1,1 @@
+`sed -i ':begin;$!N;/[ACTGNn-]\n[ACTGNn-]/s/\n//;tbegin;P;D' ../pema/rna.fa`
