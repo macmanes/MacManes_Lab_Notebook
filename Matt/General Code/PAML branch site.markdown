@@ -1,26 +1,26 @@
 sync blast output
 -
 
-BLAST PEER-PEMA
-
-	blastn -db peer -query pema/rna.fa -evalue 1e-50 -num_threads 32 -outfmt "6 qseqid stitle pident slen length evalue" -max_hsps 1 -max_target_seqs 1 > peer-pema.blast
-	
 BLAST PEMA-MUS
 
-	blastn -db pema -query ../mus/Mus_musculus.GRCm38.75.cdna.all.fa -evalue 1e-50 -num_threads 32 -outfmt "6 qseqid stitle pident slen length evalue" -max_hsps 1 -max_target_seqs 1 > mus-pema.blast
+	blastn -db mus -query ../pema/rna.fa -evalue 1e-50 -num_threads 32 -outfmt "6 qseqid sacc pident slen length evalue" -max_hsps 1 -max_target_seqs 1 > mus-pema.blast
+	
+BLAST PEER-MUS
+
+	blastn -db mus -query ../peer/peer.genes.fasta -evalue 1e-50 -num_threads 32 -outfmt "6 qseqid sacc pident slen length evalue" -max_hsps 1 -max_target_seqs 1 > mus-peer.blast
 
 BLAST PEER-RAT
 
-	blastn -db peer -query ../rat/Rattus_norvegicus.Rnor_5.0.75.cds.all.fa \
+	blastn -db mus -query ../rat/Rattus_norvegicus.Rnor_5.0.75.cds.all.fa \
 	-evalue 1e-50 -num_threads 12 \
-	-outfmt "6 qseqid stitle pident slen length evalue" \
-	-max_hsps 1 -max_target_seqs 1 > rat-peer.blast
+	-outfmt "6 qseqid sacc pident slen length evalue" \
+	-max_hsps 1 -max_target_seqs 1 > mus-rat.blast
 
 Format BLAST
 
-	cat peer-pema.blast | awk '.9>$6/$5{next}1' > peer-pema-good.blast
-	cat mus-pema.blast | awk '.9>$6/$5{next}1' > mus-pema-good.blast
-	cat rat-peer.blast | awk '.9>$6/$5{next}1' > rat-peer-good.blast
+	cat mus-pema.blast | awk '.8>$5/$4{next}1' > mus-pema-good.blast
+	cat mus-peer.blast | awk '.8>$5/$4{next}1' > mus-peer-good.blast
+	cat mus-rat.blast | awk '.8>$5/$4{next}1' > mus-rat-good.blast
 	
 
 SYNC THE 2 BLAST RESULTS FILES
