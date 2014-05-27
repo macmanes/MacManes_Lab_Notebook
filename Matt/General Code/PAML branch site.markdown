@@ -41,7 +41,7 @@ BLAST PEMA-MUS
 
 BLAST PEMA-MUS
 
-	blastn -db mus -query ../pema/rna.fa -evalue 1e-50 -num_threads 32 -outfmt "6 qseqid sacc slen length" -max_hsps 1 -max_target_seqs 1 > mus-pema.blast
+	blastn -db mus -query ../pema/pema.cds -evalue 1e-50 -num_threads 32 -outfmt "6 qseqid sacc slen length" -max_hsps 1 -max_target_seqs 1 > mus-pema.blast
 	
 BLAST PEER-MUS
 
@@ -49,7 +49,7 @@ BLAST PEER-MUS
 
 BLAST PEER-RAT
 
-	blastn -db mus -query ../rat/Rattus_norvegicus.Rnor_5.0.75.cds.all.fa \
+	blastn -db mus -query ../rat/rat.cds \
 	-evalue 1e-50 -num_threads 12 \
 	-outfmt "6 qseqid sacc slen length" \
 	-max_hsps 1 -max_target_seqs 1 > mus-rat.blast
