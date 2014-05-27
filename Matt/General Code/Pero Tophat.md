@@ -12,3 +12,8 @@ Find input files:
 	## and 
 	../pero_annotation/Pero2925.1.fastq
 	../pero_annotation/Pero2925.2.fastq
+	
+Tophat
+
+	tophat -p4 -o 2926 --library-type fr-firststrand \
+	pero_genome ../pero_annotation/Pero2926.1.fastq ../pero_annotation/Pero2926.2.fastq
