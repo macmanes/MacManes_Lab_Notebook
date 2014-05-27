@@ -1,26 +1,64 @@
 sync blast output
 -
 
+Transdocoder
+
+Mus
+
+	TransDecoder --CPU 20 Mus_musculus.GRCm38.75.cdna.all.fa  --search_pfam /share/transdecoder_rel16JAN2014/pfam/Pfam-AB.hmm.bin
+Rat
+
+	TransDecoder --CPU 15 -t Rattus_norvegicus.Rnor_5.0.75.cdna.all.fa  --search_pfam /share/transdecoder_rel16JAN2014/pfam/Pfam-AB.hmm.bin
+leucopus
+
+	TransDecoder --CPU 15 -t Pleucopus_Transcriptome_Contigs.fasta  --search_pfam /share/transdecoder_rel16JAN2014/pfam/Pfam-AB.hmm.bin &	
+PEMA:
+
+	##Need to do
+	TransDecoder --CPU 15 -t Pleucopus_Transcriptome_Contigs.fasta  --search_pfam /share/transdecoder_rel16JAN2014/pfam/Pfam-AB.hmm.bin &
+
+**Need to extract out complete and 3' contigs**
+
+>> unwrap
+
+>> grep
+
+BLAST
+
+
+--
+--
+--
+--
+--
+--
+--
+
 BLAST PEMA-MUS
 
-	blastn -db mus -query ../pema/rna.fa -evalue 1e-50 -num_threads 32 -outfmt "6 qseqid sacc pident slen length evalue" -max_hsps 1 -max_target_seqs 1 > mus-pema.blast
+	blastn -db mus -query ../leucopus/rna.fa -evalue 1e-50 -num_threads 32 -outfmt "6 qseqid sacc slen length" -max_hsps 1 -max_target_seqs 1 > mus-pele.blast
+
+
+BLAST PEMA-MUS
+
+	blastn -db mus -query ../pema/rna.fa -evalue 1e-50 -num_threads 32 -outfmt "6 qseqid sacc slen length" -max_hsps 1 -max_target_seqs 1 > mus-pema.blast
 	
 BLAST PEER-MUS
 
-	blastn -db mus -query ../peer/peer.genes.fasta -evalue 1e-50 -num_threads 32 -outfmt "6 qseqid sacc pident slen length evalue" -max_hsps 1 -max_target_seqs 1 > mus-peer.blast
+	blastn -db mus -query ../peer/peer.genes.fasta -evalue 1e-50 -num_threads 32 -outfmt "6 qseqid sacc slen length" -max_hsps 1 -max_target_seqs 1 > mus-peer.blast
 
 BLAST PEER-RAT
 
 	blastn -db mus -query ../rat/Rattus_norvegicus.Rnor_5.0.75.cds.all.fa \
 	-evalue 1e-50 -num_threads 12 \
-	-outfmt "6 qseqid sacc pident slen length evalue" \
+	-outfmt "6 qseqid sacc slen length" \
 	-max_hsps 1 -max_target_seqs 1 > mus-rat.blast
 
 Format BLAST
 
-	cat mus-pema.blast | awk '.8>$5/$4{next}1' > mus-pema-good.blast
-	cat mus-peer.blast | awk '.8>$5/$4{next}1' > mus-peer-good.blast
-	cat mus-rat.blast | awk '.8>$5/$4{next}1' > mus-rat-good.blast
+	cat mus-pema.blast | awk '.8>$4/$3{next}1' > mus-pema-good.blast
+	cat mus-peer.blast | awk '.8>$4/$3{next}1' > mus-peer-good.blast
+	cat mus-rat.blast | awk '.8>$4/$3{next}1' > mus-rat-good.blast
 	
 
 SYNC THE 2 BLAST RESULTS FILES
@@ -48,7 +86,7 @@ SYNC THE 3rd BLAST RESULTS file to the other one
 	total=19074
 	n=1
 	while [ $n -lt $total ]; do
-		var1=$(sed -n "${n}p" mus-peer.blast | awk '{print $1 "\t" $2}')
+		var1=$(sed -n "${n}p" mus-peer-good.blast | awk '{print $1 "\t" $2}')
 		echo $var1 > tmp
 		var3=$(awk '{print $2}' tmp)
 		grep -w --max-count=1 $var3 mus.rat.pema.blast.final | paste - tmp >> mus.peer.pema.rat.blast
