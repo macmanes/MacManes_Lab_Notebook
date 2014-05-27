@@ -25,13 +25,13 @@ Format BLAST
 
 SYNC THE 2 BLAST RESULTS FILES
 
-	total=10074
+	total=19074
 	n=1
 	while [ $n -lt $total ]; do
 		var1=$(sed -n "${n}p" mus-pema-good.blast)
 		echo $var1 > tmp
 		var3=$(awk '{print $2}' tmp)
-		grep -w --max-count=1 $var3 peer-pema-good.blast | paste - tmp >> mus.peer.pema.blast
+		grep -w --max-count=1 $var3 mus-rat-good.blast | paste - tmp >> mus.rat.pema.blast
 		echo "Line $n = $var1"
 		let n=n+1
 	done
@@ -39,19 +39,19 @@ SYNC THE 2 BLAST RESULTS FILES
 
 EXTRACT HITS WHERE ALL ARE PRESENT
 
-	grep ^'gi|' mus.peer.pema.blast > mus.peer.pema.blast.final
+	grep ^'ENSR' mus.rat.pema.blast > mus.rat.pema.blast.final
 
 
 
 SYNC THE 3rd BLAST RESULTS file to the other one
 
-	total=12074
+	total=19074
 	n=1
 	while [ $n -lt $total ]; do
-		var1=$(sed -n "${n}p" rat-peer.blast)
+		var1=$(sed -n "${n}p" mus-peer.blast | awk '{print $1 "\t" $2}')
 		echo $var1 > tmp
 		var3=$(awk '{print $2}' tmp)
-		grep -w --max-count=1 $var3 mus.peer.pema.blast.final | paste - tmp >> mus.peer.pema.rat.blast
+		grep -w --max-count=1 $var3 mus.rat.pema.blast.final | paste - tmp >> mus.peer.pema.rat.blast
 		echo "Line $n = $var1"
 		let n=n+1
 	done
@@ -62,8 +62,8 @@ SYNC THE 3rd BLAST RESULTS file to the other one
 
 EXTRACT HITS WHERE ALL ARE PRESENT & FORMAT
 
-	grep ^'gi|' mus.peer.pema.rat.blast > mus.peer.pema.rat.blast.final
-	cat mus.peer.pema.rat.blast.final | awk '{print $1 "\t" $2 "\t" $3 "\t" $8 "\t" $8}' > 4species.blast
+	grep ^'ENSR' mus.peer.pema.rat.blast > mus.peer.pema.rat.blast.final
+	cat mus.peer.pema.rat.blast.final | awk '{print $1 "\t" $2 "\t" $7 "\t" $13}' > 4species.blast
 
 
 
@@ -76,14 +76,16 @@ SYNC FILES TO GET FASTA OUTPUT
 	total=13000
 	n=1
 	while [ $n -lt $total ]; do
-		var1=$(sed -n "${n}p" 3species.blast)
+		var1=$(sed -n "${n}p" 4species.blast)
 		echo $var1 > tmp
 		var2=$(awk '{print $1}' tmp)
 		var3=$(awk '{print $2}' tmp)
 		var4=$(awk '{print $3}' tmp)
-		grep -A1 -w --max-count=1 $var2 ../pema/pema.rna.fa > ../ortholog/$n.hits.fa
-		grep -A1 -w --max-count=1 $var4 ../peer/peer.genes.fasta >> ../ortholog/$n.hits.fa
-		grep -A1 -w --max-count=1 $var3 ../mus/mus.genes.fa >> ../ortholog/$n.hits.fa
+		var5=$(awk '{print $4}' tmp)
+		grep -A1 -w --max-count=1 $var2 ../rat/rat.genes.fa > ../4species/$n.hits.fa
+		grep -A1 -w --max-count=1 $var3 ../mus/mus.genes.fa >> ../4species/$n.hits.fa
+		grep -A1 -w --max-count=1 $var4 ../pema/pema.rna.fa >> ../4species/$n.hits.fa
+		grep -A1 -w --max-count=1 '>'$var5 ../peer/peer.genes.fasta >> ../4species/$n.hits.fa
 		echo "Line $n = $var1"
 		let n=n+1
 	done
