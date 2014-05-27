@@ -50,6 +50,9 @@ extract complete and 3prime (has start codon) CDS - 50k of these
 
 
 	nohup /home/macmanes/pero_transcriptome/omega.sh -f pero.transdecoder.cds -o omega.ini -t 40 &
+	for i in `ls om*out`; do summarize 2000 $i > $i.results; done
+	for i in `ls omega/om*results`; do sed -n '4p' $i >> summary.file; done
+	
 
 
 
