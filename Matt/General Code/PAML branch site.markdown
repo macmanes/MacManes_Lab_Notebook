@@ -34,9 +34,9 @@ BLAST
 --
 --
 
-BLAST PEMA-MUS
+BLAST LEUCOPUS-MUS
 
-	blastn -db mus -query ../leucopus/rna.fa -evalue 1e-50 -num_threads 32 -outfmt "6 qseqid sacc slen length" -max_hsps 1 -max_target_seqs 1 > mus-pele.blast
+	blastn -db mus -query ../leucopus/leucopus.cds -evalue 1e-50 -num_threads 32 -outfmt "6 qseqid sacc slen length" -max_hsps 1 -max_target_seqs 1 > mus-pele.blast
 
 
 BLAST PEMA-MUS
@@ -50,7 +50,7 @@ BLAST PEER-MUS
 BLAST PEER-RAT
 
 	blastn -db mus -query ../rat/rat.cds \
-	-evalue 1e-50 -num_threads 12 \
+	-evalue 1e-50 -num_threads 32 \
 	-outfmt "6 qseqid sacc slen length" \
 	-max_hsps 1 -max_target_seqs 1 > mus-rat.blast
 
@@ -59,6 +59,7 @@ Format BLAST
 	cat mus-pema.blast | awk '.8>$4/$3{next}1' > mus-pema-good.blast
 	cat mus-peer.blast | awk '.8>$4/$3{next}1' > mus-peer-good.blast
 	cat mus-rat.blast | awk '.8>$4/$3{next}1' > mus-rat-good.blast
+	cat mus-pele.blast | awk '.8>$4/$3{next}1' > mus-pele-good.blast
 	
 
 SYNC THE 2 BLAST RESULTS FILES
@@ -66,7 +67,7 @@ SYNC THE 2 BLAST RESULTS FILES
 	total=19074
 	n=1
 	while [ $n -lt $total ]; do
-		var1=$(sed -n "${n}p" mus-pema-good.blast)
+		var1=$(sed -n "${n}p" mus-pema-good.blast | awk '{print $1 "\t" $2}')
 		echo $var1 > tmp
 		var3=$(awk '{print $2}' tmp)
 		grep -w --max-count=1 $var3 mus-rat-good.blast | paste - tmp >> mus.rat.pema.blast
@@ -77,7 +78,7 @@ SYNC THE 2 BLAST RESULTS FILES
 
 EXTRACT HITS WHERE ALL ARE PRESENT
 
-	grep ^'ENSR' mus.rat.pema.blast > mus.rat.pema.blast.final
+	grep ^'cds.ENSR' mus.rat.pema.blast > mus.rat.pema.blast.final
 
 
 
