@@ -101,7 +101,7 @@ SYNC THE 3rd BLAST RESULTS file to the other one
 
 EXTRACT HITS WHERE ALL ARE PRESENT & FORMAT
 
-	grep ^'ENSR' mus.peer.pema.rat.blast > mus.peer.pema.rat.blast.final
+	grep ^'cds.ENSR' mus.peer.pema.rat.blast > mus.peer.pema.rat.blast.final
 	cat mus.peer.pema.rat.blast.final | awk '{print $1 "\t" $2 "\t" $7 "\t" $13}' > 4species.blast
 
 
@@ -115,16 +115,16 @@ SYNC FILES TO GET FASTA OUTPUT
 	total=13000
 	n=1
 	while [ $n -lt $total ]; do
-		var1=$(sed -n "${n}p" 4species.blast)
+		var1=$(sed -n "${n}p" 4s.blast)
 		echo $var1 > tmp
 		var2=$(awk '{print $1}' tmp)
 		var3=$(awk '{print $2}' tmp)
 		var4=$(awk '{print $3}' tmp)
 		var5=$(awk '{print $4}' tmp)
-		grep -A1 -w --max-count=1 $var2 ../rat/rat.genes.fa > ../4species/$n.hits.fa
-		grep -A1 -w --max-count=1 $var3 ../mus/mus.genes.fa >> ../4species/$n.hits.fa
-		grep -A1 -w --max-count=1 $var4 ../pema/pema.rna.fa >> ../4species/$n.hits.fa
-		grep -A1 -w --max-count=1 '>'$var5 ../peer/peer.genes.fasta >> ../4species/$n.hits.fa
+		grep -A1 -w --max-count=1 $var2 ../rat/rat.cds > ../4sp-coding/aligned/$n.hits.fa
+		grep -A1 -w --max-count=1 $var3 ../mus/mus.cds >> ../4sp-coding/aligned/$n.hits.fa
+		grep -A1 -w --max-count=1 $var4 ../pema/pema.cds >> ../4sp-coding/aligned/$n.hits.fa
+		grep -A1 -w --max-count=1 '>'$var5 ../peer/peer.genes.fasta >> ../4sp-coding/aligned/$n.hits.fa
 		echo "Line $n = $var1"
 		let n=n+1
 	done
@@ -174,7 +174,29 @@ Alternative model sets `omega=1`
 
 Process results
 
+	$HOME/pero_transcriptome/sync.branch.site.sh
 
+This gives you:
+
+	1.hits.out 	 branch-site 	 0 	 1.00000
+	2.hits.out 	 branch-site 	 0 	 1.00000
+	3.hits.out 	 branch-site 	 0 	 1.00000
+	4.hits.out 	 branch-site 	 0 	 1.00000
+	5.hits.out 	 branch-site 	 2.6e-05 	 1.07268
+	6.hits.out 	 branch-site 	 0 	 1.00000
+
+
+Critical Value is:
+
+	/share/paml4.8/src/chi2 2 22.6
+	> p.adjust(0.000012373, method='BH', n=4000)
+	[1] 0.049492
+
+Get sig hits #there are 164 using star, 86 using real phylogeny
+	cat branch-site.txt | sort -rnk 3 | more
+
+
+	for i in `awk '{print $1}' sig.hits.star.txt | awk -F "." '{print $1}'`; do sed -n '7p' aligned/$i.hits.fa; done
 
 
 
