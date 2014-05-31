@@ -2,7 +2,7 @@
  	
  	
  	nohup PrepareAllPathsInputs.pl \
- 	DATA_DIR=$RAID/macmanes/allpaths/peer/mydata/ \
+ 	DATA_DIR=$RAID/allpaths/peer/mydata/ \
  	GENOME_SIZE=2600000000 OVERWRITE=True PLOIDY=2 \
  	FRAG_COVERAGE=45 HOSTS=12 &
  	
@@ -45,7 +45,7 @@ in_libs.csv
 RunAllPaths
 --
 	nohup RunAllPathsLG THREADS=32 FIX_ASSEMBLY_BASE_ERRORS=TRUE \
- 	PRE=$RAID/macmanes/allpaths/ \
+ 	PRE=$RAID/allpaths/ \
  	DATA_SUBDIR=mydata \
  	RUN=peer1 \
  	REFERENCE_NAME=peer \
@@ -58,12 +58,12 @@ RunAllPaths
 Run failed during the PathReads step after ~90 hours - ran out of memory. I was running a big-ish trinity assembly concurrantly.
 
 	nohup RunAllPathsLG THREADS=32 FIX_ASSEMBLY_BASE_ERRORS=TRUE \
- 	PRE=$RAID/macmanes/allpaths/ \
+ 	PRE=$RAID/allpaths/ \
  	DATA_SUBDIR=mydata \
  	RUN=peer1 \
  	REFERENCE_NAME=peer \
  	TARGETS=standard \
- 	CONNECT_SCAFFOLDS=TRUE HAPLOIDIFY=TRUE OVERWRITE=TRUE&
+ 	CONNECT_SCAFFOLDS=TRUE HAPLOIDIFY=TRUE OVERWRITE=TRUE &
 
 
 
