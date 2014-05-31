@@ -2,12 +2,6 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
  <dict>
-  <key>CreationDate</key>
-<<<<<<< HEAD
-  <date>2014-05-28T16:20:39Z</date>
-=======
-  <date>2014-05-30T11:44:46Z</date>
->>>>>>> FETCH_HEAD
   <key>Markdown</key>
   <string>OK</string>
  </dict>
