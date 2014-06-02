@@ -33,7 +33,7 @@ in `/mnt/data3/macmanes/STAR/transcripts`
 	STAR --genomeDir peer_trans --readFilesIn $RAID/pero_pigeons_ladybugs/2345.trim_1P.fq $RAID/pero_pigeons_ladybugs/2345.trim_2P.fq \
 	--runThreadN 30 --genomeLoad LoadAndKeep --outFilterIntronMotifs RemoveNoncanonical --outFileNamePrefix 2345
 	
-	STAR --genomeDir peer_trans --readFilesIn $RAID/pero_pigeons_ladybugs/2346.trim_1P.fq $RAID/pero_pigeons_ladybugs/2346.trim_2P.fq \
+	STAR --genomeDir peer_trans --readFilesIn $RAID/pero_pigeons_ladybugs/2346.trim_1U.fq $RAID/pero_pigeons_ladybugs/2346.trim_2P.fq \
 	--runThreadN 30 --genomeLoad LoadAndKeep --outFilterIntronMotifs RemoveNoncanonical --outFileNamePrefix 2346
 	
 	STAR --genomeDir peer_trans --readFilesIn $RAID/pero_pigeons_ladybugs/2342.trim_1P.fq $RAID/pero_pigeons_ladybugs/2342.trim_2P.fq \
@@ -61,7 +61,7 @@ Make Bams
 	cat 2345SE1Aligned.out.sam | samtools view -@6 -Sub - | samtools sort -n -m3G -@8 - ../bam/2345SE1
 	cat 2346SE1Aligned.out.sam | samtools view -@6 -Sub - | samtools sort -n -m3G -@8 - ../bam/2346SE1
 	cat 2336SE1Aligned.out.sam | samtools view -@6 -Sub - | samtools sort -n -m3G -@8 - ../bam/2336SE1
-
+	cat 2342SE1Aligned.out.sam | samtools view -@6 -Sub - | samtools sort -n -m3G -@8 - ../bam/2342SE1
 
 \##Need to do
 
@@ -71,6 +71,7 @@ Make Bams
 	samtools merge -fn -@10 2346.sort.bam 2346.bam 2346SE1.bam
 	samtools merge -fn -@10 2345.sort.bam 2345.bam 2345SE1.bam
 	samtools merge -fn -@10 2336.sort.bam 2336.bam 2336SE1.bam
+	samtools merge -fn -@10 2342.sort.bam 2342.bam 2342SE1.bam
 	
 	##
 	
