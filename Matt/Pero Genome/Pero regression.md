@@ -1,7 +1,7 @@
 Pero Regression:
 
 
-	cs <- as.matrix(read.delim("pero.tpm.counts"))
+	cs <- as.matrix(read.delim("pero.tpm.txt"))
 	for(n in 3:nrow(cs)) {
    	  x <- try(summary(lm(as.numeric(cs[1,c(2:7)]) ~ as.numeric(cs[n,c(2:7)])))$coefficients[2,4], silent = TRUE)
    	  if(x<.0001) {

@@ -108,7 +108,7 @@ in `/mnt/data3/macmanes/STAR/transcripts`
     paste 0.txt 0a.txt 1.txt 2.txt 3.txt 4.txt 5.txt > pero.tpm.counts
    
 
-
+	cat pero.tpm.counts | awk '{print $1 "\t" int($2+0.5) "\t" int($3+0.5) "\t" int($4+0.5) "\t" int($5+0.5) "\t" int($6+0.5) "\t" int($7+0.5)} ' > 	pero.tpm.txt
 
  
     sed -i '1 i\names \t wet1 \t wet2 \t dry1 \t dry2 \t dry3 \t dry4' pero.tpm.counts  
