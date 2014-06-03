@@ -67,3 +67,24 @@ in `/mnt/data3/macmanes/STAR/transcripts`
 	
 	##
 	
+
+
+
+\#process eXpress
+
+    cat 2925.express/results.xprs | sort -k2 | cut -f2 > 0.txt
+	cat 2926.express/results.xprs | sort -k2 | cut -f8 > 0a.txt
+	cat 2926.express/results.xprs | sort -k2 | cut -f8 > 1.txt
+    cat 2342.sort.express/results.xprs | sort -k2 | cut -f8 > 2.txt
+    cat 2345.sort.express/results.xprs | sort -k2 | cut -f8 > 3.txt
+    cat 2346.sort.express/results.xprs | sort -k2 | cut -f8 > 4.txt
+    cat 2336.sort.express/results.xprs | sort -k2 | cut -f8 > 5.txt
+    paste 0.txt 0a.txt 1.txt 2.txt 3.txt 4.txt 5.txt > pero.effcounts.counts
+   
+
+	cat pero.effcounts.counts | awk '{print $1 "\t" int($2+0.5) "\t" int($3+0.5) "\t" int($4+0.5) "\t" int($5+0.5) "\t" int($6+0.5) "\t" int($7+0.5)} ' > pero.effcounts.txt 
+
+
+ 
+    cat pero.effcounts.counts | sed '1 i\names \t wet1 \t wet2 \t wet3 \t dry1 \t dry2 \t dry3' > pero.effcounts.txt 
+
