@@ -55,6 +55,29 @@ in `/mnt/data3/macmanes/STAR/transcripts`
 	bwa mem -t20 pero_final  $RAID/pero_pigeons_ladybugs/2346.trim_1U.fq | \
 	samtools view -@6 -Sub - | samtools sort -n -m3G -@16 - ../bam/2346SE
 
+	\# new reads
+	
+	bwa mem -t30 pero_final  $RAID/pero_pigeons_ladybugs/2345a.trim_1P.fq.gz  \
+	$RAID/pero_pigeons_ladybugs/2345a.trim_2P.fq.gz  | \
+	samtools view -@6 -Sub - | samtools sort -n -m3G -@16 - ../bam/2345a
+	
+	bwa mem -t30 pero_final  $RAID/pero_pigeons_ladybugs/2346a.trim_1P.fq.gz  \
+	$RAID/pero_pigeons_ladybugs/2346a.trim_2P.fq.gz  | \
+	samtools view -@6 -Sub - | samtools sort -n -m3G -@16 - ../bam/2346a
+
+
+	bwa mem -t30 pero_final  $RAID/pero_pigeons_ladybugs/2336a.trim_1P.fq.gz  \
+	$RAID/pero_pigeons_ladybugs/2336a.trim_2P.fq.gz  | \
+	samtools view -@6 -Sub - | samtools sort -n -m3G -@16 - ../bam/2336a
+	
+	bwa mem -t30 pero_final  $RAID/pero_pigeons_ladybugs/2336a.trim_1U.fq.gz | \
+	samtools view -@6 -Sub - | samtools sort -n -m3G -@16 - ../bam/2336aSE
+
+	bwa mem -t30 pero_final  $RAID/pero_pigeons_ladybugs/2346a.trim_1U.fq.gz | \
+	samtools view -@6 -Sub - | samtools sort -n -m3G -@16 - ../bam/2346aSE
+
+	bwa mem -t30 pero_final  $RAID/pero_pigeons_ladybugs/2345a.trim_1U.fq.gz | \
+	samtools view -@6 -Sub - | samtools sort -n -m3G -@16 - ../bam/2345aSE
 
 
 	cd ../bam
@@ -83,9 +106,9 @@ in `/mnt/data3/macmanes/STAR/transcripts`
 	cat 2925.express/results.xprs | sort -k2 | cut -f8 > 0a.txt
 	cat 2926.express/results.xprs | sort -k2 | cut -f8 > 1.txt
     cat 2342.sort.express/results.xprs | sort -k2 | cut -f8 > 2.txt
-    cat 2345.sort.express/results.xprs | sort -k2 | cut -f8 > 3.txt
-    cat 2346.sort.express/results.xprs | sort -k2 | cut -f8 > 4.txt
-    cat 2336.sort.express/results.xprs | sort -k2 | cut -f8 > 5.txt
+    cat 2345.merge.express/results.xprs | sort -k2 | cut -f8 > 3.txt
+    cat 2346.merge.express/results.xprs | sort -k2 | cut -f8 > 4.txt
+    cat 2336.merge.express/results.xprs | sort -k2 | cut -f8 > 5.txt
     paste 0.txt 0a.txt 1.txt 2.txt 3.txt 4.txt 5.txt > pero.effcounts.counts
    
 
@@ -102,9 +125,9 @@ in `/mnt/data3/macmanes/STAR/transcripts`
 	cat 2925.express/results.xprs | sort -k2 | cut -f15 > 0a.txt
 	cat 2926.express/results.xprs | sort -k2 | cut -f15 > 1.txt
     cat 2342.sort.express/results.xprs | sort -k2 | cut -f15 > 2.txt
-    cat 2345.sort.express/results.xprs | sort -k2 | cut -f15 > 3.txt
-    cat 2346.sort.express/results.xprs | sort -k2 | cut -f15 > 4.txt
-    cat 2336.sort.express/results.xprs | sort -k2 | cut -f15 > 5.txt
+    cat 2345.merge.express/results.xprs | sort -k2 | cut -f15 > 3.txt
+    cat 2346.merge.express/results.xprs | sort -k2 | cut -f15 > 4.txt
+    cat 2336.merge.express/results.xprs | sort -k2 | cut -f15 > 5.txt
     paste 0.txt 0a.txt 1.txt 2.txt 3.txt 4.txt 5.txt > pero.tpm.counts
    
 

@@ -31,3 +31,27 @@ BWA Mapping ladybugs
 
 	bwa mem -t25 lb $RAID/pero_pigeons_ladybugs/MM1.trim_1P.fq $RAID/pero_pigeons_ladybugs/MM1.trim_1P.fq | samtools view -@6 -Sub - | samtools sort -m3G -@8 - MM1
 
+Trimming new reads:
+
+in `/mnt/data3/macmanes/pero_pigeons_ladybugs`
+
+	java -Xmx80g -jar /share/Trimmomatic-0.32/trimmomatic-0.32.jar PE \
+	-threads 30 -baseout 2346a.trim.fq.gz raw_reads_run2/MM46a.1.fq.gz \
+	raw_reads_run2/MM46a.2.fq.gz \
+	ILLUMINACLIP:/share/Trimmomatic-0.32/barcodes.fa:2:40:15 \
+	LEADING:0 TRAILING:0 SLIDINGWINDOW:4:0 MINLEN:25
+	
+46
+
+Input Read Pairs: 12,673,036 Both Surviving: 9657940 (76.21%) Forward Only Surviving: 3014798 (23.79%) Reverse Only Surviving: 250 (0.00%) Dropped: 48 (0.00%)
+
+
+45
+
+Input Read Pairs: 17,676,152 Both Surviving: 13259038 (75.01%) Forward Only Surviving: 4416402 (24.99%) Reverse Only Surviving: 621 (0.00%) Dropped: 91 (0.00%)
+
+36
+
+Input Read Pairs: 21738363 Both Surviving: 16587505 (76.31%) Forward Only Surviving: 5150458 (23.69%) Reverse Only Surviving: 316 (0.00%) Dropped: 84 (0.00%)
+
+

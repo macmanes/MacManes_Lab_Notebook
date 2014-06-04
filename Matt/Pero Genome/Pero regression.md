@@ -27,4 +27,4 @@ head(cs)
 
 48500	c228273_g1_i1	raw p= 9.956139e-05
 
-cat /mnt/data3/macmanes/pero_trans_assembly/pero.final.fa | grep -wA1 c111413_g1_i1
+cat /mnt/data3/macmanes/pero_trans_assembly/pero.final.fa | grep -wA1 c228273_g1_i1
