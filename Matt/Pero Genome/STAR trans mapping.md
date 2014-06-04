@@ -59,7 +59,7 @@ in `$RAID/STAR`
 	time STAR --genomeDir peer_star --readFilesIn $RAID/pero_pigeons_ladybugs/2346a.trim_1U.fq.gz --readFilesCommand zcat \
 	--runThreadN 10 --genomeLoad LoadAndKeep  --outStd SAM | samtools view -@ 6 -Sub - | samtools sort -n -m4G -@ 16 - ../starbam/2346SE2
 
-	time STAR --genomeDir peer_genome --readFilesIn $RAID/pero_pigeons_ladybugs/2346a.trim_1P.fq.gz $RAID/pero_pigeons_ladybugs/2346a.trim_2P.fq.gz \
+	time STAR --genomeDir peer_star --readFilesIn $RAID/pero_pigeons_ladybugs/2346a.trim_1P.fq.gz $RAID/pero_pigeons_ladybugs/2346a.trim_2P.fq.gz \
 	--readFilesCommand zcat --runThreadN 30 --genomeLoad LoadAndKeep  --outStd SAM | samtools view -@ 6 -Sub - | samtools sort -n -m4G -@ 16 - ../starbam/2346a
 
 	#2336
