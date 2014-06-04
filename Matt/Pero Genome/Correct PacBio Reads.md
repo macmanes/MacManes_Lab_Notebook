@@ -69,3 +69,29 @@ pacbio.spec
     frgCorrConcurrency = 8
     ovlCorrConcurrency = 16
     cnsConcurrency = 16
+    
+
+June 6th
+
+
+in `/mnt/data3/macmanes/pbcr`
+    
+    maxUncorrectedGap = 1500
+    
+    merSize=14
+    
+    merylMemory = 628000
+    merylThreads = 10
+    
+    ovlStoreMemory = 8192
+    ovlHashBits = 24
+    ovlThreads = 10
+    
+    ovlConcurrency = 2
+    cnsConcurrency = 10
+    
+    maxGap=1500
+    ovlHashBlockLength=10000000000
+    ovlRefBlockLength=10000000000
+    
+    blasr=-noRefineAlign -advanceHalf -noSplitSubreads -minMatch 10 -minPctIdentity 70 -bestn 24 -nCandidates 24

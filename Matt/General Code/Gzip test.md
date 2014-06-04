@@ -20,9 +20,9 @@ This is on SCRATCH, a SSD
 
 	time bwa mem -t10 pero_final Pero2925.1.fastq Pero2925.2.fastq > 2925.sam
 	
-		real	33m42.204s
-		user	295m41.135s
-		sys	6m23.523s
+	real	38m34.495s
+	user	331m8.599s
+	sys	9m18.295s
 	
 	time bwa mem -t5 pero_final Pero2925.1.fastq Pero2925.2.fastq > 2925.sam
 	
