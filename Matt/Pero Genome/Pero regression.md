@@ -2,7 +2,7 @@ Pero Regression:
 
 
 	cs <- as.matrix(read.delim("pero.tpm.txt"))
-	for(n in 3:nrow(cs)) {
+	for(n in 4:nrow(cs)) {
    	  x <- try(summary(lm(as.numeric(cs[1,c(2:7)]) ~ as.numeric(cs[n,c(2:7)])))$coefficients[2,4], silent = TRUE)
    	  if(x<.0001) {
    	      cat(n,"\t",cs[n,1],"\t", "raw p= ", x, "\n", sep = "", file = "")
@@ -35,7 +35,7 @@ cat /mnt/data3/macmanes/pero_trans_assembly/pero.final.fa | grep -wA1 c228273_g1
 	
     1814	c113620_g1_i1	raw p= 2.672977e-05 polysaccharide biosynthesis domain containing 1 (Pbdc1)
     2804	c119017_g1_i1	raw p= 2.910683e-05 phosphotriesterase related (Pter)
-    7235	c150421_g1_i1	raw p= 4.878605e-05	none
+    *7235	c150421_g1_i1	raw p= 4.878605e-05	none
     11553	c171918_g1_i1	raw p= 2.329851e-05	heterogeneous nuclear ribonucleoprotein A/B (Hnrnpab)
     14929	c185268_g1_i1	raw p= 5.388551e-05 kelch-like 42 (Klhl42)
     15318	c186564_g1_i1	raw p= 5.186312e-05	VAMP (vesicle-associated membrane protein)-assoc. Vapb
@@ -68,3 +68,50 @@ cat /mnt/data3/macmanes/pero_trans_assembly/pero.final.fa | grep -wA1 c228273_g1
 	88560	c471472_g1_i1	raw p= 5.04038e-05 Hoxd10
 	94969	c543038_g1_i1	raw p= 2.212793e-05 none
 	104266	c96263_g2_i1	raw p= 3.948493e-05 Pter
+	44188	c226125_g2_i11	raw p= 2.212793e-05 : Add1
+
+
+
+
+
+    328	c113620_g1_i1	raw p= 2.672977e-05
+    568	c119017_g1_i1	raw p= 2.910683e-05
+    1504	c150421_g1_i1	raw p= 4.878605e-05
+    2576	c171918_g1_i1	raw p= 2.329851e-05
+    3446	c185268_g1_i1	raw p= 5.388551e-05
+    3562	c186564_g1_i1	raw p= 5.186312e-05
+    4420	c195420_g1_i1	raw p= 2.382286e-05
+    5556	c203027_g1_i3	raw p= 9.753688e-05
+    5915	c204662_g1_i2	raw p= 5.388551e-05
+    5995	c205036_g1_i1	raw p= 1.6561e-05
+    7042	c210242_g1_i4	raw p= 5.019948e-05
+    7498	c212287_g1_i1	raw p= 5.554408e-05
+    8425	c215994_g1_i1	raw p= 9.956139e-05
+    9272	c218632_g1_i2	raw p= 7.82864e-05
+    9575	c219667_g1_i1	raw p= 5.04038e-05
+    10860	c222873_g1_i2	raw p= 7.708392e-05
+    11548	c224147_g2_i7	raw p= 1.725915e-05
+    12615	c226090_g1_i1	raw p= 1.016452e-06
+    13857	c228069_g4_i2	raw p= 3.285311e-05
+    14892	c229614_g7_i1	raw p= 1.890506e-05
+    15487	c230325_g3_i1	raw p= 1.6561e-05
+    16053	c231114_g11_i1	raw p= 7.052927e-05
+    16089	c231155_g1_i2	raw p= 2.235395e-05
+    16338	c231448_g4_i1	raw p= 3.846585e-05
+    17293	c232551_g5_i2	raw p= 7.297572e-05
+    17547	c232858_g3_i2	raw p= 8.382555e-06
+    17768	c233162_g3_i1	raw p= 2.830928e-05
+    17801	c233197_g2_i1	raw p= 7.032711e-05
+    18907	c234519_g3_i1	raw p= 2.212793e-05
+    19354	c235090_g2_i1	raw p= 2.212793e-05
+    19585	c236231_g1_i1	raw p= 4.26761e-05
+    20552	c403035_g1_i1	raw p= 8.139244e-06
+    21004	c471472_g1_i1	raw p= 5.04038e-05
+    22311	c96263_g2_i1	raw p= 3.948493e-05
+
+
+RCode
+
+	par(mfrow=c(2,2))
+	plot(as.numeric(cs[1,c(2:7)]) ~ as.numeric(cs[17925,c(2:7)]), lwd=4, pch=3, frame.plot=F, xlab='AQP2 expression', ylab='Serum Potassium')
+	
