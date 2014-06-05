@@ -38,6 +38,7 @@ DEseq2
 
 	#rlog transformation
 	rld <- rlogTransformation(dds)	
+	vsd <- varianceStabilizingTransformation(dds)
 
 	#plot showing difference
 	par( mfrow = c( 1, 2 ) )
@@ -68,8 +69,8 @@ DEseq2
 this one is a good heatmap, looks art highly vriable genes
 
 	library( "genefilter" )
-	topVarGenes <- head( order( rowVars( assay(rld) ), decreasing=TRUE ), 200 )
-	heatmap.2( assay(rld)[ topVarGenes, ], scale="row",
+	topVarGenes <- head( order( rowVars( assay(vsd) ), decreasing=TRUE ), 200 )
+	heatmap.2( assay(vsd)[ topVarGenes, ], scale="row",
 	trace="none", dendrogram="column",
 	col = colorRampPalette( rev(brewer.pal(9, "RdBu")) )(255))
 	

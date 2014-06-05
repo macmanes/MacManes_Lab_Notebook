@@ -1,14 +1,15 @@
 Pero Regression:
 
 
-	cs <- as.matrix(read.delim("pero.tpm.txt"))
-	for(n in 4:nrow(cs)) {
-   	  x <- try(summary(lm(as.numeric(cs[1,c(2:7)]) ~ as.numeric(cs[n,c(2:7)])))$coefficients[2,4], silent = TRUE)
-   	  if(x<.0001) {
-   	      cat(n,"\t",cs[n,1],"\t", "raw p= ", x, "\n", sep = "", file = "")
-   	  }
- 	}
 
+    cs <- as.matrix(read.delim("pero.tpm.txt1"))
+    for(n in 4:nrow(cs)) {
+        x <- try(summary(lm(as.numeric(cs[2,c(2:7)]) ~ as.numeric(cs[n,c(2:7)])))$coefficients[2,4], silent = TRUE)
+        y <- try(summary(lm(as.numeric(cs[3,c(2:7)]) ~ as.numeric(cs[n,c(2:7)])))$coefficients[2,4], silent = TRUE)
+        if(x<.00001 & y<.00001) {
+            cat(n,"\t",cs[n,1],"\t", "raw p= ", x, "\n", sep = "", file = "")
+        }
+    }
 
 head(cs)
 
@@ -79,7 +80,7 @@ cat /mnt/data3/macmanes/pero_trans_assembly/pero.final.fa | grep -wA1 c228273_g1
     1504	c150421_g1_i1	raw p= 4.878605e-05
     2576	c171918_g1_i1	raw p= 2.329851e-05
     3446	c185268_g1_i1	raw p= 5.388551e-05
-    3562	c186564_g1_i1	raw p= 5.186312e-05
+    3562	c186564_g1_i1	raw p= 5.186312e-05 VAMP
     4420	c195420_g1_i1	raw p= 2.382286e-05
     5556	c203027_g1_i3	raw p= 9.753688e-05
     5915	c204662_g1_i2	raw p= 5.388551e-05
@@ -112,6 +113,53 @@ cat /mnt/data3/macmanes/pero_trans_assembly/pero.final.fa | grep -wA1 c228273_g1
 
 RCode
 
-	par(mfrow=c(2,2))
-	plot(as.numeric(cs[1,c(2:7)]) ~ as.numeric(cs[17925,c(2:7)]), lwd=4, pch=3, frame.plot=F, xlab='AQP2 expression', ylab='Serum Potassium')
+     test=2
+     row=17766
+     par(mfrow=c(2,2))
+     plot(as.numeric(cs[test,c(2:7)]) ~ as.numeric(cs[row+3,c(2:7)]), lwd=4, pch=3, frame.plot=F, 
+     	xlab='Abca3 expression', 
+     	ylab='Serum Sodium', 
+     	main='Na vs Abca3',
+     	col=c("dodgerblue","dodgerblue","sienna4","sienna4","sienna4","sienna4"))
+     abline(lm(as.numeric(cs[test,c(2:7)]) ~ as.numeric(cs[row+3,c(2:7)])), lwd=4, col='red')
+     plot(as.numeric(cs[test+1,c(2:7)]) ~ as.numeric(cs[row+3,c(2:7)]), lwd=4, pch=3, frame.plot=F, 
+     	xlab='Abca3 expression', 
+     	ylab='Serum Chloride', 
+     	main='Cl vs Abca3',
+     	col=c("dodgerblue","dodgerblue","sienna4","sienna4","sienna4","sienna4"))
+     abline(lm(as.numeric(cs[test+1,c(2:7)]) ~ as.numeric(cs[row+3,c(2:7)])), lwd=4, col='red')
+     boxplot(as.numeric(cs[row+3,c(2:7)]) ~ cs[1,c(2:7)], main='Slc22a11', ylab='FPMK', frame.plot=F, cex.main=1.1, cex.lab=1, 
+     	col=(c("sienna4","dodgerblue")))
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 	
