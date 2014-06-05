@@ -105,10 +105,10 @@ in `/mnt/data3/macmanes/STAR/transcripts`
     cat 2925.express/results.xprs | sort -k2 | cut -f2 > 0.txt
 	cat 2925.express/results.xprs | sort -k2 | cut -f8 > 0a.txt
 	cat 2926.express/results.xprs | sort -k2 | cut -f8 > 1.txt
-    cat 2342.sort.express/results.xprs | sort -k2 | cut -f8 > 2.txt
-    cat 2345.merge.express/results.xprs | sort -k2 | cut -f8 > 3.txt
-    cat 2346.merge.express/results.xprs | sort -k2 | cut -f8 > 4.txt
-    cat 2336.merge.express/results.xprs | sort -k2 | cut -f8 > 5.txt
+    cat 2342.express/results.xprs | sort -k2 | cut -f8 > 2.txt
+    cat 2345.express/results.xprs | sort -k2 | cut -f8 > 3.txt
+    cat 2346.express/results.xprs | sort -k2 | cut -f8 > 4.txt
+    cat 2336.express/results.xprs | sort -k2 | cut -f8 > 5.txt
     paste 0.txt 0a.txt 1.txt 2.txt 3.txt 4.txt 5.txt > pero.effcounts.counts
    
 
@@ -124,15 +124,15 @@ in `/mnt/data3/macmanes/STAR/transcripts`
     cat 2925.express/results.xprs | sort -k2 | cut -f2 > 0.txt
 	cat 2925.express/results.xprs | sort -k2 | cut -f15 > 0a.txt
 	cat 2926.express/results.xprs | sort -k2 | cut -f15 > 1.txt
-    cat 2342.sort.express/results.xprs | sort -k2 | cut -f15 > 2.txt
-    cat 2345.merge.express/results.xprs | sort -k2 | cut -f15 > 3.txt
-    cat 2346.merge.express/results.xprs | sort -k2 | cut -f15 > 4.txt
-    cat 2336.merge.express/results.xprs | sort -k2 | cut -f15 > 5.txt
+    cat 2342.express/results.xprs | sort -k2 | cut -f15 > 2.txt
+    cat 2345.express/results.xprs | sort -k2 | cut -f15 > 3.txt
+    cat 2346.express/results.xprs | sort -k2 | cut -f15 > 4.txt
+    cat 2336.express/results.xprs | sort -k2 | cut -f15 > 5.txt
     paste 0.txt 0a.txt 1.txt 2.txt 3.txt 4.txt 5.txt > pero.tpm.counts
    
 
 	cat pero.tpm.counts | awk '{print $1 "\t" int($2+0.5) "\t" int($3+0.5) "\t" int($4+0.5) "\t" int($5+0.5) "\t" int($6+0.5) "\t" int($7+0.5)} ' > 	pero.tpm.txt
 
  
-    sed -i '1 i\names \t wet1 \t wet2 \t dry1 \t dry2 \t dry3 \t dry4' pero.tpm.counts  
+    sed -i '1 i\names \t wet1 \t wet2 \t dry1 \t dry2 \t dry3 \t dry4' pero.tpm.txt  
 

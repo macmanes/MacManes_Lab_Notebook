@@ -16,16 +16,19 @@ DEseq2
 	biocLite("DESeq2")
 	biocLite("vsn")
 	biocLite("gplots")
+	biocLite("vsn")
+	biocLite("gplots")
+	
 	library( "DESeq2")
 	library("RColorBrewer")
-	library("gplots")	pero <- read.delim("~/Documents/deseq2_analyses/pero.effcounts.txt", header=T, row.names=1)
+	library("gplots")	pero <- read.delim("pero.effcounts.txt", header=T, row.names=1)
 	ExDes <- data.frame(row.names=colnames(pero), condition = c("wet","wet","dry","dry","dry","dry"))
 	samples <- data.frame(row.names=c("wet1","wet2","dry1","dry2","dry3","dry4"),
     	condition=as.factor(c(rep("wet",2), rep("dry",4))))
  
 	bckCDS <- DESeqDataSetFromMatrix(countData = pero, colData=samples, design=~condition)
 	dds <- DESeq(bckCDS)
-	res <- results(dds, alpha=0.01)
+	res <- results(dds)
 	plotDispEsts(dds, ylim = c(1e-6, 1e1) )
 	sum( res$padj < 0.01, na.rm=TRUE )
 	plotMA(dds, alpha=.01)
