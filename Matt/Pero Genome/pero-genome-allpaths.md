@@ -194,3 +194,12 @@ Log directory: /mnt/data3/macmanes/allpaths/peer/make_log/mydata/peer/test/2014-
 
 will try `CLOSE_UNIPATH_GAPS=False` if this fails again.
 
+7 June
+--
+
+Run failed dt hardware. restart
+
+nohup RunAllPathsLG THREADS=32 FIX_ASSEMBLY_BASE_ERRORS=TRUE \
+PRE=$RAID/allpaths/ DATA_SUBDIR=mydata RUN=peer \
+REFERENCE_NAME=peer TARGETS=standard CONNECT_SCAFFOLDS=TRUE \
+HAPLOIDIFY=TRUE OVERWRITE=True &
