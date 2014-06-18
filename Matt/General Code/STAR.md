@@ -54,10 +54,12 @@ in `$RAID/STAR`
 	
 	STAR --genomeDir peer_genome --readFilesIn $RAID/pero_pigeons_ladybugs/2336.trim_1U.fq \
 	--runThreadN 10 --genomeLoad LoadAndKeep --outFilterIntronMotifs RemoveNoncanonical --outFileNamePrefix 2336SE1
- Make BAM's from SAM
+
+ Make BAM's from SAM
  
 	cat 2342Aligned.out.sam | samtools view -@6 -Sub - | samtools sort -n -m3G -@8 - bam/2342
-	cat 2926Aligned.out.sam | samtools view -@6 -Sub - | samtools sort -n -m3G -@8 - bam/2926	cat 2925Aligned.out.sam | samtools view -@6 -Sub - | samtools sort -n -m3G -@8 - bam/2925
+	cat 2926Aligned.out.sam | samtools view -@6 -Sub - | samtools sort -n -m3G -@8 - bam/2926
+	cat 2925Aligned.out.sam | samtools view -@6 -Sub - | samtools sort -n -m3G -@8 - bam/2925
 	
 	cat 2345Aligned.out.sam | samtools view -@6 -Sub - | samtools sort -n -m3G -@8 - bam/2345
 	cat 2346Aligned.out.sam | samtools view -@6 -Sub - | samtools sort -n -m3G -@8 - bam/2346
@@ -67,7 +69,8 @@ in `$RAID/STAR`
 	cat 2336SE1Aligned.out.sam | samtools view -@6 -Sub - | samtools sort -n -m3G -@8 - bam/2336SE1
 
 
- Cufflinks
+
+ Cufflinks
  
 	for i in `ls *bam`; do F=`basename $i .bam`;
 	cufflinks -p30 -o ../cufflinks/$F --library-type fr-firststrand \

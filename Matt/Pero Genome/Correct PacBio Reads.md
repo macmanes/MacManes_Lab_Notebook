@@ -26,7 +26,7 @@ May 15
 Correct PacBio Reads
 
 	nohup /share/wgs-8.1/Linux-amd64/bin/pacBioToCA -length 5000 -partitions 50 \
-	-l pacbio -t 20 -s pacbio.spec \
+	-l pacbio -t 48 -s pacbio.spec \
 	-genomeSize 2600000000 \
 	-fastq /mnt/data3/macmanes/pacbio/raw.pacbio.reads/fastq/all.pb.fastq \
 	illumina.frg > pbcr.out 2>&1 &
