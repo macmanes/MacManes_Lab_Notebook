@@ -4,7 +4,7 @@
  	nohup PrepareAllPathsInputs.pl \
  	DATA_DIR=$RAID/allpaths/peer/mydata/ \
  	GENOME_SIZE=2600000000 OVERWRITE=True PLOIDY=2 \
- 	FRAG_COVERAGE=45 HOSTS=12 &
+ 	FRAG_COVERAGE=50 HOSTS=12 &
  	
 in_groups.csv
 --
@@ -21,6 +21,7 @@ in_groups.csv
 	/mnt/data3/macmanes/pero_genome/131219/peroL5_*U.fq,L1_UP,      frags10
 	/mnt/data3/macmanes/pero-mate-pair/peer3kb.clipped.*.fq,3kb,      jumps3
 	/mnt/data3/macmanes/pero-mate-pair/peer7kb.clipped.*.fq,7kb,      jumps7
+	/mnt/data3/macmanes/pbcr/pacbio.fasta,long,long
 	
 
 in_libs.csv
@@ -32,14 +33,14 @@ in_libs.csv
 	L1,peer_genome,peer, fragment,1,300,50,            ,              ,           inward,0,0
 	L1,peer_genome,peer, fragment,1,300,50,            ,              ,           inward,0,0
 	L1,peer_genome,peer, fragment,1,300,50,            ,              ,           inward,0,0
-	L1_UP,peer_genome,peer, fragment,0,300,50,            ,              ,           inward,0,0
-	L1_UP,peer_genome,peer, fragment,0,300,50,            ,              ,           inward,0,0
-	L1_UP,peer_genome,peer, fragment,0,300,50,            ,              ,           inward,0,0
-	L1_UP,peer_genome,peer, fragment,0,300,50,            ,              ,           inward,0,0
-	L1_UP,peer_genome,peer, fragment,0,300,50,            ,              ,           inward,0,0
+	L1_UP,peer_genome,peer, fragment,0, , ,            ,              ,           , ,
+	L1_UP,peer_genome,peer, fragment,0, , ,            ,              ,            , ,
+	L1_UP,peer_genome,peer, fragment,0, , ,            ,              ,            , ,
+	L1_UP,peer_genome,peer, fragment,0, , ,            ,              ,            , ,
+	L1_UP,peer_genome,peer, fragment,0, , ,            ,              ,            , ,
 	3kb,peer_genome,peer,  jumping,1,          ,            ,3000,500,          outward,0,0
 	7kb,peer_genome,peer,  jumping,1,          ,            ,7000,500,          outward,0,0
-	
+	long,peer_genome,peer, long, , , ,            ,              ,          , ,
 
 
 RunAllPaths
