@@ -47,7 +47,7 @@ Lets try SGA
     sga index -a ropebwt -t 60 reads.ec.k31.fastq
     sga filter -d 32 -x 2 -t 60 --low-complexity-check reads.ec.k31.fastq
     sga fm-merge -m 45 -t 60 -o merged.k41.fa reads.ec.k31.filter.pass.fa
-    sga index -t 60 merged.k31.fa
+    sga index -a ropebwt -t 10 merged.k31.fa
     sga rmdup -d 32 -t 60 merged.k31.fa
     sga overlap -e 0.04 -t 60 merged.k31.rmdup.fa
     sga assemble -b 10 -m 50 -r 10 -o assemble.m50 merged.k31.rmdup.asqg.gz
