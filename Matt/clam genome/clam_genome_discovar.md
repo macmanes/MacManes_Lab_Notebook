@@ -46,7 +46,7 @@ Lets try SGA
     sga correct -k 31 --discard -r 2 --learn -t 60 -d 32 -o reads.ec.k31.fastq sga_preproc.fq
     sga index -a ropebwt -t 60 reads.ec.k31.fastq
     sga filter -d 32 -x 2 -t 60 --low-complexity-check reads.ec.k31.fastq
-    sga fm-merge -m 45 -t 60 -o merged.k41.fa reads.ec.k31.filter.pass.fa
+    sga fm-merge -m 45 -t 60 -o merged.k31.fa reads.ec.k31.filter.pass.fa
     sga index -t 60 merged.k31.fa
     sga rmdup -d 32 -t 60 merged.k31.fa
     sga overlap -e 0.04 -t 60 merged.k31.rmdup.fa
