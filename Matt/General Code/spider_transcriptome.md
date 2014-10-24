@@ -105,11 +105,47 @@ Diginorm removed 78% of reads...
 	rm MDM_SPIDER_28W_1.fq.gz MDM_SPIDER_28W_2.fq.gz
 	#done
 	
+	bwa mem -t60 index  MDM_SPIDER_51L_1.fq.gz MDM_SPIDER_51L_2.fq.gz | \
+	samtools view -@16 -Sub - | samtools sort -n -m3G -@28 - 51L_paired
+	rm MDM_SPIDER_51L_1.fq.gz MDM_SPIDER_51L_2.fq.gz
+	
+	bwa mem -t60 index  spider110L.fq.gz | \
+	samtools view -@16 -Sub - | samtools sort -n -m3G -@28 - 110L_single
+	rm spider110L.fq.gz
+	
+	bwa mem -t60 index  spider39.fq.gz | \
+	samtools view -@16 -Sub - | samtools sort -n -m3G -@28 - 39_single
+	rm spider39.fq.gz
 
+	bwa mem -t60 index  spider48.fq.gz | \
+	samtools view -@16 -Sub - | samtools sort -n -m3G -@28 - 48_single
+	rm spider48.fq.gz
 
+	bwa mem -t60 index  spider55.fq.gz | \
+	samtools view -@16 -Sub - | samtools sort -n -m3G -@28 - 55_single
+	rm spider55.fq.gz
 
+	bwa mem -t60 index  spider73.fq.gz | \
+	samtools view -@16 -Sub - | samtools sort -n -m3G -@28 - 73_single
+	rm spider73.fq.gz
 
+	bwa mem -t60 index  spider83.fq.gz | \
+	samtools view -@16 -Sub - | samtools sort -n -m3G -@28 - 83_single
+	rm spider83.fq.gz
 
+	bwa mem -t60 index  spider89.fq.gz | \
+	samtools view -@16 -Sub - | samtools sort -n -m3G -@28 - 89_single
+	rm spider89.fq.gz
+
+	bwa mem -t60 index  spider96L.fq.gz | \
+	samtools view -@16 -Sub - | samtools sort -n -m3G -@28 - 96L_single
+	rm spider96L.fq.gz
+
+	bwa mem -t60 index  spider9W.fq.gz | \
+	samtools view -@16 -Sub - | samtools sort -n -m3G -@28 - 9W_single
+	rm spider9W.fq.gz
+	
+	ls
 
 
 
