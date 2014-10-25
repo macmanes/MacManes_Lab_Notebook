@@ -190,14 +190,48 @@ Diginorm removed 78% of reads...
     y <- estimateCommonDisp(y)
     y <- estimateTagwiseDisp(y)
     et <- exactTest(y)
-    summary(decideTestsDGE(et, p.value=0.05))
+    summary(de <- decideTestsDGE(et, p=0.05, adjust="BH"))
 	topTags(et, n=205)
-
-
-
-
-
 	
+	detags <- rownames(y)[as.logical(de)]
+	plotSmear(et, de.tags=detags)
+
+
+**Annotation**
+
+in `~/spider/blast`
+
+	TransDecoder -t ec.C50.P2.Trin.highexp.spider.fasta --CPU 60 /home/macmanes/cpg_project/prot/Pfam-A.hmm
 	
+
+
+**Trinity style annotation**
+
+	/share/trinityrnaseq_r20140717/util/abundance_estimates_to_matrix.pl \
+	--est_method eXpress --name_sample_by_basedir \
+	28W_paired.xprs/results.xprs \
+	9W.xprs/results.xprs \
+	39_single.xprs/results.xprs \
+	48_single.xprs/results.xprs \
+	89_single.xprs/results.xprs \
+	10L_paired.xprs/results.xprs \
+	7L_paired.xprs/results.xprs \
+	67L_paired.xprs/results.xprs \
+	51L_paired.xprs/results.xprs \
+	110L_single.xprs/results.xprs \
+	96L_single.xprs/results.xprs
 	
+
+	/share/trinityrnaseq_r20140717/Analysis/DifferentialExpression/run_DE_analysis.pl \
+	--matrix matrix.counts.matrix --method DESeq \
+	--samples_file samples_described.txt
 	
+in `/home/macmanes/spider/diffexp/DESeq.14921.dir`
+
+	/share/trinityrnaseq_r20140717/Analysis/DifferentialExpression/analyze_diff_expr.pl \
+	--matrix ../matrix.TMM.fpkm.matrix -P 1e-2 -C 2 --samples ../samples_described.txt
+
+	---
+	
+	/share/trinityrnaseq_r20140717/Analysis/DifferentialExpression/define_clusters_by_cutting_tree.pl \
+	-R diffExpr.P1e-2_C2.matrix.RData -K 10
