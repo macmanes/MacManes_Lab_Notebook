@@ -145,7 +145,53 @@ Diginorm removed 78% of reads...
 	samtools view -@16 -Sub - | samtools sort -n -m3G -@28 - 9W_single
 	rm spider9W.fq.gz
 	
-	ls
+**pulling out count data**
+
+    cat 28W_paired.xprs/results.xprs | sort -k2 | cut -f2 > 0.txt
+    cat 28W_paired.xprs/results.xprs | sort -k2 | cut -f8 > 0a.txt
+    cat 9W.xprs/results.xprs | sort -k2 | cut -f8 > 1.txt
+    cat 10L_paired.xprs/results.xprs | sort -k2 | cut -f8 > 2.txt
+    cat 7L_paired.xprs/results.xprs | sort -k2 | cut -f8 > 3.txt
+    cat 67L_paired.xprs/results.xprs | sort -k2 | cut -f8 > 4.txt
+    cat 51L_paired.xprs/results.xprs | sort -k2 | cut -f8 > 5.txt
+    cat 110L_single.xprs/results.xprs | sort -k2 | cut -f8 > 6.txt
+    cat 96L_single.xprs/results.xprs | sort -k2 | cut -f8 > 7.txt
+    cat 39_single.xprs/results.xprs | sort -k2 | cut -f8 > 8.txt
+    cat 48_single.xprs/results.xprs | sort -k2 | cut -f8 > 9.txt
+    cat 55_single.xprs/results.xprs | sort -k2 | cut -f8 > 10.txt
+    cat 73_single.xprs/results.xprs | sort -k2 | cut -f8 > 11.txt
+    cat 83_single.xprs/results.xprs | sort -k2 | cut -f8 > 12.txt
+    cat 89_single.xprs/results.xprs | sort -k2 | cut -f8 > 13.txt
+    paste 0.txt 0a.txt 1.txt 2.txt 3.txt 4.txt 5.txt 6.txt 7.txt 8.txt 9.txt 10.txt 11.txt 12.txt 13.txt  > spider.fpkm.txt 
+    
+    
+    
+    cat spider.fpkm.txt | awk '{print $1 "\t" int($2+0.5) "\t" int($3+0.5) "\t" int($4+0.5) "\t" int($5+0.5) "\t" int($6+0.5) "\t" int($7+0.5) "\t" int($8+0.5) "\t" int($9+0.5) "\t" int($10+0.5) \
+    "\t" int($11+0.5) "\t" int($12+0.5) "\t" int($13+0.5) "\t" int($14+0.5) "\t" int($15+0.5)}' > spider.effcounts
+    
+    cat spider.effcounts | sed '1 i\names 28W 9W 10L 7L 67L 51L 110L 96L 39W 48W 55WL 73L 83L 89W' > spider.effcounts.txt 
+    
+    awk '{print $1 "\t" $2 "\t" $3 "\t" $10 "\t" $11 "\t" $15 "\t" $4 "\t" $5 "\t" $6 "\t" $7 "\t" $8 "\t" $9}' spider.effcounts.txt > final.spider.effcounts.txt
+    sed -i '$ d' foo.txt
+    
+**edgeR**
+
+    #edgeR
+    source("http://bioconductor.org/biocLite.R")
+    biocLite("edgeR")
+    library(edgeR)
+    x <- read.delim("~/Dropbox/spider.genomics/final.spider.effcounts.txt", row.names='names')
+    group <- factor(c(1,1,1,1,1,2,2,2,2,2,2))
+    y <- DGEList(counts=x, group=group)
+    keep <- rowSums(cpm(y) > 10) >= 2
+    y <- y[keep,]
+    dim(y)
+    y <- calcNormFactors(y)
+    y <- estimateCommonDisp(y)
+    y <- estimateTagwiseDisp(y)
+    et <- exactTest(y)
+    summary(decideTestsDGE(et, p.value=0.05))
+	topTags(et, n=205)
 
 
 
