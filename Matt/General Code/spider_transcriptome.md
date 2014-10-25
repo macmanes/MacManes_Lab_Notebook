@@ -55,7 +55,7 @@ Diginorm removed 78% of reads...
 	awk '1>$15{next}1' results.xprs  | awk '{print $2}' | \
 	sed '1,1d' >> /home/macmanes/spider/list
 	sort list | uniq > list2
-
+	split -n20 list2
 
 **extract**
 
@@ -235,3 +235,89 @@ in `/home/macmanes/spider/diffexp/DESeq.14921.dir`
 	
 	/share/trinityrnaseq_r20140717/Analysis/DifferentialExpression/define_clusters_by_cutting_tree.pl \
 	-R diffExpr.P1e-2_C2.matrix.RData -K 10
+	
+
+There are lost of BS diff expression hits (+ a few good ones), maybe i need to think about how better to filter the assembly. 
+--
+
+**download invert refseq and blast**
+
+	wget ftp://ftp.ncbi.nlm.nih.gov/refseq/release/invertebrate/invertebrate.*.rna.fna.gz
+	gzip -d
+	cat invertebrate* | makeblastdb -dbtype nucl -title invert -out title -in -
+
+tool every contig that has a conserved coding domain + things that blast to inverts. 
+
+in `/home/macmanes/spider/refined`
+
+	split -n20 final.list
+
+    for i in `cat xaa`; do  grep --max-count=1 -A1 -w $i ec.C50.P2.Trin.fasta >> ec.C50.P2.Trin.highexp.spider.fa1; done &
+    for i in `cat xab`; do  grep --max-count=1 -A1 -w $i ec.C50.P2.Trin.fasta >> ec.C50.P2.Trin.highexp.spider.fa2; done &
+    for i in `cat xac`; do  grep --max-count=1 -A1 -w $i ec.C50.P2.Trin.fasta >> ec.C50.P2.Trin.highexp.spider.fa3; done &
+    for i in `cat xad`; do  grep --max-count=1 -A1 -w $i ec.C50.P2.Trin.fasta >> ec.C50.P2.Trin.highexp.spider.fa4; done &
+    for i in `cat xae`; do  grep --max-count=1 -A1 -w $i ec.C50.P2.Trin.fasta >> ec.C50.P2.Trin.highexp.spider.fa5; done &
+    for i in `cat xaf`; do  grep --max-count=1 -A1 -w $i ec.C50.P2.Trin.fasta >> ec.C50.P2.Trin.highexp.spider.fa6; done &
+    for i in `cat xag`; do  grep --max-count=1 -A1 -w $i ec.C50.P2.Trin.fasta >> ec.C50.P2.Trin.highexp.spider.fa7; done &
+    for i in `cat xah`; do  grep --max-count=1 -A1 -w $i ec.C50.P2.Trin.fasta >> ec.C50.P2.Trin.highexp.spider.fa8; done &
+    for i in `cat xai`; do  grep --max-count=1 -A1 -w $i ec.C50.P2.Trin.fasta >> ec.C50.P2.Trin.highexp.spider.fa9; done &
+    for i in `cat xaj`; do  grep --max-count=1 -A1 -w $i ec.C50.P2.Trin.fasta >> ec.C50.P2.Trin.highexp.spider.fa11; done &
+    for i in `cat xak`; do  grep --max-count=1 -A1 -w $i ec.C50.P2.Trin.fasta >> ec.C50.P2.Trin.highexp.spider.fa10; done &
+    for i in `cat xal`; do  grep --max-count=1 -A1 -w $i ec.C50.P2.Trin.fasta >> ec.C50.P2.Trin.highexp.spider.fa12; done &
+    for i in `cat xam`; do  grep --max-count=1 -A1 -w $i ec.C50.P2.Trin.fasta >> ec.C50.P2.Trin.highexp.spider.fa13; done &
+    for i in `cat xan`; do  grep --max-count=1 -A1 -w $i ec.C50.P2.Trin.fasta >> ec.C50.P2.Trin.highexp.spider.fa14; done &
+    for i in `cat xao`; do  grep --max-count=1 -A1 -w $i ec.C50.P2.Trin.fasta >> ec.C50.P2.Trin.highexp.spider.fa15; done &
+    for i in `cat xap`; do  grep --max-count=1 -A1 -w $i ec.C50.P2.Trin.fasta >> ec.C50.P2.Trin.highexp.spider.fa16; done &
+    for i in `cat xaq`; do  grep --max-count=1 -A1 -w $i ec.C50.P2.Trin.fasta >> ec.C50.P2.Trin.highexp.spider.fa17; done &
+    
+
+	cat ec.C50.P2.Trin.highexp.spider* > ec.C50.P2.Trin.highexp.blasted.spider.fasta
+
+**mapping**
+
+	cp /mnt/data3/macmanes/121114_HS3B_elias_spider/raw.reads/MDM* . &
+	bwa index -p index ec.C50.P2.Trin.highexp.blasted.spider.fasta
+
+    bwa mem -t60 index  MDM_SPIDER_10L_1.fq.gz MDM_SPIDER_10L_2.fq.gz | express -p 30 -o 10L_paired ec.C50.P2.Trin.highexp.blasted.spider.fasta
+    
+    rm MDM_SPIDER_10L_1.fq.gz MDM_SPIDER_10L_2.fq.gz
+    bwa mem -t60 index  MDM_SPIDER_7L_1.fq.gz MDM_SPIDER_7L_2.fq.gz | express -p 30 -o  7L_paired ec.C50.P2.Trin.highexp.blasted.spider.fasta
+    
+    rm MDM_SPIDER_7L_1.fq.gz MDM_SPIDER_7L_2.fq.gz
+    bwa mem -t60 index  MDM_SPIDER_67L_1.fq.gz MDM_SPIDER_67L_2.fq.gz | express -p 30 -o  67L_paired ec.C50.P2.Trin.highexp.blasted.spider.fasta
+    
+    rm MDM_SPIDER_67L_1.fq.gz MDM_SPIDER_67L_2.fq.gz
+    bwa mem -t60 index  MDM_SPIDER_28W_1.fq.gz MDM_SPIDER_28W_2.fq.gz | express -p 30 -o  28W_paired ec.C50.P2.Trin.highexp.blasted.spider.fasta
+    rm MDM_SPIDER_28W_1.fq.gz MDM_SPIDER_28W_2.fq.gz
+    #done
+    
+    bwa mem -t60 index  MDM_SPIDER_51L_1.fq.gz MDM_SPIDER_51L_2.fq.gz | express -p 30 -o  51L_paired ec.C50.P2.Trin.highexp.blasted.spider.fasta
+    rm MDM_SPIDER_51L_1.fq.gz MDM_SPIDER_51L_2.fq.gz
+    
+    bwa mem -t60 index  spider110L.fq.gz | express -p 30 -o  110L_single ec.C50.P2.Trin.highexp.blasted.spider.fasta
+    rm spider110L.fq.gz
+    
+    bwa mem -t60 index  spider39.fq.gz | express -p 30 -o  39_single ec.C50.P2.Trin.highexp.blasted.spider.fasta
+    rm spider39.fq.gz
+    
+    bwa mem -t60 index  spider48.fq.gz | express -p 30 -o  48_single ec.C50.P2.Trin.highexp.blasted.spider.fasta
+    rm spider48.fq.gz
+    
+    bwa mem -t60 index  spider55.fq.gz | express -p 30 -o  55_single ec.C50.P2.Trin.highexp.blasted.spider.fasta
+    rm spider55.fq.gz
+    
+    bwa mem -t60 index  spider73.fq.gz | express -p 30 -o  73_single ec.C50.P2.Trin.highexp.blasted.spider.fasta
+    rm spider73.fq.gz
+    
+    bwa mem -t60 index  spider83.fq.gz | express -p 30 -o  83_single ec.C50.P2.Trin.highexp.blasted.spider.fasta
+    rm spider83.fq.gz
+    
+    bwa mem -t60 index  spider89.fq.gz | express -p 30 -o  89_single ec.C50.P2.Trin.highexp.blasted.spider.fasta
+    rm spider89.fq.gz
+    
+    bwa mem -t60 index  spider96L.fq.gz | express -p 30 -o  96L_single ec.C50.P2.Trin.highexp.blasted.spider.fasta
+    rm spider96L.fq.gz
+    
+    bwa mem -t60 index  spider9W.fq.gz | express -p 30 -o  9W_single ec.C50.P2.Trin.highexp.blasted.spider.fasta
+    rm spider9W.fq.gz
+    
