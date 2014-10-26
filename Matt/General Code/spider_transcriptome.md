@@ -244,13 +244,17 @@ There are lost of BS diff expression hits (+ a few good ones), maybe i need to t
 
 	wget ftp://ftp.ncbi.nlm.nih.gov/refseq/release/invertebrate/invertebrate.*.rna.fna.gz
 	gzip -d
-	cat invertebrate* | makeblastdb -dbtype nucl -title invert -out title -in -
+	gzip -cd complete*gz | makeblastdb -dbtype prot -title refseq -out refseq -in -
+	
+	blastx -db refseq/refseq -query ec.C50.P2.Trin.fasta -outfmt 6 \
+	-evalue 1e-5 -num_threads 60 -out spider.blastx
+	
 
 tool every contig that has a conserved coding domain + things that blast to inverts. 
 
 in `/home/macmanes/spider/refined`
 
-	split -n20 final.list
+	split -l 2000 final.list
 
     for i in `cat xaa`; do  grep --max-count=1 -A1 -w $i ec.C50.P2.Trin.fasta >> ec.C50.P2.Trin.highexp.spider.fa1; done &
     for i in `cat xab`; do  grep --max-count=1 -A1 -w $i ec.C50.P2.Trin.fasta >> ec.C50.P2.Trin.highexp.spider.fa2; done &
@@ -320,4 +324,28 @@ in `/home/macmanes/spider/refined`
     
     bwa mem -t60 index  spider9W.fq.gz | express -p 30 -o  9W_single ec.C50.P2.Trin.highexp.blasted.spider.fasta
     rm spider9W.fq.gz
+    
+
+Need to do some recapping on the filtering stuff
+--
+
+1. 1st pass was to filter based on expression and coding regions. Things that were expressed over TMP>1 and looked like they were coding were kept. The issue is that there is a low ot low complexxity contigs that ended up in the dataset --> bad.
+
+2. Then I did some filtering based on Pfam hits + searching Refseq invert database. This ws fine (33k contigs, so pretty small), but in looking around I saw that this secretin contig that showed up as differentially expressed had been filtered out as there was no conserved coding domain. It hit a protein in RefSeq that was not in the invert collection. 
+
+3. What I am doing right now, is to blast against the complete protein RefSeq - this is taking a long time, given the large database and blastX search. It is recovering new things, not included in the last dataset, so I think this is worth doing, even if it is slow...
+
+ So, once blastx is done, I will: 
+
+
+Extract out hits that are uniq, and pull down the contigs.
+
+
+	awk '{print $1}' spider.blastx | sort | uniq > blast.list
+	diff blast.list list.final | grep '<' | awk '{print $2}' > diff.list
+	split -l 2000 diff.list
+	
+	#pull down contigs. 
+	#mapping and express
+	#Trinity style diff expression. 
     
