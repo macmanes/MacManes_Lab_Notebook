@@ -56,8 +56,12 @@ Diginorm removed 78% of reads...
 	sed '1,1d' >> /home/macmanes/spider/list
 	sort list | uniq > list2
 <<<<<<< HEAD
+<<<<<<< HEAD
 	split -l 4000 list2
 
+=======
+	split -n20 list2
+>>>>>>> FETCH_HEAD
 =======
 	split -n20 list2
 >>>>>>> FETCH_HEAD
@@ -142,6 +146,7 @@ Diginorm removed 78% of reads...
 	rm spider9W.fq.gz
 	
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 **exporting counts**
 
@@ -165,6 +170,8 @@ Diginorm removed 78% of reads...
     cat spider.txt | sed '1 i\names 10L 96L 7L 67L 51L 110L 96W 28W 39WL 48WL 55WL 73WL 83WL 89WL' > spider.effcounts.txt 
     
 =======
+=======
+>>>>>>> FETCH_HEAD
 **pulling out count data**
 
     cat 28W_paired.xprs/results.xprs | sort -k2 | cut -f2 > 0.txt
@@ -223,8 +230,38 @@ in `~/spider/blast`
 
 	TransDecoder -t ec.C50.P2.Trin.highexp.spider.fasta --CPU 60 /home/macmanes/cpg_project/prot/Pfam-A.hmm
 	
+<<<<<<< HEAD
+=======
 
 
+**Trinity style annotation**
+
+	/share/trinityrnaseq_r20140717/util/abundance_estimates_to_matrix.pl \
+	--est_method eXpress --name_sample_by_basedir \
+	28W_paired.xprs/results.xprs \
+	9W.xprs/results.xprs \
+	39_single.xprs/results.xprs \
+	48_single.xprs/results.xprs \
+	89_single.xprs/results.xprs \
+	10L_paired.xprs/results.xprs \
+	7L_paired.xprs/results.xprs \
+	67L_paired.xprs/results.xprs \
+	51L_paired.xprs/results.xprs \
+	110L_single.xprs/results.xprs \
+	96L_single.xprs/results.xprs
+	
+
+	/share/trinityrnaseq_r20140717/Analysis/DifferentialExpression/run_DE_analysis.pl \
+	--matrix matrix.counts.matrix --method DESeq \
+	--samples_file samples_described.txt
+	
+in `/home/macmanes/spider/diffexp/DESeq.14921.dir`
+>>>>>>> FETCH_HEAD
+
+	/share/trinityrnaseq_r20140717/Analysis/DifferentialExpression/analyze_diff_expr.pl \
+	--matrix ../matrix.TMM.fpkm.matrix -P 1e-2 -C 2 --samples ../samples_described.txt
+
+<<<<<<< HEAD
 **Trinity style annotation**
 
 	/share/trinityrnaseq_r20140717/util/abundance_estimates_to_matrix.pl \
@@ -370,3 +407,123 @@ Extract out hits that are uniq, and pull down the contigs.
 	#mapping and express
 	#Trinity style diff expression. 
     
+=======
+	---
+	
+	/share/trinityrnaseq_r20140717/Analysis/DifferentialExpression/define_clusters_by_cutting_tree.pl \
+	-R diffExpr.P1e-2_C2.matrix.RData -K 10
+	
+
+There are lost of BS diff expression hits (+ a few good ones), maybe i need to think about how better to filter the assembly. 
+--
+
+**download invert refseq and blast**
+
+	wget ftp://ftp.ncbi.nlm.nih.gov/refseq/release/invertebrate/invertebrate.*.rna.fna.gz
+	gzip -d
+	gzip -cd complete*gz | makeblastdb -dbtype prot -title refseq -out refseq -in -
+	
+	blastx -db refseq/refseq -query ec.C50.P2.Trin.fasta -outfmt 6 \
+	-evalue 1e-5 -num_threads 60 -out spider.blastx
+	
+
+tool every contig that has a conserved coding domain + things that blast to inverts. 
+
+in `/home/macmanes/spider/refined`
+
+	split -l 2000 final.list
+
+    for i in `cat xaa`; do  grep --max-count=1 -A1 -w $i ec.C50.P2.Trin.fasta >> ec.C50.P2.Trin.highexp.spider.fa1; done &
+    for i in `cat xab`; do  grep --max-count=1 -A1 -w $i ec.C50.P2.Trin.fasta >> ec.C50.P2.Trin.highexp.spider.fa2; done &
+    for i in `cat xac`; do  grep --max-count=1 -A1 -w $i ec.C50.P2.Trin.fasta >> ec.C50.P2.Trin.highexp.spider.fa3; done &
+    for i in `cat xad`; do  grep --max-count=1 -A1 -w $i ec.C50.P2.Trin.fasta >> ec.C50.P2.Trin.highexp.spider.fa4; done &
+    for i in `cat xae`; do  grep --max-count=1 -A1 -w $i ec.C50.P2.Trin.fasta >> ec.C50.P2.Trin.highexp.spider.fa5; done &
+    for i in `cat xaf`; do  grep --max-count=1 -A1 -w $i ec.C50.P2.Trin.fasta >> ec.C50.P2.Trin.highexp.spider.fa6; done &
+    for i in `cat xag`; do  grep --max-count=1 -A1 -w $i ec.C50.P2.Trin.fasta >> ec.C50.P2.Trin.highexp.spider.fa7; done &
+    for i in `cat xah`; do  grep --max-count=1 -A1 -w $i ec.C50.P2.Trin.fasta >> ec.C50.P2.Trin.highexp.spider.fa8; done &
+    for i in `cat xai`; do  grep --max-count=1 -A1 -w $i ec.C50.P2.Trin.fasta >> ec.C50.P2.Trin.highexp.spider.fa9; done &
+    for i in `cat xaj`; do  grep --max-count=1 -A1 -w $i ec.C50.P2.Trin.fasta >> ec.C50.P2.Trin.highexp.spider.fa11; done &
+    for i in `cat xak`; do  grep --max-count=1 -A1 -w $i ec.C50.P2.Trin.fasta >> ec.C50.P2.Trin.highexp.spider.fa10; done &
+    for i in `cat xal`; do  grep --max-count=1 -A1 -w $i ec.C50.P2.Trin.fasta >> ec.C50.P2.Trin.highexp.spider.fa12; done &
+    for i in `cat xam`; do  grep --max-count=1 -A1 -w $i ec.C50.P2.Trin.fasta >> ec.C50.P2.Trin.highexp.spider.fa13; done &
+    for i in `cat xan`; do  grep --max-count=1 -A1 -w $i ec.C50.P2.Trin.fasta >> ec.C50.P2.Trin.highexp.spider.fa14; done &
+    for i in `cat xao`; do  grep --max-count=1 -A1 -w $i ec.C50.P2.Trin.fasta >> ec.C50.P2.Trin.highexp.spider.fa15; done &
+    for i in `cat xap`; do  grep --max-count=1 -A1 -w $i ec.C50.P2.Trin.fasta >> ec.C50.P2.Trin.highexp.spider.fa16; done &
+    for i in `cat xaq`; do  grep --max-count=1 -A1 -w $i ec.C50.P2.Trin.fasta >> ec.C50.P2.Trin.highexp.spider.fa17; done &
+    
+
+	cat ec.C50.P2.Trin.highexp.spider* > ec.C50.P2.Trin.highexp.blasted.spider.fasta
+
+**mapping**
+
+	cp /mnt/data3/macmanes/121114_HS3B_elias_spider/raw.reads/MDM* . &
+	bwa index -p index ec.C50.P2.Trin.highexp.blasted.spider.fasta
+
+    bwa mem -t60 index  MDM_SPIDER_10L_1.fq.gz MDM_SPIDER_10L_2.fq.gz | express -p 30 -o 10L_paired ec.C50.P2.Trin.highexp.blasted.spider.fasta
+    
+    rm MDM_SPIDER_10L_1.fq.gz MDM_SPIDER_10L_2.fq.gz
+    bwa mem -t60 index  MDM_SPIDER_7L_1.fq.gz MDM_SPIDER_7L_2.fq.gz | express -p 30 -o  7L_paired ec.C50.P2.Trin.highexp.blasted.spider.fasta
+    
+    rm MDM_SPIDER_7L_1.fq.gz MDM_SPIDER_7L_2.fq.gz
+    bwa mem -t60 index  MDM_SPIDER_67L_1.fq.gz MDM_SPIDER_67L_2.fq.gz | express -p 30 -o  67L_paired ec.C50.P2.Trin.highexp.blasted.spider.fasta
+    
+    rm MDM_SPIDER_67L_1.fq.gz MDM_SPIDER_67L_2.fq.gz
+    bwa mem -t60 index  MDM_SPIDER_28W_1.fq.gz MDM_SPIDER_28W_2.fq.gz | express -p 30 -o  28W_paired ec.C50.P2.Trin.highexp.blasted.spider.fasta
+    rm MDM_SPIDER_28W_1.fq.gz MDM_SPIDER_28W_2.fq.gz
+    #done
+    
+    bwa mem -t60 index  MDM_SPIDER_51L_1.fq.gz MDM_SPIDER_51L_2.fq.gz | express -p 30 -o  51L_paired ec.C50.P2.Trin.highexp.blasted.spider.fasta
+    rm MDM_SPIDER_51L_1.fq.gz MDM_SPIDER_51L_2.fq.gz
+    
+    bwa mem -t60 index  spider110L.fq.gz | express -p 30 -o  110L_single ec.C50.P2.Trin.highexp.blasted.spider.fasta
+    rm spider110L.fq.gz
+    
+    bwa mem -t60 index  spider39.fq.gz | express -p 30 -o  39_single ec.C50.P2.Trin.highexp.blasted.spider.fasta
+    rm spider39.fq.gz
+    
+    bwa mem -t60 index  spider48.fq.gz | express -p 30 -o  48_single ec.C50.P2.Trin.highexp.blasted.spider.fasta
+    rm spider48.fq.gz
+    
+    bwa mem -t60 index  spider55.fq.gz | express -p 30 -o  55_single ec.C50.P2.Trin.highexp.blasted.spider.fasta
+    rm spider55.fq.gz
+    
+    bwa mem -t60 index  spider73.fq.gz | express -p 30 -o  73_single ec.C50.P2.Trin.highexp.blasted.spider.fasta
+    rm spider73.fq.gz
+    
+    bwa mem -t60 index  spider83.fq.gz | express -p 30 -o  83_single ec.C50.P2.Trin.highexp.blasted.spider.fasta
+    rm spider83.fq.gz
+    
+    bwa mem -t60 index  spider89.fq.gz | express -p 30 -o  89_single ec.C50.P2.Trin.highexp.blasted.spider.fasta
+    rm spider89.fq.gz
+    
+    bwa mem -t60 index  spider96L.fq.gz | express -p 30 -o  96L_single ec.C50.P2.Trin.highexp.blasted.spider.fasta
+    rm spider96L.fq.gz
+    
+    bwa mem -t60 index  spider9W.fq.gz | express -p 30 -o  9W_single ec.C50.P2.Trin.highexp.blasted.spider.fasta
+    rm spider9W.fq.gz
+    
+
+Need to do some recapping on the filtering stuff
+--
+
+1. 1st pass was to filter based on expression and coding regions. Things that were expressed over TMP>1 and looked like they were coding were kept. The issue is that there is a low ot low complexxity contigs that ended up in the dataset --> bad.
+
+2. Then I did some filtering based on Pfam hits + searching Refseq invert database. This ws fine (33k contigs, so pretty small), but in looking around I saw that this secretin contig that showed up as differentially expressed had been filtered out as there was no conserved coding domain. It hit a protein in RefSeq that was not in the invert collection. 
+
+3. What I am doing right now, is to blast against the complete protein RefSeq - this is taking a long time, given the large database and blastX search. It is recovering new things, not included in the last dataset, so I think this is worth doing, even if it is slow...
+
+ So, once blastx is done, I will: 
+
+
+Extract out hits that are uniq, and pull down the contigs.
+
+
+	awk '{print $1}' spider.blastx | sort | uniq > blast.list
+	diff blast.list list.final | grep '<' | awk '{print $2}' > diff.list
+	split -l 2000 diff.list
+	
+	#pull down contigs. 
+	#mapping and express
+	#Trinity style diff expression. 
+    
+>>>>>>> FETCH_HEAD
