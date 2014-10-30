@@ -459,54 +459,41 @@ in `/home/macmanes/spider/refined`
 	cp /mnt/data3/macmanes/121114_HS3B_elias_spider/raw.reads/MDM* . &
 	bwa index -p index ec.C50.P2.Trin.highexp.blasted.spider.fasta
 
-    bwa mem -t60 index  MDM_SPIDER_10L_1.fq.gz MDM_SPIDER_10L_2.fq.gz | express -p 30 -o 10L_paired ec.C50.P2.Trin.highexp.blasted.spider.fasta
+    bwa mem -t25 index  ../MDM_SPIDER_10L_1.fq.gz ../MDM_SPIDER_10L_2.fq.gz | express -p 30 -o 10L_paired ec.C50.P2.Trin.highexp.blasted.first.refseq.cdhit.spider.fasta
     
-    rm MDM_SPIDER_10L_1.fq.gz MDM_SPIDER_10L_2.fq.gz
-    bwa mem -t60 index  MDM_SPIDER_7L_1.fq.gz MDM_SPIDER_7L_2.fq.gz | express -p 30 -o  7L_paired ec.C50.P2.Trin.highexp.blasted.spider.fasta
+    bwa mem -t25 index  ../MDM_SPIDER_7L_1.fq.gz ../MDM_SPIDER_7L_2.fq.gz | express -p 30 -o  7L_paired ec.C50.P2.Trin.highexp.blasted.first.refseq.cdhit.spider.fasta
     
-    rm MDM_SPIDER_7L_1.fq.gz MDM_SPIDER_7L_2.fq.gz
-    bwa mem -t60 index  MDM_SPIDER_67L_1.fq.gz MDM_SPIDER_67L_2.fq.gz | express -p 30 -o  67L_paired ec.C50.P2.Trin.highexp.blasted.spider.fasta
+    bwa mem -t25 index  ../MDM_SPIDER_67L_1.fq.gz ../MDM_SPIDER_67L_2.fq.gz | express -p 30 -o  67L_paired ec.C50.P2.Trin.highexp.blasted.first.refseq.cdhit.spider.fasta
     
-    rm MDM_SPIDER_67L_1.fq.gz MDM_SPIDER_67L_2.fq.gz
-    bwa mem -t60 index  MDM_SPIDER_28W_1.fq.gz MDM_SPIDER_28W_2.fq.gz | express -p 30 -o  28W_paired ec.C50.P2.Trin.highexp.blasted.spider.fasta
-    rm MDM_SPIDER_28W_1.fq.gz MDM_SPIDER_28W_2.fq.gz
-    #done
+    bwa mem -t25 index  ../MDM_SPIDER_28W_1.fq.gz ../MDM_SPIDER_28W_2.fq.gz | express -p 30 -o  28W_paired ec.C50.P2.Trin.highexp.blasted.first.refseq.cdhit.spider.fasta
     
-    bwa mem -t60 index  MDM_SPIDER_51L_1.fq.gz MDM_SPIDER_51L_2.fq.gz | express -p 30 -o  51L_paired ec.C50.P2.Trin.highexp.blasted.spider.fasta
-    rm MDM_SPIDER_51L_1.fq.gz MDM_SPIDER_51L_2.fq.gz
+    bwa mem -t25 index  ../MDM_SPIDER_51L_1.fq.gz ../MDM_SPIDER_51L_2.fq.gz | express -p 30 -o  51L_paired ec.C50.P2.Trin.highexp.blasted.first.refseq.cdhit.spider.fasta
     
-    bwa mem -t60 index  spider110L.fq.gz | express -p 30 -o  110L_single ec.C50.P2.Trin.highexp.blasted.spider.fasta
-    rm spider110L.fq.gz
+    bwa mem -t25 index  ../spider110L.fq.gz | express -p 30 -o  110L_single ec.C50.P2.Trin.highexp.blasted.first.refseq.cdhit.spider.fasta
     
-    bwa mem -t60 index  spider39.fq.gz | express -p 30 -o  39_single ec.C50.P2.Trin.highexp.blasted.spider.fasta
-    rm spider39.fq.gz
+    bwa mem -t25 index  ../spider39.fq.gz | express -p 30 -o  39_single ec.C50.P2.Trin.highexp.blasted.first.refseq.cdhit.spider.fasta
     
-    bwa mem -t60 index  spider48.fq.gz | express -p 30 -o  48_single ec.C50.P2.Trin.highexp.blasted.spider.fasta
-    rm spider48.fq.gz
+    bwa mem -t25 index  ../spider48.fq.gz | express -p 30 -o  48_single ec.C50.P2.Trin.highexp.blasted.first.refseq.cdhit.spider.fasta
     
-    bwa mem -t60 index  spider55.fq.gz | express -p 30 -o  55_single ec.C50.P2.Trin.highexp.blasted.spider.fasta
-    rm spider55.fq.gz
+    bwa mem -t25 index  ../spider55.fq.gz | express -p 30 -o  55_single ec.C50.P2.Trin.highexp.blasted.first.refseq.cdhit.spider.fasta
     
-    bwa mem -t60 index  spider73.fq.gz | express -p 30 -o  73_single ec.C50.P2.Trin.highexp.blasted.spider.fasta
-    rm spider73.fq.gz
+    bwa mem -t25 index  ../spider73.fq.gz | express -p 30 -o  73_single ec.C50.P2.Trin.highexp.blasted.first.refseq.cdhit.spider.fasta
     
-    bwa mem -t60 index  spider83.fq.gz | express -p 30 -o  83_single ec.C50.P2.Trin.highexp.blasted.spider.fasta
-    rm spider83.fq.gz
+    bwa mem -t25 index  ../spider83.fq.gz | express -p 30 -o  83_single ec.C50.P2.Trin.highexp.blasted.first.refseq.cdhit.spider.fasta
     
-    bwa mem -t60 index  spider89.fq.gz | express -p 30 -o  89_single ec.C50.P2.Trin.highexp.blasted.spider.fasta
-    rm spider89.fq.gz
+    bwa mem -t25 index  ../spider89.fq.gz | express -p 30 -o  89_single ec.C50.P2.Trin.highexp.blasted.first.refseq.cdhit.spider.fasta
     
-    bwa mem -t60 index  spider96L.fq.gz | express -p 30 -o  96L_single ec.C50.P2.Trin.highexp.blasted.spider.fasta
-    rm spider96L.fq.gz
+    bwa mem -t25 index  ../spider96L.fq.gz | express -p 30 -o  96L_single ec.C50.P2.Trin.highexp.blasted.first.refseq.cdhit.spider.fasta
     
-    bwa mem -t60 index  spider9W.fq.gz | express -p 30 -o  9W_single ec.C50.P2.Trin.highexp.blasted.spider.fasta
-    rm spider9W.fq.gz
+    bwa mem -t25 index  ../spider9W.fq.gz | express -p 30 -o  9W_single ec.C50.P2.Trin.highexp.blasted.first.refseq.cdhit.spider.fasta
+    
+	ls
     
 
 Need to do some recapping on the filtering stuff
 --
 
-1. 1st pass was to filter based on expression and coding regions. Things that were expressed over TMP>1 and looked like they were coding were kept. The issue is that there is a low ot low complexxity contigs that ended up in the dataset --> bad.
+1. 1st pass was to filter based on expression and coding regions. Things that were expressed over TMP>1 and looked like they were coding were kept. The issue is that there is a low ot low complexity contigs that ended up in the dataset --> bad.
 
 2. Then I did some filtering based on Pfam hits + searching Refseq invert database. This ws fine (33k contigs, so pretty small), but in looking around I saw that this secretin contig that showed up as differentially expressed had been filtered out as there was no conserved coding domain. It hit a protein in RefSeq that was not in the invert collection. 
 
@@ -518,12 +505,38 @@ Need to do some recapping on the filtering stuff
 Extract out hits that are uniq, and pull down the contigs.
 
 
-	awk '{print $1}' spider.blastx | sort | uniq > blast.list
-	diff blast.list list.final | grep '<' | awk '{print $2}' > diff.list
+	awk '{print $1}' spider.blastx | sort | uniq | diff - list.final | grep '<' | awk '{print $2}' | wc -l
 	split -l 2000 diff.list
 	
 	#pull down contigs. 
 	#mapping and express
 	#Trinity style diff expression. 
     
->>>>>>> FETCH_HEAD
+
+I have been blasting for 5 days, and am 50% done. I decided to stop the blast and use what I hafe thus far, then restart when I am ready. I stopped blasting at contig `c94840_g1_i1` which is line `184317`
+
+This is the file that contains the good contigs + the contigs from the 1st set of refseq blast hits. 
+
+	ec.C50.P2.Trin.highexp.spider.fa19 ec.C50.P2.Trin.highexp.blasted.spider.fasta > ec.C50.P2.Trin.highexp.blasted.first.refseq.spider.fasta
+	cd-hit-est -M 5000 -T 24 -c .97 -i ec.C50.P2.Trin.highexp.blasted.first.refseq.spider.fasta \
+	-o ec.C50.P2.Trin.highexp.blasted.first.refseq.cdhit.spider.fasta
+	
+When I restart blast, I need to use a modified quert file in `$HOME/spider/refined`
+
+	sed '1,184318d' ec.C50.P2.Trin.fasta
+
+restarted blast Thursday AM. wen done, need to do this:
+
+	awk '{print $1}' spider.blastx | sort | uniq | diff - list.final | grep '<' | awk '{print $2}' > diff.list
+	
+	for i in `cat diff.list`; do  grep --max-count=1 -A1 -w $i ec.C50.P2.Trin.fasta >> ec.C50.P2.Trin.highexp.spider.fa1; done &
+	
+	cat ec.C50.P2.Trin.highexp.spider.fa1 ec.C50.P2.Trin.highexp.blasted.first.refseq.cdhit.spider.fasta \
+	> ec.C50.P2.Trin.highexp.blasted.second.refseq.spider.fasta
+	
+	cd-hit-est -M 5000 -T 24 -c .97 -i ec.C50.P2.Trin.highexp.blasted.second.refseq.spider.fasta \
+	-o ec.C50.P2.Trin.highexp.blasted.second.refseq.cdhit.spider.fasta
+	
+
+
+
