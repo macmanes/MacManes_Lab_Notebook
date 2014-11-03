@@ -266,8 +266,8 @@ in `/home/macmanes/spider/diffexp/DESeq.14921.dir`
 
 	/share/trinityrnaseq_r20140717/util/abundance_estimates_to_matrix.pl \
 	--est_method eXpress --name_sample_by_basedir \
-	28W_paired.xprs/results.xprs \
-	9W.xprs/results.xprs \
+	28W_paired/results.xprs \
+	9W_single/results.xprs \
 	39_single.xprs/results.xprs \
 	48_single.xprs/results.xprs \
 	89_single.xprs/results.xprs \
@@ -469,23 +469,23 @@ in `/home/macmanes/spider/refined`
     
     bwa mem -t25 index  ../MDM_SPIDER_51L_1.fq.gz ../MDM_SPIDER_51L_2.fq.gz | express -p 30 -o  51L_paired ec.C50.P2.Trin.highexp.blasted.first.refseq.cdhit.spider.fasta
     
-    bwa mem -t25 index  ../spider110L.fq.gz | express -p 30 -o  110L_single ec.C50.P2.Trin.highexp.blasted.first.refseq.cdhit.spider.fasta
+    bwa mem -t25 index  ../spider110L.fq.gz | express -o 110L_single ec.C50.P2.Trin.highexp.blasted.first.refseq.cdhit.spider.fasta
     
-    bwa mem -t25 index  ../spider39.fq.gz | express -p 30 -o  39_single ec.C50.P2.Trin.highexp.blasted.first.refseq.cdhit.spider.fasta
+    bwa mem -t25 index  ../spider39.fq.gz | express -o 39_single ec.C50.P2.Trin.highexp.blasted.first.refseq.cdhit.spider.fasta
     
-    bwa mem -t25 index  ../spider48.fq.gz | express -p 30 -o  48_single ec.C50.P2.Trin.highexp.blasted.first.refseq.cdhit.spider.fasta
+    bwa mem -t25 index  ../spider48.fq.gz | express -o 48_single ec.C50.P2.Trin.highexp.blasted.first.refseq.cdhit.spider.fasta
     
-    bwa mem -t25 index  ../spider55.fq.gz | express -p 30 -o  55_single ec.C50.P2.Trin.highexp.blasted.first.refseq.cdhit.spider.fasta
+    bwa mem -t25 index  ../spider55.fq.gz | express -o 55_single ec.C50.P2.Trin.highexp.blasted.first.refseq.cdhit.spider.fasta
     
-    bwa mem -t25 index  ../spider73.fq.gz | express -p 30 -o  73_single ec.C50.P2.Trin.highexp.blasted.first.refseq.cdhit.spider.fasta
+    bwa mem -t25 index  ../spider73.fq.gz | express -o 73_single ec.C50.P2.Trin.highexp.blasted.first.refseq.cdhit.spider.fasta
     
-    bwa mem -t25 index  ../spider83.fq.gz | express -p 30 -o  83_single ec.C50.P2.Trin.highexp.blasted.first.refseq.cdhit.spider.fasta
+    bwa mem -t25 index  ../spider83.fq.gz | express -o 83_single ec.C50.P2.Trin.highexp.blasted.first.refseq.cdhit.spider.fasta
     
-    bwa mem -t25 index  ../spider89.fq.gz | express -p 30 -o  89_single ec.C50.P2.Trin.highexp.blasted.first.refseq.cdhit.spider.fasta
+    bwa mem -t25 index  ../spider89.fq.gz | express -o 89_single ec.C50.P2.Trin.highexp.blasted.first.refseq.cdhit.spider.fasta
     
-    bwa mem -t25 index  ../spider96L.fq.gz | express -p 30 -o  96L_single ec.C50.P2.Trin.highexp.blasted.first.refseq.cdhit.spider.fasta
+    bwa mem -t25 index  ../spider96L.fq.gz | express -o 96L_single ec.C50.P2.Trin.highexp.blasted.first.refseq.cdhit.spider.fasta
     
-    bwa mem -t25 index  ../spider9W.fq.gz | express -p 30 -o  9W_single ec.C50.P2.Trin.highexp.blasted.first.refseq.cdhit.spider.fasta
+    bwa mem -t25 index  ../spider9W.fq.gz | express -o 9W_single ec.C50.P2.Trin.highexp.blasted.first.refseq.cdhit.spider.fasta
     
 	ls
     
@@ -537,6 +537,41 @@ restarted blast Thursday AM. wen done, need to do this:
 	cd-hit-est -M 5000 -T 24 -c .97 -i ec.C50.P2.Trin.highexp.blasted.second.refseq.spider.fasta \
 	-o ec.C50.P2.Trin.highexp.blasted.second.refseq.cdhit.spider.fasta
 	
+
+Trying Trinity annotation again
+--
+
+
+**Trinity style annotation**
+
+	/share/trinityrnaseq_r20140717/util/abundance_estimates_to_matrix.pl \
+	--est_method eXpress --name_sample_by_basedir \
+	28W_paired/results.xprs \
+	9W_single/results.xprs \
+	39_single/results.xprs \
+	48_single/results.xprs \
+	89_single/results.xprs \
+	10L_paired/results.xprs \
+	7L_paired/results.xprs \
+	67L_paired/results.xprs \
+	51L_paired/results.xprs \
+	110L_single/results.xprs \
+	96L_single/results.xprs
+	
+
+	/share/trinityrnaseq_r20140717/Analysis/DifferentialExpression/run_DE_analysis.pl \
+	--matrix matrix.counts.matrix --method DESeq \
+	--samples_file samples_described.txt
+	
+in `/home/macmanes/spider/diffexp/DESeq.14921.dir`
+
+	/share/trinityrnaseq_r20140717/Analysis/DifferentialExpression/analyze_diff_expr.pl \
+	--matrix ../matrix.TMM.fpkm.matrix -P 1e-2 -C 2 --samples ../samples_described.txt
+
+	---
+	
+	/share/trinityrnaseq_r20140717/Analysis/DifferentialExpression/define_clusters_by_cutting_tree.pl \
+	-R diffExpr.P1e-2_C2.matrix.RData -K 10
 
 
 
