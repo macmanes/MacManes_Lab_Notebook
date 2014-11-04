@@ -1,6 +1,9 @@
 Mytilus Project
 --
 
+	scp /Users/macmanes/Desktop/Newest\ 454/RL1\ copy/454AllContigs.fna macmanes@132.177.115.145:/mouse/Mytilus/RL1.454AllContigs.fna
+	scp /Users/macmanes/Desktop/Newest\ 454/RL2\ copy/454AllContigs.fna macmanes@132.177.115.145:/mouse/Mytilus/RL2.454AllContigs.fna
+	scp /Users/macmanes/Desktop/Newest\ 454/RL3\ copy/454AllContigs.fna macmanes@132.177.115.145:/mouse/Mytilus/RL3.454AllContigs.fna
 	scp /Users/macmanes/Desktop/Newest\ 454/RL4\ copy/454AllContigs.fna macmanes@132.177.115.145:/mouse/Mytilus/RL4.454AllContigs.fna
 	scp /Users/macmanes/Desktop/Newest\ 454/RL5\ copy/454AllContigs.fna macmanes@132.177.115.145:/mouse/Mytilus/RL5.454AllContigs.fna
 	scp /Users/macmanes/Desktop/Newest\ 454/RL6\ copy/454AllContigs.fna macmanes@132.177.115.145:/mouse/Mytilus/RL6.454AllContigs.fna
