@@ -193,14 +193,89 @@ Log directory: /mnt/data3/macmanes/allpaths/peer/make_log/mydata/peer/test/2014-
 
  *** Make encountered an error, see above for error messages. ***
 
-will try `CLOSE_UNIPATH_GAPS=False` if this fails again.
+**will try `CLOSE_UNIPATH_GAPS=False` if this fails again.**
 
 7 June
 --
 
 Run failed dt hardware. restart
 
-nohup RunAllPathsLG THREADS=32 FIX_ASSEMBLY_BASE_ERRORS=TRUE \
-PRE=$RAID/allpaths/ DATA_SUBDIR=mydata RUN=peer \
-REFERENCE_NAME=peer TARGETS=standard CONNECT_SCAFFOLDS=TRUE \
-HAPLOIDIFY=TRUE OVERWRITE=False &
+    nohup RunAllPathsLG THREADS=32 FIX_ASSEMBLY_BASE_ERRORS=TRUE \
+    PRE=$RAID/allpaths/ DATA_SUBDIR=mydata RUN=peer \
+    REFERENCE_NAME=peer TARGETS=standard CONNECT_SCAFFOLDS=TRUE \
+    HAPLOIDIFY=TRUE OVERWRITE=False &
+
+
+NOV6
+--
+
+I am going to try one more time the allpaths assembly, but using no unpaied reads and not the PBJelly reads. Let's see how this goes...
+
+in `$SCRATCH/allpaths`
+
+    PrepareAllPathsInputs.pl \
+    DATA_DIR=$RAID/allpaths/peer/mydata/ \
+    GENOME_SIZE=2600000000 OVERWRITE=True PLOIDY=2 \
+    FRAG_COVERAGE=50 HOSTS=12
+
+Then
+
+    RunAllPathsLG THREADS=32 FIX_ASSEMBLY_BASE_ERRORS=TRUE \
+    PRE=$RAID/allpaths/ DATA_SUBDIR=mydata RUN=PEER_genome_Nov5 \
+    REFERENCE_NAME=peer TARGETS=standard CONNECT_SCAFFOLDS=TRUE \
+    HAPLOIDIFY=TRUE OVERWRITE=False
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

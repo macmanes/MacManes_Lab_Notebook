@@ -46,8 +46,38 @@ stats
     364	206	74	501	622	854	1149	994	3652	172306	RL8.454AllContigs.fna
     443	162	65	500	557	681	911	796	2191	114653	RL9.454AllContigs.fna
 
-    
 
-blast
+making sure names are non-redundant
 
-	blastx -db /home/macmanes/spider/refined/refseq/refseq -query Mytilus.cdhit.fasta -outfmt 6 -evalue 1e-5 -num_threads 30 -out mytilus.blast
+	awk '/^>/{print ">Mytilus_contig_" ++i; next}{print}' < Mytilus.cdhit.fasta > Mytilus.cdhit.fa
+	mv Mytilus.cdhit.fa Mytilus.cdhit.fasta
+	head Mytilus.cdhit.fasta
+	>Mytilus_contig_1
+	AAAAAACTGTCAAGTTATATTTGACAAATGATTTTTTTTAAATTTTTAAtTTTTACGTTC
+	GTTATTACACTAGTTACGTaACGTaCGGCtTGTAACTTGTTATTTCGTCATGCACTCgGC
+	GAtTTTTaCTTGTTGTTGTCACACAtTTTCGtTGCATGTTCACAGCTATTTCTAACTGTC
+	CGACAGAATAGTTTGTaATATCGGtACGATGtTACAGtTTaTACtTTGTACaATCTGTTA
+	tTA
+	>Mytilus_contig_2
+	GCAACGAAACAGTAaGgATTAAaCAGATtAaCAACAAACaaTTTtcAAAATGTcctgAtg
+	ATGATGTAGCCGCTTTGGTCATTGACAATGGTTCTGGAATGTGTAAAGCCGgATTTGCCG
+	GAGATGATGcTCCAAGAGCCGTATTTCCATCaaTTGTCGGCaGaCCAAGACATCAGGGaG
+
+blastx - might take several hours..
+
+	blastx -db /home/macmanes/spider/refined/refseq/refseq -max_target_seqs 5 -query Mytilus.cdhit.fasta \
+	-outfmt 6 -evalue 1e-5 -num_threads 30 -out mytilus.blast
+	
+---
+
+Query: Does it make sense that each of the Mytilus contig files (RL1-RL12) only has on average ~550 contigs in them? This seems like a very small number of transcripts to be expressed in any eukaryotic tissue. Also, then concatenating them into a single file and removing redundancy, there are 6674 and 4183 contigs left respectively. I think this suggests that there is relatively little overlap between the samples, which might be a sign there are issue..
+
+---
+
+Good idea to blast to a more specialized database - perhaps the Mytilus genome found here http://www.ncbi.nlm.nih.gov/Traces/wgs/?val=APJB01
+
+I downloaded each file, concagtenated them together and made a blast db `cat *fsa | makeblastdb -title mytilus -out mytilus -dbtype nucl` Im working in `/mouse/Mytilus/mgallo`
+
+
+
+	blastn -db mytilus -query ../Mytilus.cdhit.fasta -outfmt 6 -evalue 1e-5 -num_threads 10 -out mytilus.blastn
