@@ -573,5 +573,46 @@ in `/home/macmanes/spider/diffexp/DESeq.14921.dir`
 	/share/trinityrnaseq_r20140717/Analysis/DifferentialExpression/define_clusters_by_cutting_tree.pl \
 	-R diffExpr.P1e-2_C2.matrix.RData -K 10
 
+Mapping to refseq complete
+--
+
+it looks like I gained about 10k genes by blasting to refseq, so it was probably worth it. I think there could still be some very lowly expressed ncRNA's but those will be very difficult to find..
+
+
+Final Assembly in `/home/macmanes/spider/refined/`
+--
+
+`ec.C50.P2.Trin.highexp.blasted.final.refseq.cdhit.spider.fasta`
+
+Final Mapping in `/home/macmanes/spider/refined/final`
+--
+
+    bwa mem -t25 index  ../MDM_SPIDER_10L_1.fq.gz ../MDM_SPIDER_10L_2.fq.gz | express -p 30 -o 10L_paired ec.C50.P2.Trin.highexp.blasted.final.refseq.cdhit.spider.fasta
+    
+    bwa mem -t25 index  ../MDM_SPIDER_7L_1.fq.gz ../MDM_SPIDER_7L_2.fq.gz | express -p 30 -o  7L_paired ec.C50.P2.Trin.highexp.blasted.final.refseq.cdhit.spider.fasta
+    
+    bwa mem -t25 index  ../MDM_SPIDER_67L_1.fq.gz ../MDM_SPIDER_67L_2.fq.gz | express -p 30 -o  67L_paired ec.C50.P2.Trin.highexp.blasted.final.refseq.cdhit.spider.fasta
+    
+    bwa mem -t25 index  ../MDM_SPIDER_28W_1.fq.gz ../MDM_SPIDER_28W_2.fq.gz | express -p 30 -o  28W_paired ec.C50.P2.Trin.highexp.blasted.final.refseq.cdhit.spider.fasta
+    
+    bwa mem -t25 index  ../MDM_SPIDER_51L_1.fq.gz ../MDM_SPIDER_51L_2.fq.gz | express -p 30 -o  51L_paired ec.C50.P2.Trin.highexp.blasted.final.refseq.cdhit.spider.fasta
+    
+    bwa mem -t25 index  ../spider110L.fq.gz | express -o 110L_single ec.C50.P2.Trin.highexp.blasted.final.refseq.cdhit.spider.fasta
+    
+    bwa mem -t25 index  ../spider39.fq.gz | express -o 39_single ec.C50.P2.Trin.highexp.blasted.final.refseq.cdhit.spider.fasta
+    
+    bwa mem -t25 index  ../spider48.fq.gz | express -o 48_single ec.C50.P2.Trin.highexp.blasted.final.refseq.cdhit.spider.fasta
+    
+    bwa mem -t25 index  ../spider55.fq.gz | express -o 55_single ec.C50.P2.Trin.highexp.blasted.final.refseq.cdhit.spider.fasta
+    
+    bwa mem -t25 index  ../spider73.fq.gz | express -o 73_single ec.C50.P2.Trin.highexp.blasted.final.refseq.cdhit.spider.fasta
+    
+    bwa mem -t25 index  ../spider83.fq.gz | express -o 83_single ec.C50.P2.Trin.highexp.blasted.final.refseq.cdhit.spider.fasta
+    
+    bwa mem -t25 index  ../spider89.fq.gz | express -o 89_single ec.C50.P2.Trin.highexp.blasted.final.refseq.cdhit.spider.fasta
+    
+    bwa mem -t25 index  ../spider96L.fq.gz | express -o 96L_single ec.C50.P2.Trin.highexp.blasted.final.refseq.cdhit.spider.fasta
+    
+    bwa mem -t25 index  ../spider9W.fq.gz | express -o 9W_single ec.C50.P2.Trin.highexp.blasted.final.refseq.cdhit.spider.fasta
 
 
