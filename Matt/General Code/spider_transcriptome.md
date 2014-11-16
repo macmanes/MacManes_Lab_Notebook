@@ -587,15 +587,15 @@ Final Assembly in `/home/macmanes/spider/refined/`
 Final Mapping in `/home/macmanes/spider/refined/final`
 --
 
-    bwa mem -t25 index  ../MDM_SPIDER_10L_1.fq.gz ../MDM_SPIDER_10L_2.fq.gz | express -p 30 -o 10L_paired ec.C50.P2.Trin.highexp.blasted.final.refseq.cdhit.spider.fasta
+    bwa mem -t25 index  ../MDM_SPIDER_10L_1.fq.gz ../MDM_SPIDER_10L_2.fq.gz | express -o 10L_paired ec.C50.P2.Trin.highexp.blasted.final.refseq.cdhit.spider.fasta
     
-    bwa mem -t25 index  ../MDM_SPIDER_7L_1.fq.gz ../MDM_SPIDER_7L_2.fq.gz | express -p 30 -o  7L_paired ec.C50.P2.Trin.highexp.blasted.final.refseq.cdhit.spider.fasta
+    bwa mem -t25 index  ../MDM_SPIDER_7L_1.fq.gz ../MDM_SPIDER_7L_2.fq.gz | express -o  7L_paired ec.C50.P2.Trin.highexp.blasted.final.refseq.cdhit.spider.fasta
     
-    bwa mem -t25 index  ../MDM_SPIDER_67L_1.fq.gz ../MDM_SPIDER_67L_2.fq.gz | express -p 30 -o  67L_paired ec.C50.P2.Trin.highexp.blasted.final.refseq.cdhit.spider.fasta
+    bwa mem -t25 index  ../MDM_SPIDER_67L_1.fq.gz ../MDM_SPIDER_67L_2.fq.gz | express -o  67L_paired ec.C50.P2.Trin.highexp.blasted.final.refseq.cdhit.spider.fasta
     
-    bwa mem -t25 index  ../MDM_SPIDER_28W_1.fq.gz ../MDM_SPIDER_28W_2.fq.gz | express -p 30 -o  28W_paired ec.C50.P2.Trin.highexp.blasted.final.refseq.cdhit.spider.fasta
+    bwa mem -t25 index  ../MDM_SPIDER_28W_1.fq.gz ../MDM_SPIDER_28W_2.fq.gz | express -o  28W_paired ec.C50.P2.Trin.highexp.blasted.final.refseq.cdhit.spider.fasta
     
-    bwa mem -t25 index  ../MDM_SPIDER_51L_1.fq.gz ../MDM_SPIDER_51L_2.fq.gz | express -p 30 -o  51L_paired ec.C50.P2.Trin.highexp.blasted.final.refseq.cdhit.spider.fasta
+    bwa mem -t25 index  ../MDM_SPIDER_51L_1.fq.gz ../MDM_SPIDER_51L_2.fq.gz | express -o  51L_paired ec.C50.P2.Trin.highexp.blasted.final.refseq.cdhit.spider.fasta
     
     bwa mem -t25 index  ../spider110L.fq.gz | express -o 110L_single ec.C50.P2.Trin.highexp.blasted.final.refseq.cdhit.spider.fasta
     
