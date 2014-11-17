@@ -616,3 +616,38 @@ Final Mapping in `/home/macmanes/spider/refined/final`
     bwa mem -t25 index  ../spider9W.fq.gz | express -o 9W_single ec.C50.P2.Trin.highexp.blasted.final.refseq.cdhit.spider.fasta
 
 
+
+
+
+Final Trinity Diff Expression
+--
+
+	/share/trinityrnaseq-code/util/abundance_estimates_to_matrix.pl \
+	--est_method eXpress --name_sample_by_basedir \
+	28W_paired/results.xprs \
+	9W_single/results.xprs \
+	39_single/results.xprs \
+	48_single/results.xprs \
+	89_single/results.xprs \
+	10L_paired/results.xprs \
+	7L_paired/results.xprs \
+	67L_paired/results.xprs \
+	51L_paired/results.xprs \
+	110L_single/results.xprs \
+	96L_single/results.xprs
+	
+
+	/share/trinityrnaseq-code/Analysis/DifferentialExpression/run_DE_analysis.pl \
+	--matrix matrix.counts.matrix --method DESeq \
+	--samples_file samples_described.txt
+	
+in `/home/macmanes/spider/diffexp/DESeq.14921.dir`
+
+	/share/trinityrnaseq-code/Analysis/DifferentialExpression/analyze_diff_expr.pl \
+	--matrix ../matrix.TMM.fpkm.matrix -P 1e-2 -C 2 --samples ../samples_described.txt
+
+	---
+	
+	/share/trinityrnaseq-code/Analysis/DifferentialExpression/define_clusters_by_cutting_tree.pl \
+	-R diffExpr.P1e-2_C2.matrix.RData -K 10
+
