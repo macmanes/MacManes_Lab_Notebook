@@ -46,7 +46,8 @@ Input Read Pairs: 594639181 Both Surviving: 592762879 (99.68%) Forward Only Surv
 
 > split
 
-	split --lines=32000000 mya.lighter25.trimP2.C50norm.fq
+	split --lines=72000000 --additional-suffix .fastq \
+	mya.lighter25.trimP2.C50norm.fq
 
 > Assembly
 
@@ -54,9 +55,6 @@ Input Read Pairs: 594639181 Both Surviving: 592762879 (99.68%) Forward Only Surv
 
 	for k in 71 81 91; do
 		mkdir k$k
-		abyss-pe -C k$k np=32 v=-v k=$k name=clam$k n=5 lib='clam' \  
-		clam='/mnt/data3/macmanes/Mya/mya.lighter25.trimP2_1P.fastq.gz \
-		/mnt/data3/macmanes/Mya/mya.lighter25.trimP2_2P.fastq.gz' \  
-		se='/mnt/data3/macmanes/Mya/mya.lighter25.trimP2_1U.fastq.gz \
-		/mnt/data3/macmanes/Mya/mya.lighter25.trimP2_2U.fastq.gz'  
+		abyss-pe -C k$k np=40 k=$k name=clam$k n=5 lib='clam' \  
+		clam='../x*.fastq'  
 	done
