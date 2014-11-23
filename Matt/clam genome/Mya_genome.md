@@ -54,11 +54,11 @@ Input Read Pairs: 594639181 Both Surviving: 592762879 (99.68%) Forward Only Surv
 -ABySS
 
 	for k in 71 81 91; do
-		mkdir k$k
-		abyss-pe -C k$k np=40 k=$k name=clam$k n=5 lib='clam' long=long1 \  
-		clam='../x*.fastq'
-		long1='../clam.Trinity.fasta'
+	     mkdir k$k;
+	     abyss-pe -C k$k np=40 k=$k name=clam$k n=5 long=long1 \
+	     in='../x*.fastq' \
+	     long1='../clam.Trinity.fasta'; 
 	done
-	
+
 
 
