@@ -53,7 +53,7 @@ Input Read Pairs: 594639181 Both Surviving: 592762879 (99.68%) Forward Only Surv
 
 -ABySS
 
-	for k in 71 81 91; do
+	for k in 61 67 75; do
 	     mkdir k$k;
 	     abyss-pe -C k$k np=40 k=$k name=clam$k n=5 long=long1 \
 	     in='../x*.fastq' \
@@ -61,4 +61,48 @@ Input Read Pairs: 594639181 Both Surviving: 592762879 (99.68%) Forward Only Surv
 	done
 
 
+
+spades list
+	
+	bwa mem -a -t40 -S -P spades clam.Trinity.fasta > spades.sam
+	samtools view -S -F4 spades.sam > spades-filtered.sam
+	awk '{print $1}' spades-filtered.sam | grep c | sort | uniq | wc -l
+	awk '{print $3}' spades-filtered.sam | grep NODE | sort | uniq > list	
+	split -l 7000 list
+	
+	for i in `cat xaa`; do grep -A1 --max-count=1 -w $i scaffolds.fa >> temp1.fa; done &
+	for i in `cat xab`; do grep -A1 --max-count=1 -w $i scaffolds.fa >> temp2.fa; done &
+	for i in `cat xac`; do grep -A1 --max-count=1 -w $i scaffolds.fa >> temp3.fa; done &
+	for i in `cat xad`; do grep -A1 --max-count=1 -w $i scaffolds.fa >> temp4.fa; done &
+	for i in `cat xae`; do grep -A1 --max-count=1 -w $i scaffolds.fa >> temp5.fa; done &
+	for i in `cat xaf`; do grep -A1 --max-count=1 -w $i scaffolds.fa >> temp6.fa; done &
+	for i in `cat xag`; do grep -A1 --max-count=1 -w $i scaffolds.fa >> temp7.fa; done &
+	for i in `cat xah`; do grep -A1 --max-count=1 -w $i scaffolds.fa >> temp8.fa; done &
+	for i in `cat xai`; do grep -A1 --max-count=1 -w $i scaffolds.fa >> temp9.fa; done &
+	for i in `cat xaj`; do grep -A1 --max-count=1 -w $i scaffolds.fa >> temp10.fa; done &
+	for i in `cat xak`; do grep -A1 --max-count=1 -w $i scaffolds.fa >> temp12.fa; done &
+	for i in `cat xal`; do grep -A1 --max-count=1 -w $i scaffolds.fa >> temp13.fa; done &
+	for i in `cat xam`; do grep -A1 --max-count=1 -w $i scaffolds.fa >> temp14.fa; done &
+	for i in `cat xan`; do grep -A1 --max-count=1 -w $i scaffolds.fa >> temp15.fa; done &
+	for i in `cat xao`; do grep -A1 --max-count=1 -w $i scaffolds.fa >> temp16.fa; done &
+	for i in `cat xap`; do grep -A1 --max-count=1 -w $i scaffolds.fa >> temp17.fa; done &
+	for i in `cat xaq`; do grep -A1 --max-count=1 -w $i scaffolds.fa >> temp18.fa; done &
+	for i in `cat xar`; do grep -A1 --max-count=1 -w $i scaffolds.fa >> temp19.fa; done &
+	for i in `cat xas`; do grep -A1 --max-count=1 -w $i scaffolds.fa >> temp20.fa; done &
+
+	for i in `cat xat`; do grep -A1 --max-count=1 -w $i scaffolds.fa >> temp21.fa; done &
+	for i in `cat xau`; do grep -A1 --max-count=1 -w $i scaffolds.fa >> temp22.fa; done &
+	for i in `cat xav`; do grep -A1 --max-count=1 -w $i scaffolds.fa >> temp23.fa; done &
+	for i in `cat xaw`; do grep -A1 --max-count=1 -w $i scaffolds.fa >> temp24.fa; done &
+	for i in `cat xax`; do grep -A1 --max-count=1 -w $i scaffolds.fa >> temp25.fa; done &
+	for i in `cat xay`; do grep -A1 --max-count=1 -w $i scaffolds.fa >> temp26.fa; done &
+	for i in `cat xaz`; do grep -A1 --max-count=1 -w $i scaffolds.fa >> temp27.fa; done &
+	
+abyss list
+	
+	bwa mem -a -t40 -S -P abyss clam.Trinity.fasta > abyss.sam
+	samtools view -S -F4 abyss.sam > abyss-filtered.sam
+	awk '{print $1}' abyss-filtered.sam | grep c | sort | uniq | wc -l
+	awk '{print $3}' abyss-filtered.sam | grep ^[0-9] | sort | uniq > abyss.list	
+	split -l 7000 list
 
