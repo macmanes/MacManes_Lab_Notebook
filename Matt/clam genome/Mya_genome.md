@@ -61,6 +61,13 @@ Input Read Pairs: 594639181 Both Surviving: 592762879 (99.68%) Forward Only Surv
 	done
 
 
+spades.py -t 40 -m 500 --only-assembler -k 55,71,85 \
+--pe1-12 ../mya.lighter25.trimP2.C50norm.fq \
+--pacbio ../clam.Trinity.fasta \
+-o mya.spades
+
+
+mya.lighter25.trimP2.C50norm.fq
 
 spades list
 	
