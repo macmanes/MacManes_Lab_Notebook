@@ -14,3 +14,11 @@ abyss
 	     abyss-pe -C k$k np=40 k=$k name=k$k n=5 \
 	     in='../x*.fastq'; 
 	done
+
+more
+
+	for k in 95 97 103 105; do
+	     mkdir k$k;
+	     abyss-pe -C k$k np=40 k=$k name=k$k n=5 \
+	     in='../x*.fastq'; 
+	done
