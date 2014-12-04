@@ -18,3 +18,5 @@ in `/mouse/Mytilus/working_reads/`
 		
 	fastqc -t8 mytilus.muscle.2.fq.gz
 	fastqc -t8 mytilus.muscle.1.fq.gz
+	fastqc -t8 mytilus.gill.1.fq.gz
+	fastqc -t8 mytilus.gill.2.fq.gz
