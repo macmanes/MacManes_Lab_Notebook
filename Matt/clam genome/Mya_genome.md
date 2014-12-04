@@ -113,3 +113,25 @@ abyss list
 	awk '{print $3}' abyss-filtered.sam | grep ^[0-9] | sort | uniq > abyss.list	
 	split -l 7000 list
 
+Need to run PREQC - had deleted old files
+
+in `/mnt/data3/macmanes/Mya`
+	
+	lighter -t 48 -r <1914-KO-1_1_sequence.fastq  -r 1914-KO-1_2_sequence.fastq -k 32 6000000000 .1
+
+
+> Trimming in `/mouse/Mya`
+
+	java -Xmx50g -jar /share/trinityrnaseq-code/trinity-plugins/Trimmomatic-0.32/trimmomatic-0.32.jar PE \
+	-threads 48 -baseout mya.lighter32.trimP2.fastq \
+	1914-KO-1_1_sequence.fastq.cor.fq.gz \
+	1914-KO-1_2_sequence.fastq.cor.fq.gz  \
+	ILLUMINACLIP:/share/trinityrnaseq-code/trinity-plugins/Trimmomatic-0.32/adapters/TruSeq3-PE.fa:2:30:10
+
+PreQC
+--
+
+	sga preprocess --pe-mode 1 mya.lighter32.trimP2_1P.fastq mya.lighter32.trimP2_1P.fastq > mya.corr.trim.fq
+	sga index -a ropebwt --no-reverse -t 48 mya.corr.trim.fq
+	sga preqc -t 48 mya.corr.trim.fq > mya.preqc 
+
