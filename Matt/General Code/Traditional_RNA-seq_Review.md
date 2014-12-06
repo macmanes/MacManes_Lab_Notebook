@@ -3,7 +3,7 @@ Traditional RNA-seq versus 3' RNA-seq review
 
 General Comments:
 
-- Overall, given the limitations of the design, I can see absolutely no benefit to the 3' procedure as described. It performs worse in many of the evaluated metrics (contigs length, %annotated, mapping, expression quantitation, etc). While it resulted in more DE genes, these are very likely to be false positives. 
+- I worry that the 3' procedure as described is of limited value, at least as it is described here. It performs worse in many of the evaluated metrics (contigs length, %annotated, mapping, expression quantitation, etc). While it resulted in more DE genes, until the authors can demonstrate that these DE genes are not false positives, most readers, including myself will be very suspicious.
 
 - The code need to be made available. This includes all of the in-house scripts. Available from the author is generally not sufficient. Many free repositories for this information exist (e.g. GitHub). Methods sections should be detailed enough to allow the reader to replicate your experiment. When these types of scripts are used and not presented you violate one of the most basic principles of scientific publishing. 
 
@@ -15,7 +15,7 @@ General Comments:
 
 - There are many serious issues with the methods (described below)
 
-- Given the unreplicated design, that you find more DE genes in the 3' design is **extremely** unconvincing! This seems much more likely to be the result of false positives, though you will never be able to disentangle the 2. 
+- Given the un-replicated design, that you find more DE genes in the 3' design is **extremely** unconvincing. This seems much more likely to be the result of false positives, though you likely have great difficulty trying to disentangle the 2. 
 
 
 > Methods
@@ -27,9 +27,9 @@ General Comments:
 	- what is the read length
 	- what was the total number of reads used for the analyses
 	- were adapters trimmed and how? (in house scripts not made available NOT acceptable)
-	- Why was the Phred trimming threshold of 20 chosen, given there is substantial evidence (e.g. http://www.ncbi.nlm.nih.gov/pmc/articles/PMC3908319/ and http://www.ncbi.nlm.nih.gov/pubmed/24575122) that this is detrimental to assemblies? Should change this at at a minimum justofy your approach. 
+	- Why was the Phred trimming threshold of 20 chosen, given there is substantial evidence (e.g. http://www.ncbi.nlm.nih.gov/pmc/articles/PMC3908319/ and http://www.ncbi.nlm.nih.gov/pubmed/24575122) that this is detrimental to assemblies? Should change this at a minimum justify your approach. 
 - Counting the poly(A)-rich reads
-	- where is the 'in house python script'. Methods sections should be detailed enough to allow the reader to replicate your experiment. When these types of scripts are used and not presented you violate one of the most basic principles of scientific publishing. 
+	- where is the 'in house python script' deposited? 
 	- What was the threshold of % A's that you used for inclusion into the study?
 	- how were the reads mapped (what command used)?
 	- what version of bowtie was used?
