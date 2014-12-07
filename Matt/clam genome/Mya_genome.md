@@ -135,10 +135,11 @@ PreQC
 	sga index -a ropebwt --no-reverse -t 48 mya.corr.trim.fq
 	sga preqc -t 48 mya.corr.trim.fq > mya.preqc 
 	
-Dec 6th in PM -- started dipspades.py
+Dec 6th in PM -- started dipspades.py. in `/mouse/Mya/spades/`
 --
 
 	dipspades.py -t 20 -m 500 --pe1-1 ../mya.lighter32.trimP2_1P.fastq --pe1-2 ../mya.lighter32.trimP2_2P.fastq  --pacbio ../clam.Trinity.fasta -o mya.dipspades --only-assembler
 	
+
 
 
