@@ -34,4 +34,7 @@ in `/mouse/feeding/`
 
 in `/mouse/feeding/transrate`
 
-	transrate -a ../20M.ec.P2/Trinity.fasta -r ../Mus_musculus.GRCm38.pep.abinitio.fa -l ../SRR797058_1.fastq.gz -i ../SRR797058_2.fastq.gz -o 20M.ec.P2 -t 40	
+	transrate -a ../20M.ec.P2/Trinity.fasta -r ../Mus_musculus.GRCm38.pep.all.fa \
+	-l ../20M.ec.P2/20M_corrk19.1.corrected.fastq.gz.P.qtrim.gz \
+	-i ../20M.ec.P2/20M_corrk19.2.corrected.fastq.gz.P.qtrim.gz \
+	-o 20M.ec.P2 -t 20
