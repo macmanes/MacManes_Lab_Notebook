@@ -98,11 +98,11 @@ Downloaded invert protein and RNA databases to run blastP and blastN
 	blastp -db invertprot -query ../express/MG.lighter.P2.expressfilt.cdhit.Trinity.fasta.transdecoder.pep -outfmt 6 -evalue 1e-2 -num_threads 20 -out invert.blastp
 	blastn -db invert -query Trinity.fasta -outfmt 6 -evalue 1e-2 -num_threads 20 -out invert.blastnq
 
-The assemblies are pretty crappy for so many reads.. I'm going to try different assembly. 
+The assemblies are pretty crappy for so many reads.. I'm going to try different assembly. **This is using r2999**
 
     Trinity --seqType fq --JM 150G --SS_lib_type FR \
     --left mytilus.muscle.lighter25.trimP2_1P.fastq,mytilus.gill.lighter25.trimP2_1P.fastq  \
     --right mytilus.muscle.lighter25.trimP2_2P.fastq,mytilus.gill.lighter25.trimP2_2P.fastq \
-    --CPU 20 --output MG.lighter.P2 --group_pairs_distance 999 --inchworm_cpu 10
+    --CPU 20 --output MG.lighter.P2 --group_pairs_distance 999 --inchworm_cpu 10 --bflyHeapSpaceMax 50G
 
 	
