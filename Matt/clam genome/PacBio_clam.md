@@ -49,12 +49,12 @@ ectools
 	cp /share/ectools/correct.sh . #must modify this substantially, though it is easy)
 	
 
-Actually do teh correction
+Actually do the correction-- have to do this for each of 100 folders. 
 
 
 
-	for i in {0001..000N}; do 
-		cd $i; SGE_TASK_ID=1 TMPDIR=/tmp ../correct.sh; cd ..; 
+	for i in {1..500}; do 
+		SGE_TASK_ID=$i TMPDIR=/tmp ../correct.sh; cd ..; 
 	done
 
 Trying to run the correction: 

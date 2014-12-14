@@ -98,7 +98,7 @@ Downloaded invert protein and RNA databases to run blastP and blastN
 	blastp -db invertprot -query ../express/MG.lighter.P2.expressfilt.cdhit.Trinity.fasta.transdecoder.pep -outfmt 6 -evalue 1e-2 -num_threads 20 -out invert.blastp
 	blastn -db invert -query Trinity.fasta -outfmt 6 -evalue 1e-2 -num_threads 20 -out invert.blastnq
 
-The assemblies are pretty crappy for so many reads.. I'm going to try different assembly. **This is using r2999**
+The assemblies are pretty crappy for so many reads.. I'm going to try different assembly. **This is using r3999**
 
     Trinity --seqType fq --JM 150G --SS_lib_type FR \
     --left mytilus.muscle.lighter25.trimP2_1P.fastq,mytilus.gill.lighter25.trimP2_1P.fastq  \
@@ -106,3 +106,56 @@ The assemblies are pretty crappy for so many reads.. I'm going to try different 
     --CPU 20 --output MG.lighter.P2 --group_pairs_distance 999 --inchworm_cpu 10 --bflyHeapSpaceMax 50G
 
 	
+in `/mouse/Mytilus/express` will run new transdecoder
+
+	TransDecoder -t ../assembly/new.MG.lighter.P2/Trinity.fasta --CPU 20 --search_pfam /home/macmanes/cpg_project/prot/Pfam-A.hmm
+	
+
+in `/mouse/Mytilus/bwa`
+
+will test the protien coding things with a small read dataset. 
+
+	ln -s ../express/Trinity.fasta.transdecoder.mRNA .
+	bwa index -p mrna Trinity.fasta.transdecoder.mRNA
+	head -800000 /mouse/Mytilus/working_reads/corr_trim/mytilus.muscle.lighter25.trimP2_1P.fastq > test.1.fq
+	head -800000 /mouse/Mytilus/working_reads/corr_trim/mytilus.muscle.lighter25.trimP2_2P.fastq > test.2.fq	
+
+	bwa mem -t40 mrna  test.1.fq test.2.fq | samtools view -@6 -Sub - | samtools sort -n -m3G -@8 - mrnatest	
+
+OK, so 90% of the reads map to the transdecoder predicted mRNA's. COOL!
+
+lets run cd-hit in `express/`
+
+	cd-hit-est -M 5000 -T 24 -c .97 -i Trinity.fasta.transdecoder.mRNA -o MG.lighter.P2.TransDec.cdhit.Trinity.mrna
+
+full run
+
+    bwa mem -t20 mrna  /mouse/Mytilus/working_reads/corr_trim/mytilus.gill.lighter25.trimP2_1P.fastq /mouse/Mytilus/working_reads/corr_trim/mytilus.gill.lighter25.trimP2_2P.fastq | samtools view -@6 -Sub - | samtools sort -n -m3G -@8 - gill_mrna
+    bwa mem -t20 mrna  /mouse/Mytilus/working_reads/corr_trim/mytilus.muscle.lighter25.trimP2_1P.fastq /mouse/Mytilus/working_reads/corr_trim/mytilus.muscle.lighter25.trimP2_2P.fastq | samtools view -@6 -Sub - | samtools sort -n -m3G -@8 - muscle_mrna    
+
+about 90% of reads mapping. 
+
+
+express
+
+	express MG.lighter.P2.TransDec.cdhit.Trinity.mrna muscle_mrna.bam -o muscle_mrna_express --rf-stranded
+	
+
+Muscle versus gill
+
+    awk '{print $2 "\t" $15}' muscle_mrna_express/results.xprs | sed '1,1d' | sort -k1 > muscle.exp
+    awk '{print $2 "\t" $15}' gill_mrna_express/results.xprs | sed '1,1d' | sort -k1 > gill.exp
+    paste muscle.exp gill.exp > MG.expression
+    awk '{print $1 "\t" $2 "\t" $4"\t" $2-$4}' MG.expression > MG.exp
+    awk 'NR>2 {sum+=$2; array[NR]=$2} END {for(x=1;x<=NR;x++){sumsq+=((array[x]-(sum/NR))^2);}print sqrt(sumsq/NR)}' MG.exp
+    awk 'NR>2 {sum+=$3; array[NR]=$3} END {for(x=1;x<=NR;x++){sumsq+=((array[x]-(sum/NR))^2);}print sqrt(sumsq/NR)}' MG.exp
+
+
+Things more than 2SD more highly expressed in muscle
+
+	awk '600>$4{next}1' MG.exp | wc -l
+	105 things..
+	
+Things more than 2SD more highly expressed in gill
+
+
