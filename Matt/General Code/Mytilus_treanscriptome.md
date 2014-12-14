@@ -158,4 +158,19 @@ Things more than 2SD more highly expressed in muscle
 	
 Things more than 2SD more highly expressed in gill
 
+BLAST
 
+
+    blastn -db invert -query MG.lighter.P2.TransDec.cdhit.Trinity.mrna -outfmt 6 -evalue 1e-2 -num_threads 20 -out invert.blastn
+    
+
+need to make pep file out of new mrna file:
+
+in `Transdecoder/`
+
+	TransDecoder -t MG.lighter.P2.TransDec.cdhit.Trinity.mrna --CPU 20 --search_pfam /home/macmanes/cpg_project/prot/Pfam-A.hmm
+	
+then, in `blast/`
+
+    blastp -db invertprot -query MG.lighter.P2.TransDec.cdhit.Trinity.mrna.transdecoder.pep \
+    -outfmt 6 -evalue 1e-2 -num_threads 10 -out invert.blastp

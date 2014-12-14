@@ -32,11 +32,18 @@ in `/mouse/Mya/pacbio`
 	cp sc/orga/projects/pacbio/userdata_permanent/raw/Clam_Mya_1_Singapore_MSW_IRRI_P6_C4_MB_4/A01_1/Analysis_Results/m141203_023445_42163R_c100749932550000001823153407081503_s1_p0.* h5/
 	
 
-extract fastq
+extract fasta
 
 	for i in `ls *bas.h5`; do
 		bash5tools.py $i --outFilePrefix $i --outType fasta --readType unrolled;
 	done
+
+extract fastq
+
+	for i in `ls *bas.h5`; do
+		bash5tools.py $i --outFilePrefix $i --outType fastq --readType unrolled;
+	done
+
 	
 ectools
 
@@ -51,10 +58,12 @@ ectools
 
 Actually do the correction-- have to do this for each of 100 folders. 
 
+**This command actually works, but have to cd into each directory**
+**Ectools aborted, will take months to finish, and breaks down many of the PB reads into shorter pieces, ? maybe because Illumina assembly is not good enough.**
 
 
 	for i in {1..500}; do 
-		SGE_TASK_ID=$i TMPDIR=/tmp ../correct.sh; cd ..; 
+		SGE_TASK_ID=$i TMPDIR=/tmp ../correct.sh; 
 	done
 
 Trying to run the correction: 
@@ -101,5 +110,32 @@ Lordec
 	/mouse/Mya/pacbio/fasta/mya.lordec.pacbio.fasta
 
 
+>Maybe try PBcR
+
+	fastqToCA -insertsize 200 -libraryname mya.illumina -technology illumina \
+	-type illumina -mates /mouse/Mya/mya.corr.trim.fq > mya.illumina.frg
+
+	PBcR -pbCNS -s spec.txt -fastq /mouse/Mya/pacbio/fastq/mya.pacbio.fastq \
+	-length 1000 -partitions 20 -l mya.pacbio.pbcr -t 20 -genomeSize 550000000 \
+	/mouse/Mya/pbcr/mya.illumina.frg
+	
 
 
+whoops, building pbdagcon
+
+	http://downloads.sourceforge.net/project/log4cpp/log4cpp-1.1.x%20%28new%29/log4cpp-1.1/log4cpp-1.1.1.tar.gz
+	./configure --prefix=/share/bin/
+	make
+	make check
+	make install
+	
+	git clone https://github.com/PacificBiosciences/pbdagcon.git
+	cd pbdagcon
+	git submodule init
+	git submodule update
+	
+>**dbg2olc on AWS**
+
+	DBG2OLC_Linux k 17 KmerCovTh 3 MinOverlap 20 AdaptiveTh 0.002 LD1 0 \
+	Contigs /mnt/clam67-6.fa RemoveChimera 1 \
+	f /mnt/mya.pacbio.fasta
