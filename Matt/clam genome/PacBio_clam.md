@@ -139,3 +139,8 @@ whoops, building pbdagcon
 	DBG2OLC_Linux k 17 KmerCovTh 3 MinOverlap 20 AdaptiveTh 0.002 LD1 0 \
 	Contigs /mnt/clam67-6.fa RemoveChimera 1 \
 	f /mnt/mya.pacbio.fasta
+	
+
+	cat /mnt/clam67-6.fa /mnt/mya.pacbio.fasta > ctg_pb.fasta
+	$HOME/dbg2olc/split_and_run_pbdagcon.sh backbone_raw.fasta  \
+	DBG2OLC_Consensus_info.txt ctg_pb.fasta ./consensus_dir >consensus_log.txt &
