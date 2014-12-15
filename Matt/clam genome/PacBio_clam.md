@@ -112,8 +112,8 @@ Lordec
 
 >Maybe try PBcR
 
-	fastqToCA -insertsize 200 -libraryname mya.illumina -technology illumina \
-	-type illumina -mates /mouse/Mya/mya.corr.trim.fq > mya.illumina.frg
+	fastqToCA -insertsize 200 30 -libraryname mya.illumina -technology illumina \
+	-type sanger -mates /mouse/Mya/mya.corr.trim.fq > mya.illumina.frg
 
 	PBcR -pbCNS -s spec.txt -fastq /mouse/Mya/pacbio/fastq/mya.pacbio.fastq \
 	-length 1000 -partitions 20 -l mya.pacbio.pbcr -t 20 -genomeSize 550000000 \
@@ -136,8 +136,8 @@ whoops, building pbdagcon
 	
 >**dbg2olc on AWS**
 
-	DBG2OLC_Linux k 17 KmerCovTh 3 MinOverlap 20 AdaptiveTh 0.002 LD1 0 \
-	Contigs /mnt/clam67-6.fa RemoveChimera 1 \
+	DBG2OLC_Linux k 17 KmerCovTh 2 MinOverlap 10 AdaptiveTh 0.001 LD1 0 \
+	Contigs /mnt/clam67-6.fa RemoveChimera 1 MinLen 500 \
 	f /mnt/mya.pacbio.fasta
 	
 
