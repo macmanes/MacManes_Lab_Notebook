@@ -136,6 +136,8 @@ whoops, building pbdagcon
 	
 >**dbg2olc on AWS**
 
+>**Must have all python scripts in same folder**
+
 	DBG2OLC_Linux k 17 KmerCovTh 2 MinOverlap 10 AdaptiveTh 0.001 LD1 0 \
 	Contigs /mnt/clam67-6.fa RemoveChimera 1 MinLen 500 \
 	f /mnt/mya.pacbio.fasta
