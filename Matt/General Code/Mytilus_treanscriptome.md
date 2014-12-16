@@ -174,3 +174,29 @@ then, in `blast/`
 
     blastp -db invertprot -query MG.lighter.P2.TransDec.cdhit.Trinity.mrna.transdecoder.pep \
     -outfmt 6 -evalue 1e-2 -num_threads 10 -out invert.blastp
+    
+
+Good, about 60k hits to proteins in the 75k things. this is a pretty good number. Next I'll work on the gene ontology stuff..
+
+>**Pull out things highly expressed in muscle and gill**
+
+>in `/mouse/Mytilus/go`
+
+
+	awk '1>$3{next}1' MG.exp | awk -F "|" '{print $1}' > highexp.in.muscle
+	awk '1>$2{next}1' MG.exp | awk -F "|" '{print $1}' > highexp.in.gill
+
+>extract out GI's
+
+	grep -w -f highexp.in.muscle invert.blastp | awk '{print $2}' | awk -F "|" '{print $2}' > highexp.in.muscle.gis
+	
+	grep -w -f highexp.in.gill invert.blastp | awk '{print $2}' | awk -F "|" '{print $2}' > highexp.in.gill.gis
+	
+
+
+
+
+
+
+
+	
