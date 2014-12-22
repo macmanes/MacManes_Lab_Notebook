@@ -38,3 +38,58 @@ in `/mouse/feeding/transrate`
 	-l /mouse/feeding/20M.ec.P2/20M_corrk19.1.corrected.fastq.gz.PwU.qtrim.fq \
 	-i /mouse/feeding/20M.ec.P2/20M_corrk19.2.corrected.fastq.gz.PwU.qtrim.fq \
 	-o 20M.ec.P2 -t 20
+	
+
+in `/mouse/feeding/transrate`
+
+
+	transrate -a Trinity.fasta -r ../Mus_musculus.GRCm38.pep.all.fa \
+	-l 100M_corrk19.1.corrected.fastq.gz.PwU.qtrim.fq \
+	-i 100M_corrk19.2.corrected.fastq.gz.PwU.qtrim.fq \
+	-o 100M.ec.P2 -t 20
+	
+
+
+Post filtering
+---
+
+for `20M.ec.P2` in `/mouse/feeding/20M.ec.P2/express_filt`
+
+Take the transrate express results.
+
+	sed ':begin;$!N;/[ACTGNn-]\n[ACTGNn-]/s/\n//;tbegin;P;D' Trinity.fasta > 20M.ec.P2.Trinity.fasta
+	awk '1>$15{next}1' Trinity.fasta_results.xprs | awk '{print $2}' | sed '1,1d' | split -l 4000 -
+	for i in `cat xaa`; do grep -A1 --max-count=1 -w $i 20M.ec.P2.Trinity.fasta >> temp1.fa; done &
+	for i in `cat xab`; do grep -A1 --max-count=1 -w $i 20M.ec.P2.Trinity.fasta >> temp2.fa; done &
+	for i in `cat xac`; do grep -A1 --max-count=1 -w $i 20M.ec.P2.Trinity.fasta >> temp3.fa; done &
+	for i in `cat xad`; do grep -A1 --max-count=1 -w $i 20M.ec.P2.Trinity.fasta >> temp4.fa; done &
+	for i in `cat xae`; do grep -A1 --max-count=1 -w $i 20M.ec.P2.Trinity.fasta >> temp5.fa; done &
+	for i in `cat xaf`; do grep -A1 --max-count=1 -w $i 20M.ec.P2.Trinity.fasta >> temp6.fa; done &
+	for i in `cat xag`; do grep -A1 --max-count=1 -w $i 20M.ec.P2.Trinity.fasta >> temp7.fa; done &
+	for i in `cat xah`; do grep -A1 --max-count=1 -w $i 20M.ec.P2.Trinity.fasta >> temp8.fa; done &
+	for i in `cat xai`; do grep -A1 --max-count=1 -w $i 20M.ec.P2.Trinity.fasta >> temp9.fa; done &
+	for i in `cat xaj`; do grep -A1 --max-count=1 -w $i 20M.ec.P2.Trinity.fasta >> temp10.fa; done &
+	for i in `cat xak`; do grep -A1 --max-count=1 -w $i 20M.ec.P2.Trinity.fasta >> temp11.fa; done &
+	for i in `cat xal`; do grep -A1 --max-count=1 -w $i 20M.ec.P2.Trinity.fasta >> temp12.fa; done &
+	for i in `cat xam`; do grep -A1 --max-count=1 -w $i 20M.ec.P2.Trinity.fasta >> temp13.fa; done &
+	for i in `cat xan`; do grep -A1 --max-count=1 -w $i 20M.ec.P2.Trinity.fasta >> temp14.fa; done &
+	for i in `cat xao`; do grep -A1 --max-count=1 -w $i 20M.ec.P2.Trinity.fasta >> temp15.fa; done &
+	for i in `cat xap`; do grep -A1 --max-count=1 -w $i 20M.ec.P2.Trinity.fasta >> temp16.fa; done &
+	for i in `cat xaq`; do grep -A1 --max-count=1 -w $i 20M.ec.P2.Trinity.fasta >> temp17.fa; done &
+	for i in `cat xar`; do grep -A1 --max-count=1 -w $i 20M.ec.P2.Trinity.fasta >> temp18.fa; done &
+	for i in `cat xas`; do grep -A1 --max-count=1 -w $i 20M.ec.P2.Trinity.fasta >> temp19.fa; done &
+	for i in `cat xat`; do grep -A1 --max-count=1 -w $i 20M.ec.P2.Trinity.fasta >> temp20.fa; done &
+	for i in `cat xau`; do grep -A1 --max-count=1 -w $i 20M.ec.P2.Trinity.fasta >> temp21.fa; done &
+	for i in `cat xav`; do grep -A1 --max-count=1 -w $i 20M.ec.P2.Trinity.fasta >> temp22.fa; done &
+	for i in `cat xaw`; do grep -A1 --max-count=1 -w $i 20M.ec.P2.Trinity.fasta >> temp23.fa; done &
+	for i in `cat xax`; do grep -A1 --max-count=1 -w $i 20M.ec.P2.Trinity.fasta >> temp24.fa; done &
+	for i in `cat xay`; do grep -A1 --max-count=1 -w $i 20M.ec.P2.Trinity.fasta >> temp25.fa; done &
+
+	cat temp* > 20M.ec.P2.express.Trinity.fasta
+
+
+	transrate -a 20M.ec.P2.express.Trinity.fasta -r ../../Mus_musculus.GRCm38.pep.all.fa \
+	-l /mouse/feeding/20M.ec.P2/20M_corrk19.1.corrected.fastq.gz.PwU.qtrim.fq \
+	-i /mouse/feeding/20M.ec.P2/20M_corrk19.2.corrected.fastq.gz.PwU.qtrim.fq \
+	-o 20M.ec.express.P2 -t 20
+
