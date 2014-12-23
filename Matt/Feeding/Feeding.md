@@ -148,5 +148,5 @@ for `20M.ec.P2` in `/mouse/feeding/20M.ec.P2/score_filt`
 	transrate -a 20M.ec.P2.contig_score.Trinity.fasta -r ../../Mus_musculus.GRCm38.pep.all.fa \
 	-l /mouse/feeding/20M.ec.P2/20M_corrk19.1.corrected.fastq.gz.PwU.qtrim.fq \
 	-i /mouse/feeding/20M.ec.P2/20M_corrk19.2.corrected.fastq.gz.PwU.qtrim.fq \
-	-o 20M.ec.contig_score.P2 -t 20
+	-o 20M.ec.contig_score.P2_right -t 20
 
