@@ -48,6 +48,7 @@ in `/mouse/feeding/transrate`
 	-i 100M_corrk19.2.corrected.fastq.gz.PwU.qtrim.fq \
 	-o 100M.ec.P2 -t 20
 	
+	TRANSRATE ASSEMBLY SCORE: 0.361 
 
 
 Post filtering
@@ -175,8 +176,51 @@ in `/mouse/feeding/100M.ec.P2/score_filt`
 	-l /mouse/feeding/100M.ec.P2/100M_corrk19.1.corrected.fastq.gz.PwU.qtrim.fq \
 	-i /mouse/feeding/100M.ec.P2/100M_corrk19.2.corrected.fastq.gz.PwU.qtrim.fq \
 	-o 100M.ec.score.P2 -t 40
+	
+	score = 0.3912
+
+---
+
+**filter 100M set based on express AND score .3**
+--
+
+---
+
+in `/mouse/feeding/100M.ec.P2/score_express_filt`
+
+	awk -F "," '1>$22{next}1' 100M.ec.P2_Trinity.fasta_contigs.csv  | awk -F "," '.3>$17{next}1' | awk -F "," '{print $1}' | split -l 4000
+	
+	ln -s ../express_filt/100M.ec.P2.Trinity.fasta .
+
+	for i in `cat xaa`; do grep -A1 --max-count=1 -w $i 100M.ec.P2.Trinity.fasta >> temp1.fa; done &
+	for i in `cat xab`; do grep -A1 --max-count=1 -w $i 100M.ec.P2.Trinity.fasta >> temp2.fa; done &
+	for i in `cat xac`; do grep -A1 --max-count=1 -w $i 100M.ec.P2.Trinity.fasta >> temp3.fa; done &
+	for i in `cat xad`; do grep -A1 --max-count=1 -w $i 100M.ec.P2.Trinity.fasta >> temp4.fa; done &
+	for i in `cat xae`; do grep -A1 --max-count=1 -w $i 100M.ec.P2.Trinity.fasta >> temp5.fa; done &
+	for i in `cat xaf`; do grep -A1 --max-count=1 -w $i 100M.ec.P2.Trinity.fasta >> temp6.fa; done &
+	for i in `cat xag`; do grep -A1 --max-count=1 -w $i 100M.ec.P2.Trinity.fasta >> temp7.fa; done &
+	for i in `cat xah`; do grep -A1 --max-count=1 -w $i 100M.ec.P2.Trinity.fasta >> temp8.fa; done &
+	for i in `cat xai`; do grep -A1 --max-count=1 -w $i 100M.ec.P2.Trinity.fasta >> temp9.fa; done &
+	for i in `cat xaj`; do grep -A1 --max-count=1 -w $i 100M.ec.P2.Trinity.fasta >> temp10.fa; done &
+	for i in `cat xak`; do grep -A1 --max-count=1 -w $i 100M.ec.P2.Trinity.fasta >> temp11.fa; done &
+	for i in `cat xal`; do grep -A1 --max-count=1 -w $i 100M.ec.P2.Trinity.fasta >> temp12.fa; done &
+	for i in `cat xam`; do grep -A1 --max-count=1 -w $i 100M.ec.P2.Trinity.fasta >> temp13.fa; done &
+	for i in `cat xan`; do grep -A1 --max-count=1 -w $i 100M.ec.P2.Trinity.fasta >> temp14.fa; done &
+	for i in `cat xao`; do grep -A1 --max-count=1 -w $i 100M.ec.P2.Trinity.fasta >> temp15.fa; done &
+	for i in `cat xap`; do grep -A1 --max-count=1 -w $i 100M.ec.P2.Trinity.fasta >> temp16.fa; done &
+	for i in `cat xaq`; do grep -A1 --max-count=1 -w $i 100M.ec.P2.Trinity.fasta >> temp17.fa; done &
+	for i in `cat xar`; do grep -A1 --max-count=1 -w $i 100M.ec.P2.Trinity.fasta >> temp18.fa; done &
+
+	cat temp* > 100M.ec.P2.score.express.Trinity.fasta
+
+	transrate -a 100M.ec.P2.score.express.Trinity.fasta -r ../../Mus_musculus.GRCm38.pep.all.fa \
+	-l /mouse/feeding/100M.ec.P2/100M_corrk19.1.corrected.fastq.gz.PwU.qtrim.fq \
+	-i /mouse/feeding/100M.ec.P2/100M_corrk19.2.corrected.fastq.gz.PwU.qtrim.fq \
+	-o 100M.ec.score.express.P2 -t 40
 
 
+
+--
 
 20M Filter based on contig score
 --
