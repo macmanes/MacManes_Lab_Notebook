@@ -342,10 +342,36 @@ in `/mouse/feeding`
 
 
 
+transrate 20M full read dataset
+--
+
+		transrate -a 20M.ec.P2.contig_score.Trinity.fasta -r ../../Mus_musculus.GRCm38.pep.all.fa \
+	-l /mouse/feeding/SRR797058.P2_1P.fq \
+	-i /mouse/feeding/SRR797058.P2_2P.fq \
+	-o 20M.ec.contig_score.P2.FULL -t 24
 
 
+transrate eval using full read dataset
+--
+
+**20M read assembly**
+
+in `/mouse/feeding/20M.ec.P2/score_filt`
+
+	transrate -a 20M.ec.P2.contig_score.Trinity.fasta -r ../../Mus_musculus.GRCm38.pep.all.fa \
+	-l /mouse/feeding/SRR797058.P2_1P.fq \
+	-i /mouse/feeding/SRR797058.P2_2P.fq \
+	-o 20M.ec.contig_score.P2.FULL -t 24
+
+**100M read assembly**
+
+in `/mouse/feeding/100M.ec.P2/score_filt`
 
 
+	transrate -a 100M.ec.P2.score.Trinity.fasta -r ../../Mus_musculus.GRCm38.pep.all.fa \
+	-l /mouse/feeding/SRR797058.P2_1P.fq \
+	-i /mouse/feeding/SRR797058.P2_2P.fq \
+	-o 100M.ec.contig_score.P2.FULL -t 24
 
 
 
