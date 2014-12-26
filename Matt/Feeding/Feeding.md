@@ -356,7 +356,7 @@ transrate eval using full read dataset
 
 **20M read assembly**
 
-in `/mouse/feeding/20M.ec.P2/score_filt`
+in `/mouse/feeding/20M.ec.P2/score_filt/correct/`
 
 	transrate -a 20M.ec.P2.contig_score.Trinity.fasta -r ../../Mus_musculus.GRCm38.pep.all.fa \
 	-l /mouse/feeding/SRR797058.P2_1P.fq \
