@@ -323,6 +323,22 @@ for `20M.ec.P2` in `/mouse/feeding/20M.ec.P2/score_express_filt`
 	-o 20M.ec.express.score.P2 -t 40
 
 
+try to use Transrate with full read dataset
+--
+
+in `/mouse/feeding`
+
+	lighter -t 24 -r SRR797058_1.fastq.gz  -r SRR797058_1.fastq.gz -k 25 6000000000 .1
+	
+	java -Xmx50g -jar /share/trinityrnaseq-code/trinity-plugins/Trimmomatic-0.32/trimmomatic-0.32.jar PE \
+	-threads 24 -baseout SRR797058.P2.fq \
+	SRR797058_1.fastq.gz \
+	SRR797058_2.fastq.gz  \
+	ILLUMINACLIP:/share/trinityrnaseq-code/trinity-plugins/Trimmomatic-0.32/adapters/TruSeq2-PE.fa:2:30:10 \
+	SLIDINGWINDOW:4:2 \
+	LEADING:2 \
+	TRAILING:2 \
+	MINLEN:25
 
 
 
