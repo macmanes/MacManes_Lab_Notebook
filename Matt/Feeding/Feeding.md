@@ -400,6 +400,8 @@ in `/mouse/feeding/20M.ec.P2.C50/score_filt`
 	-l /mouse/feeding/SRR797058.P2_1P.fq \
 	-i /mouse/feeding/SRR797058.P2_2P.fq \
 	-o 20M.ec.contig_score.P2.C50.FULL -t 24
+	
+	TRANSRATE ASSEMBLY SCORE: 0.3039
 
 
 	
@@ -414,6 +416,58 @@ in `/mouse/feeding/100M.ec.P2/score_filt`
 	-o 100M.ec.contig_score.P2.FULL -t 24
 
 	TRANSRATE ASSEMBLY SCORE: 0.3288
+
+**100M read NORMALIZED assembly**
+
+	awk -F "," '.3>$17{next}1' 100M.ec.P2.C50_Trinity.fasta_contigs.csv | awk -F "," '{print $1}' | sed '1,1d' | split -l 9000
+	sed ':begin;$!N;/[ACTGNn-]\n[ACTGNn-]/s/\n//;tbegin;P;D' Trinity.fasta > 100M.ec.P2.C50.Trinity.fasta
+	mv x* score_filt_full/
+	cd score_filt_full/	
+	ln -s ../100M.ec.P2.C50.Trinity.fasta .
+	
+	for i in $(cat xaa); do grep -A1 --max-count=1 -w $i 100M.ec.P2.C50.Trinity.fasta >> temp1.fa; done &
+	for i in $(cat xab); do grep -A1 --max-count=1 -w $i 100M.ec.P2.C50.Trinity.fasta >> temp2.fa; done &
+	for i in $(cat xac); do grep -A1 --max-count=1 -w $i 100M.ec.P2.C50.Trinity.fasta >> temp3.fa; done &
+	for i in $(cat xad); do grep -A1 --max-count=1 -w $i 100M.ec.P2.C50.Trinity.fasta >> temp4.fa; done &
+	for i in $(cat xae); do grep -A1 --max-count=1 -w $i 100M.ec.P2.C50.Trinity.fasta >> temp5.fa; done &
+	for i in $(cat xaf); do grep -A1 --max-count=1 -w $i 100M.ec.P2.C50.Trinity.fasta >> temp6.fa; done &
+	for i in $(cat xag); do grep -A1 --max-count=1 -w $i 100M.ec.P2.C50.Trinity.fasta >> temp7.fa; done &
+	for i in $(cat xah); do grep -A1 --max-count=1 -w $i 100M.ec.P2.C50.Trinity.fasta >> temp8.fa; done &
+	for i in $(cat xai); do grep -A1 --max-count=1 -w $i 100M.ec.P2.C50.Trinity.fasta >> temp9.fa; done &
+	for i in $(cat xaj); do grep -A1 --max-count=1 -w $i 100M.ec.P2.C50.Trinity.fasta >> temp10.fa; done &
+	for i in $(cat xak); do grep -A1 --max-count=1 -w $i 100M.ec.P2.C50.Trinity.fasta >> temp11.fa; done &
+	for i in $(cat xal); do grep -A1 --max-count=1 -w $i 100M.ec.P2.C50.Trinity.fasta >> temp12.fa; done &
+	for i in $(cat xam); do grep -A1 --max-count=1 -w $i 100M.ec.P2.C50.Trinity.fasta >> temp13.fa; done &
+	for i in $(cat xan); do grep -A1 --max-count=1 -w $i 100M.ec.P2.C50.Trinity.fasta >> temp14.fa; done &
+	for i in $(cat xao); do grep -A1 --max-count=1 -w $i 100M.ec.P2.C50.Trinity.fasta >> temp15.fa; done &
+	for i in $(cat xap); do grep -A1 --max-count=1 -w $i 100M.ec.P2.C50.Trinity.fasta >> temp16.fa; done &
+	for i in $(cat xaq); do grep -A1 --max-count=1 -w $i 100M.ec.P2.C50.Trinity.fasta >> temp17.fa; done &
+	for i in $(cat xar); do grep -A1 --max-count=1 -w $i 100M.ec.P2.C50.Trinity.fasta >> temp18.fa; done &
+	for i in $(cat xas); do grep -A1 --max-count=1 -w $i 100M.ec.P2.C50.Trinity.fasta >> temp19.fa; done &
+	for i in $(cat xat); do grep -A1 --max-count=1 -w $i 100M.ec.P2.C50.Trinity.fasta >> temp20.fa; done &
+	for i in $(cat xau); do grep -A1 --max-count=1 -w $i 100M.ec.P2.C50.Trinity.fasta >> temp21.fa; done &
+	for i in $(cat xav); do grep -A1 --max-count=1 -w $i 100M.ec.P2.C50.Trinity.fasta >> temp22.fa; done &
+	for i in $(cat xaw); do grep -A1 --max-count=1 -w $i 100M.ec.P2.C50.Trinity.fasta >> temp23.fa; done &
+	for i in $(cat xax); do grep -A1 --max-count=1 -w $i 100M.ec.P2.C50.Trinity.fasta >> temp24.fa; done &
+	for i in $(cat xay); do grep -A1 --max-count=1 -w $i 100M.ec.P2.C50.Trinity.fasta >> temp25.fa; done &
+
+	cat temp* > 100M.ec.P2.C50.score.Trinity.fasta
+	rm temp* x*
+
+
+	transrate -a 100M.ec.P2.C50.score.Trinity.fasta -r ../../Mus_musculus.GRCm38.pep.all.fa \
+	-l /mouse/feeding/SRR797058.P2_1P.fq \
+	-i /mouse/feeding/SRR797058.P2_2P.fq \
+	-o 100M.ec.contig_score.P2.C50.FULL -t 24
+
+
+
+
+
+
+
+
+
 
 
 
