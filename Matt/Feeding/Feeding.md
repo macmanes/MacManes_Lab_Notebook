@@ -461,12 +461,36 @@ in `/mouse/feeding/100M.ec.P2/score_filt`
 	-o 100M.ec.contig_score.P2.C50.FULL -t 24
 
 
+	TRANSRATE ASSEMBLY SCORE: 0.3393
+
 
 this is all
 
+>**CDHIT EST**
 
+	cd-hit-est -M 5000 -T 24 -c .97 \
+	-i new.100M.ec.P2.C50.score.Trinity.fasta \
+	-o 100M.ec.P2.C50.score.cdhit.Trinity.fasta
+	
+	cd-hit-est -M 5000 -T 24 -c .97 \
+	-i 20M.ec.P2.score.Trinity.fasta \
+	-o 20M.ec.P2.score.cdhit.Trinity.fasta
 
+	cd-hit-est -M 5000 -T 24 -c .97 \
+	-i 20M.ec.P2.C50.score.Trinity.fasta \
+	-o 20M.ec.P2.C50.score.cdhit.Trinity.fasta
 
+	cd-hit-est -M 5000 -T 24 -c .97 \
+	-i 100M.ec.P2.score.Trinity.fasta \
+	-o 100M.ec.P2.score.cdhit.Trinity.fasta
+
+	transrate -t 24 -a 100M.ec.P2.C50.score.cdhit.Trinity.fasta,\
+	20M.ec.P2.score.cdhit.Trinity.fasta,\
+	20M.ec.P2.C50.score.cdhit.Trinity.fasta,\
+	100M.ec.P2.score.cdhit.Trinity.fasta \
+	-r ../Mus_musculus.GRCm38.pep.all.fa \
+	-l /mouse/feeding/SRR797058.P2_1P.fq \
+	-i /mouse/feeding/SRR797058.P2_2P.fq
 
 
 
