@@ -492,6 +492,43 @@ this is all
 	-l /mouse/feeding/SRR797058.P2_1P.fq \
 	-i /mouse/feeding/SRR797058.P2_2P.fq
 
+> **100M non normalized: TRANSRATE ASSEMBLY SCORE: 0.3213**
+
+> **20M non normalized: TRANSRATE ASSEMBLY SCORE: 0.2755**
+
+
+**VSEARCH**
+--
+
+in `/mouse/feeding/vsearch`
+
+	vsearch --fasta_width 0 --threads 20 --id .99 \
+	--cluster_fast 20M.ec.P2.score.Trinity.fa --consout vsearch.fa
+
+	long_fasta.py 20M.ec.P2.score.Trinity.fasta LONG.20M.ec.P2.score.Trinity.fasta 15000
+	
+	cat vsearch.fa LONG.20M.ec.P2.score.Trinity.fasta > 20M.ec.P2.score.vsearch.Trinity.fasta
+	
+	transrate -a 20M.ec.P2.score.vsearch.Trinity.fasta -r ../Mus_musculus.GRCm38.pep.all.fa \
+	-l /mouse/feeding/SRR797058.P2_1P.fq \
+	-i /mouse/feeding/SRR797058.P2_2P.fq \
+	-o 20M.ec.P2.score.vsearch -t 24
+	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
