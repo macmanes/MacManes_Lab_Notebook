@@ -513,8 +513,31 @@ in `/mouse/feeding/vsearch`
 	-l /mouse/feeding/SRR797058.P2_1P.fq \
 	-i /mouse/feeding/SRR797058.P2_2P.fq \
 	-o 20M.ec.P2.score.vsearch -t 24
-	
 
+shit, have to shave off last ; before running transrate vsearch clusters. 
+
+	sed -i s'/;$//' 20M.ec.P2.score.vsearch.Trinity.fasta
+	
+**TRANSRATE SCORE = .2771**
+
+	vsearch --fasta_width 0 --threads 20 --id .99 --cons_truncate \
+	--cluster_fast 20M.ec.P2.score.Trinity.fasta --strand both \
+	--centroid 20M.ec.P2.score.centriod.Trinity.fasta1 \
+
+	vsearch --fasta_width 0 --threads 20 --id .99 --cons_truncate \
+	--cluster_fast 20M.ec.P2.score.Trinity.fasta --strand both \
+	--consout 20M.ec.P2.score.consensus.Trinity.fasta1
+	
+Do all the transrating
+
+
+	transrate -t 24 -a 20M.ec.P2.score.consensus.Trinity.fasta,\
+	20M.ec.P2.score.centriod.Trinity.fasta,\
+	20M.ec.P2.score.Trinity.fasta,\
+	20M.ec.P2.score.vsearch.Trinity.fasta \
+	-r ../Mus_musculus.GRCm38.pep.all.fa \
+	-l /mouse/feeding/SRR797058.P2_1P.fq \
+	-i /mouse/feeding/SRR797058.P2_2P.fq
 
 
 
