@@ -146,3 +146,13 @@ whoops, building pbdagcon
 	cat /mnt/clam67-6.fa /mnt/mya.pacbio.fasta > ctg_pb.fasta
 	$HOME/dbg2olc/split_and_run_pbdagcon.sh backbone_raw.fasta  \
 	DBG2OLC_Consensus_info.txt ctg_pb.fasta ./consensus_dir >consensus_log.txt &
+
+
+**RUN THIS COMMAND FOR PBcR WHEN TIME**
+**IT WILL TAKE A MONTH OR MORE**
+
+in `/mouse/Mya/pbcr`
+
+	PBcR -s spec2.txt -fastq /mouse/Mya/pacbio/fastq/mya.pacbio.fastq -length 1000 \
+	-partitions 40 -l mya.pacbio.pbcr -t 40 -pbCNS -genomeSize 550000000 \
+	/mouse/Mya/pbcr/mya.illumina.frg
