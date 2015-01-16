@@ -21,7 +21,8 @@ in `/mouse/mouse_rnaseq`
             
 now I want to run cufflinks on the bam files
 
-    for i in `ls *bam`; do F=`basename $i .bam`;  
-    cufflinks -p30 -o ../cufflinks/$F --library-type fr-firststrand \  
-    -G $SCRATCH/maker/pero.genes.all.gff \  
-    -b ../pero.genes.fa -u $F.bam; done 
+    for i in `ls *bam`; do F=`basename $i .bam`;
+    cufflinks -p24 -o cufflinks/$F --library-type fr-firststrand \
+    -G gff/pero.genes.all.gff \
+    -b genome/pero.genes.fa -u $i; done
+    

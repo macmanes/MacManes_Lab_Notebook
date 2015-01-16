@@ -123,6 +123,34 @@ new list:
 
 	
 
+	cd nos
+	~/coral/crb_genes.sh -t 8 -f nos.fasta -n nos
+	cd ../Caspase_3
+	~/coral/crb_genes.sh -t 12 -f caspase3.fasta -n caspase3
+	cd ../bcl2
+	~/coral/crb_genes.sh -t 16 -f bcl2.fasta -n bcl2
+	cd ../BAX
+	~/coral/crb_genes.sh -t 12 -f bax.fasta -n BAX
+	cd ../gadd45a
+	~/coral/crb_genes.sh -t 12 -f gadd45a.fasta -n gadd45a
+	cd ../photolyase
+	~/coral/crb_genes.sh -t 12 -f photolyase.fasta -n photolyase
+	cd ../cdc2
+	~/coral/crb_genes.sh -t 12 -f cdc2.fasta -n cdc2
+	cd ../hausp
+	~/coral/crb_genes.sh -t 12 -f hausp.fasta -n hausp
+	cd ../tnf
+	~/coral/crb_genes.sh -t 12 -f tnf.fasta -n tnf
+	cd ../bad
+	~/coral/crb_genes.sh -t 12 -f bad.fasta -n bad
+	cd ../bbc3
+	~/coral/crb_genes.sh -t 12 -f bbc3.fasta -n bbc3
+	cd ../cas8
+	~/coral/crb_genes.sh -t 12 -f casp8.fasta -n casp8
+	cd ../aif
+	~/coral/crb_genes.sh -t 12 -f aif.fasta -n aif
+	cd ../cad
+	~/coral/crb_genes.sh -t 12 -f cad.fasta -n cad
 
 
 
