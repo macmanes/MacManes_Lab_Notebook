@@ -1,0 +1,23 @@
+mouse spades
+--
+
+in `/mouse/pero_genome` started 1/16/15 at 1830
+
+    spades.py -t 40 -m 500 --only-assembler -o spades.mouse \
+    --pe1-1 /mnt/data3/macmanes/pero_genome/131008/peroL1_1P.fq \
+    --pe1-2 /mnt/data3/macmanes/pero_genome/131008/peroL1_2P.fq  \
+    --pe2-1 /mnt/data3/macmanes/pero_genome/131219/peroL5_1P.fq \
+    --pe2-2 /mnt/data3/macmanes/pero_genome/131219/peroL5_2P.fq  \
+    --pe3-1 /mnt/data3/macmanes/pero_genome/131023/peroL3_1P.fq \
+    --pe3-2 /mnt/data3/macmanes/pero_genome/131023/peroL3_2P.fq  \
+    --pe4-1 /mnt/data3/macmanes/pero_genome/131008/peroL2_1P.fq \
+    --pe4-2 /mnt/data3/macmanes/pero_genome/131008/peroL2_2P.fq  \
+    --pe5-1 /mnt/data3/macmanes/pero_genome/131219/peroL4_1P.fq \
+    --pe5-2 /mnt/data3/macmanes/pero_genome/131219/peroL4_2P.fq  \
+    --mp1-1 /mnt/data3/macmanes/pero-mate-pair/peer3kb.clipped.1.fq \
+    --mp1-2 /mnt/data3/macmanes/pero-mate-pair/peer3kb.clipped.2.fq \
+    --mp2-1 /mnt/data3/macmanes/pero-mate-pair/peer7kb.clipped.1.fq \
+    --mp2-2 /mnt/data3/macmanes/pero-mate-pair/peer7kb.clipped.2.fq \
+    --pacbio /mnt/data3/macmanes/pacbio/raw.pacbio.reads/fastq/all.pb.fastq
+    
+    
