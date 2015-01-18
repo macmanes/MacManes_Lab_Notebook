@@ -25,18 +25,14 @@ now I want to run cufflinks on the bam files
     cufflinks -p24 -o cufflinks/$F --library-type fr-firststrand \
     -G gff/pero.genes.all.gff \
     -b genome/pero.genes.fa -u $i; done
-    
-	cuffdiff -p24 -L wet,dry --library-type fr-firststrand \
-	-b ../genome/pero.genes.fa ../gff/pero.genes.all.gff \
-	2346Aligned.sortedByCoord.out.bam,
-	2345Aligned.sortedByCoord.out.bam,
-	2336Aligned.sortedByCoord.out.bam \
-	2925Aligned.sortedByCoord.out.bam,
-	234Aligned.sortedByCoord.out.bam,
-	2355Aligned.sortedByCoord.out.bam,
-	2335Aligned.sortedByCoord.out.bam,
-	336Aligned.sortedByCoord.out.bam,
-	335Aligned.sortedByCoord.out.bam,
-	2342Aligned.sortedByCoord.out.bam,
 
+cuffmerge
+
+    cuffmerge -p 24 -s ../genome/pero.genes.fa \
+    -g ../gff/pero.genes.all.gff -o pero list.txt
     
+cuffquant
+
+    for i in `ls *bam`; do F=`basename $i .out.bam`;
+    cuffquant -p 24 -o cuffquant/$F --library-type fr-firststrand \
+    -b genome/pero.genes.fa -u cuffmerge/merged.gtf $i; done
