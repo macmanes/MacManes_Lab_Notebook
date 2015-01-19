@@ -36,3 +36,20 @@ cuffquant
     for i in `ls *bam`; do F=`basename $i .out.bam`;
     cuffquant -p 24 -o cuffquant/$F --library-type fr-firststrand \
     -b genome/pero.genes.fa -u cuffmerge/merged.gtf $i; done
+
+cuffdiff
+
+    cuffdiff -p24 -L dry,wet --library-type fr-firststrand \
+    -b ../genome/pero.genes.fa ../gff/pero.genes.all.gff \
+    2346Aligned.sortedByCoord/abundances.cxb,
+    2345Aligned.sortedByCoord/abundances.cxb,
+    2336Aligned.sortedByCoord/abundances.cxb \
+    2925Aligned.sortedByCoord/abundances.cxb,
+    234Aligned.sortedByCoord/abundances.cxb,
+    2355Aligned.sortedByCoord/abundances.cxb,
+    2335Aligned.sortedByCoord/abundances.cxb,
+    336Aligned.sortedByCoord/abundances.cxb,
+    335Aligned.sortedByCoord/abundances.cxb,
+    2342Aligned.sortedByCoord/abundances.cxb
+    
+
