@@ -152,7 +152,17 @@ new list:
 	cd ../cad
 	~/coral/crb_genes.sh -t 12 -f cad.fasta -n cad
 
+3rd
 
+
+	~/coral/crb_genes.sh -t 16 -f cad.fasta -n cad
+	cd ../icad
+	~/coral/crb_genes.sh -t 16 -f icad.fasta -n icad
+	cd ../catalase
+	~/coral/crb_genes.sh -t 16 -f catalase.fasta -n catalase
+	cd ../cytc
+	~/coral/crb_genes.sh -t 16 -f cytc.fasta -n cytc
+	
 
 
 

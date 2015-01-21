@@ -40,16 +40,99 @@ cuffquant
 cuffdiff
 
     cuffdiff -p24 -L dry,wet --library-type fr-firststrand \
-    -b ../genome/pero.genes.fa ../gff/pero.genes.all.gff \
-    2346Aligned.sortedByCoord/abundances.cxb,
-    2345Aligned.sortedByCoord/abundances.cxb,
-    2336Aligned.sortedByCoord/abundances.cxb \
-    2925Aligned.sortedByCoord/abundances.cxb,
-    234Aligned.sortedByCoord/abundances.cxb,
-    2355Aligned.sortedByCoord/abundances.cxb,
-    2335Aligned.sortedByCoord/abundances.cxb,
-    336Aligned.sortedByCoord/abundances.cxb,
-    335Aligned.sortedByCoord/abundances.cxb,
-    2342Aligned.sortedByCoord/abundances.cxb
+    -b ../genome/pero.genes.fa ../cuffmerge/merged.gtf \
+    ../cuffquant/2346Aligned.sortedByCoord/abundances.cxb,\
+    ../cuffquant/2345Aligned.sortedByCoord/abundances.cxb,\
+    ../cuffquant/2336Aligned.sortedByCoord/abundances.cxb \
+    ../cuffquant/2925Aligned.sortedByCoord/abundances.cxb,\
+    ../cuffquant/234Aligned.sortedByCoord/abundances.cxb,\
+    ../cuffquant/2355Aligned.sortedByCoord/abundances.cxb,\
+    ../cuffquant/2335Aligned.sortedByCoord/abundances.cxb,\
+    ../cuffquant/336Aligned.sortedByCoord/abundances.cxb,\
+    ../cuffquant/335Aligned.sortedByCoord/abundances.cxb,\
+    ../cuffquant/334Aligned.sortedByCoord/abundances.cxb,\
+    ../cuffquant/2926Aligned.sortedByCoord/abundances.cxb,\
+    ../cuffquant/2342Aligned.sortedByCoord/abundances.cxb
     
+
+    cuffdiff -p24 -L dry,wet --library-type fr-firststrand \
+    -b ../genome/pero.genes.fa ../cuffmerge/merged.gtf \
+    ../cuffquant/2346Aligned.sortedByCoord/abundances.cxb,\
+    ../cuffquant/2345Aligned.sortedByCoord/abundances.cxb \
+    ../cuffquant/2925Aligned.sortedByCoord/abundances.cxb,\
+    ../cuffquant/234Aligned.sortedByCoord/abundances.cxb,\
+    ../cuffquant/2355Aligned.sortedByCoord/abundances.cxb,\
+    ../cuffquant/2335Aligned.sortedByCoord/abundances.cxb,\
+    ../cuffquant/336Aligned.sortedByCoord/abundances.cxb,\
+    ../cuffquant/335Aligned.sortedByCoord/abundances.cxb,\
+    ../cuffquant/334Aligned.sortedByCoord/abundances.cxb,\
+    ../cuffquant/2926Aligned.sortedByCoord/abundances.cxb,\
+    ../cuffquant/2342Aligned.sortedByCoord/abundances.cxb
+    
+
+
+
+Annotating:
+
+
+	
+in `/mouse/mouse_rnaseq/cuffdiff/old`
+
+set working directory for the maker derived transcripts.. Until a new assembly is had, this is the right working dir.
+
+	WDIR=/mnt/data3/macmanes/maker/pero.genes.maker.output/
+	
+find Maker entries for the genes that diff expressed.
+
+	grep yes gene_exp.diff | awk '{print $4}' | awk -F ':' '{print $1}' > ge.list
+
+get the specific locations of the transcript sequenes.
+	
+	grep -wf ge.list $WDIR/pero.genes_master_datastore_index.log | grep FINISHED | awk '{print $2}' > loc.list
+
+get the actual sequences. 
+	
+	for i in $(cat loc.list); do cat $WDIR/$i/*transcripts.fasta >> gene.exp.diff.candidates.fasta; done
+
+will need to blast. 
+
+in `/mouse/mouse_rnaseq/cuffdiff/blast`
+
+downloaded refseq mammal blast
+
+	gzip -cd *gz | makeblastdb -in - -title mammal -out mammal -dbtype nucl
+
+	blastn -db mammal -query gene.exp.diff.candidates.fasta \
+	-outfmt '6 qseqid pident length evalue stitle' -evalue 1e-8 \
+	-num_threads 50 -max_target_seqs 1 -out gene_exp_diff.blastn
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

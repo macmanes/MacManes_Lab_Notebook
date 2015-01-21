@@ -3,7 +3,7 @@ mouse spades
 
 in `/mouse/pero_genome` started 1/16/15 at 1830
 
-    spades.py -t 40 -m 500 --only-assembler -o spades.mouse \
+    spades.py -t 40 -m 500 --only-assembler -o spades.mouse --continue --careful \
     --pe1-1 /mnt/data3/macmanes/pero_genome/131008/peroL1_1P.fq \
     --pe1-2 /mnt/data3/macmanes/pero_genome/131008/peroL1_2P.fq  \
     --pe2-1 /mnt/data3/macmanes/pero_genome/131219/peroL5_1P.fq \
@@ -20,4 +20,9 @@ in `/mouse/pero_genome` started 1/16/15 at 1830
     --mp2-2 /mnt/data3/macmanes/pero-mate-pair/peer7kb.clipped.2.fq \
     --pacbio /mnt/data3/macmanes/pacbio/raw.pacbio.reads/fastq/all.pb.fastq
     
-    
+
+1 lib at a time, which will get me the error correction I think, then can use all the libs together:
+
+    spades.py -t 40 -m 500 -o spadesL1 --careful -k 65 \
+    --pe1-1 /mnt/data3/macmanes/pero_genome/131008/peroL1_1P.fq \
+    --pe1-2 /mnt/data3/macmanes/pero_genome/131008/peroL1_2P.fq
