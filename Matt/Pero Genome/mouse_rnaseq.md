@@ -94,6 +94,12 @@ get the actual sequences.
 	
 	for i in $(cat loc.list); do cat $WDIR/$i/*transcripts.fasta >> gene.exp.diff.candidates.fasta; done
 
+
+get the actual sequences **FROM GENOME**. 
+	
+	for i in $(cat ge.list); do grep -A1 --max-count=1 -w $i >> gene.exp.diff.candidates.genome.fasta; done
+
+
 will need to blast. 
 
 in `/mouse/mouse_rnaseq/cuffdiff/blast`
@@ -102,9 +108,9 @@ downloaded refseq mammal blast
 
 	gzip -cd *gz | makeblastdb -in - -title mammal -out mammal -dbtype nucl
 
-	blastn -db mammal -query gene.exp.diff.candidates.fasta \
-	-outfmt '6 qseqid pident length evalue stitle' -evalue 1e-8 \
-	-num_threads 50 -max_target_seqs 1 -out gene_exp_diff.blastn
+	blastn -db mammal -query ../old/gene.exp.diff.candidates.genome.fasta \
+	-outfmt '6 qseqid length evalue qstart qend stitle' -evalue 1e-8 \
+	-num_threads 50 -max_target_seqs 1 -out gene_exp_diff.genome.blastn
 
 
 
