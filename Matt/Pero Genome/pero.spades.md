@@ -33,7 +33,7 @@ malloc after 52 hours with kmer=21.. I'll try something higher.
 
 
 
-    spades.py -k 55,65,75 -t 40 -m 500 --only-assembler -o spades.mouse --careful \
+    spades.py -k 55,65,75 -t 40 -m 500 --only-assembler -o spades.mouse --careful --continue \
     --pe1-1 /mnt/data3/macmanes/pero_genome/131008/peroL1_1P.fq \
     --pe1-2 /mnt/data3/macmanes/pero_genome/131008/peroL1_2P.fq  \
     --pe2-1 /mnt/data3/macmanes/pero_genome/131219/peroL5_1P.fq \

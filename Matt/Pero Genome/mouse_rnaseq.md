@@ -113,6 +113,25 @@ downloaded refseq mammal blast
 	-num_threads 50 -max_target_seqs 1 -out gene_exp_diff.genome.blastn
 
 
+cummerbund - on mac
+
+	library(cummeRbund)
+	cuff<-readCufflinks()
+	
+cuffnorm
+
+    cuffnorm -p24 -L dry,wet --library-type fr-firststrand ../cuffmerge/merged.gtf \
+    ../cuffquant/2346Aligned.sortedByCoord/abundances.cxb,\
+    ../cuffquant/2345Aligned.sortedByCoord/abundances.cxb \
+    ../cuffquant/2925Aligned.sortedByCoord/abundances.cxb,\
+    ../cuffquant/234Aligned.sortedByCoord/abundances.cxb,\
+    ../cuffquant/2355Aligned.sortedByCoord/abundances.cxb,\
+    ../cuffquant/2335Aligned.sortedByCoord/abundances.cxb,\
+    ../cuffquant/336Aligned.sortedByCoord/abundances.cxb,\
+    ../cuffquant/335Aligned.sortedByCoord/abundances.cxb,\
+    ../cuffquant/334Aligned.sortedByCoord/abundances.cxb,\
+    ../cuffquant/2926Aligned.sortedByCoord/abundances.cxb,\
+    ../cuffquant/2342Aligned.sortedByCoord/abundances.cxb
 
 
 
