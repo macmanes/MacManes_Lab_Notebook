@@ -170,12 +170,41 @@ Starling bwa
 	samtools view -@16 -Sub - | samtools sort -n -m3G -@28 - starling.rnaseq
 	
 
+new attempt
+
+	lighter -t 40 -r ../rnaseq_reads/starling.1.fastq  -r ../rnaseq_reads/starling.2.fastq -k 25 6000000000 .1
+
+	Processed 276497916 reads:
+        211733893 are error-free
+        Corrected 37302001 bases(0.575968 corrections for reads with errors)
+        Trimmed 0 reads with average trimmed bases 0.000000
 
 
+	java -Xmx199g -jar /share/trinityrnaseq/trinity-plugins/Trimmomatic-0.32/trimmomatic-0.32.jar PE \
+	-threads 40 -baseout starling.lighter25.trimP2.fastq \
+	starling.1.cor.fq \
+	starling.2.cor.fq  \
+	ILLUMINACLIP:/share/trinityrnaseq-code/trinity-plugins/Trimmomatic-0.32/adapters/TruSeq3-PE.fa:2:30:10 \
+	LEADING:2 TRAILING:2 SLIDINGWINDOW:4:2 MINLEN:25 
+	
+	Input Read Pairs: 138248958 Both Surviving: 134327787 (97.16%) Forward Only Surviving: 3920449 (2.84%) Reverse Only Surviving: 0 (0.00%) Dropped: 722 (0.00%)
 
 
-
-
+	interleave-reads.py starling.lighter25.trimP2_1P.fastq starling.lighter25.trimP2_2P.fastq | \
+	normalize-by-median.py --n_tables 4 --min-tablesize 4e9 -p -k 25 -C 50 -o starling.lighter25.trimP2.C50.fastq /dev/stdin
+	
+	split-paired-reads.py -f starling.lighter25.trimP2.C50.fastq
+	
+    Trinity --seqType fq \
+    --max_memory 100G \
+    --inchworm_cpu 10 \
+    --SS_lib_type RF \
+    --normalize_reads \
+    --left starling.lighter25.trimP2.C50.fastq \
+    --right starling.lighter25.trimP2.C50.fastq \
+    --CPU 40 \
+    --output starling_SS_C50 \
+    --group_pairs_distance 999 \
 
 
 
