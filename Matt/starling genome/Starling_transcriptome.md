@@ -230,6 +230,64 @@ Transdecoder pfam
 
 
 
+	/share/HpcGridRunner//BioIfx/hpc_FASTA_GridRunner.pl \
+        --cmd_template "hmmscan --cpu 1 --domtblout __QUERY_FILE__.domtblout /home/macmanes/cpg_project/prot/Pfam-A.hmm __QUERY_FILE__" \
+        --query_fasta Trinity.fasta.transdecoder_dir/longest_orfs.pep \
+        -N 20 -O pfam_search --parafly_only 40
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
