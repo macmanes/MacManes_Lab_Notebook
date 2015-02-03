@@ -199,15 +199,30 @@ new attempt
     --max_memory 100G \
     --inchworm_cpu 10 \
     --SS_lib_type RF \
-    --normalize_reads \
-    --left starling.lighter25.trimP2.C50.fastq \
-    --right starling.lighter25.trimP2.C50.fastq \
+    --left starling.lighter25.trimP2.C50.fastq.1 \
+    --right starling.lighter25.trimP2.C50.fastq.2 \
     --CPU 40 \
-    --output starling_SS_C50 \
-    --group_pairs_distance 999 \
+    --output starling_SS_C50_trinity \
+    --group_pairs_distance 999
+    
+Transdecoder
+
+in `/mouse/starling/TransDecoder`
+
+	/share/TransDecoder/TransDecoder.LongOrfs -t ../transrate/Trinity.fasta
+	makeblastdb -in /mnt/data3/macmanes/maker/proteins/uniprot_sprot.fasta -out uniprot -dbtype prot
 
 
+Transdecoder blast
 
+	blastp -query Trinity.fasta.transdecoder_dir/longest_orfs.pep  -db uniprot -max_target_seqs 1 -outfmt 6 -evalue 1e-5 -num_threads 40 > blastp.outfmt6
+
+Transdecoder pfam
+
+	hmmscan --cpu 40 --domtblout pfam.domtblout /home/macmanes/cpg_project/prot/Pfam-A.hmm Trinity.fasta.transdecoder_dir/longest_orfs.pep
+	
+
+	TransDecoder.Predict -t ../transrate/Trinity.fasta --retain_pfam_hits pfam.domtblout --retain_blastp_hits blastp.outfmt6
 
 
 
