@@ -236,6 +236,7 @@ Transdecoder pfam
         -N 20 -O pfam_search --parafly_only 40
 
 
+	TransDecoder.Predict -t ../transrate/Trinity.fasta --retain_pfam_hits pfam.out --retain_blastp_hits blastp.outfmt6
 
 
 
