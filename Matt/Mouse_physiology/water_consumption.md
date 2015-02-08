@@ -28,3 +28,23 @@ mouse physiology
 	abline(h=0.1065829, lwd=3)
 
 <a href="http://imgur.com/mD8WupX"><img src="http://i.imgur.com/mD8WupX.png" title="source: imgur.com" /></a>
+
+	elytes <- read.csv("~/Box Sync/Desert_Animal_Stuff/R_desert_animal_water/Desert_Lab_Animals_elytes.csv", header=TRUE)
+	
+    par(mfrow=c(1,6))
+    boxplot(elytes$Alt ~ elytes$water, frame.plot=F, ylim=c(0,300), xlab='Alt', cex.lab=2, col=c('sienna4', 'dodgerblue'))
+    boxplot(elytes$BUN ~ elytes$water, axes=F, frame.plot=F, ylim=c(0,300), xlab='BUN', cex.lab=2, col=c('sienna4', 'dodgerblue'))
+    
+    boxplot(elytes$Na ~ elytes$water, axes=T, frame.plot=F, ylim=c(75,190), xlab='Na',  cex.lab=2, col=c('sienna4', 'dodgerblue'))
+    boxplot(elytes$Cl ~ elytes$water, axes=F, frame.plot=F, ylim=c(75,190), xlab='Cl',  cex.lab=2, col=c('sienna4', 'dodgerblue'))
+    
+    boxplot(elytes$Cr ~ elytes$water, axes=T, frame.plot=F, ylim=c(0,1), xlab='Cr',  cex.lab=2, col=c('sienna4', 'dodgerblue'))
+    boxplot(elytes$TCO2 ~ elytes$water, axes=T, frame.plot=F, ylim=c(0,25), xlab='Bicarb',  cex.lab=2, col=c('sienna4', 'dodgerblue'))
+
+
+__t tests:__
+
+	t.test(elytes$TCO2 ~ elytes$water)
+	....
+
+<a href="http://imgur.com/NdqPEAZ"><img src="http://i.imgur.com/NdqPEAZ.png" title="source: imgur.com" /></a>
