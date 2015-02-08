@@ -135,6 +135,20 @@ cuffnorm
 
 
 
+    cs <- as.matrix(read.delim("~/Dropbox/DEB_Summers_Nielsen_MacManes/candidates.xprs")) 
+    for(n in 15:nrow(cs)) {  
+        x <- try(summary(lm(as.numeric(cs[n,c(2:10)]) ~ as.numeric(cs[10,c(2:10)])))$coefficients[2,4], silent = TRUE)  
+        try(if(x<0.0000033) {  
+            cat(n,"\t",cs[n,1],"\t", "raw p= ", x, "\n", sep = "", file = "")  
+        }, silent = TRUE)  
+    }
+
+
+pull out results
+
+	grep P9362 cds.attr_table
+	P9362	-	-	XLOC_014354	maker-Contig18648-exonerate_protein2genome-gene-0.11	TSS14564	Contig18648:10693-11370	-    
+
 
 
 

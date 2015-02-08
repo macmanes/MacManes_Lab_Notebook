@@ -531,10 +531,15 @@ shit, have to shave off last ; before running transrate vsearch clusters.
 Do all the transrating
 
 
-	transrate -t 24 -a 20M.ec.P2.score.consensus.Trinity.fasta,\
-	20M.ec.P2.score.centriod.Trinity.fasta,\
-	20M.ec.P2.score.Trinity.fasta,\
-	20M.ec.P2.score.vsearch.Trinity.fasta \
+	transrate -t 30 -a \
+	../vsearch/20M.ec.P2.score.consensus.Trinity.fasta,\
+	../vsearch/20M.ec.P2.score.centriod.Trinity.fasta,\
+	../vsearch/20M.ec.P2.score.Trinity.fasta,\
+	../vsearch/20M.ec.P2.score.vsearch.Trinity.fasta,\
+	../100M.ec.P2.C50/100M.ec.P2.C50.Trinity.fasta,\
+	../20M.ec.P2.C50/20M.ec.P2.C50.Trinity.fasta,\
+	../20M.ec.P2/Trinity.fasta,\
+	../100M.ec.P2/Trinity.fasta \
 	-r ../Mus_musculus.GRCm38.pep.all.fa \
 	-l /mouse/feeding/SRR797058.P2_1P.fq \
 	-i /mouse/feeding/SRR797058.P2_2P.fq
