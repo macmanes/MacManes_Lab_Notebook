@@ -545,6 +545,9 @@ Do all the transrating
 	-i /mouse/feeding/SRR797058.P2_2P.fq
 
 
+Salmon hanging
+
+	
 
 
 
