@@ -547,7 +547,9 @@ Do all the transrating
 
 Salmon hanging
 
-	
+	salmon quant --targets ../../vsearch/20M.ec.P2.score.vsearch.Trinity.fasta \
+	--alignments ../SRR797058.P2_1P.fq.SRR797058.P2_2P.fq.20M.ec.P2.score.vsearch.Trinity.bam \
+	--sampleOut --sampleUnaligned --output . --threads 30 --libType IU
 
 
 
