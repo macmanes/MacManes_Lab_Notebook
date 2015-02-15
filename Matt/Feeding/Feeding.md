@@ -553,6 +553,16 @@ Salmon hanging
 
 
 
+new Trinity assemblies v2.0.3
+
+	transrate -t 48 -a \
+	new.trinity.100M.ec.P2.C50.Trinity.fasta,\
+	new.trinity.20M.ec.P2.C50.Trinity.fasta,\
+	new.trinity.100M.ec.P2.Trinity.fasta,\
+	new.trinity.20M.ec.P2.Trinity.fasta \
+	-r ../Mus_musculus.GRCm38.pep.all.fa \
+	-l /mouse/feeding/SRR797058.P2_1P.fq \
+	-i /mouse/feeding/SRR797058.P2_2P.fq
 
 
 
