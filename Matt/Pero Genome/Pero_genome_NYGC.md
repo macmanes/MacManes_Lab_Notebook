@@ -156,7 +156,7 @@ and
     RunAllPathsLG THREADS=40 FIX_ASSEMBLY_BASE_ERRORS=TRUE \
     PRE=/mouse/pero_genome/ \
     DATA_SUBDIR=allpaths_data \
-    RUN=eremicus \
+    RUN=eremicus MAXPAR=2 \
     REFERENCE_NAME=peer \
     TARGETS=standard TMP_DIR=/mnt/data0/ \
     CONNECT_SCAFFOLDS=TRUE HAPLOIDIFY=TRUE
