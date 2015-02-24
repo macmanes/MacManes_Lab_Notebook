@@ -158,5 +158,5 @@ and
     DATA_SUBDIR=allpaths_data \
     RUN=eremicus MAXPAR=2 \
     REFERENCE_NAME=peer \
-    TARGETS=standard TMP_DIR=/mnt/data0/ \
+    TARGETS=standard OVERWRITE=True \
     CONNECT_SCAFFOLDS=TRUE HAPLOIDIFY=TRUE
