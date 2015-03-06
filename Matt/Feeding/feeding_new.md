@@ -45,3 +45,6 @@ on AWS 10M
         --left /mnt/raw.100M.SRR797058_1.fastq.gz \
         --right /mnt/raw.100M.SRR797058_2.fastq.gz \
         --CPU 16 --output trinity_100M_raw
+
+
+seems like AWS not going to work...
