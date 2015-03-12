@@ -11,6 +11,7 @@ on davinci
     /mnt/data3/macmanes/subsamp/10M_corr/raw.10M.SRR797058_2.fastq.gz
     /mnt/data3/macmanes/subsamp/50M_corr/raw.50M.SRR797058_1.fastq.gz
     /mnt/data3/macmanes/subsamp/50M_corr/raw.50M.SRR797058_2.fastq.gz
+    
 
 
 aws stuff
@@ -31,16 +32,25 @@ aws stuff
 download data
 
 	scp macmanes@davinci.unh.edu:/mnt/data3/macmanes/subsamp/10M_corr/raw.10M.SRR797058_*.fastq.gz .
+	scp macmanes@davinci.unh.edu:/mnt/data3/macmanes/subsamp/20M_corr/raw.20M.SRR797058_*.fastq.gz .
 
 	scp macmanes@davinci.unh.edu:/mnt/data3/macmanes/subsamp/100M_corr/raw.100M.SRR797058_*.fastq.gz .
 
 
 on AWS 10M
 
-    ~/trinityrnaseq/Trinity --seqType fq --max_memory 100G --trimmomatic \
+    ~/trinityrnaseq/Trinity --seqType fq --max_memory 40G --trimmomatic \
         --left /mnt/raw.10M.SRR797058_1.fastq.gz  \
         --right /mnt/raw.10M.SRR797058_2.fastq.gz \
         --CPU 32 --output trinity_10M_raw
+
+on AWS 20M
+
+    ~/trinityrnaseq/Trinity --seqType fq --max_memory 40G --trimmomatic \
+        --left /mnt/raw.20M.SRR797058_1.fastq.gz  \
+        --right /mnt/raw.20M.SRR797058_2.fastq.gz \
+        --CPU 32 --output trinity_20M_raw
+
         
 100M
 
