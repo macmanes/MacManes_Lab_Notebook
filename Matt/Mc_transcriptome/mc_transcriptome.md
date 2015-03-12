@@ -125,14 +125,14 @@ change in plans: this this after trinity completes
 --
 
 
-	cd
+	cd /mnt
 	wget http://edhar.genomecenter.ucdavis.edu/~koadman/phylosift/phylosift_latest.tar.bz2
 	
 	tar -jxf phylosift_latest.tar.bz2
 	
-	PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/ubuntu/trinityrnaseq:/home/ubuntu/phylosift_20140419
+	PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/ubuntu/trinityrnaseq:/mnt/phylosift_20140419
 
-	nano /home/ubuntu/phylosift_20140419/lib/Phylosift/pplacer.pm
+	nano /mnt/phylosift_20140419/lib/Phylosift/pplacer.pm
 
 
 mod phylosift config file
