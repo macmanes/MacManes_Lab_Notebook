@@ -156,11 +156,11 @@ contents
 run phylosift
 
 	tmux new -s phylosift
-	phylosift all --debug --bayes --besthit --extended --threads 16 --output mcor3 mcor3_lighter_trinity/Trinity.fasta
-	phylosift all --debug --bayes --besthit --extended --threads 16 --output mcor2 mcor2_lighter_trinity/Trinity.fasta
-	phylosift all --debug --bayes --besthit --extended --threads 16 --output mcor1 mcor1_lighter_trinity/Trinity.fasta
-	phylosift all --debug --bayes --besthit --extended --threads 16 --output mcbr3 mcbr3_lighter_trinity/Trinity.fasta
-	phylosift all --debug --bayes --besthit --extended --threads 16 --output mcbr2 mcbr2_lighter_trinity/Trinity.fasta
+	phylosift all --debug --bayes --besthit --extended --config config --threads 16 --output mcor3 mcor3_lighter_trinity/Trinity.fasta
+	phylosift all --debug --bayes --besthit --extended --config config --threads 16 --output mcor2 mcor2_lighter_trinity/Trinity.fasta
+	phylosift all --debug --bayes --besthit --extended --config config --threads 16 --output mcor1 mcor1_lighter_trinity/Trinity.fasta
+	phylosift all --debug --bayes --besthit --extended --config config --threads 16 --output mcbr3 mcbr3_lighter_trinity/Trinity.fasta
+	phylosift all --debug --bayes --besthit --extended --config config --threads 16 --output mcbr2 mcbr2_lighter_trinity/Trinity.fasta
 
 
 
