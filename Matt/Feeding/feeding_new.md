@@ -16,18 +16,25 @@ on davinci
 
 aws stuff
 
+	sudo mkfs -t ext4 /dev/xvdb
+	sudo mount /dev/xvdb /mnt
+	sudo chown -R ubuntu:ubuntu /mnt
+	
+
 	sudo bash
 	apt-get update
 	apt-get -y upgrade
-	apt-get -y install subversion tmux git curl bowtie libncurses5-dev samtools gcc make g++ python-dev unzip dh-autoreconf default-jre python-pip zlib1g-dev
-	sudo apt-get update && sudo apt-get install python-software-properties
-	sudo add-apt-repository ppa:ubuntu-on-ec2/ec2-tools
-	sudo sed -i "/^# deb.*multiverse/ s/^# //" /etc/apt/sources.list
-	apt-get install ec2-api-tools
-	ec2-create-image -b "/dev/sdb=ephemeral0"
+	apt-get -y install openmpi* sparsehash libboost-atomic1.55-dev libboost1.55-dbg subversion tmux git curl bowtie libncurses5-dev samtools gcc make g++ python-dev unzip dh-autoreconf default-jre python-pip zlib1g-dev
 	
-
+	
+	easy_install -U setuptools
+	git clone https://github.com/ged-lab/khmer.git
+	cd khmer 
+	make
+	
 	git clone https://github.com/trinityrnaseq/trinityrnaseq.git
+	wget http://downloads.sourceforge.net/project/bless-ec/bless.v0p17.tgz
+	PATH=$PATH:/home/ubuntu/v0p17:/home/ubuntu/trinityrnaseq:/home/ubuntu/khmer/scripts
 
 download data
 
@@ -61,3 +68,13 @@ on AWS 20M
 
 
 lets see if 100M run can work with 60Gb RAM...
+
+10M
+
+	bless -kmerlength 19 -read1 raw.10M.SRR797058_1.fastq \
+	-read2 raw.10M.SRR797058_2.fastq -verify -notrim -prefix 10M
+	
+    Trinity --seqType fq --max_memory 20G --trimmomatic \
+        --left /mnt/raw.10M.SRR797058_2.fastq  \
+        --right /mnt/raw.10M.SRR797058_2.fastq \
+        --CPU 16 --output trinity_10M_raw
