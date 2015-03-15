@@ -9,10 +9,12 @@ Trimmomatic PE data
     $RAID/pero_genome/raw_reasd/nygc.550.2.cor.fq.gz \
     LEADING:20 TRAILING:20 SLIDINGWINDOW:4:10 MINLEN:25
     
+Input Read Pairs: 276768820 Both Surviving: 276742084 (99.99%) Forward Only Surviving: 14493 (0.01%) Reverse Only Surviving: 12237 (0.00%) Dropped: 6 (0.00%)
+    
 and 
 
     java -Xmx300g -jar /share/Trimmomatic-0.32/trimmomatic-0.32.jar PE \
-    -threads 40 -baseout Pero360_300bp.P20.gz \
+    -threads 20 -baseout Pero360_300bp.P20.gz \
     $RAID/pero_genome/raw_reasd/hcgs.300.1.cor.fq \
     $RAID/pero_genome/raw_reasd/hcgs.300.2.cor.fq \
     LEADING:20 TRAILING:20 SLIDINGWINDOW:4:10 MINLEN:25
@@ -22,7 +24,7 @@ ABySS
 
 	export TMPDIR=/mnt/data0/	
 
-	for k in 71 81 91; do
+	for k in 91 71 81; do
 		mkdir k$k
 		abyss-pe -C k$k np=40 k=$k name=pero$k l=25 n=5 \
 		lib='pe1 pe2' mp1_l=30 mp1_l=30 mp3_l=30 mp4_l=30 \
@@ -39,13 +41,8 @@ ABySS
 		$RAID/pero_genome/raw_reasd/peer7kb.clipped.2.fq' \
 		mp4='$RAID/pero_genome/raw_reasd/peer3kb.clipped.1.fq \
 		$RAID/pero_genome/raw_reasd/peer3kb.clipped.2.fq' \
-
-
-	
-	
-	
-	
-		long1=''
+		long1='/mnt/data3/macmanes/pero_trans_paper/merged/mapping/Pero.BLTK.fasta'
+	done
 		
 		
 		
