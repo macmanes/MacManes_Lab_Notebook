@@ -78,3 +78,13 @@ lets see if 100M run can work with 60Gb RAM...
         --left /mnt/raw.10M.SRR797058_2.fastq  \
         --right /mnt/raw.10M.SRR797058_2.fastq \
         --CPU 16 --output trinity_10M_raw
+
+    Trinity --seqType fq --max_memory 20G --trimmomatic \
+        --left /mnt/10M.1.corrected.fastq  \
+        --right /mnt/10M.2.corrected.fastq \
+        --CPU 16 --output trinity_10M_bless
+
+    Trinity --seqType fq --max_memory 20G --trimmomatic \
+        --left /mnt/ec.norm.fq.1  \
+        --right /mnt/ec.norm.fq.2 \
+        --CPU 16 --output trinity_10M_bless_norm
