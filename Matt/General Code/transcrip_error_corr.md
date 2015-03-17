@@ -33,7 +33,6 @@ lighter
 bfc
 sga
 
-	sudo bash
 	
 	
 
@@ -45,13 +44,14 @@ sga
 
 	cd $HOME
 	git clone https://github.com/lh3/bfc.git
+	cd bfc
 	make
 	PATH=$PATH:$(pwd)
 	
 	cd $HOME
 	wget http://downloads.sourceforge.net/project/bio-bwa/bwakit/bwakit-0.7.12_x64-linux.tar.bz2
 	tar -jxf bwakit-0.7.12_x64-linux.tar.bz2
-	cd bwa,kit
+	cd bwa.kit
 	PATH=$PATH:$(pwd)
 
 	cd $HOME
@@ -100,7 +100,7 @@ bwa mapping
 	cd /mnt/bwa_mapping
 	bwa mem -t16 ../genome/mus /mnt/raw.20M.SRR797058_1.fastq /mnt/raw.20M.SRR797058_2.fastq > 20M.raw.sam
 
-	bwa mem -t16 ../genome/mus /mnt/20M_bless55.1.corrected.fastq /mnt/20M_bless55.2.corrected.fastq > 20M.bless55.sam
+	bwa mem -t16 ../genome/mus /mnt/20M_bless55.1.corrected.fastq.gz /mnt/20M_bless55.2.corrected.fastq.
 
 	bwa mem -t16 ../genome/mus /mnt/20M_bless33.1.corrected.fastq /mnt/20M_bless33.2.corrected.fastq > 20M.bless33.sam
 	
@@ -187,4 +187,48 @@ bfc
     
     bfc -s 50m -k33 -t 16 inter.fq > corr.fq
     
+
+Gonna do the 100M read set
+---
+
+bless
+
+	/home/root/.openmpi/bin/mpirun -np 16 ~/v0p24/bless -read1 raw.100M.SRR797058_1.fastq \
+	-read2 raw.100M.SRR797058_2.fastq -prefix 100M_bless55 -kmerlength 55	
+
+	/home/root/.openmpi/bin/mpirun -np 16 ~/v0p24/bless -read1 raw.100M.SRR797058_1.fastq \
+	-read2 raw.100M.SRR797058_2.fastq -prefix 2100M_bless33 -kmerlength 33
+	
+
+bwa mapping
+
+	mkdir /mnt/bwa_mapping
+	cd /mnt/bwa_mapping
+	bwa mem -t16 ../genome/mus /mnt/raw.100M.SRR797058_1.fastq /mnt/raw.100M.SRR797058_2.fastq > 100M.raw.sam
+
+	bwa mem -t16 ../genome/mus /mnt/100M_bless55.1.corrected.fastq.gz /mnt/100M_bless55.2.corrected.fastq.gz \
+	| gzip > 100M.bless55.sam.gz
+
+	bwa mem -t16 ../genome/mus /mnt/100M_bless33.1.corrected.fastq.gz /mnt/100M_bless33.2.corrected.fastq.gz |
+	| gzip > 100M.bless33.sam.gz
+
+
+
+	k8 ~/bfc/errstat.js 100M.bless55.sam.gz 100M.raw.sam.gz  > table
+	
+    # reads:             200000000
+    # perfect reads:     9923992
+    # unmapped reads:    145876528
+    # chimeric reads:    1860610
+    # chimeric events:   1864467
+    # reads w/ base err: 29200430
+    # error bases:       132748547
+    # clipped reads:     26562322
+    # clipped bases:     1408470565
+    # better reads:      10315307
+    # worse reads:       771255
+    
+
+
+
 
