@@ -41,22 +41,22 @@ ABySS
 
 
 
-	for k in 91 71 81; do
+	for k in 91; do
 		abyss-pe -C k$k np=40 k=$k name=peer$k l=25 n=5 \
 		lib='pe1 pe2' mp1_l=30 mp1_l=30 mp3_l=30 mp4_l=30 \
 		mp='mp1 mp2 mp3 mp4' long=long1 v=-v \
-		pe1='$RAID/pero_genome/raw_reasd/Pero360_550bp.P20_1P.gz \
-		$RAID/pero_genome/raw_reasd/Pero360_550bp.P20_2P.gz' \
-		pe2='$RAID/pero_genome/raw_reasd/Pero360_300bp.P20_1P.gz \
-		$RAID/pero_genome/raw_reasd/Pero360_300bp.P20_2P.gz' \
-		mp1='$RAID/pero_genome/raw_reasd/peer5kb.clipped.1.fq \
-		$RAID/pero_genome/raw_reasd/peer5kb.clipped.2.fq' \
-		mp2='$RAID/pero_genome/raw_reasd/peer8kb.clipped.1.fq \
-		$RAID/pero_genome/raw_reasd/peer8kb.clipped.2.fq' \
-		mp3='$RAID/pero_genome/raw_reasd/peer7kb.clipped.1.fq \
-		$RAID/pero_genome/raw_reasd/peer7kb.clipped.2.fq' \
-		mp4='$RAID/pero_genome/raw_reasd/peer3kb.clipped.1.fq \
-		$RAID/pero_genome/raw_reasd/peer3kb.clipped.2.fq' \
+		pe1='$$RAID/pero_genome/raw_reasd/Pero360_550bp.P20_1P.gz \
+		$$RAID/pero_genome/raw_reasd/Pero360_550bp.P20_2P.gz' \
+		pe2='$$RAID/pero_genome/raw_reasd/Pero360_300bp.P20_1P.gz \
+		$$RAID/pero_genome/raw_reasd/Pero360_300bp.P20_2P.gz' \
+		mp1='$$RAID/pero_genome/raw_reasd/peer5kb.clipped.1.fq \
+		$$RAID/pero_genome/raw_reasd/peer5kb.clipped.2.fq' \
+		mp2='$$RAID/pero_genome/raw_reasd/peer8kb.clipped.1.fq \
+		$$RAID/pero_genome/raw_reasd/peer8kb.clipped.2.fq' \
+		mp3='$$RAID/pero_genome/raw_reasd/peer7kb.clipped.1.fq \
+		$$RAID/pero_genome/raw_reasd/peer7kb.clipped.2.fq' \
+		mp4='$$RAID/pero_genome/raw_reasd/peer3kb.clipped.1.fq \
+		$$RAID/pero_genome/raw_reasd/peer3kb.clipped.2.fq' \
 		long1='/mnt/data3/macmanes/pero_trans_paper/merged/mapping/Pero.BLTK.fasta';
 	done
 		
