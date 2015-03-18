@@ -217,7 +217,7 @@ bwa mapping
 	k8 ~/bfc/errstat.js 100M.bless55.sam.gz 100M.raw.sam.gz  > table
 	
     # reads:             200000000
-    # perfect reads:     9923992
+    # perfect reads:     9,923,992
     # unmapped reads:    145876528
     # chimeric reads:    1860610
     # chimeric events:   1864467
@@ -225,10 +225,21 @@ bwa mapping
     # error bases:       132748547
     # clipped reads:     26562322
     # clipped bases:     1408470565
-    # better reads:      10315307
-    # worse reads:       771255
+    # better reads:      10,315,307
+    # worse reads:       771,255
     
+	k8 ~/bfc/errstat.js 100M.bless33.sam.gz 100M.raw.sam.gz
 
-
+    # reads:             200000000
+    # perfect reads:     10,428,169
+    # unmapped reads:    145465179
+    # chimeric reads:    1860982
+    # chimeric events:   1864896
+    # reads w/ base err: 28646781
+    # error bases:       128263100
+    # clipped reads:     26507294
+    # clipped bases:     1413132813
+    # better reads:      11,991,342
+    # worse reads:       1,658,332
 
 
