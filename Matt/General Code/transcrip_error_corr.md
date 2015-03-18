@@ -204,7 +204,9 @@ bwa mapping
 
 	mkdir /mnt/bwa_mapping
 	cd /mnt/bwa_mapping
-	bwa mem -t16 ../genome/mus /mnt/raw.100M.SRR797058_1.fastq /mnt/raw.100M.SRR797058_2.fastq > 100M.raw.sam
+	bwa mem -t16 ../genome/mus /mnt/raw.100M.SRR797058_1.fastq /mnt/raw.100M.SRR797058_2.fastq \
+	| gzip > 100M.raw.sam.gz
+
 
 	bwa mem -t16 ../genome/mus /mnt/100M_bless55.1.corrected.fastq.gz /mnt/100M_bless55.2.corrected.fastq.gz \
 	| gzip > 100M.bless55.sam.gz
@@ -241,5 +243,43 @@ bwa mapping
     # clipped bases:     1413132813
     # better reads:      11,991,342
     # worse reads:       1,658,332
+
+
+Lighter 100M
+--
+
+	lighter -K 31 60000000 -r /mnt/raw.100M.SRR797058_1.fastq.gz \
+	-r /mnt/raw.100M.SRR797058_2.fastq.gz -t 16
+	
+
+	mkdir /mnt/bwa_mapping
+	cd /mnt/bwa_mapping
+	
+	bwa mem -t16 ../genome/mus /mnt/raw.100M.SRR797058_1.fastq.gz /mnt/raw.100M.SRR797058_2.fastq.gz \
+	| gzip > 100M.raw.sam.gz
+
+
+	bwa mem -t16 ../genome/mus /mnt/raw.100M.SRR797058_1.cor.fq.gz /mnt/raw.100M.SRR797058_2.cor.fq.gz \
+	| gzip > 100M.lighter31.sam.gz
+
+
+    # reads:             200000000
+    # perfect reads:     9,347,302
+    # unmapped reads:    145159777
+    # chimeric reads:    1953884
+    # chimeric events:   1958799
+    # reads w/ base err: 29677760
+    # error bases:       132383274
+    # clipped reads:     27538598
+    # clipped bases:     1469774504
+    # better reads:      10,642,995
+    # worse reads:       402,821
+
+
+
+
+
+
+
 
 
