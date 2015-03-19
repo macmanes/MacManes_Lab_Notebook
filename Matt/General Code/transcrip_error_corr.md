@@ -276,7 +276,19 @@ Lighter 100M
     # worse reads:       402,821
 
 
+bfc55
 
+    # reads:             200000000
+    # perfect reads:     9,811,554
+    # unmapped reads:    145333166
+    # chimeric reads:    1934044
+    # chimeric events:   1938785
+    # reads w/ base err: 29047569
+    # error bases:       132214049
+    # clipped reads:     27625805
+    # clipped bases:     1464690941
+    # better reads:      11,454,234
+    # worse reads:       433,424
 
 
 

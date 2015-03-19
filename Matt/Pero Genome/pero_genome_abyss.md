@@ -30,7 +30,7 @@ ABySS
 	split -l 116000000 --additional-suffix=aaa <(zcat ../Pero360_550bp*gz) &
 	split -l 116000000 --additional-suffix=zzz <(zcat ../Pero360_300bp*{P,U}.gz) &
 
-	for k in 91 71 81; do
+	for k in 71 81 91 101 111 97; do
 		mkdir /mouse/abyss/k$k
 		cd /mouse/abyss/k$k
 		mpirun -np 64 ABYSS-P -v -k$k \
