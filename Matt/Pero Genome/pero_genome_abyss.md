@@ -41,8 +41,8 @@ ABySS
 
 
 
-	for k in 91; do
-		abyss-pe -C k$k np=40 k=$k name=peer$k l=25 n=5 \
+	for k in 101; do
+		abyss-pe -C k$k np=60 k=$k name=peer$k l=25 n=5 \
 		lib='pe1 pe2' mp1_l=30 mp1_l=30 mp3_l=30 mp4_l=30 \
 		mp='mp1 mp2 mp3 mp4' long=long1 v=-v \
 		pe1='/mnt/data3/macmanes/pero_genome/raw_reasd/Pero360_550bp.P20_1P.gz /mnt/data3/macmanes/pero_genome/raw_reasd/Pero360_550bp.P20_2P.gz' \
