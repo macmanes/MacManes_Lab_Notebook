@@ -55,4 +55,4 @@ ABySS
 	done
 		
 		
-		
+Stopped ABySS after contig step because it was not that good.. trying MaSuRCA	

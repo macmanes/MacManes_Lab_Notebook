@@ -1,6 +1,16 @@
 Transcriptome error correction
 --
 
+khmer version 1.3
+bwa 0.7.12-r1039
+sga 0.10.13
+lighter Lighter v1.0.5
+bless v0.24
+bfc r177
+seqtc 1.0-r77-dirty
+bwakit-0.7.12
+
+
     /mnt/data3/macmanes/subsamp/100M_corr/raw.100M.SRR797058_1.fastq.gz
     /mnt/data3/macmanes/subsamp/100M_corr/raw.100M.SRR797058_2.fastq.gz
     /mnt/data3/macmanes/subsamp/20M_corr/raw.20M.SRR797058_1.fastq.gz
@@ -15,7 +25,7 @@ Transcriptome error correction
 	sudo bash
 	apt-get update
 	apt-get -y upgrade
-	apt-get -y install sparsehash libboost-atomic1.55-dev libibnetdisc-dev libboost1.55-all-dev libboost1.55-dbg subversion tmux git curl bowtie libncurses5-dev samtools gcc make g++ python-dev unzip dh-autoreconf default-jre python-pip zlib1g-dev
+	apt-get -y install cmake sparsehash libboost-atomic1.55-dev libibnetdisc-dev libboost1.55-all-dev libboost1.55-dbg subversion tmux git curl bowtie libncurses5-dev samtools gcc make g++ python-dev unzip dh-autoreconf default-jre python-pip zlib1g-dev
 
 
 
@@ -74,6 +84,9 @@ sga
 	
 	mkdir -p /mnt/kmc/bin/
 	sudo cp /home/ubuntu/v0p24/kmc/bin/kmc /mnt/kmc/bin/
+
+
+
 
 mouse genome
 	
@@ -291,7 +304,44 @@ bfc55
     # worse reads:       433,424
 
 
+SGA
+--
+
+	/home/ubuntu/sga/src/SGA/sga preprocess -p 1 /mnt/raw.20M.SRR797058_1.fastq.gz /mnt/raw.20M.SRR797058_2.fastq.gz | gzip -1 > out.pe.fq.gz
+	/home/ubuntu/sga/src/SGA/sga index -a ropebwt -t 8 --no-reverse out.20M.SGA.pe.fq.gz
+	/home/ubuntu/sga/src/SGA/sga correct -t 8 -k 55 --learn out.20M.SGA.pe.fq.gz
 
 
+	cd /mnt/mapping
 
+	bwa mem -t16 ../genome/mus /mnt/raw.20M.SRR797058_1.fastq.gz /mnt/raw.20M.SRR797058_2.fastq.gz \
+	| gzip > 20M.raw.sam.gz
+
+	k8 ~/bfc/errstat.js 20M.SGA55.sam.gz 20M.raw.sam.gz  > table
+
+    # reads:             33486854
+    # perfect reads:     1,543,738
+    # unmapped reads:    24410947
+    # chimeric reads:    320410
+    # chimeric events:   321238
+    # reads w/ base err: 4952410
+    # error bases:       22478052
+    # clipped reads:     4599337
+    # clipped bases:     242303001
+    # better reads:      7,805,357
+    # worse reads:       7,633,699
+
+	k8 ~/bfc/errstat.js 20M.SGA33.sam.gz 20M.raw.sam.gz  > table
+
+    # reads:             33486854
+    # perfect reads:     1489045
+    # unmapped reads:    24378787
+    # chimeric reads:    323725
+    # chimeric events:   324572
+    # reads w/ base err: 5025140
+    # error bases:       22435348
+    # clipped reads:     4610195
+    # clipped bases:     243991080
+    # better reads:      7830762
+    # worse reads:       7632490
 

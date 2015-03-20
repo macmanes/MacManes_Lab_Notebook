@@ -21,10 +21,12 @@ in `/mouse/masurca`
     CA_PARAMETERS = cgwErrorRate=0.15 ovlMemory=4GB
     KMER_COUNT_THRESHOLD = 1    
     NUM_THREADS = 50
-    JF_SIZE = 4739060241
+    JF_SIZE = 16244928491
     DO_HOMOPOLYMER_TRIM = 0
     END
 
 to run
 
 	./assemble.sh
+
+_started assembly 3/20/15 at 0619._
