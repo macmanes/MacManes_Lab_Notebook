@@ -275,6 +275,8 @@ Lighter 100M
 	bwa mem -t16 ../genome/mus /mnt/raw.100M.SRR797058_1.cor.fq.gz /mnt/raw.100M.SRR797058_2.cor.fq.gz \
 	| gzip > 100M.lighter31.sam.gz
 
+lighter31 100M
+--
 
     # reads:             200000000
     # perfect reads:     9,347,302
@@ -289,7 +291,8 @@ Lighter 100M
     # worse reads:       402,821
 
 
-bfc55
+bfc55 100M
+--
 
     # reads:             200000000
     # perfect reads:     9,811,554
@@ -307,6 +310,7 @@ bfc55
 SGA
 --
 
+<<<<<<< Updated upstream
 	/home/ubuntu/sga/src/SGA/sga preprocess -p 1 /mnt/raw.20M.SRR797058_1.fastq.gz /mnt/raw.20M.SRR797058_2.fastq.gz | gzip -1 > out.pe.fq.gz
 	/home/ubuntu/sga/src/SGA/sga index -a ropebwt -t 8 --no-reverse out.20M.SGA.pe.fq.gz
 	/home/ubuntu/sga/src/SGA/sga correct -t 8 -k 55 --learn out.20M.SGA.pe.fq.gz
@@ -344,4 +348,18 @@ SGA
     # clipped bases:     243991080
     # better reads:      7830762
     # worse reads:       7632490
+=======
+# reads:             200000000
+# perfect reads:     9875487
+# unmapped reads:    144756703
+# chimeric reads:    1978434
+# chimeric events:   1983423
+# reads w/ base err: 29002165
+# error bases:       130473100
+# clipped reads:     28117842
+# clipped bases:     1501698313
+# better reads:      12227863
+# worse reads:       460163
+
+>>>>>>> Stashed changes
 
