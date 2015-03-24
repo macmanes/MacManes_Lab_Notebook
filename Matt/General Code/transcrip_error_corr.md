@@ -351,7 +351,12 @@ SGA
     # better reads:      7830762
     # worse reads:       7632490
 
+<<<<<<< Updated upstream
 	k8 ~/bfc/errstat.js 100M.SGA33.sam.gz 100M.raw.sam.gz | tail -20
+=======
+
+k8 ~/bfc/errstat.js 100M.SGA33.sam.gz 100M.raw.sam.gz  > table
+>>>>>>> Stashed changes
 
     # reads:             167447694
     # perfect reads:     7079803
@@ -364,6 +369,7 @@ SGA
     # clipped bases:     1202474283
     # better reads:      38997782
     # worse reads:       38199036
+<<<<<<< Updated upstream
     
 
 
@@ -445,3 +451,5 @@ RAW READ ANALYSIS
     # error bases:       141119210
     # clipped reads:     27209498
     # clipped bases:     1394228538
+=======
+>>>>>>> Stashed changes
