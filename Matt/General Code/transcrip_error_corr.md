@@ -281,8 +281,6 @@ Lighter 100M
 	bwa mem -t16 ../genome/mus /mnt/raw.100M.SRR797058_1.cor.fq.gz /mnt/raw.100M.SRR797058_2.cor.fq.gz \
 	| gzip > 100M.lighter31.sam.gz
 
-lighter31 100M
---
 
     # reads:             200000000
     # perfect reads:     9,347,302
@@ -297,8 +295,7 @@ lighter31 100M
     # worse reads:       402,821
 
 
-bfc55 100M
---
+bfc55
 
     # reads:             200000000
     # perfect reads:     9,811,554
@@ -316,7 +313,6 @@ bfc55 100M
 SGA
 --
 
-<<<<<<< Updated upstream
 	/home/ubuntu/sga/src/SGA/sga preprocess -p 1 /mnt/raw.20M.SRR797058_1.fastq.gz /mnt/raw.20M.SRR797058_2.fastq.gz | gzip -1 > out.pe.fq.gz
 	/home/ubuntu/sga/src/SGA/sga index -a ropebwt -t 8 --no-reverse out.20M.SGA.pe.fq.gz
 	/home/ubuntu/sga/src/SGA/sga correct -t 8 -k 55 --learn out.20M.SGA.pe.fq.gz
@@ -354,20 +350,6 @@ SGA
     # clipped bases:     243991080
     # better reads:      7830762
     # worse reads:       7632490
-=======
-# reads:             200000000
-# perfect reads:     9875487
-# unmapped reads:    144756703
-# chimeric reads:    1978434
-# chimeric events:   1983423
-# reads w/ base err: 29002165
-# error bases:       130473100
-# clipped reads:     28117842
-# clipped bases:     1501698313
-# better reads:      12227863
-# worse reads:       460163
-
->>>>>>> Stashed changes
 
 	k8 ~/bfc/errstat.js 100M.SGA33.sam.gz 100M.raw.sam.gz | tail -20
 
@@ -389,8 +371,68 @@ SGA
 	bwa mem -t16 ../genome/mus /mnt/sga/100M.out.SGA55.pe.fq.gz.1 /mnt/sga/100M.out.SGA55.pe.fq.gz.2 \
 	| gzip > 100M.SGA55.sam.gz
 
+    k8 ~/bfc/errstat.js 100M.SGA55.sam.gz 100M.raw.sam.gz | tail -20
+    
+    # reads:             167447694
+    # perfect reads:     7168656
+    # unmapped reads:    122197057
+    # chimeric reads:    1590052
+    # chimeric events:   1593782
+    # reads w/ base err: 25496358
+    # error bases:       113427762
+    # clipped reads:     22871670
+    # clipped bases:     1199875980
+    # better reads:      38917160
+    # worse reads:       38207285
+    
+
 
 
 SEECER
 
 	~/SEECER-0.1.3/SEECER/bin/run_seecer.sh -t . -k 31 ../raw.10M.SRR797058_1.fastq ../raw.10M.SRR797058_2.fastq
+	
+
+
+    k8 ~/bfc/errstat.js 10M.seecer31.sam.gz 10M.raw.sam.gz | tail -20
+    
+    # reads:             20000000
+    # perfect reads:     1072867
+    # unmapped reads:    14543190
+    # chimeric reads:    191814
+    # chimeric events:   192283
+    # reads w/ base err: 2811791
+    # error bases:       13061261
+    # clipped reads:     2744455
+    # clipped bases:     145834784
+    # better reads:      1241908
+    # worse reads:       59882
+    
+RAW READ ANALYSIS
+--
+
+    k8 ~/bfc/errstat.js  10M.raw.sam.gz | tail -20
+    
+    # reads:             20000000
+    # perfect reads:     717061
+    # unmapped reads:    14654974
+    # chimeric reads:    185905
+    # chimeric events:   186342
+    # reads w/ base err: 3226227
+    # error bases:       14105615
+    # clipped reads:     2721570
+    # clipped bases:     139446263
+    
+    
+    k8 ~/bfc/errstat.js  20M.raw.sam.gz | tail -20
+    # reads:             40000000
+    # perfect reads:     1428466
+    # unmapped reads:    29311281
+    # chimeric reads:    373601
+    # chimeric events:   374488
+    # reads w/ base err: 6454755
+    # error bases:       28223069
+    # clipped reads:     5444611
+    # clipped bases:     278966692
+    
+
