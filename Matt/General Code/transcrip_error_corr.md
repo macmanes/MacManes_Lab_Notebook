@@ -25,7 +25,7 @@ bwakit-0.7.12
 	sudo bash
 	apt-get update
 	apt-get -y upgrade
-	apt-get -y install cmake sparsehash libboost-atomic1.55-dev libibnetdisc-dev libboost1.55-all-dev libboost1.55-dbg subversion tmux git curl bowtie libncurses5-dev samtools gcc make g++ python-dev unzip dh-autoreconf default-jre python-pip zlib1g-dev
+	apt-get -y install cmake sparsehash valgrind libboost-atomic1.55-dev libibnetdisc-dev ruby-full gsl-bin libgsl0-dev libgsl0ldbl libboost1.55-all-dev libboost1.55-dbg subversion tmux git curl bowtie libncurses5-dev samtools gcc make g++ python-dev unzip dh-autoreconf default-jre python-pip zlib1g-dev
 
 
 
@@ -43,7 +43,13 @@ lighter
 bfc
 sga
 
-	
+	cd $HOME
+	wget http://sb.cs.cmu.edu/seecer/downloads/SEECER-0.1.3.tar.gz
+	tar -zxf SEECER-0.1.3.tar.gz
+	cd cd SEECER-0.1.3/SEECER
+	./configure
+	make
+	PATH=$PATH:$(pwd)/bin
 	
 
 	cd $HOME
@@ -363,3 +369,28 @@ SGA
 
 >>>>>>> Stashed changes
 
+	k8 ~/bfc/errstat.js 100M.SGA33.sam.gz 100M.raw.sam.gz | tail -20
+
+    # reads:             167447694
+    # perfect reads:     7079803
+    # unmapped reads:    122099171
+    # chimeric reads:    1600880
+    # chimeric events:   1604674
+    # reads w/ base err: 25688949
+    # error bases:       113449996
+    # clipped reads:     22866030
+    # clipped bases:     1202474283
+    # better reads:      38997782
+    # worse reads:       38199036
+    
+
+
+
+	bwa mem -t16 ../genome/mus /mnt/sga/100M.out.SGA55.pe.fq.gz.1 /mnt/sga/100M.out.SGA55.pe.fq.gz.2 \
+	| gzip > 100M.SGA55.sam.gz
+
+
+
+SEECER
+
+	~/SEECER-0.1.3/SEECER/bin/run_seecer.sh -t . -k 31 ../raw.10M.SRR797058_1.fastq ../raw.10M.SRR797058_2.fastq
