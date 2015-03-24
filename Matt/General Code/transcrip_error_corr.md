@@ -435,4 +435,13 @@ RAW READ ANALYSIS
     # clipped reads:     5444611
     # clipped bases:     278966692
     
-
+    k8 ~/bfc/errstat.js  100M.raw.sam.gz | tail -20
+    # reads:             200000000
+    # perfect reads:     7153105
+    # unmapped reads:    146551366
+    # chimeric reads:    1863889
+    # chimeric events:   1868108
+    # reads w/ base err: 32265352
+    # error bases:       141119210
+    # clipped reads:     27209498
+    # clipped bases:     1394228538
