@@ -91,8 +91,16 @@ sga
 	mkdir -p /mnt/kmc/bin/
 	sudo cp /home/ubuntu/v0p24/kmc/bin/kmc /mnt/kmc/bin/
 
-
-
+	cd $HOME
+	wget http://www.canonware.com/download/jemalloc/jemalloc-3.4.1.tar.bz2
+	tar -jxf jemalloc-3.4.1.tar.bz2
+	cd jemalloc-3.4.1 && ./configure && make -j4 && cd ../
+	git clone git://github.com/pezmaster31/bamtools.git
+	cd bamtools && mkdir build && cd build && cmake .. && make	
+	git clone git://github.com/jts/sga
+	cd sga/src && ./autogen.sh &&./configure --with-sparsehash=/home/ubuntu/sparsehash-2.0.2 \
+	--with-bamtools=/home/ubuntu/bamtools \
+	--with-jemalloc=/home/ubuntu/jemalloc-3.4.1/lib && make
 
 mouse genome
 	
@@ -453,3 +461,189 @@ RAW READ ANALYSIS
     # clipped bases:     1394228538
 =======
 >>>>>>> Stashed changes
+
+
+	cd /mnt/bless
+
+	/home/root/.openmpi/bin/mpirun -np 16 bless -read1 /mnt/raw.10M.SRR797058_1.fastq \
+	-read2 /mnt/raw.10M.SRR797058_2.fastq -prefix 10M_bless55 -kmerlength 55 
+
+	/home/root/.openmpi/bin/mpirun -np 16 bless -read1 /mnt/raw.10M.SRR797058_1.fastq \
+	-read2 /mnt/raw.10M.SRR797058_2.fastq -prefix 10M_bless33 -kmerlength 33
+
+
+	cd /mnt/lighter
+
+	lighter -K 31 60000000 -r /mnt/raw.10M.SRR797058_1.fastq \
+	-r /mnt/raw.10M.SRR797058_2.fastq -t 16
+
+	cd /mnt/bfc
+
+	seqtk mergepe /mnt/raw.10M.SRR797058_1.fastq /mnt/raw.10M.SRR797058_2.fastq > inter.fq
+	bfc -s 50m -k55 -t 16 inter.fq > bfc55.corr.fq
+	bfc -s 50m -k33 -t 16 inter.fq > bfc33.corr.fq
+
+	awk '{print $1}' bfc55.corr.fq > bfc55.corr.fastq
+	awk '{print $1}' bfc33.corr.fq > bfc33.corr.fastq
+
+	split-paired-reads.py bfc55.corr.fastq
+	split-paired-reads.py bfc33.corr.fastq
+
+	cd /mnt/sga/
+
+	/home/ubuntu/sga/src/SGA/sga preprocess -p 1 /mnt/raw.10M.SRR797058_1.fastq.gz /mnt/raw.10M.SRR797058_2.fastq.gz | gzip -1 > 10M.out.pe.fq.gz
+	/home/ubuntu/sga/src/SGA/sga index -a ropebwt -t 8 --no-reverse 10M.out.pe.fq.gz
+	/home/ubuntu/sga/src/SGA/sga correct -t 8 -k 55 --learn 10M.out.pe.fq.gz
+
+
+
+	cd /mnt/bless
+
+	bwa mem -t16 /mnt/genome/mus /mnt/bless/10M_bless55.1.corrected.fastq /mnt/bless/10M_bless55.2.corrected.fastq \
+	| gzip > 10M.bless55.sam.gz
+
+	bwa mem -t16 /mnt/genome/mus /mnt/bless/10M_bless33.1.corrected.fastq /mnt/bless/10M_bless33.2.corrected.fastq \
+	| gzip > 10M.bless33.sam.gz
+
+	cd /mnt/lighter
+
+	bwa mem -t16 /mnt/genome/mus raw.10M.SRR797058_1.cor.fq raw.10M.SRR797058_2.cor.fq \
+	| gzip > 10M.lighter31.sam.gz
+
+	cd /mnt/bfc
+
+	bwa mem -t16 /mnt/genome/mus bfc55.corr.fastq.1 bfc55.corr.fastq.2 \
+	| gzip > 10M.bfc55.sam.gz
+
+	bwa mem -t16 /mnt/genome/mus bfc33.corr.fastq.1 bfc33.corr.fastq.2 \
+	| gzip > 10M.bfc33.sam.gz
+
+	cd /mnt/sga
+
+	bwa mem -t16 /mnt/genome/mus 10M.SGA55.out.pe.ec.fa.1 10M.SGA55.out.pe.ec.fa.2 \
+	| gzip > 10M.sga55.sam.gz
+
+	bwa mem -t16 /mnt/genome/mus 10M.SGA33.out.pe.ec.fa.1 10M.SGA33.out.pe.ec.fa.2 \
+	| gzip > 10M.sga33.sam.gz
+
+
+
+	k8 ~/bfc/errstat.js bless/10M.bless55.sam.gz mapping/10M.raw.sam.gz | tail -20
+
+	# reads:             20000000
+	# perfect reads:     940122
+	# unmapped reads:    14616126
+	# chimeric reads:    183860
+	# chimeric events:   184256
+	# reads w/ base err: 3000477
+	# error bases:       13426097
+	# clipped reads:     2642702
+	# clipped bases:     139127391
+	# better reads:      875529
+	# worse reads:       45918
+
+	k8 ~/bfc/errstat.js bless/10M.bless33.sam.gz mapping/10M.raw.sam.gz | tail -20
+
+	# reads:             20000000
+	# perfect reads:     987534
+	# unmapped reads:    14591976
+	# chimeric reads:    182225
+	# chimeric events:   182652
+	# reads w/ base err: 2957997
+	# error bases:       13084776
+	# clipped reads:     2616376
+	# clipped bases:     138413822
+	# better reads:      1075067
+	# worse reads:       82014
+
+	k8 ~/bfc/errstat.js lighter/10M.lighter31.sam.gz mapping/10M.raw.sam.gz | tail -20
+
+	# reads:             20000000
+	# perfect reads:     974037
+	# unmapped reads:    14514662
+	# chimeric reads:    194564
+	# chimeric events:   195053
+	# reads w/ base err: 2924919
+	# error bases:       13122575
+	# clipped reads:     2754647
+	# clipped bases:     147043308
+	# better reads:      1174719
+	# worse reads:       42747
+
+
+	k8 ~/bfc/errstat.js bfc/10M.bfc33.sam.gz mapping/10M.raw.sam.gz | tail -20
+
+	# reads:             20000000
+	# perfect reads:     1069699
+	# unmapped reads:    14465127
+	# chimeric reads:    197867
+	# chimeric events:   198363
+	# reads w/ base err: 2817927
+	# error bases:       12708561
+	# clipped reads:     2775120
+	# clipped bases:     149241539
+	# better reads:      1476812
+	# worse reads:       52445
+
+	k8 ~/bfc/errstat.js bfc/10M.bfc55.sam.gz mapping/10M.raw.sam.gz | tail -20
+
+	# reads:             20000000
+	# perfect reads:     1022925
+	# unmapped reads:    14540224
+	# chimeric reads:    192396
+	# chimeric events:   192864
+	# reads w/ base err: 2859874
+	# error bases:       13130166
+	# clipped reads:     2740286
+	# clipped bases:     145557672
+	# better reads:      1221951
+	# worse reads:       44290
+
+	k8 ~/bfc/errstat.js sga/10M.sga55.sam.gz mapping/10M.raw.sam.gz | tail -20
+
+	# reads:             16741894
+	# perfect reads:     772868
+	# unmapped reads:    12204729
+	# chimeric reads:    159515
+	# chimeric events:   159895
+	# reads w/ base err: 2477273
+	# error bases:       11248355
+	# clipped reads:     2302145
+	# clipped bases:     121038701
+	# better reads:      3902756
+	# worse reads:       3815741
+
+
+	k8 ~/bfc/errstat.js sga/10M.sga33.sam.gz mapping/10M.raw.sam.gz | tail -20
+
+
+
+
+	cd /mnt/bfc
+
+	seqtk mergepe /mnt/raw.20M.SRR797058_1.fastq /mnt/raw.20M.SRR797058_2.fastq > inter.fq
+	bfc -s 50m -k33 -t 16 inter.fq > bfc33.corr.fq
+
+	awk '{print $1}' bfc33.corr.fq > bfc33.corr.fastq
+
+	split-paired-reads.py bfc33.corr.fastq
+
+	bwa mem -t16 /mnt/genome/mus bfc33.corr.fastq.1 bfc33.corr.fastq.2 \
+	| gzip > 20M.bfc33.sam.gz
+
+	k8 ~/bfc/errstat.js bfc/20M.bfc33.sam.gz mapping/20M.raw.sam.gz | tail -20
+
+
+	# reads:             40000000
+	# perfect reads:     2107983
+	# unmapped reads:    28932073
+	# chimeric reads:    397368
+	# chimeric events:   398394
+	# reads w/ base err: 5660601
+	# error bases:       25556896
+	# clipped reads:     5578768
+	# clipped bases:     299573690
+	# better reads:      2860000
+	# worse reads:       102660
+
+
