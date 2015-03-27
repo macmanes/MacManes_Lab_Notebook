@@ -646,4 +646,5 @@ RAW READ ANALYSIS
 	# better reads:      2860000
 	# worse reads:       102660
 
-
+	bwa mem -t16 /mnt/genome/mus bfc33.corr.fastq.1 bfc33.corr.fastq.2 \
+	| gzip > 1000M.bfc33.sam.gz
