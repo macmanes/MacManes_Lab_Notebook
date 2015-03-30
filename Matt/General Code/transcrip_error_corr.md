@@ -651,6 +651,7 @@ RAW READ ANALYSIS
 	# better reads:      2860000
 	# worse reads:       102660
 
+<<<<<<< HEAD
     ~/bwa.kit/k8 ~/bfc/errstat.js bfc/1000M.bfc33.sam.gz mapping/100M.raw.sam.gz | tail -20
     
     # reads:             200000000
@@ -685,3 +686,7 @@ RAW READ ANALYSIS
     # better reads:      2521018
     # worse reads:       127985
 
+=======
+	bwa mem -t16 /mnt/genome/mus bfc33.corr.fastq.1 bfc33.corr.fastq.2 \
+	| gzip > 1000M.bfc33.sam.gz
+>>>>>>> origin/master
