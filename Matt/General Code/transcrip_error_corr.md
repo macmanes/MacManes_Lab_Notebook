@@ -9,6 +9,11 @@ bless v0.24
 bfc r177
 seqtc 1.0-r77-dirty
 bwakit-0.7.12
+seecer 0.1.3 (does not take gz files)
+
+
+
+
 
 
     /mnt/data3/macmanes/subsamp/100M_corr/raw.100M.SRR797058_1.fastq.gz
@@ -46,7 +51,7 @@ sga
 	cd $HOME
 	wget http://sb.cs.cmu.edu/seecer/downloads/SEECER-0.1.3.tar.gz
 	tar -zxf SEECER-0.1.3.tar.gz
-	cd cd SEECER-0.1.3/SEECER
+	cd SEECER-0.1.3/SEECER
 	./configure
 	make
 	PATH=$PATH:$(pwd)/bin
@@ -646,4 +651,37 @@ RAW READ ANALYSIS
 	# better reads:      2860000
 	# worse reads:       102660
 
+    ~/bwa.kit/k8 ~/bfc/errstat.js bfc/1000M.bfc33.sam.gz mapping/100M.raw.sam.gz | tail -20
+    
+    # reads:             200000000
+    # perfect reads:     9875615
+    # unmapped reads:    144756657
+    # chimeric reads:    1978445
+    # chimeric events:   1983433
+    # reads w/ base err: 29002009
+    # error bases:       130474785
+    # clipped reads:     28117633
+    # clipped bases:     1501694424
+    # better reads:      12228941
+    # worse reads:       461217
+
+
+	~/SEECER-0.1.3/SEECER/bin/run_seecer.sh -t . -k 31 ../raw.20M.SRR797058_1.fastq ../raw.20M.SRR797058_2.fastq
+
+	bwa mem -t16 /mnt/genome/mus raw.20M.SRR797058_1.fastq_corrected.fa raw.20M.SRR797058_1.fastq_corrected.fa \
+	| gzip > 20M.seecer31.sam.gz
+	
+	~/bwa.kit/k8 ~/bfc/errstat.js seecer/20M.seecer31.sam.gz mapping/20M.raw.sam.gz | tail -20
+	
+    # reads:             40000000
+    # perfect reads:     2151034
+    # unmapped reads:    29081264
+    # chimeric reads:    385987
+    # chimeric events:   386943
+    # reads w/ base err: 5613509
+    # error bases:       26090041
+    # clipped reads:     5492995
+    # clipped bases:     292174910
+    # better reads:      2521018
+    # worse reads:       127985
 
