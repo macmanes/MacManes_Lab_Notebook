@@ -23,7 +23,7 @@ seecer 0.1.3 (does not take gz files)
 
 
 	sudo mkfs -t ext4 /dev/xvdb
-	sudo mount /dev/xvdb /mnt
+	sudo mount /dev/xvdf /mnt
 	sudo chown -R ubuntu:ubuntu /mnt
 	
 
@@ -690,3 +690,26 @@ RAW READ ANALYSIS
 	bwa mem -t16 /mnt/genome/mus bfc33.corr.fastq.1 bfc33.corr.fastq.2 \
 	| gzip > 1000M.bfc33.sam.gz
 >>>>>>> origin/master
+
+100M seecer
+--
+
+	bwa mem -t30 /mnt/genome/mus raw.100M.SRR797058_1.fastq_corrected.fa raw.100M.SRR797058_2.fastq_corrected.fa \
+	| gzip > 1000M.seecer31.sam.gz
+
+
+
+
+# reads:             103778058
+# perfect reads:     5560852
+# unmapped reads:    75744878
+# chimeric reads:    981601
+# chimeric events:   983900
+# reads w/ base err: 14427406
+# error bases:       67553600
+# clipped reads:     14104823
+# clipped bases:     748077108
+# better reads:      5651334
+# worse reads:       325222
+
+
