@@ -49,3 +49,20 @@ malloc after 52 hours with kmer=21.. I'll try something higher.
     --mp2-1 /mnt/data3/macmanes/pero-mate-pair/peer7kb.clipped.1.fq \
     --mp2-2 /mnt/data3/macmanes/pero-mate-pair/peer7kb.clipped.2.fq \
     --pacbio /mnt/data3/macmanes/pacbio/raw.pacbio.reads/fastq/all.pb.fastq
+
+pero all NYGC data 
+
+    spades.py -k 95,85,75 -t 50 -m 1000 --only-assembler -o spades.mouse --careful \
+    --pe1-1 /mnt/data3/macmanes/pero_genome/raw_reasd/Pero360_550bp.P20_1P.fq.gz \
+    --pe1-2 /mnt/data3/macmanes/pero_genome/raw_reasd/Pero360_550bp.P20_2P.fq.gz  \
+    --pe2-1 /mnt/data3/macmanes/pero_genome/raw_reasd/Pero360_300bp.P20_1P.fq.gz \
+    --pe2-2 /mnt/data3/macmanes/pero_genome/raw_reasd/Pero360_300bp.P20_2P.fq.gz  \
+    --mp1-1 /mnt/data3/macmanes/pero_genome/raw_reasd/peer5kb.clipped.1.fq \
+    --mp1-2 /mnt/data3/macmanes/pero_genome/raw_reasd/peer5kb.clipped.2.fq \
+    --mp2-1 /mnt/data3/macmanes/pero_genome/raw_reasd/peer8kb.clipped.1.fq \
+    --mp2-2 /mnt/data3/macmanes/pero_genome/raw_reasd/peer8kb.clipped.2.fq \
+    --mp3-1 /mnt/data3/macmanes/pero_genome/raw_reasd/peer7kb.clipped.1.fq \
+    --mp3-2 /mnt/data3/macmanes/pero_genome/raw_reasd/peer7kb.clipped.2.fq \
+    --mp4-1 /mnt/data3/macmanes/pero_genome/raw_reasd/peer3kb.clipped.1.fq \
+    --mp4-2 /mnt/data3/macmanes/pero_genome/raw_reasd/peer3kb.clipped.2.fq \
+    --pacbio /mnt/data3/macmanes/pacbio/raw.pacbio.reads/fastq/all.pb.fastq
