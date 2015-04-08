@@ -50,7 +50,7 @@ malloc after 52 hours with kmer=21.. I'll try something higher.
     --mp2-2 /mnt/data3/macmanes/pero-mate-pair/peer7kb.clipped.2.fq \
     --pacbio /mnt/data3/macmanes/pacbio/raw.pacbio.reads/fastq/all.pb.fastq
 
-pero all NYGC data 
+pero all NYGC data : started 4/3/15 at 2030
 
     spades.py -k 95,85,75 -t 50 -m 1000 --only-assembler -o spades.mouse --careful \
     --pe1-1 /mnt/data3/macmanes/pero_genome/raw_reasd/Pero360_550bp.P20_1P.fq.gz \
