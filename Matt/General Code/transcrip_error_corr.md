@@ -752,24 +752,64 @@ RAW READ ANALYSIS
 
 run2
 
-	mkdir /mnt/bless
-	cd /mnt/bless
-	mpirun -np 16 ~/v0p24/bless -read1 /mnt/raw/raw.50M.SRR797058_1.fastq.gz \
-	-read2 /mnt/raw/raw.50M.SRR797058_2.fastq.gz -prefix 50M_bless55 -kmerlength 55   
+    cd /mnt/raw
+    gzip -d raw.50M.SRR797058_1.fastq.gz
+    gzip -d raw.50M.SRR797058_2.fastq.gz
+    
+    mkdir /mnt/bless
+    cd /mnt/bless
+    /openmpi/bin/mpirun --allow-run-as-root -np 16 ~/v0p24/bless -read1 /mnt/raw/raw.50M.SRR797058_1.fastq \
+    -read2 /mnt/raw/raw.50M.SRR797058_2.fastq -prefix 50M_bless55 -kmerlength 55
+    
+    /openmpi/bin/mpirun --allow-run-as-root -np 16 ~/v0p24/bless -read1 /mnt/raw/raw.50M.SRR797058_1.fastq \
+    -read2 /mnt/raw/raw.50M.SRR797058_2.fastq -prefix 50M_bless33 -kmerlength 33
+    
+    mkdir /mnt/sga
+    cd /mnt/sga
+    
+    #/home/ubuntu/bamtools/build/sga/src/SGA/sga preprocess -p 1 /mnt/raw/raw.50M.SRR797058_1.fastq.gz \
+    #/mnt/raw/raw.50M.SRR797058_2.fastq.gz | gzip -1 > out.pe.fq.gz
+    
+    /home/ubuntu/bamtools/build/sga/src/SGA/sga index -a ropebwt -t 16 --no-reverse out.pe.fq.gz
+    
+    /home/ubuntu/bamtools/build/sga/src/SGA/sga correct -t 16 -k 55 --learn out.pe.fq.gz -o sga.55.fq
+    
+    /home/ubuntu/bamtools/build/sga/src/SGA/sga correct -t 16 -k 33 --learn out.pe.fq.gz -o sga.33.fq
+    
+    
+run3
 
-	mpirun -np 16 ~/v0p24/bless -read1 /mnt/raw/raw.50M.SRR797058_1.fastq.gz \
-	-read2 /mnt/raw/raw.50M.SRR797058_2.fastq.gz -prefix 50M_bless33 -kmerlength 33
+	cd /mnt/bless/
+    bwa mem -t16 /mnt/genome/mus 50M_bless55.1.corrected.fastq 50M_bless55.2.corrected.fastq \
+    | gzip > 50M.bless55.sam.gz
+    
+    bwa mem -t16 /mnt/genome/mus 50M_bless33.1.corrected.fastq 50M_bless33.2.corrected.fastq \
+    | gzip > 50M.bless33.sam.gz
 
-	mkdir /mnt/sga
-	cd /mnt/sga
+	split-paired-reads.py sga.55.fq
+	split-paired-reads.py sga.33.fq
 	
-	/home/ubuntu/bamtools/build/sga/src/SGA/sga preprocess -p 1 /mnt/raw/raw.50M.SRR797058_1.fastq.gz \
-	/mnt/raw/raw.50M.SRR797058_2.fastq.gz | gzip -1 > out.pe.fq.gz
-	
-	/home/ubuntu/bamtools/build/sga/src/SGA/sga index -a ropebwt -t 16 --no-reverse out.50M.SGA.pe.fq.gz 
-	
-	/home/ubuntu/bamtools/build/sga/src/SGA/sga correct -t 16 -k 55 --learn out.50M.SGA.pe.fq.gz -o sga.55.fq
+	bwa mem -t16 /mnt/genome/mus sga.55.fq.1 sga.55.fq.2 \
+	| gzip > 50M.sga55.sam.gz
 
-	/home/ubuntu/bamtools/build/sga/src/SGA/sga correct -t 16 -k 33 --learn out.50M.SGA.pe.fq.gz -o sga.33.fq
+	bwa mem -t16 /mnt/genome/mus sga.33.fq.1 sga.33.fq.2 \
+	| gzip > 50M.sga33.sam.gz
+
+
+
+STATS
+--
+
+	~/bwa.kit/k8 ~/bfc/errstat.js raw/50M.raw.sam.gz | tail -20
+	~/bwa.kit/k8 ~/bfc/errstat.js bfc/50M.bfc55.sam.gz raw/50M.raw.sam.gz | tail -17
+	~/bwa.kit/k8 ~/bfc/errstat.js lighter/50M.lighter31.sam.gz raw/50M.raw.sam.gz | tail -17
+
+
+
+
+
+
+
+
 
 
