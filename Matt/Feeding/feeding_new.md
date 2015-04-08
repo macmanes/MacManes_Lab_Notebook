@@ -88,3 +88,34 @@ lets see if 100M run can work with 60Gb RAM...
         --left /mnt/ec.norm.fq.1  \
         --right /mnt/ec.norm.fq.2 \
         --CPU 16 --output trinity_10M_bless_norm
+
+
+
+
+    transrate -t 10 -a ../vsearch/20M.ec.P2.score.consensus.Trinity.fasta,\
+    ../vsearch/20M.ec.P2.score.centriod.Trinity.fasta,\
+    ../vsearch/20M.ec.P2.score.Trinity.fasta,\
+    ../vsearch/20M.ec.P2.score.vsearch.Trinity.fasta,\
+    10M.bless.C50.Trinity.fasta,\
+    10M.bless.Trinity.fasta,\
+    trinity_10M_raw.Trinity.fasta,\
+    trinity_20M_raw.Trinity.fasta,\
+    trinity_100M_raw.Trinity.fasta,\
+    new.trinity.100M.ec.P2.C50.Trinity.fasta,\
+    new.trinity.20M.ec.P2.C50.Trinity.fasta,\
+    new.trinity.100M.ec.P2.Trinity.fasta,\
+    new.trinity.20M.ec.P2.Trinity.fasta,\
+    -r ../Mus_musculus.GRCm38.pep.all.fa \
+    -l /mnt/data3/macmanes/feeding/SRR797058.P2_1P.fq \
+    -i /mnt/data3/macmanes/feeding/SRR797058.P2_2P.fq
+
+
+
+
+
+
+
+
+
+
+

@@ -37,16 +37,19 @@ seecer 0.1.3 (does not take gz files)
 	wget https://www.open-mpi.org/software/ompi/v1.8/downloads/openmpi-1.8.4.tar.gz
 	tar -zxf openmpi-1.8.4.tar.gz
 	cd openmpi-1.8.4/
-	./configure --prefix="/home/$USER/.openmpi"
-	make -j8
+	./configure --prefix="/openmpi"
+	make -j3
 	make install
-	export PATH=$PATH:/home/root/.openmpi/bin/
-	export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/home/$USER/.openmpi/lib/
+	export PATH=$PATH:/openmpi/bin/
+	export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/openmpi/lib/
 
 bless: 
 lighter
 bfc
 sga
+
+	easy_install -U setuptools
+	pip install khmer
 
 	cd $HOME
 	wget http://sb.cs.cmu.edu/seecer/downloads/SEECER-0.1.3.tar.gz
@@ -78,7 +81,7 @@ sga
 	cd $HOME
 	git clone https://github.com/mourisl/Lighter.git
 	make -j8
-	PATH=$PATH:$(pwd)/scripts
+	PATH=$PATH:$(pwd)
 	
 	cd $HOME
 	git clone https://github.com/lh3/bwa.git
@@ -694,22 +697,79 @@ RAW READ ANALYSIS
 100M seecer
 --
 
-	bwa mem -t30 /mnt/genome/mus raw.100M.SRR797058_1.fastq_corrected.fa raw.100M.SRR797058_2.fastq_corrected.fa \
+	bwa mem -t30 /mnt/genome/mus raw.100M.SRR797058_1.fastq_corrected.fa.gz raw.100M.SRR797058_2.fastq_corrected.fa.gz \
 	| gzip > 1000M.seecer31.sam.gz
 
 
 
+    # reads:             200000000
+    # perfect reads:     10897587
+    # unmapped reads:    145342275
+    # chimeric reads:    1927630
+    # chimeric events:   1932231
+    # reads w/ base err: 27940421
+    # error bases:       129989815
+    # clipped reads:     27469520
+    # clipped bases:     1463688247
+    # better reads:      13073703
+    # worse reads:       678161
 
-# reads:             103778058
-# perfect reads:     5560852
-# unmapped reads:    75744878
-# chimeric reads:    981601
-# chimeric events:   983900
-# reads w/ base err: 14427406
-# error bases:       67553600
-# clipped reads:     14104823
-# clipped bases:     748077108
-# better reads:      5651334
-# worse reads:       325222
+
+50M read analysis
+--
+
+	bwa mem -t16 /mnt/genome/mus raw/raw.50M.SRR797058_1.fastq.gz raw/raw.50M.SRR797058_2.fastq.gz \
+	| gzip > 50M.raw.sam.gz
+
+	cd lighter
+	
+	lighter -K 31 60000000 -r ../raw/raw.50M.SRR797058_1.fastq.gz \
+	-r ../raw/raw.50M.SRR797058_2.fastq.gz -t 16
+
+	bwa mem -t16 /mnt/genome/mus raw.50M.SRR797058_1.cor.fq raw.50M.SRR797058_2.cor.fq \
+	| gzip > 50M.lighter31.sam.gz
+
+
+
+	cd /mnt/bfc
+
+	seqtk mergepe ../raw/raw.50M.SRR797058_1.fastq.gz ../raw/raw.50M.SRR797058_2.fastq.gz > inter.fq
+	bfc -s 50m -k55 -t 16 inter.fq > bfc55.corr.fq
+	bfc -s 50m -k33 -t 16 inter.fq > bfc33.corr.fq
+
+	awk '{print $1}' bfc55.corr.fq > bfc55.corr.fastq
+	awk '{print $1}' bfc33.corr.fq > bfc33.corr.fastq
+
+	split-paired-reads.py bfc55.corr.fastq
+	split-paired-reads.py bfc33.corr.fastq
+
+	bwa mem -t16 /mnt/genome/mus bfc55.corr.fastq.1 bfc55.corr.fastq.2 \
+	| gzip > 50M.bfc55.sam.gz
+
+	bwa mem -t16 /mnt/genome/mus bfc33.corr.fastq.1 bfc33.corr.fastq.2 \
+	| gzip > 50M.bfc33.sam.gz
+
+
+run2
+
+	mkdir /mnt/bless
+	cd /mnt/bless
+	mpirun -np 16 ~/v0p24/bless -read1 /mnt/raw/raw.50M.SRR797058_1.fastq.gz \
+	-read2 /mnt/raw/raw.50M.SRR797058_2.fastq.gz -prefix 50M_bless55 -kmerlength 55   
+
+	mpirun -np 16 ~/v0p24/bless -read1 /mnt/raw/raw.50M.SRR797058_1.fastq.gz \
+	-read2 /mnt/raw/raw.50M.SRR797058_2.fastq.gz -prefix 50M_bless33 -kmerlength 33
+
+	mkdir /mnt/sga
+	cd /mnt/sga
+	
+	/home/ubuntu/bamtools/build/sga/src/SGA/sga preprocess -p 1 /mnt/raw/raw.50M.SRR797058_1.fastq.gz \
+	/mnt/raw/raw.50M.SRR797058_2.fastq.gz | gzip -1 > out.pe.fq.gz
+	
+	/home/ubuntu/bamtools/build/sga/src/SGA/sga index -a ropebwt -t 16 --no-reverse out.50M.SGA.pe.fq.gz 
+	
+	/home/ubuntu/bamtools/build/sga/src/SGA/sga correct -t 16 -k 55 --learn out.50M.SGA.pe.fq.gz -o sga.55.fq
+
+	/home/ubuntu/bamtools/build/sga/src/SGA/sga correct -t 16 -k 33 --learn out.50M.SGA.pe.fq.gz -o sga.33.fq
 
 
