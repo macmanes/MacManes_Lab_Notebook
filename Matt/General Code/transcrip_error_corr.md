@@ -816,4 +816,13 @@ STATS
 
 
 
+	cd /mnt/bfc/
+
+	bwa mem -t16 /mnt/genome/mus bfc33.corr.fastq.1 bfc33.corr.fastq.2 \
+	| gzip > 50M.bfc33.sam.gz
+
+	bwa mem -t16 /mnt/genome/mus bfc55.corr.fastq.1 bfc55.corr.fastq.2 \
+	| gzip > 50M.bfc55.sam.gz
+	
+	
 
