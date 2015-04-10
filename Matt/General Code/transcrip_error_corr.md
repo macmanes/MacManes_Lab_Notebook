@@ -804,6 +804,10 @@ STATS
 	~/bwa.kit/k8 ~/bfc/errstat.js bfc/50M.bfc55.sam.gz raw/50M.raw.sam.gz | tail -17
 	~/bwa.kit/k8 ~/bfc/errstat.js lighter/50M.lighter31.sam.gz raw/50M.raw.sam.gz | tail -17
 
+	~/bwa.kit/k8 ~/bfc/errstat.js bless/50M.bless55.sam.gz raw/50M.raw.sam.gz | tail -17
+	~/bwa.kit/k8 ~/bfc/errstat.js bless/50M.bless33.sam.gz raw/50M.raw.sam.gz | tail -17
+	~/bwa.kit/k8 ~/bfc/errstat.js sga/50M.sga33.sam.gz raw/50M.raw.sam.gz | tail -17
+	~/bwa.kit/k8 ~/bfc/errstat.js sga/50M.sga55.sam.gz raw/50M.raw.sam.gz | tail -17
 
 
 
