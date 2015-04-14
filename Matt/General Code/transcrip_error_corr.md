@@ -824,5 +824,24 @@ STATS
 	bwa mem -t16 /mnt/genome/mus bfc55.corr.fastq.1 bfc55.corr.fastq.2 \
 	| gzip > 50M.bfc55.sam.gz
 	
+
+50M seecer
+--
+
+	~/SEECER-0.1.3/SEECER/bin/run_seecer.sh -t . -k 31 ../raw/raw.50M.SRR797058_1.fastq ../raw/raw.50M.SRR797058_2.fastq
+
+bwa
 	
+	PATH=$PATH:/home/ubuntu/bfc:/home/ubuntu/bwa.kit:/home/ubuntu/bwa
+
+	bwa mem -t16 /mnt/genome/mus raw.50M.SRR797058_1.fastq_corrected.fa \
+	raw.50M.SRR797058_2.fastq_corrected.fa \
+	| gzip > 50M.seecer31.sam.gz
+
+	cd ../
+
+	~/bwa.kit/k8 ~/bfc/errstat.js seecer/50M.seecer31.sam.gz raw/50M.raw.sam.gz | tail -17
+
+	
+
 

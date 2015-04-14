@@ -52,7 +52,9 @@ malloc after 52 hours with kmer=21.. I'll try something higher.
 
 pero all NYGC data : started 4/3/15 at 2030
 
-    spades.py -k 95,85,75 -t 50 -m 1000 --only-assembler -o spades.mouse --careful \
+restarted 4/12/15 at 0800. Added `--cov-cutoff 2` and changed output dir to `$RAID`
+
+    spades.py -k 95,85,105 -t 50 -m 1000 --only-assembler --cov-cutoff 2 -o $RAID/spades.mouse --careful \
     --pe1-1 /mnt/data3/macmanes/pero_genome/raw_reasd/Pero360_550bp.P20_1P.fq.gz \
     --pe1-2 /mnt/data3/macmanes/pero_genome/raw_reasd/Pero360_550bp.P20_2P.fq.gz  \
     --pe2-1 /mnt/data3/macmanes/pero_genome/raw_reasd/Pero360_300bp.P20_1P.fq.gz \
