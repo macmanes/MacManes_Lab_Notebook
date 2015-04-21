@@ -166,13 +166,34 @@ run phylosift
 bwa
 --
 
-	bwa mem -t16 ../genome/mus /mnt/Thomas_McOr3_R1.PF.cor.fq.gz /mnt/Thomas_McOr3_R2.PF.cor.fq.gz
-	bwa mem -t16 ../genome/mus /mnt/Thomas_McOr2_R1.PF.cor.fq.gz /mnt/Thomas_McOr2_R2.PF.cor.fq.gz
-	bwa mem -t16 ../genome/mus /mnt/Thomas_McOr3_R1.PF.cor.fq.gz /mnt/Thomas_McOr1_R2.PF.cor.fq.gz
-	bwa mem -t16 ../genome/mus /mnt/Thomas_McBr3_R1.PF.cor.fq.gz /mnt/Thomas_McOr3_R2.PF.cor.fq.gz
-	bwa mem -t16 ../genome/mus /mnt/Thomas_McBr2_R1.PF.cor.fq.gz /mnt/Thomas_McOr2_R2.PF.cor.fq.gz
-	bwa mem -t16 ../genome/mus /mnt/Thomas_McBr1_R1.PF.cor.fq.gz /mnt/Thomas_McOr1_R2.PF.cor.fq.gz
+	bwa index -p mc mc_lighter_trinity/Trinity.fasta
+
+	bwa mem -t16 mc /mnt/Thomas_McOr3_R1.PF.cor.fq.gz /mnt/Thomas_McOr3_R2.PF.cor.fq.gz | \  
+	samtools view -@36 -Sub - > McOr3.bam
+	
+
+	bwa mem -t16 mc /mnt/Thomas_McOr2_R1.PF.cor.fq.gz /mnt/Thomas_McOr2_R2.PF.cor.fq.gz | \  
+	samtools view -@36 -Sub - > McOr2.bam
+
+	bwa mem -t16 mc /mnt/Thomas_McOr3_R1.PF.cor.fq.gz /mnt/Thomas_McOr1_R2.PF.cor.fq.gz | \  
+	samtools view -@36 -Sub - > McOr1.bam
+
+	bwa mem -t16 mc /mnt/Thomas_McBr3_R1.PF.cor.fq.gz /mnt/Thomas_McOr3_R2.PF.cor.fq.gz | \  
+	samtools view -@36 -Sub - > McBr3.bam
+
+	bwa mem -t16 mc /mnt/Thomas_McBr2_R1.PF.cor.fq.gz /mnt/Thomas_McOr2_R2.PF.cor.fq.gz | \  
+	samtools view -@36 -Sub - > McBr2.bam
+
+	bwa mem -t16 mc /mnt/Thomas_McBr1_R1.PF.cor.fq.gz /mnt/Thomas_McOr1_R2.PF.cor.fq.gz | \  
+	samtools view -@36 -Sub - > McBr1.bam
 
 
+salmon
+--
+
+	salmon quant -p 36 --useErrorModel -t mc_lighter_trinity/Trinity.fasta -l SF \
+	-a McOr3.bam McOr2.bam McOr1.bam McBr3.bam McBr2.bam McBr1.bam \
+	-o salmon_quant
+	
 
 
