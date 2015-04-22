@@ -51,7 +51,7 @@ LINKS
 
 Mya links
 
-    LINKS -l 2 -d 500 -f mya.fa -s ../pacbio/fasta/mya.pacbio.fasta -b iter500
+    LINKS -l 2 -d 500 -t 100 -f mya.fa -s ../pacbio/fasta/mya.pacbio.fasta -b iter500
     LINKS -l 2 -d 600 -f iter500.scaffolds.fa -s ../pacbio/fasta/mya.pacbio.fasta -b iter600
     LINKS -l 2 -d 700 -f iter600.scaffolds.fa -s ../pacbio/fasta/mya.pacbio.fasta -b iter700
     LINKS -l 2 -d 800 -f iter700.scaffolds.fa -s ../pacbio/fasta/mya.pacbio.fasta -b iter800
