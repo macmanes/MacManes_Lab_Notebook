@@ -156,3 +156,59 @@ in `/mouse/Mya/pbcr`
 	PBcR -s spec2.txt -fastq /mouse/Mya/pacbio/fastq/mya.pacbio.fastq -length 1000 \
 	-partitions 40 -l mya.pacbio.pbcr -t 40 -pbCNS -genomeSize 550000000 \
 	/mouse/Mya/pbcr/mya.illumina.frg
+	
+
+LSC
+--
+
+**aln command**
+	-n 0.01 -o 20 -e 3 -d 0 -i 0 -M 1 -O 0 -E 1 -N
+	
+	-n NUM    max #diff (int) or missing prob under 0.02 err rate (float) [0.04
+	-o INT    maximum number or fraction of gap opens [1]
+	-e INT    maximum number of gap extensions, -1 for disabling long gaps [-1]
+	-i INT    do not put an indel within INT bp towards the ends [5]	
+	-d INT    maximum occurrences for extending a long deletion [10]
+	-M INT    mismatch penalty [3]
+	-O INT    gap open penalty [11]
+	-E INT    gap extension penalty [4]
+	-N        non-iterative mode: search for all n-difference hits (slooow)
+
+
+**mem commands**
+
+	-k14 -W20 -r10 -A1 -B1 -O1 -E1 -L0
+	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
