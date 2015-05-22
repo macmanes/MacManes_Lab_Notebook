@@ -348,7 +348,11 @@ CEGMA
        Group 4       56       86.15      -    76     1.36     25.00
 
 
-    
+
+maker functional gff
+--
+
+
     
     
     
