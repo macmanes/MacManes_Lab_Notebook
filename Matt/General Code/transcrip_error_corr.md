@@ -23,7 +23,7 @@ seecer 0.1.3 (does not take gz files)
 
 
 	sudo mkfs -t ext4 /dev/xvdb
-	sudo mount /dev/xvdf /mnt
+	sudo mount /dev/xvdb /mnt
 	sudo chown -R ubuntu:ubuntu /mnt
 	
 
