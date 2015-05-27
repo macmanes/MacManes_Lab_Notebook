@@ -62,8 +62,65 @@ TRANSRATE
     -o seecer_trin_transrate -t 30
 
 
+KALLISTO
 
-
-
-
+	kallisto quant -i imitator -o CH1_week5 --plaintext \
+	/mnt/data3/macmanes/131011_HS1A_tadpole/tadpole_10_1.fq.gz \
+	/mnt/data3/macmanes/131011_HS1A_tadpole/tadpole_10_2.fq.gz
+	
+	kallisto quant -i imitator -o CH3_week2 --plaintext \
+	/mnt/data3/macmanes/131011_HS1A_tadpole/tadpole_14_1.fq.gz \
+	/mnt/data3/macmanes/131011_HS1A_tadpole/tadpole_14_2.fq.gz
+	
+	kallisto quant -i imitator -o CH3_week4 --plaintext \
+	/mnt/data3/macmanes/131011_HS1A_tadpole/tadpole_15_1.fq.gz \
+	/mnt/data3/macmanes/131011_HS1A_tadpole/tadpole_15_2.fq.gz
+	
+	kallisto quant -i imitator -o CH3_week5 --plaintext \
+	/mnt/data3/macmanes/131011_HS1A_tadpole/tadpole16_1.fq.gz \
+	/mnt/data3/macmanes/131011_HS1A_tadpole/tadpole16_2.fq.gz
+	
+	kallisto quant -i imitator -o CH2_week1 --plaintext \
+	/mnt/data3/macmanes/131011_HS1A_tadpole/tadpole1_1.fq.gz \
+	/mnt/data3/macmanes/131011_HS1A_tadpole/tadpole1_2.fq.gz
+	
+	kallisto quant -i imitator -o CH2_week2 --plaintext \
+	/mnt/data3/macmanes/131011_HS1A_tadpole/tadpole2_1.fq.gz \
+	/mnt/data3/macmanes/131011_HS1A_tadpole/tadpole2_2.fq.gz
+	
+	kallisto quant -i imitator -o CH2_week4 --plaintext \
+	/mnt/data3/macmanes/131011_HS1A_tadpole/tadpole3_1.fq.gz \
+	/mnt/data3/macmanes/131011_HS1A_tadpole/tadpole3_2.fq.gz
+	
+	kallisto quant -i imitator -o CH2_week5 --plaintext \
+	/mnt/data3/macmanes/131011_HS1A_tadpole/tadpole4_1.fq.gz \
+	/mnt/data3/macmanes/131011_HS1A_tadpole/tadpole4_2.fq.gz
+	
+	kallisto quant -i imitator -o CH1_week2 --plaintext \
+	/mnt/data3/macmanes/131011_HS1A_tadpole/tadpole8_1.fq.gz \
+	/mnt/data3/macmanes/131011_HS1A_tadpole/tadpole8_2.fq.gz
+	
+	kallisto quant -i imitator -o CH1_week4 --plaintext \
+	/mnt/data3/macmanes/131011_HS1A_tadpole/tadpole9_1.fq.gz \
+	/mnt/data3/macmanes/131011_HS1A_tadpole/tadpole9_2.fq.gz
+	
+	kallisto quant -i imitator -o rear_legs --plaintext \
+	/mnt/data3/macmanes/121201_HS3B_imitator/MBE-MDM-89_T4.1.fq.gz \
+	/mnt/data3/macmanes/121201_HS3B_imitator/MBE-MDM-89_T4.2.fq.gz
+	
+	kallisto quant -i imitator -o chin --plaintext \
+	/mnt/data3/macmanes/121201_HS3B_imitator/MBE-MDM-89_T1.1.fq.gz \
+	/mnt/data3/macmanes/121201_HS3B_imitator/MBE-MDM-89_T1.2.fq.gz
+	
+	kallisto quant -i imitator -o nape --plaintext \
+	/mnt/data3/macmanes/121201_HS3B_imitator/MBE-MDM-89_T2.1.fq.gz \
+	/mnt/data3/macmanes/121201_HS3B_imitator/MBE-MDM-89_T2.2.fq.gz
+	
+	kallisto quant -i imitator -o dorsal_post --plaintext \
+	/mnt/data3/macmanes/121201_HS3B_imitator/MBE-MDM-89_T3.1.fq.gz \
+	/mnt/data3/macmanes/121201_HS3B_imitator/MBE-MDM-89_T3.2.fq.gz
+	
+	kallisto quant -i imitator -o brain --plaintext \
+	/mnt/data3/macmanes/121201_HS3B_imitator/MBE-MDM-89_T5.1.fq.gz \
+	/mnt/data3/macmanes/121201_HS3B_imitator/MBE-MDM-89_T5.2.fq.gz
 
