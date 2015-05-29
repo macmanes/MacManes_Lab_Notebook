@@ -124,3 +124,66 @@ KALLISTO
 	/mnt/data3/macmanes/121201_HS3B_imitator/MBE-MDM-89_T5.1.fq.gz \
 	/mnt/data3/macmanes/121201_HS3B_imitator/MBE-MDM-89_T5.2.fq.gz
 
+sort
+
+
+    cat CH1_week2/abundance.txt | sort -k1 | cut -f1 > 0.txt  
+    cat CH1_week2/abundance.txt | sort -k1 | cut -f4 > 1.txt  
+    cat CH1_week4/abundance.txt | sort -k1 | cut -f4 > 2.txt  
+    cat CH2_week1/abundance.txt | sort -k1 | cut -f4 > 3.txt  
+    cat CH2_week2/abundance.txt | sort -k1 | cut -f4 > 4.txt  
+    cat CH2_week4/abundance.txt | sort -k1 | cut -f4 > 5.txt  
+    cat CH2_week5/abundance.txt | sort -k1 | cut -f4 > 6.txt  
+    cat CH3_week2/abundance.txt | sort -k1 | cut -f4 > 8.txt  
+    cat CH3_week4/abundance.txt | sort -k1 | cut -f4 > 9.txt  
+    cat CH3_week5/abundance.txt | sort -k1 | cut -f4 > 10.txt  
+    cat brain/abundance.txt | sort -k1 | cut -f4 > 11.txt  
+    cat nape/abundance.txt | sort -k1 | cut -f4 > 12.txt  
+    cat chin/abundance.txt | sort -k1 | cut -f4 > 13.txt  
+    cat rear_legs/abundance.txt | sort -k1 | cut -f4 > 14.txt  
+    cat dorsal_post/abundance.txt | sort -k1 | cut -f4 > 15.txt  
+
+
+   
+	paste 0.txt 1.txt 2.txt 3.txt 4.txt 5.txt \
+	6.txt 8.txt 9.txt 10.txt 11.txt 12.txt 13.txt 14.txt 15.txt > imi.counts.txt
+	
+	sed -i '1d' imi.counts.txt
+    
+    cat imi.counts.txt | awk '{print $1 "\t" int($2+0.5) "\t" int($3+0.5) "\t" int($4+0.5) "\t" int($5+0.5) "\t" int($6+0.5) "\t" int($7+0.5) "\t" int($8+0.5) "\t" int($9+0.5) "\t" int($10+0.5) "\t" int($11+0.5) "\t" int($12+0.5) "\t" int($13+0.5) "\t" int($14+0.5) "\t" int($15+0.5)} ' > imi.effcounts.txt   
+    
+    
+    
+    sed -i '1 i\names \t CH1_week2 \t CH1_week4 \t CH2_week1 \t CH2_week2 \t CH2_week4 \t CH2_week5 \t \t CH3_week2 \t CH3_week4 \t CH3_week5 \t brain \t nape \t chin \t rear_legs \t dorsal_post' imi.counts.txt
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
