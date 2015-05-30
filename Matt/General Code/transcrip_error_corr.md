@@ -843,5 +843,13 @@ bwa
 	~/bwa.kit/k8 ~/bfc/errstat.js seecer/50M.seecer31.sam.gz raw/50M.raw.sam.gz | tail -17
 
 	
+ALLPATHS
+--
 
-
+	perl /mnt/allpathslg-52488/src/paths/ErrorCorrectReads.pl \
+	MAX_MEMORY_GB=14 \
+	PHRED_ENCODING=33 \
+	READS_OUT=alp_corr.fq \
+	PAIRED_READS_A_IN=/mnt/read_error_corr/reads/subsamp_1.fq \
+	PAIRED_READS_B_IN=/mnt/read_error_corr/reads/subsamp_2.fq \
+	REMOVE_DODGY_READS=0
