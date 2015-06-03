@@ -36,7 +36,7 @@ opera
 
 	/share/opera_v2.0.1/bin/opera jelly.out.fasta \
 	lib_5kb.map,lib_8kb.map,lib_7kb.map,lib_3kb.map \
-	opera_results
+	opera5kb_results
 
 
 /mnt/data3/macmanes/pero_genome/raw_reasd/peer3kb.clipped.1.fq
