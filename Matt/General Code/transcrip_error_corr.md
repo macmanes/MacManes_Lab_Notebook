@@ -846,10 +846,20 @@ bwa
 ALLPATHS
 --
 
-	perl ./ErrorCorrectReads.pl \
+	ErrorCorrectReads.pl \
 	MAX_MEMORY_GB=14 \
 	PHRED_ENCODING=33 \
 	READS_OUT=alp_corr.fq \
 	PAIRED_READS_A_IN=/mnt/read_error_corr/reads/subsamp_1.fastq \
 	PAIRED_READS_B_IN=/mnt/read_error_corr/reads/subsamp_2.fastq \
+	REMOVE_DODGY_READS=0
+	
+
+
+
+	ErrorCorrectReads.pl \
+	MAX_MEMORY_GB=14 \
+	PHRED_ENCODING=33 \
+	READS_OUT=alp_corr.fq \
+	UNPAIRED_READS_IN=/mnt/read_error_corr/reads/SRR797058_1.fastq \
 	REMOVE_DODGY_READS=0
