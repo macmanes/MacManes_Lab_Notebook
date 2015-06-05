@@ -41,6 +41,11 @@ opera
 
 
 	/share/opera_v2.0.1/bin/opera jelly.out.fasta \
+	lib_5kb.map,lib_8kb.map \
+	opera58kb_results
+
+
+	/share/opera_v2.0.1/bin/opera jelly.out.fasta \
 	lib_5kb.map,lib_8kb.map,lib_7kb.map,lib_3kb.map \
 	opera5kb_results
 
