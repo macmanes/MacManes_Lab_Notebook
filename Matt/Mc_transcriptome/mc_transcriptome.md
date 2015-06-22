@@ -260,6 +260,7 @@ salmon error
     
     processed 43000000 reads in current roundSegmentation fault (core dumped)
 
+```
 
 Comparison of groups:  2-1 
                         logFC   logCPM       PValue          FDR
@@ -374,10 +375,11 @@ TR191930-c0_g1_i1    3.381119 5.220499 4.246613e-04 3.921433e-02
 TR77507-c0_g1_i2     6.845045 6.342689 4.541639e-04 4.155391e-02
 TR68951-c1_g2_i1    -2.002932 2.291400 5.077749e-04 4.603672e-02
 TR42818-c2_g5_i1    -2.770217 2.142000 5.667517e-04 5.078928e-02
+```
 
 GFP
 --
-
+```
 gi|16508124|gb|AY056460.1|      97.91   0.0     TR75761-c4_g1_i1
 gi|15425964|gb|AF406766.1|      97.44   0.0     TR27784-c2_g1_i4
 gi|15298095|gb|AF384683.2|      86.74   0.0     TR27784-c2_g1_i8
@@ -394,8 +396,58 @@ gi|154814313|gb|EU035529.1|     97.91   0.0     TR27784-c2_g1_i4
 gi|154814311|gb|EU035528.1|     90.20   0.0     TR27784-c2_g1_i4
 gi|154814309|gb|EU035527.1|     97.93   0.0     TR75761-c4_g1_i1
 
+```
+
+
+
+```
 name	mcor1	mcor2	mcor3	mcbr1	mcbr2	mcbr3
 TR75761-c4_g1_i1 (cyan fluorescent protein )	41.1507	91	276	34	7	4
 TR27784-c2_g1_i4 (green fluorescent protein)	43	886.024	76	185.383	110	66
 TR27784-c2_g1_i8 (isolate 9 green fluorescent protein)	104.796	255.059	198.076	310.571 101.009 130.581
 TR27784-c2_g1_i5 (photoconvertible fluorescent protein)	112.911	538	240.557	231.361	58 105
+
+```
+
+
+Mc blast
+
+
+    blastx -db uniprot -max_target_seqs 1 -query loose.up.in.orange.fasta \
+    -outfmt '6 qseqid evalue stitle' -evalue 1e-10 -num_threads 20 -out loose.up.in.orange.uniprot.blastx
+    
+    blastx -db uniprot -max_target_seqs 1 -query loose.up.in.brown.fasta \
+    -outfmt '6 qseqid evalue stitle' -evalue 1e-10 -num_threads 20 -out loose.up.in.brown.uniprot.blastx
+
+Phycoer
+
+```
+name	evalue	ID	mcor1	mcor2	mcor3	mcbr1	mcbr2	mcbr3
+TR162043-c0_g1_i1	2e-75	phycoerythrin-alpha-chain	3	0	6	16	4	1
+TR43136-c0_g1_i1	5e-11	phycoerythrin-class-2-subunit-gamma-linker-polypeptide 0	0	0	0	3	0
+TR115666-c0_g1_i1	1e-78	phycoerythrin-beta-subunit		0	0	4	5	2	0
+TR81874-c3_g1_i16	1.3	phycoerythrin-lyase-subunit		19	8	23	3	12	9.97835
+TR182201-c0_g1_i1	1e-48	Glutaredoxin-like-domain-fused-to-phycoerythrin-related-domain		7	26	15	1	28	9
+TR115666-c0_g1_i1	2e-64	Phycoerythrin-class-III-beta-chain-CpeB		0	0	4	5	2	0
+
+```
+
+edgeR Hacking
+--
+    source("http://bioconductor.org/biocLite.R")  
+    biocLite("edgeR")  
+    library(edgeR)  
+    x <- read.delim("/Users/macmanes/Box\ Sync/mc_transcriptomr/mc.counts", row.names='name')  
+    group <- factor(c(1,1,1,2,2,2))
+    y <- DGEList(counts=x, group=group)
+    keep <- rowSums(cpm(y) > 1) >= 6
+    #keep <- rowSums(cpm(y) > 1) >= 3 #382 diff expression
+    y <- y[keep,]
+    dim(y)
+    y <- calcNormFactors(y)
+    y <- estimateCommonDisp(y)
+    y <- estimateTagwiseDisp(y)  
+    et <- exactTest(y)
+    summary(de <- decideTestsDGE(et, p=0.05, adjust="BH"))
+    topTags(et, n=205)
+
