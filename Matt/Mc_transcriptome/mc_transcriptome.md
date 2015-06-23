@@ -440,7 +440,7 @@ edgeR Hacking
     x <- read.delim("/Users/macmanes/Box\ Sync/mc_transcriptomr/mc.counts", row.names='name')  
     group <- factor(c(1,1,1,2,2,2))
     y <- DGEList(counts=x, group=group)
-    keep <- rowSums(cpm(y) > 1) >= 6
+    keep <- rowSums(cpm(y) > 4) >= 3
     #keep <- rowSums(cpm(y) > 1) >= 3 #382 diff expression
     y <- y[keep,]
     dim(y)
@@ -449,5 +449,5 @@ edgeR Hacking
     y <- estimateTagwiseDisp(y)  
     et <- exactTest(y)
     summary(de <- decideTestsDGE(et, p=0.05, adjust="BH"))
-    topTags(et, n=205)
+    topTags(et, n=80)
 
