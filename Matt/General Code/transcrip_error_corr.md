@@ -863,3 +863,18 @@ ALLPATHS
 	READS_OUT=alp_corr.fq \
 	UNPAIRED_READS_IN=/mnt/read_error_corr/reads/SRR797058_1.fastq \
 	REMOVE_DODGY_READS=0
+	
+
+
+transrate
+--
+
+	/share/transrate-1.0.0-linux-x86_64/transrate -t 30 \
+	--assembly trinity_10M.P2.raw.Trinity.fasta,\
+	trinity_10M.P2.bfc33.Trinity.fasta,\
+	trinity_20M.P2.raw.Trinity.fasta,\
+	trinity_20M.P2.bfc33.Trinity.fasta,\
+	trinity_20M.P2.bfc33.first.Trinity.fasta \
+	--left /mnt/data3/macmanes/feeding/SRR797058.P2_1P.fq \
+	--right /mnt/data3/macmanes/feeding/SRR797058.P2_2P.fq \
+	--reference /mnt/data3/macmanes/feeding/Mus_musculus.GRCm38.pep.all.fa 
