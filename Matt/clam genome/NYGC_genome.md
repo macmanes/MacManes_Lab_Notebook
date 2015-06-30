@@ -173,3 +173,84 @@ E external clip in 1 or both: 6972      0.00 %
 
 Done. Completed in 40445 seconds.
 ```
+
+
+
+ALLPATHS
+--
+
+in_groups.csv
+
+```
+file_name, library_name, group_name  
+/mouse/Mya/hcgs_reads/pe/mya.corr.trim.*.fq,L1,      frags1  
+/mouse/Mya/nygc_reads/pe/clam500.P2_*P.fq,L2,      frags2  
+/mouse/Mya/nygc_reads/mp/clam5kb_*.fastq,5kb,      jumps5  
+/mouse/Mya/nygc_reads/mp/clam10kb_*.fastq,10kb,      jumps10  
+
+```
+
+in_libs.csv
+
+```
+library_name, project_name, organism_name,     type, paired, frag_size, frag_stddev, insert_size, insert_stddev, read_orientation, genomic_start, genomic_end
+L1,mya_v1,mya, fragment,1,300,50,            ,              ,           inward,0,0
+L2,mya_v1,mya, fragment,1,550,50,            ,              ,           inward,0,0
+5kb,mya_v1,mya,  jumping,1,          ,            ,5000,500,          outward,0,0
+10kb,mya_v1,mya,  jumping,1,          ,            ,10000,1000,          outward,0,0
+
+```
+
+PreprareInputs
+
+```
+/usr/local/bin/PrepareAllPathsInputs.pl \
+DATA_DIR=/mouse/Mya/allpaths/v1/ \
+GENOME_SIZE=1000000000 OVERWRITE=True PLOIDY=2 \
+FRAG_COVERAGE=50 HOSTS=30 \
+TMP_DIR=/mouse \
+JAVA_MEM_GB=100 | tee prepare.out
+```
+
+RunAllp
+
+```
+RunAllPathsLG THREADS=40 FIX_ASSEMBLY_BASE_ERRORS=TRUE \
+PRE=/mouse/Mya/allpaths/ \
+DATA_SUBDIR=v1 \
+RUN=mya_v1 \
+REFERENCE_NAME=clam \
+TARGETS=standard \
+CONNECT_SCAFFOLDS=TRUE HAPLOIDIFY=TRUE | tee assembly.out
+
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
