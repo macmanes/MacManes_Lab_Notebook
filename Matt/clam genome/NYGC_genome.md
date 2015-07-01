@@ -32,6 +32,18 @@ and
     
 	Input Read Pairs: 299805502 Both Surviving: 297619937 (99.27%) Forward Only Surviving: 1956415 (0.65%) Reverse Only Surviving: 202488 (0.07%) Dropped: 26662 (0.01%)
 
+
+for hcgs PE reads
+
+    java -Xmx50g -jar \
+    /share/trinityrnaseq/trinity-plugins/Trimmomatic-0.32/trimmomatic-0.32.jar PE \
+    -threads 24 -baseout clam300.P2.fq.gz \
+    mya.corr.trim.1.fq \
+    mya.corr.trim.2.fq  \
+    ILLUMINACLIP:/share/trinityrnaseq/trinity-plugins/Trimmomatic/adapters/TruSeq3-PE.fa:2:40:15 \
+    LEADING:5 TRAILING:5 SLIDINGWINDOW:4:5 MINLEN:50
+
+
 for NYGC MP reads
 
 	nextclip \
