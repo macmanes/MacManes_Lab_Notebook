@@ -195,8 +195,8 @@ in_groups.csv
 
 ```
 file_name, library_name, group_name  
-/mouse/Mya/hcgs_reads/pe/mya.corr.trim.*.fq,L1,      frags1  
-/mouse/Mya/nygc_reads/pe/clam500.P2_*P.fq,L2,      frags2  
+/mouse/Mya/hcgs_reads/pe/clam300.P2_*P.fq.gz,L1,      frags1  
+/mouse/Mya/nygc_reads/pe/clam500.P2_*P.fq.gz,L2,      frags2  
 /mouse/Mya/nygc_reads/mp/clam5kb_*.fastq,5kb,      jumps5  
 /mouse/Mya/nygc_reads/mp/clam10kb_*.fastq,10kb,      jumps10  
 
@@ -219,7 +219,7 @@ PreprareInputs
 /usr/local/bin/PrepareAllPathsInputs.pl \
 DATA_DIR=/mouse/Mya/allpaths/v1/ \
 GENOME_SIZE=1000000000 OVERWRITE=True PLOIDY=2 \
-FRAG_COVERAGE=50 HOSTS=30 \
+HOSTS=30 \
 TMP_DIR=/mouse \
 JAVA_MEM_GB=100 | tee prepare.out
 ```
