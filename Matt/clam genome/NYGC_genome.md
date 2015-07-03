@@ -42,6 +42,11 @@ for hcgs PE reads
     mya.corr.trim.2.fq  \
     ILLUMINACLIP:/share/trinityrnaseq/trinity-plugins/Trimmomatic/adapters/TruSeq3-PE.fa:2:40:15 \
     LEADING:5 TRAILING:5 SLIDINGWINDOW:4:5 MINLEN:50
+    
+	Input Read Pairs: 490889174 Both Surviving: 480446743 (97.87%) Forward Only Surviving: 7473313 (1.52%) Reverse Only Surviving: 2492373 (0.51%) Dropped: 476745 (0.10%)
+    
+
+
 
 
 for NYGC MP reads
