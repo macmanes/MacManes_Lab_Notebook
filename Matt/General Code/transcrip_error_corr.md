@@ -878,3 +878,32 @@ transrate
 	--left /mnt/data3/macmanes/feeding/SRR797058.P2_1P.fq \
 	--right /mnt/data3/macmanes/feeding/SRR797058.P2_2P.fq \
 	--reference /mnt/data3/macmanes/feeding/Mus_musculus.GRCm38.pep.all.fa 
+	
+for asembly:
+--
+
+10 and 20M bfc
+
+50 and 100 seecer
+
+subsamp, trimmomatic (seecer output fa)
+
+    java -Xmx10g -jar \
+    ~/trinityrnaseq/trinity-plugins/Trimmomatic-0.32/trimmomatic-0.32.jar PE \
+    -threads 16 -baseout subsamp100.P2.fq.gz \
+    /mnt/reads/subsamp_1.fastq \
+    /mnt/reads/subsamp_2.fastq  \
+    ILLUMINACLIP:/mnt/scripts/barcodes.fa:2:40:15 \
+    LEADING:2 TRAILING:2 SLIDINGWINDOW:4:2 MINLEN:50
+    
+	run_seecer.sh -t . -k 31 /mnt/reads/subsamp_1.fastq /mnt/reads/subsamp_2.fastq
+	
+	cd /mnt/trinity_10M \
+	Trinity --seqType fq --max_memory 10G --trimmomatic \
+	--left /mnt/bfc10M/bfc33.corr.fq.1 \
+	--right /mnt/bfc10M/bfc33.corr.fq.2 \
+	--CPU 16 --output trinity_10M.P2.bfc33 --inchworm_cpu 10 --full_cleanup \
+	--quality_trimming_params "ILLUMINACLIP:/mnt/scripts/barcodes.fa:2:40:15 LEADING:2 TRAILING:2 MINLEN:25"
+	
+
+
