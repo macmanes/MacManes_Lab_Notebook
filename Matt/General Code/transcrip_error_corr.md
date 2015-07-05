@@ -890,20 +890,20 @@ subsamp, trimmomatic (seecer output fa)
 
     java -Xmx10g -jar \
     ~/trinityrnaseq/trinity-plugins/Trimmomatic-0.32/trimmomatic-0.32.jar PE \
-    -threads 16 -baseout subsamp100.P2.fq.gz \
+    -threads 16 -baseout subsamp50.P2.fq \
     /mnt/reads/subsamp_1.fastq \
     /mnt/reads/subsamp_2.fastq  \
     ILLUMINACLIP:/mnt/scripts/barcodes.fa:2:40:15 \
-    LEADING:2 TRAILING:2 SLIDINGWINDOW:4:2 MINLEN:50
+    LEADING:2 TRAILING:2 SLIDINGWINDOW:4:2 MINLEN:25
     
-	run_seecer.sh -t . -k 31 /mnt/reads/subsamp_1.fastq /mnt/reads/subsamp_2.fastq
+	run_seecer.sh -t . -k 31 /mnt/reads/subsamp100.P2_1P.fq /mnt/reads/subsamp100.P2_2P.fq
 	
-	cd /mnt/trinity_10M \
-	Trinity --seqType fq --max_memory 10G --trimmomatic \
-	--left /mnt/bfc10M/bfc33.corr.fq.1 \
-	--right /mnt/bfc10M/bfc33.corr.fq.2 \
-	--CPU 16 --output trinity_10M.P2.bfc33 --inchworm_cpu 10 --full_cleanup \
-	--quality_trimming_params "ILLUMINACLIP:/mnt/scripts/barcodes.fa:2:40:15 LEADING:2 TRAILING:2 MINLEN:25"
+	cd /mnt/trinity_100M \
+	Trinity --seqType fq --max_memory 10G \
+	--left /mnt/reads/subsamp100.P2_1P.fq \
+	--right /mnt/reads/subsamp100.P2_2P.fq \
+	--CPU 16 --output trinity_100M.P2.raw --inchworm_cpu 10 --full_cleanup \
+
 	
 
 
