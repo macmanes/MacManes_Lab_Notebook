@@ -251,8 +251,8 @@ ABYSS
 	export TMPDIR=/mnt/data0/   
 
 
-    split -l 116000000 --additional-suffix=aaa <(zcat /mouse/Mya/hcgs_reads/pe/clam300.P2_*P.fq.gz) &  
-    split -l 116000000 --additional-suffix=zzz <(cat /mouse/Mya/nygc_reads/pe/clam500.P2_*P.fq.gz) &  
+    split -l 156000000 --additional-suffix=aaa <(zcat /mouse/Mya/hcgs_reads/pe/clam300.P2_*P.fq.gz) &
+    split -l 156000000 --additional-suffix=zzz <(zcat /mouse/Mya/nygc_reads/pe/clam500.P2_*P.fq.gz) &
     
     for k in 71 91 111; do
         mkdir /mouse/Mya/abyss/k$k
