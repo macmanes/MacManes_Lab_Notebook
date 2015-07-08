@@ -257,7 +257,7 @@ ABYSS
     for k in 71 91 111; do
         mkdir /mouse/Mya/abyss/k$k
         cd /mouse/Mya/abyss/k$k
-        mpirun -np 64 ABYSS-P -v -k$k \
+        mpirun -np 40 ABYSS-P -v -k$k \
         --coverage-hist=coverage.hist \
         -o Mya$k-1.fa /mouse/Mya/split/*;
     done
@@ -266,7 +266,7 @@ ABYSS
 
 
     for k in 101; do
-        abyss-pe -C k$k np=60 k=$k name=peer$k l=25 n=5 \
+        abyss-pe -C k$k np=40 k=$k name=Mya$k l=25 n=5 \
         lib='pe1 pe2' mp1_l=30 mp1_l=30 \
         mp='mp1 mp2' long='long1 long2' v=-v \
         pe1='/mouse/Mya/nygc_reads/pe/clam500.P2_1P.fq /mouse/Mya/nygc_reads/pe/clam500.P2_2P.fq' \
