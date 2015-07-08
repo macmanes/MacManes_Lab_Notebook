@@ -251,28 +251,28 @@ ABYSS
 	export TMPDIR=/mnt/data0/   
 
 
-    split -l 116000000 --additional-suffix=aaa <(cat /mouse/Mya/hcgs_reads/pe/clam300.P2_*P.fq) &  
-    split -l 116000000 --additional-suffix=zzz <(cat /mouse/Mya/nygc_reads/pe/clam500.P2_*P.fq) &  
+    split -l 116000000 --additional-suffix=aaa <(zcat /mouse/Mya/hcgs_reads/pe/clam300.P2_*P.fq.gz) &  
+    split -l 116000000 --additional-suffix=zzz <(cat /mouse/Mya/nygc_reads/pe/clam500.P2_*P.fq.gz) &  
     
-    for k in 71 91 111; do  
-        mkdir /mouse/Mya/abyss/k$k  
-        cd /mouse/Mya/abyss/k$k  
-        mpirun -np 64 ABYSS-P -v -k$k \  
-        --coverage-hist=coverage.hist \  
-        -o Mya$k-1.fa /mouse/Mya/split/*;  
-    done  
+    for k in 71 91 111; do
+        mkdir /mouse/Mya/abyss/k$k
+        cd /mouse/Mya/abyss/k$k
+        mpirun -np 64 ABYSS-P -v -k$k \
+        --coverage-hist=coverage.hist \
+        -o Mya$k-1.fa /mouse/Mya/split/*;
+    done
 
 
 
 
-    for k in 101; do  
-        abyss-pe -C k$k np=60 k=$k name=peer$k l=25 n=5 \  
-        lib='pe1 pe2' mp1_l=30 mp1_l=30 \  
-        mp='mp1 mp2 mp3 mp4' long='long1 long2' v=-v \  
-        pe1='/mouse/Mya/nygc_reads/pe/clam500.P2_1P.fq /mouse/Mya/nygc_reads/pe/clam500.P2_2P.fq' \  
-        pe2='/mouse/Mya/nygc_reads/pe/clam500.P2_1P.fq /mouse/Mya/nygc_reads/pe/clam500.P2_2P.fq' \  
-        mp1='/mouse/Mya/nygc_reads/mp/clam5kb_1.fastq /mouse/Mya/nygc_reads/mp/clam5kb_2.fastq' \  
-        mp2='/mouse/Mya/nygc_reads/mp/clam10kb_1.fastq /mouse/Mya/nygc_reads/mp/clam10kb_2.fastq' \  
+    for k in 101; do
+        abyss-pe -C k$k np=60 k=$k name=peer$k l=25 n=5 \
+        lib='pe1 pe2' mp1_l=30 mp1_l=30 \
+        mp='mp1 mp2' long='long1 long2' v=-v \
+        pe1='/mouse/Mya/nygc_reads/pe/clam500.P2_1P.fq /mouse/Mya/nygc_reads/pe/clam500.P2_2P.fq' \
+        pe2='/mouse/Mya/nygc_reads/pe/clam500.P2_1P.fq /mouse/Mya/nygc_reads/pe/clam500.P2_2P.fq' \
+        mp1='/mouse/Mya/nygc_reads/mp/clam5kb_1.fastq /mouse/Mya/nygc_reads/mp/clam5kb_2.fastq' \
+        mp2='/mouse/Mya/nygc_reads/mp/clam10kb_1.fastq /mouse/Mya/nygc_reads/mp/clam10kb_2.fastq' \
         long1='/mouse/Mya/output_lsc/corrected_LR.fa' \
         long2='/mnt/data3/macmanes/Mya/clam.Trinity.fasta';
 
