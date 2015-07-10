@@ -254,7 +254,7 @@ ABYSS
     split -l 156000000 --additional-suffix=aaa <(zcat /mouse/Mya/hcgs_reads/pe/clam300.P2_*P.fq.gz) &
     split -l 156000000 --additional-suffix=zzz <(zcat /mouse/Mya/nygc_reads/pe/clam500.P2_*P.fq.gz) &
     
-    for k in 81 101 111; do
+    for k in 101 111 81; do
         mkdir /mouse/Mya/abyss/k$k
         cd /mouse/Mya/abyss/k$k
         mpirun -np 42 ABYSS-P -v -k$k \
@@ -265,7 +265,7 @@ ABYSS
 
 
 
-    for k in 91 71 81 101 111; do
+    for k in 91 101 111 71 81; do
         abyss-pe -C k$k np=40 k=$k name=Mya$k l=25 n=5 \
         lib='pe1 pe2' mp1_l=25 mp2_l=25 \
         mp='mp1 mp2' long='long1 long2' v=-vv \
