@@ -254,10 +254,10 @@ ABYSS
     split -l 156000000 --additional-suffix=aaa <(zcat /mouse/Mya/hcgs_reads/pe/clam300.P2_*P.fq.gz) &
     split -l 156000000 --additional-suffix=zzz <(zcat /mouse/Mya/nygc_reads/pe/clam500.P2_*P.fq.gz) &
     
-    for k in 71 91 111; do
+    for k in 91 71 111; do
         mkdir /mouse/Mya/abyss/k$k
         cd /mouse/Mya/abyss/k$k
-        mpirun -np 40 ABYSS-P -v -k$k \
+        mpirun -np 42 ABYSS-P -v -k$k \
         --coverage-hist=coverage.hist \
         -o Mya$k-1.fa /mouse/Mya/split/*;
     done
@@ -265,17 +265,16 @@ ABYSS
 
 
 
-    for k in 101; do
+    for k in 91 71; do
         abyss-pe -C k$k np=40 k=$k name=Mya$k l=25 n=5 \
-        lib='pe1 pe2' mp1_l=30 mp1_l=30 \
-        mp='mp1 mp2' long='long1 long2' v=-v \
-        pe1='/mouse/Mya/nygc_reads/pe/clam500.P2_1P.fq /mouse/Mya/nygc_reads/pe/clam500.P2_2P.fq' \
-        pe2='/mouse/Mya/nygc_reads/pe/clam500.P2_1P.fq /mouse/Mya/nygc_reads/pe/clam500.P2_2P.fq' \
+        lib='pe1 pe2' mp1_l=25 mp2_l=25 \
+        mp='mp1 mp2' long='long1 long2' v=-vv \
+        pe1='/mouse/Mya/hcgs_reads/pe/clam300.P2_1P.fq.gz /mouse/Mya/hcgs_reads/pe/clam300.P2_2P.fq.gz' \
+        pe2='/mouse/Mya/nygc_reads/pe/clam500.P2_1P.fq.gz /mouse/Mya/nygc_reads/pe/clam500.P2_2P.fq.gz' \
         mp1='/mouse/Mya/nygc_reads/mp/clam5kb_1.fastq /mouse/Mya/nygc_reads/mp/clam5kb_2.fastq' \
         mp2='/mouse/Mya/nygc_reads/mp/clam10kb_1.fastq /mouse/Mya/nygc_reads/mp/clam10kb_2.fastq' \
         long1='/mouse/Mya/output_lsc/corrected_LR.fa' \
         long2='/mnt/data3/macmanes/Mya/clam.Trinity.fasta';
-
     done  
 
 
