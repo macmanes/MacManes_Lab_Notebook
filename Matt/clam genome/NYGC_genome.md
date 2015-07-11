@@ -267,7 +267,7 @@ ABYSS
 
     for k in 91 101 111 71 81; do
         abyss-pe -C k$k np=40 k=$k name=Mya$k l=25 n=5 \
-        lib='pe1 pe2' mp1_l=25 mp2_l=25 \
+        lib='pe1 pe2' mp1_l=25 mp2_l=25 aligner=bwa \
         mp='mp1 mp2' long='long1 long2' v=-vv \
         pe1='/mouse/Mya/hcgs_reads/pe/clam300.P2_1P.fq.gz /mouse/Mya/hcgs_reads/pe/clam300.P2_2P.fq.gz' \
         pe2='/mouse/Mya/nygc_reads/pe/clam500.P2_1P.fq.gz /mouse/Mya/nygc_reads/pe/clam500.P2_2P.fq.gz' \
@@ -277,6 +277,30 @@ ABYSS
         long2='/mnt/data3/macmanes/Mya/clam.Trinity.fasta';
     done  
 
+masurca
+--
+
+```
+DATA  
+PE= aa 550 50 /mouse/Mya/nygc_reads/pe/clam500.P2_1P.fq.gz /mouse/Mya/nygc_reads/pe/clam500.P2_2P.fq.gz  
+PE= ab 300 40 /mouse/Mya/hcgs_reads/pe/clam300.P2_1P.fq.gz /mouse/Mya/hcgs_reads/pe/clam300.P2_2P.fq.gz   
+JUMP= af 7000 600 mouse/Mya/nygc_reads/mp/clam5kb_1.fastq /mouse/Mya/nygc_reads/mp/clam5kb_2.fastq  
+JUMP= ac 6000 600 /mouse/Mya/nygc_reads/mp/clam10kb_1.fastq /mouse/Mya/nygc_reads/mp/clam10kb_2.fastq   
+OTHER=clam.pacbio.frg  
+END  
+
+PARAMETERS
+SOAP_ASSEMBLY=1
+GRAPH_KMER_SIZE = auto  
+USE_LINKING_MATES = 1  
+LIMIT_JUMP_COVERAGE = 300  
+CA_PARAMETERS = cgwErrorRate=0.15
+KMER_COUNT_THRESHOLD = 2  
+NUM_THREADS = 40  
+JF_SIZE = 16244928491  
+DO_HOMOPOLYMER_TRIM = 0  
+END  
+```
 
 
 
