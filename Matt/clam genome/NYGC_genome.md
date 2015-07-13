@@ -292,7 +292,30 @@ ABYSS
 
 
 
+masurca
+--
 
+```
+DATA  
+PE= aa 550 50 /mouse/Mya/nygc_reads/pe/clam500.P2_1P.fq.gz /mouse/Mya/nygc_reads/pe/clam500.P2_2P.fq.gz  
+PE= ab 300 40 /mouse/Mya/hcgs_reads/pe/clam300.P2_1P.fq.gz /mouse/Mya/hcgs_reads/pe/clam300.P2_2P.fq.gz   
+JUMP= af 7000 600 mouse/Mya/nygc_reads/mp/clam5kb_1.fastq /mouse/Mya/nygc_reads/mp/clam5kb_2.fastq  
+JUMP= ac 6000 600 /mouse/Mya/nygc_reads/mp/clam10kb_1.fastq /mouse/Mya/nygc_reads/mp/clam10kb_2.fastq   
+OTHER=clam.pacbio.frg  
+END  
+
+PARAMETERS
+SOAP_ASSEMBLY=1
+GRAPH_KMER_SIZE = auto  
+USE_LINKING_MATES = 1  
+LIMIT_JUMP_COVERAGE = 300  
+CA_PARAMETERS = cgwErrorRate=0.15
+KMER_COUNT_THRESHOLD = 2  
+NUM_THREADS = 40  
+JF_SIZE = 16244928491  
+DO_HOMOPOLYMER_TRIM = 0  
+END  
+```
 
 
 
