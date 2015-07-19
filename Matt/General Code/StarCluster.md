@@ -30,9 +30,9 @@ nano ~/.starcluster/config
 
 
 [aws info]
-aws_access_key_id = AKIAJQYKA3447MYIHETA
-aws_secret_access_key = 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
-aws_user_id = 705503817198
+aws_access_key_id = 
+aws_secret_access_key = 
+aws_user_id = 
 
 [key mykey]
 key_location = ~/.ssh/mykey.rsa
@@ -57,7 +57,7 @@ logout
 starcluster terminate mycluster
 
 
-cd /mnt
+cd /genome
 tmux new -s dl
 wget https://s3.amazonaws.com/mya-genome/clam.longreads.fastq
 nano config
@@ -109,3 +109,12 @@ asmOBT=0
 starcluster createvolume 555 us-east-1c -n mya -m mkfs.ext4 --detach-volume
 
 starcluster listclusters volumecreator
+
+
+```
+PBcR -l Mya -s config \
+-fastq clam.longreads.fastq \
+genomeSize=1000000000 \
+sgeName=Mya "sge=-A Mya"
+
+```
