@@ -278,10 +278,10 @@ ABYSS
     done  
 
 
-    for k in 71 81 61; do
-        abyss-pe -C k$k np=20 k=$k name=Mya$k l=25 n=5 s=1000 pcopt=-a1 \
-        lib='pe1 pe2' mp1_l=25 mp2_l=25 \
-        mp='mp1 mp2' long='long1 long2' v=-vv \
+    for k in 61; do
+        abyss-pe -C k$k np=40 k=$k name=Mya$k l=25 n=5 \
+        lib='pe1 pe2' mp1_l=25 mp2_l=25 aligner=bwa \
+        mp='mp1 mp2' long='long1 long2' \
         pe1='/mouse/Mya/hcgs_reads/pe/clam300.P2_1P.fq.gz /mouse/Mya/hcgs_reads/pe/clam300.P2_2P.fq.gz' \
         pe2='/mouse/Mya/nygc_reads/pe/clam500.P2_1P.fq.gz /mouse/Mya/nygc_reads/pe/clam500.P2_2P.fq.gz' \
         mp1='/mouse/Mya/nygc_reads/mp/clam5kb_1.fastq /mouse/Mya/nygc_reads/mp/clam5kb_2.fastq' \
