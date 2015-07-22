@@ -89,24 +89,24 @@ mhap=-k 14 --num-hashes 1024 --pacbio_fast
 useGrid=1
 scriptOnGrid=1
 
-ovlMemory=64
+ovlMemory=2
 ovlStoreMemory=64000
-threads=96
+threads=1
 ovlConcurrency=96
-cnsConcurrency=90
-merylThreads=90
-merylMemory=32000
+cnsConcurrency=96
+merylThreads=96
+merylMemory=4000
 ovlRefBlockSize=20000
-frgCorrThreads = 90
+frgCorrThreads = 96
 frgCorrBatchSize = 100000
 ovlCorrBatchSize = 100000
 
 sgeScript = -pe orte 90
 sgeConsensus = -pe orte 90
-sgeOverlap = -pe orte 90 -l mem=2GB
-sgeCorrection = -pe orte 90 -l mem=2GB
-sgeFragmentCorrection = -pe orte 90 -l mem=2GB
-sgeOverlapCorrection = -pe orte 90 -l mem=16GB
+sgeOverlap = -pe orte 90
+sgeCorrection = -pe orte 90
+sgeFragmentCorrection = -pe orte 90
+sgeOverlapCorrection = -pe orte 90
 # relax overlap parameters
 asmOvlErrorRate=0.10
 asmUtgErrorRate=0.07
@@ -138,4 +138,9 @@ PBcR -l Mya_test -s config2 \
 genomeSize=1000000000 \
 sgeName=Mya "sge=-A Mya"
 
+```
+
+```
+runCA -p Mya_asm -d Mya_asm -s config genomeSize=1000000000 \
+sgeName=Mya "sge=-A Mya" Mya.frg
 ```

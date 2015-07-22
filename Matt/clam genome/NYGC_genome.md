@@ -321,8 +321,20 @@ END
 
 
 
+PBcR
+--
 
+```
+PBcR -l Mya -s config ---length 1000 -t 20 -pbCNS \
+-fastq clam.longreads.fastq \
+```
 
+runCA
+--
+
+```
+runCA -p Mya_asm -d Mya_asm -s config tempMya/Mya.frg 
+```
 
 
 
