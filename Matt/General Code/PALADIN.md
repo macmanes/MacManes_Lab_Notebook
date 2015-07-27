@@ -88,7 +88,7 @@ PALADIN test
 	93698 entries to UniProt
 
 -
-	paladin align -t 4 -u 2 data/uniprot_sprot.fasta data/4520320_merged.assembled.fastq > pear_paladin.txt
+	paladin align -t 4 -u 2 data/uniprot_sprot.fasta data/4520320_merged.assembled.fastq > pear_paladin2.txt
 
 	awk '{ sum += $1 } END { print sum }' pear_paladin.txt
 	164996 (139k original reads)
@@ -126,6 +126,14 @@ Count	UniProtKB	ID	Organism	Protein Names	Genes	Pathway	Features	Gene Ontology	R
 
 ```
 
+sample_data
+
+```
+make_check
+	cd sample_data && \
+	paladin prepare -r0 && \ 
+	paladin align -t 4 -u 2 uniprot_sprot.fasta.gz sample_data/4520320_merged.assembled.fastq.gz > paladin_uniprot_report.txt
+``
 
 
 
