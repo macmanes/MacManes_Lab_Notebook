@@ -338,6 +338,15 @@ runCA -p Mya_asm -d Mya_asm -s config tempMya/Mya.frg
 
 
 
+BUSCO
+--
+
+in `/mouse/Mya/assemblies/long`
+
+```
+for i in $(ls *fa); do F=$(basename $i .fa); python3 /share/BUSCO_v1.1b1/BUSCO_v1.1b1.py -o $F -in $i -l metazoa -m genome -c 20; done
+```
+
 
 
 
