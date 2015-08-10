@@ -16,7 +16,7 @@ in `/mouse/Mya/medusa`
 
 ```
 java -jar /share/medusa/medusa.jar -f ../assemblies/long/ \
--i ../assemblies/reference/asm.fa -o meduasa.mya.fasta -v
+-i ../assemblies/reference/oyster71-8.fa -o meduasa.mya.fasta -v | tee medusa.out
 
 ```
 
