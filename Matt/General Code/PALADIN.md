@@ -133,10 +133,27 @@ make_check
 	cd sample_data && \
 	paladin prepare -r0 && \ 
 	paladin align -t 4 -u 2 uniprot_sprot.fasta.gz sample_data/4520320_merged.assembled.fastq.gz > paladin_uniprot_report.txt
-``
+```
 
 
 
+version 1.0.0
+--
+
+```
+paladin prepare -r0
+
+curl http://api.metagenomics.anl.gov//download/mgm4520306.3?file=050.1 > root_S13.R1.fq
+
+curl http://api.metagenomics.anl.gov//download/mgm4520307.3?file=050.1 > root_S13.R2.fq
+
+
+pip install --upgrade setuptools
+pip install khmer
+
+interleave-reads.py root_S13.R1.fq root_S13.R2.fq > interleaved.fq
+
+```
 
 
 
