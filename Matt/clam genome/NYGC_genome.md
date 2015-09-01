@@ -388,7 +388,22 @@ done
 ```
 
 
+picking khmer k81
+=================
 
+```
+for k in 81; do
+    /mouse/Mya/abyss-khmer/k97/new/abyss-pe.pacbio -C k$k np=40 k=$k name=Mya$k l=25 n=5 \
+    lib='pe1 pe2' mp1_l=50 mp2_l=50 pacbio='long1' \
+    mp='mp1 mp2' long='long2' \
+    pe1='/mouse/Mya/hcgs_reads/pe/clam300.P2_1P.fq.gz /mouse/Mya/hcgs_reads/pe/clam300.P2_2P.fq.gz' \
+    pe2='/mouse/Mya/nygc_reads/pe/clam500.P2_1P.fq.gz /mouse/Mya/nygc_reads/pe/clam500.P2_2P.fq.gz' \
+    mp1='/mouse/Mya/nygc_reads/mp/clam5kb_1.fastq /mouse/Mya/nygc_reads/mp/clam5kb_2.fastq' \
+    mp2='/mouse/Mya/nygc_reads/mp/clam10kb_1.fastq /mouse/Mya/nygc_reads/mp/clam10kb_2.fastq' \
+    long1='/mouse/Mya/output_lsc/corrected_LR.fa' \
+    long2='/mnt/data3/macmanes/Mya/clam.Trinity.fasta' | tee $kassembly.out;
+done
+```
 
 
 
