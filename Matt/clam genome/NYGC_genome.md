@@ -405,6 +405,103 @@ for k in 81; do
 done
 ```
 
+opera
+--
+
+```
+perl /share/opera_v2.0.2/bin/preprocess_reads.pl \
+Mya81-contigs.fa \
+/mouse/Mya/hcgs_reads/pe/clam300.P2_1P.fq.gz /mouse/Mya/hcgs_reads/pe/clam300.P2_2P.fq.gz \
+lib_300.map
+
+perl /share/opera_v2.0.2/bin/preprocess_reads.pl \
+Mya81-contigs.fa \
+/mouse/Mya/nygc_reads/pe/clam500.P2_1P.fq.gz /mouse/Mya/nygc_reads/pe/clam500.P2_2P.fq.gz \
+lib_500.map
+
+perl /share/opera_v2.0.2/bin/preprocess_reads.pl \
+Mya81-contigs.fa \
+/mouse/Mya/nygc_reads/mp/clam5kb_1.fastq /mouse/Mya/nygc_reads/mp/clam5kb_2.fastq \
+lib_5kb.map
+
+perl /share/opera_v2.0.2/bin/preprocess_reads.pl \
+Mya81-contigs.fa \
+/mouse/Mya/nygc_reads/mp/clam10kb_1.fastq /mouse/Mya/nygc_reads/mp/clam10kb_2.fastq \
+lib_10kb.map
+
+```
+and
+
+```
+/share/opera_v2.0.1/bin/opera Mya81-contigs.fa \
+lib_300.map lib_500.map lib_5kb.map lib_10kb.map \
+opera_results
+```
+
+opera taking toon long, also, see BESST paper
+
+besst
+--
+
+```
+
+bwa mem -t 30 Mya81-contigs.fa \
+/mouse/Mya/nygc_reads/mp/clam-no-leukemia-MP-5k_CGATGTAT_BC7A4MANXX_L001_001.R1.fastq.gz \
+/mouse/Mya/nygc_reads/mp/clam-no-leukemia-MP-5k_CGATGTAT_BC7A4MANXX_L001_001.R2.fastq.gz \
+| samtools view -Sb - \
+| samtools sort -@ 10 -m 20G - clam.5kb
+
+#and 
+
+bwa mem -t 30 Mya81-contigs.fa \
+/mouse/Mya/nygc_reads/mp/clam-no-leukemia-MP-10k_CGATGTAT_BC7A4MANXX_L002_001.R1.fastq.gz \
+/mouse/Mya/nygc_reads/mp/clam-no-leukemia-MP-10k_CGATGTAT_BC7A4MANXX_L002_001.R2.fastq.gz \
+| samtools view -Sb - \
+| samtools sort -@ 10 -m 20G - clam.10kb
+
+#and
+
+samtools index clam.5kb.bam
+samtools index clam.10kb.bam
+
+#and 
+
+/share/BESST/runBESST -c Mya81-contigs.fa -f clam.5kb.bam clam.10kb.bam -o /path/to/output --orientation rf rf
+
+
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
