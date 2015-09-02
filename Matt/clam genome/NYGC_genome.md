@@ -365,12 +365,12 @@ split -l 156000000 --additional-suffix=zzz <(zcat /mouse/Mya/nygc_reads/pe/clam5
 
 
 
-for k in 61 81 71; do
+for k in 109 97 91 61 81 71; do
     mkdir /mouse/Mya/abyss-khmer/k$k
     cd /mouse/Mya/abyss-khmer/k$k
     mpirun -np 42 ABYSS-P -v -k$k \
     --coverage-hist=coverage.hist \
-    -o Mya$k-1.fa /mouse/Mya/abyss-khmer/split/*zzz |& tee $k_assembly.out;
+    -o Mya$k-1.fa /mouse/Mya/split/*zzz | tee $k_assembly.out;
 done
 
 
@@ -387,7 +387,26 @@ done
 
 ```
 
+PBJelly
+--
 
+in `/mouse/Mya/blasr`
+
+```
+Jelly.py setup Protocol.xml
+Jelly.py mapping Protocol.xml
+Jelly.py support Protocol.xml -x "--minMapqv=100"
+Jelly.py extraction Protocol.xml
+Jelly.py assembly Protocol.xml -x "--nproc=40"
+Jelly.py output Protocol.xml
+
+
+
+```
+
+     > Jelly.py <stage> yourProtocol.xml
+
+<<<<<<< Updated upstream
 picking khmer k81
 =================
 
@@ -511,6 +530,15 @@ samtools index clam.500.bam
 
 
 
+=======
+     The stages, in order, and their descriptions are
+       1. setup       Tag sequence names, find gaps, and index the reference
+       2. mapping     Use blasr to map the sequences to the reference
+       3. support     Identify which reads support which gaps
+       4. extraction  For each gap, consolidate all reads supporting it into a local-assembly folder.
+       5. assembly    Build the consensus gap-filling sequence
+       6. output      Stitch the reference sequences and gap-fillling sequences together
+>>>>>>> Stashed changes
 
 
 
