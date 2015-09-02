@@ -438,7 +438,7 @@ lib_300.map lib_500.map lib_5kb.map lib_10kb.map \
 opera_results
 ```
 
-opera taking toon long, also, see BESST paper
+opera taking too long, also, see BESST paper
 
 besst
 --
