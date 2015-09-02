@@ -445,28 +445,39 @@ besst
 
 ```
 
-bwa mem -t 30 Mya81-contigs.fa \
+interleave-reads.py \
 /mouse/Mya/nygc_reads/mp/clam-no-leukemia-MP-5k_CGATGTAT_BC7A4MANXX_L001_001.R1.fastq.gz \
 /mouse/Mya/nygc_reads/mp/clam-no-leukemia-MP-5k_CGATGTAT_BC7A4MANXX_L001_001.R2.fastq.gz \
+| skewer -Q 5 -t 20 -x $SCRATCH/adapters.fa - -1 \
+| bwa mem -p -t 30 Mya81-contigs.fa - \
 | samtools view -Sb - \
 | samtools sort -@ 10 -m 20G - clam.5kb
 
-#and 
 
-bwa mem -t 30 Mya81-contigs.fa \
+interleave-reads.py \
 /mouse/Mya/nygc_reads/mp/clam-no-leukemia-MP-10k_CGATGTAT_BC7A4MANXX_L002_001.R1.fastq.gz \
 /mouse/Mya/nygc_reads/mp/clam-no-leukemia-MP-10k_CGATGTAT_BC7A4MANXX_L002_001.R2.fastq.gz \
+| skewer -Q 5 -t 20 -x $SCRATCH/adapters.fa - -1 \
+| bwa mem -p -t 30 Mya81-contigs.fa - \
 | samtools view -Sb - \
 | samtools sort -@ 10 -m 20G - clam.10kb
 
-#and
+
+interleave-reads.py \
+/mouse/Mya/nygc_reads/pe/clam500.P2_1P.fq.gz \
+/mouse/Mya/nygc_reads/pe/clam500.P2_2P.fq.gz \
+| skewer -Q 5 -t 20 -x $SCRATCH/adapters.fa - -1 \
+| bwa mem -p -t 30 Mya81-contigs.fa - \
+| samtools view -Sb - \
+| samtools sort -@ 10 -m 20G - clam.500
+
 
 samtools index clam.5kb.bam
 samtools index clam.10kb.bam
+samtools index clam.500.bam
 
-#and 
 
-/share/BESST/runBESST -c Mya81-contigs.fa -f clam.5kb.bam clam.10kb.bam -o /path/to/output --orientation rf rf
+/share/BESST/runBESST -c Mya81-contigs.fa -f clam.500.bam clam.5kb.bam clam.10kb.bam -o /mouse/Mya/besst --orientation fr rf rf
 
 
 ```
