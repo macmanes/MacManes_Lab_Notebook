@@ -483,8 +483,8 @@ interleave-reads.py \
 
 
 interleave-reads.py \
-/mouse/Mya/nygc_reads/pe/clam500.P2_1P.fq.gz \
-/mouse/Mya/nygc_reads/pe/clam500.P2_2P.fq.gz \
+/mnt/data3/macmanes/Mya/nygc_reads/raw_reads/clam-no-leukemia_ATTACTCG_AC730GANXX_L003_001.R1.fastq.gz \
+/mnt/data3/macmanes/Mya/nygc_reads/raw_reads/clam-no-leukemia_ATTACTCG_AC730GANXX_L003_002.R1.fastq.gz \
 | skewer -Q 5 -t 20 -x $SCRATCH/adapters.fa - -1 \
 | bwa mem -p -t 30 Mya81-contigs.fa - \
 | samtools view -Sb - \
