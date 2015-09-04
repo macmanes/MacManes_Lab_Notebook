@@ -468,6 +468,7 @@ interleave-reads.py \
 /mouse/Mya/nygc_reads/mp/clam-no-leukemia-MP-5k_CGATGTAT_BC7A4MANXX_L001_001.R1.fastq.gz \
 /mouse/Mya/nygc_reads/mp/clam-no-leukemia-MP-5k_CGATGTAT_BC7A4MANXX_L001_001.R2.fastq.gz \
 | skewer -Q 5 -t 20 -x $SCRATCH/adapters.fa - -1 \
+| extract-paired-reads.py -p - -s /dev/null - \
 | bwa mem -p -t 30 Mya81-contigs.fa - \
 | samtools view -Sb - \
 | samtools sort -@ 10 -m 20G - clam.5kb
@@ -477,6 +478,7 @@ interleave-reads.py \
 /mouse/Mya/nygc_reads/mp/clam-no-leukemia-MP-10k_CGATGTAT_BC7A4MANXX_L002_001.R1.fastq.gz \
 /mouse/Mya/nygc_reads/mp/clam-no-leukemia-MP-10k_CGATGTAT_BC7A4MANXX_L002_001.R2.fastq.gz \
 | skewer -Q 5 -t 20 -x $SCRATCH/adapters.fa - -1 \
+| extract-paired-reads.py -p - -s /dev/null - \
 | bwa mem -p -t 30 Mya81-contigs.fa - \
 | samtools view -Sb - \
 | samtools sort -@ 10 -m 20G - clam.10kb
@@ -486,6 +488,7 @@ interleave-reads.py \
 /mnt/data3/macmanes/Mya/nygc_reads/raw_reads/clam-no-leukemia_ATTACTCG_AC730GANXX_L003_001.R1.fastq.gz \
 /mnt/data3/macmanes/Mya/nygc_reads/raw_reads/clam-no-leukemia_ATTACTCG_AC730GANXX_L003_002.R1.fastq.gz \
 | skewer -Q 5 -t 20 -x $SCRATCH/adapters.fa - -1 \
+| extract-paired-reads.py -p - -s /dev/null - \
 | bwa mem -p -t 30 Mya81-contigs.fa - \
 | samtools view -Sb - \
 | samtools sort -@ 10 -m 20G - clam.500
