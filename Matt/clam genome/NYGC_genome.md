@@ -543,9 +543,52 @@ samtools index clam.500.bam
        6. output      Stitch the reference sequences and gap-fillling sequences together
 >>>>>>> Stashed changes
 
+BESST on PBJelly
+--
+
+```
+time interleave-reads.py \
+/mouse/Mya/nygc_reads/mp/clam-no-leukemia-MP-5k_CGATGTAT_BC7A4MANXX_L001_001.R1.fastq.gz \
+/mouse/Mya/nygc_reads/mp/clam-no-leukemia-MP-5k_CGATGTAT_BC7A4MANXX_L001_001.R2.fastq.gz \
+| skewer -Q 5 -t 8 -x $SCRATCH/adapters.fa - -1 \
+| bwa mem -p -t 30 jelly - \
+| samtools view -T . -F4 -bu - \
+| samtools sort -l 0 -O bam -T tmp -@ 8 -m 22G -o jelly.clam.5kb.bam -
+
+
+time interleave-reads.py \
+/mouse/Mya/nygc_reads/mp/clam-no-leukemia-MP-10k_CGATGTAT_BC7A4MANXX_L002_001.R1.fastq.gz \
+/mouse/Mya/nygc_reads/mp/clam-no-leukemia-MP-10k_CGATGTAT_BC7A4MANXX_L002_001.R2.fastq.gz \
+| skewer -Q 5 -t 8 -x $SCRATCH/adapters.fa - -1 \
+| extract-paired-reads.py -p - -s /dev/null - \
+| bwa mem -p -t 30 jelly - \
+| samtools view -T . -F4 -bu - \
+| samtools sort -l 0 -O bam -T tmp -@ 8 -m 22G -o jelly.clam.10kb.bam -
+
+
+time interleave-reads.py \
+/mnt/data3/macmanes/Mya/nygc_reads/raw_reads/clam-no-leukemia_ATTACTCG_AC730GANXX_L003_001.R1.fastq.gz \
+/mnt/data3/macmanes/Mya/nygc_reads/raw_reads/clam-no-leukemia_ATTACTCG_AC730GANXX_L003_001.R2.fastq.gz \
+| skewer -Q 5 -t 8 -x $SCRATCH/adapters.fa - -1 \
+| extract-paired-reads.py -p - -s /dev/null - \
+| bwa mem -p -t 30 jelly - \
+| samtools view -T . -F4 -bu - \
+| samtools sort -l 0 -O bam -T tmp -@ 8 -m 22G -o jelly.clam.500.bam -
+
+
+samtools index jelly.clam.5kb.bam
+samtools index jelly.clam.10kb.bam
+samtools index jelly.clam.500.bam
 
 
 
+/share/BESST/runBESST -c Mya81-contigs.fa \
+-f jelly.clam.500.bam jelly.clam.5kb.bam jelly.clam.10kb.bam \
+-o /mouse/Mya/besst/besst_jelly \
+--orientation fr rf rf \
+
+
+```
 
 
 
