@@ -590,5 +590,32 @@ samtools index jelly.clam.500.bam
 
 ```
 
+RNAscaffolding
+==
 
+in `/mouse/Mya/genome`
 
+```
+python /share/BESST_RNA/src/Main.py 1 -c jelly.best.fasta -f rna.clam.bam -e 3 -T 20000 -k 500 -d 1 -z 1000 -o rna_scaff
+```
+
+results -> jelly.best.RNAscaff.fasta
+
+```
+n	n:1000	L50	LG50	NG50	min	N80	N50	N20	E-size	max	sum	name
+316572	311616	49881	9800	23312	1000	4124	9600	24101	17839	247712	1.923e9	jelly.best.fasta
+308262	303486	46366	8881	25604	1000	4209	10068	26468	19205	250147	1.923e9	jelly.best.RNAscaff.fasta
+```
+
+working on L_RNA_scff in `/mouse/Mya/LRNA_scaff`
+
+```
+blat ../genome/jelly.best.RNAscaff.fasta /mnt/data3/macmanes/reference_assemblies/Mya/transcriptome/clam.Trinity.fasta output.psl
+```
+and 
+
+```
+L_RNA_scaffolder.sh -d /home/macmanes/L_RNA_scaffolder/ -j ../genome/jelly.best.RNAscaff.fasta -i output.psl
+```
+
+after that - move 
