@@ -638,12 +638,12 @@ n	n:1000	L50	LG50	NG50	min	N80	N50	N20	E-size	max	sum	name
 working on L_RNA_scff in `/mouse/Mya/LRNA_scaff`
 
 ```
-blat ../genome/jelly.best.RNAscaff.fasta /mnt/data3/macmanes/reference_assemblies/Mya/transcriptome/clam.Trinity.fasta output.psl
+blat -noHead ../genome/jelly.best.RNAscaff.fasta /mnt/data3/macmanes/reference_assemblies/Mya/transcriptome/clam.Trinity.fasta output.psl
 ```
 and 
 
 ```
-L_RNA_scaffolder.sh -d /home/macmanes/L_RNA_scaffolder/ -j ../genome/jelly.best.RNAscaff.fasta -i output.psl -o scaff
+L_RNA_scaffolder.sh -d /home/macmanes/L_RNA_scaffolder/ -j ../genome/jelly.best.RNAscaff.fasta -i clam.psl -o scaff
 ```
 
 after that - move 
