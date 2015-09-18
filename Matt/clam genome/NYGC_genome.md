@@ -590,8 +590,36 @@ samtools index jelly.clam.500.bam
 
 ```
 
+<<<<<<< Updated upstream
 RNAscaffolding
 ==
+=======
+LINKS on jelly > BESST scaffolded genome
+
+in `/mouse/Mya/links` file is `jelly.besst.fasta -> /mouse/Mya/besst/besst_jelly/BESST_output/pass3/Scaffolds_pass3.fa`
+
+pacbio is `/mouse/Mya/output_lsc/corrected_LR.fastq` and `/mouse/Mya/output_lsc/uncorrected_LR.fasta`
+
+
+```
+LINKS -d 500 -f jelly.besst.fasta -s files -b iter500
+LINKS -d 600 -f iter500.scaffolds.fa -s files -b iter600
+LINKS -d 800 -f iter500.scaffolds.fa -s files -b iter800
+LINKS -d 1000 -f iter800.scaffolds.fa -s files -b iter1000
+LINKS -d 1500 -f iter1000.scaffolds.fa -s files -b iter1500
+LINKS -d 2000 -f iter1500.scaffolds.fa -s files -b iter2000
+LINKS -d 2500 -f iter2000.scaffolds.fa -s files -b iter2500
+LINKS -d 3000 -f iter2500.scaffolds.fa -s files -b iter3000
+LINKS -d 3500 -f ite3000.scaffolds.fa -s files -b iter3500
+LINKS -d 4000 -f iter3500.scaffolds.fa -s files -b iter4000
+
+
+
+
+
+```
+
+>>>>>>> Stashed changes
 
 in `/mouse/Mya/genome`
 
@@ -615,7 +643,7 @@ blat ../genome/jelly.best.RNAscaff.fasta /mnt/data3/macmanes/reference_assemblie
 and 
 
 ```
-L_RNA_scaffolder.sh -d /home/macmanes/L_RNA_scaffolder/ -j ../genome/jelly.best.RNAscaff.fasta -i output.psl
+L_RNA_scaffolder.sh -d /home/macmanes/L_RNA_scaffolder/ -j ../genome/jelly.best.RNAscaff.fasta -i output.psl -o scaff
 ```
 
 after that - move 
