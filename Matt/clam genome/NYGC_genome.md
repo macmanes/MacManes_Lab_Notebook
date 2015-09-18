@@ -647,3 +647,26 @@ L_RNA_scaffolder.sh -d /home/macmanes/L_RNA_scaffolder/ -j ../genome/jelly.best.
 ```
 
 after that - move 
+
+
+in `/mouse/Mya/genome`
+
+```
+samtools flagstat rna.clam.bam
+341877012 + 0 in total (QC-passed reads + QC-failed reads)
+0 + 0 secondary
+59952703 + 0 supplementary
+0 + 0 duplicates
+341877012 + 0 mapped (100.00% : N/A)
+281924309 + 0 paired in sequencing
+141105253 + 0 read1
+140819056 + 0 read2
+240869804 + 0 properly paired (85.44% : N/A)
+281529632 + 0 with itself and mate mapped
+394677 + 0 singletons (0.14% : N/A)
+26571678 + 0 with mate mapped to a different chr
+2769139 + 0 with mate mapped to a different chr (mapQ>=5)
+```
+
+rm Mya81-contigs.long.fasta.sa
+
