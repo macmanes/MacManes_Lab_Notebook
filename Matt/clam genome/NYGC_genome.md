@@ -670,3 +670,42 @@ samtools flagstat rna.clam.bam
 
 rm Mya81-contigs.long.fasta.sa
 
+working with `Mya.genome.v1.01.fasta`
+--
+
+> mapping
+
+
+```
+bwa index -p mya1.01 Mya.genome.v1.01.fasta
+
+
+time interleave-reads.py \
+/mnt/data2/lesser/HCGS_run140822/Clam.1.fq.gz \
+/mnt/data2/lesser/HCGS_run140822/Clam.2.fq.gz \
+| skewer -Q 2 -t 10 -x $SCRATCH/adapters.fa - -1 \
+| extract-paired-reads.py -p - -s /dev/null - \
+| bwa mem -p -t 40 mya1.01 - \
+| samtools view -T . -bu - \
+| samtools sort -l 0 -O bam -T tmp -@ 15 -m 22G -o rna.mya1.01.clam.bam -
+
+time interleave-reads.py \
+/mnt/data3/macmanes/Mya/nygc_reads/raw_reads/clam-no-leukemia_ATTACTCG_AC730GANXX_L003_001.R1.fastq.gz \
+/mnt/data3/macmanes/Mya/nygc_reads/raw_reads/clam-no-leukemia_ATTACTCG_AC730GANXX_L003_001.R2.fastq.gz \
+| skewer -Q 2 -t 8 -x $SCRATCH/adapters.fa - -1 \
+| extract-paired-reads.py -p - -s /dev/null - \
+| bwa mem -p -t 30 mya1.01 - \
+| samtools view -T . -bu - \
+| samtools sort -l 0 -O bam -T tmp -@ 8 -m 22G -o dna.mya1.01.clam.bam -
+
+
+bwa mem -p -t 30 mya1.01 /mnt/data3/macmanes/reference_assemblies/Mya/transcriptome/clam.Trinity.fasta \
+| samtools view -T . -bu - \
+| samtools sort -l 0 -O bam -T tmp -@ 8 -m 22G -o transcriptome.mya1.01.clam.bam -
+
+python3 /share/BUSCO_v1.1b1/BUSCO_v1.1b1.py -o Mya_v1.01 -in Mya.genome.v1.01.fasta -l metazoa -m genome -c 30
+
+```
+
+
+
