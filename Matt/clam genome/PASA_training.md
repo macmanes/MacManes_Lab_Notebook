@@ -44,6 +44,10 @@ etraining --species=Mya clam.gb.train
 
 augustus --species=Mya clam.gb.test | tee firsttest.out
 
-/share/augustus-3.1/scripts/optimize_augustus.pl --species=Mya clam.gb.train
-
+/share/augustus-3.1/scripts/optimize_augustus.pl \
+--species=Mya \
+--cpus=40 \
+--UTR=on \
+--chunksize=500000 \
+clam.gb.train
 ```
