@@ -34,7 +34,7 @@ augustus
 /share/augustus-3.1/scripts/gff2gbSmallDNA.pl clam_pasa.pasa_assemblies.gff3 Mya.genome.v1.01.fasta 100 clam.gb
 
 
-/share/augustus-3.1/scripts/randomSplit.pl clam.gb 100
+/share/augustus-3.1/scripts/randomSplit.pl clam.gb 500
 
 /share/augustus-3.1/scripts/new_species.pl --species=Mya
 
@@ -42,7 +42,7 @@ augustus
 etraining --species=Mya clam.gb.train
 
 
-augustus --species=Mya clam.gb.test | tee firsttest.out
+augustus --species=Mya clam.gb.test | tee 4test.out
 
 /share/augustus-3.1/scripts/optimize_augustus.pl \
 --species=Mya \
@@ -50,4 +50,20 @@ augustus --species=Mya clam.gb.test | tee firsttest.out
 --UTR=on \
 --chunksize=500000 \
 clam.gb.train
+```
+
+now
+
+```
+perl /share/augustus-3.1/scripts/autoAugTrain.pl \
+--species=Mya --trainingset=clam.gb.train --utr \
+--estali=est.psl --flanking_DNA=1000 --optrounds=3 \
+--genome=Mya.genome.v1.01.fasta
+
+
+perl /share/augustus-3.1/scripts/autoAugTrain.pl \
+--genome=Mya.genome.v1.01.fasta \
+--trainingset=clam.gb.train \
+--species=clam
+
 ```
