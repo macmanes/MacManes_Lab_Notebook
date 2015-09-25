@@ -45,11 +45,11 @@ etraining --species=Mya clam.gb.train
 augustus --species=Mya clam.gb.test | tee 4test.out
 
 /share/augustus-3.1/scripts/optimize_augustus.pl \
---species=Mya \
+--species=clam3 \
 --cpus=40 \
 --UTR=on \
 --chunksize=500000 \
-clam.gb.train
+test.gb
 ```
 
 now
@@ -64,6 +64,6 @@ perl /share/augustus-3.1/scripts/autoAugTrain.pl \
 perl /share/augustus-3.1/scripts/autoAugTrain.pl \
 --genome=Mya.genome.v1.01.fasta \
 --trainingset=clam.gb.train \
---species=clam
+--species=clam2
 
 ```
