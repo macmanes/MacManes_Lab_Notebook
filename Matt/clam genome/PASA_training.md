@@ -39,10 +39,10 @@ augustus
 /share/augustus-3.1/scripts/new_species.pl --species=Mya
 
 
-etraining --species=Mya clam.gb.train
+etraining --species= clam.gb.train
 
 
-augustus --species=Mya clam.gb.test | tee 4test.out
+augustus --species=Mya.genome.v1.1.1 clam.gb.test | tee 4test.out
 
 /share/augustus-3.1/scripts/optimize_augustus.pl \
 --species=clam3 \
