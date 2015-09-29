@@ -34,15 +34,15 @@ augustus
 /share/augustus-3.1/scripts/gff2gbSmallDNA.pl clam_pasa.pasa_assemblies.gff3 Mya.genome.v1.01.fasta 100 clam.gb
 
 
-/share/augustus-3.1/scripts/randomSplit.pl clam.gb 500
+/share/augustus-3.1/scripts/randomSplit.pl clam.gb 2000
 
 /share/augustus-3.1/scripts/new_species.pl --species=Mya
 
 
-etraining --species= clam.gb.train
+etraining --species=Mya clam.gb.test
 
 
-augustus --species=Mya.genome.v1.1.1 clam.gb.test | tee 4test.out
+augustus --species=Mya clam.gb.test| tee 7test.out
 
 /share/augustus-3.1/scripts/optimize_augustus.pl \
 --species=clam3 \
