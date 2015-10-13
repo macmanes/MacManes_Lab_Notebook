@@ -18,9 +18,12 @@ RepeatMasker -lib consensi.fa.classified ../../../genome/Mya.genome.v1.1.1.fasta
 ```
 
 Maker for SNAP training
+--
+
+in `ta maker2` and `/mouse/Mya/maker`. Still need to add in rfam_scan and GeneMark, both of which were still running when I started this run at 0600 on Thursday 8Oct15
 
 ```
-mpirun -np 20 maker -fix_nucleotides
+mpirun -np 40 maker -fix_nucleotides -base maker_pass1
 ```
 
 Braker1: in `/mouse/Mya/maker`
@@ -33,6 +36,11 @@ perl /share/braker.pl \
 --UTR on --cores 10 --species=Mya --useexisting
 ```
 
+
+Genemark
+--
+
+in `/mouse/Mya/maker/genemark`
 
 rfam_scan in `/mouse/Mya/maker`
 
