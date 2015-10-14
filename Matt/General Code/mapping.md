@@ -47,6 +47,8 @@ This recipe trims using the Truseq adapters - if these libraries were made with 
 
 
 ```
+bwa index -p index Genome.fasta
+
 time seqtk mergepe \
 ../Schizo.50M.left.fq.gz \
 ../Schizo.50M.right.fq.gz \
