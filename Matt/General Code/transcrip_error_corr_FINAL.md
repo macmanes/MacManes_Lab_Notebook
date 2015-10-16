@@ -1,10 +1,10 @@
 Transcriptome error correction
 --
 
-khmer version 1.3
+khmer version 2.0
 bwa 0.7.12-r1039
 sga 0.10.13
-lighter Lighter v1.0.5
+lighter Lighter v1.0.7
 bless v0.24
 bfc r177
 seqtc 1.0-r77-dirty
@@ -27,7 +27,7 @@ seecer 0.1.3 (does not take gz files)
 	sudo chown -R ubuntu:ubuntu /mnt
 	
 
-	sudo apt-get update && sudo apt-get -y upgrade
+	sudo apt-get update && apt-get -y upgrade
 	sudo apt-get -y install cmake sparsehash valgrind libboost-atomic1.55-dev libibnetdisc-dev ruby-full gsl-bin libgsl0-dev libgsl0ldbl libboost1.55-all-dev libboost1.55-dbg subversion tmux git curl bowtie libncurses5-dev samtools gcc make g++ python-dev unzip dh-autoreconf default-jre python-pip zlib1g-dev
 
 
@@ -125,9 +125,6 @@ sga
 	cd trinityrnaseq
 	make -j6
 	PATH:$PATH:$(pwd)
-	
-    cd 
-    
 
 
 mouse genome
