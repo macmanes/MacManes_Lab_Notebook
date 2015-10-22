@@ -51,6 +51,11 @@ lighter
 bfc
 sga
 
+
+    curl -LO https://bintray.com/artifact/download/blahah/generic/transrate-1.0.1-linux-x86_64.tar.gz
+    tar -zxf transrate-1.0.1-linux-x86_64.tar.gz
+    
+
 	easy_install -U setuptools
 	pip install khmer
 

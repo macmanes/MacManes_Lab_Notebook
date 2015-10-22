@@ -6,8 +6,8 @@ bwa 0.7.12-r1039
 sga 0.10.13
 lighter Lighter v1.0.7
 bless v0.24
-bfc r177
-seqtc 1.0-r77-dirty
+bfc r181
+seqtc 1.0-r82-dirty
 bwakit-0.7.12
 seecer 0.1.3 (does not take gz files)
 
@@ -921,5 +921,10 @@ subsamp, trimmomatic (seecer output fa)
 	--CPU 16 --output trinity_100M.P2.raw --inchworm_cpu 10 --full_cleanup \
 
 	
+
+
+in `/mnt/data1/error`
+
+
 
 
