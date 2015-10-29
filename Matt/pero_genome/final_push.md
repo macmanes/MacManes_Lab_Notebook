@@ -25,15 +25,7 @@ bwa index -p $version $fasta &
 
 python3 /share/BUSCO_v1.1b1/BUSCO_v1.1b1.py -o peer.genome.$version -in $fasta -l vertebrata -m genome -c 30 --long
 
-time seqtk mergepe \
-$RAID/pero_annotation/Pero360L.1.fastq.gz \
-$RAID/pero_annotation/Pero360L.2.fastq.gz \
-| skewer -Q 2 -t 20 -x $SCRATCH/adapters.fa - -1 \
-| extract-paired-reads.py -p - -s /dev/null - \
-| bwa mem -p -t 30 $version - \
-| samtools view -T . -bu - \
-| samtools sort -l 0 -O bam -T tmp -@ 15 -m 22G -o $version.liver.bam -
-
+	
 time seqtk mergepe \
 $RAID/pero_annotation/Pero360K.1.fastq.gz \
 $RAID/pero_annotation/Pero360K.2.fastq.gz \

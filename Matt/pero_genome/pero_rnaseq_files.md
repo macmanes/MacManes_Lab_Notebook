@@ -30,6 +30,10 @@ $RAID/NYGC_pero/342K.R1.fastq.gz
 $RAID/NYGC_pero/336K.R1.fastq.gz
 $RAID/NYGC_pero/335K.R2.fastq.gz
 $RAID/NYGC_pero/334L.R2.fastq.gz
+$RAID/NYGC_August2015/raw_data/381-testes_ATTCCT_BC6PR5ANXX_L008_001.R{1,2}.fastq.gz
+$RAID/NYGC_August2015/raw_data/366-testes_GTGGCC_BC6PR5ANXX_L008_001.R{1,2}.fastq.gz
+$RAID/NYGC_August2015/raw_data/349-testes_ACTGAT_BC6PR5ANXX_L008_001.R{1,2}.fastq.gz
+$RAID/NYGC_August2015/raw_data/3333-testes_GTTTCG_BC6PR5ANXX_L008_001.R{1,2}.fastq.gz
 
 **unknown**
 
