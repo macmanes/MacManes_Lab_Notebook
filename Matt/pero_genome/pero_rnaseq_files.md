@@ -21,8 +21,8 @@ $RAID/pero_pigeons_ladybugs/2345.{1,2}.fastq.gz
 
 **Wet**
 
-/mnt/data3/macmanes/pero_annotation/Pero2926.{1,2}.fastq
-/mnt/data3/macmanes/pero_annotation/Pero2925.{1,2}.fastq
+/mnt/data3/macmanes/pero_annotation/Pero2926.{1,2}.fastq.gz
+/mnt/data3/macmanes/pero_annotation/Pero2925.{1,2}.fastq.gz
 $RAID/NYGC_pero/2355K.R1.fastq.gz
 $RAID/NYGC_pero/2341K.R1.fastq.gz
 $RAID/NYGC_pero/2335K.R1.fastq.gz

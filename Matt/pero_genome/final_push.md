@@ -25,7 +25,7 @@ bwa index -p $version $fasta &
 
 python3 /share/BUSCO_v1.1b1/BUSCO_v1.1b1.py -o peer.genome.$version -in $fasta -l vertebrata -m genome -c 30 --long
 
-	
+	`
 time seqtk mergepe \
 $RAID/pero_annotation/Pero360K.1.fastq.gz \
 $RAID/pero_annotation/Pero360K.2.fastq.gz \
