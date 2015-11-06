@@ -207,3 +207,133 @@ sleuth_live(so)
 
 ```
 
+
+```
+source("http://bioconductor.org/biocLite.R")  
+biocLite("edgeR")  
+library(edgeR)  
+library("edgeR")
+
+
+base_dir <- "/Users/macmanes/Desktop/salmon"
+
+files <- c("/Users/macmanes/Desktop/salmon/2329.counts",
+           "/Users/macmanes/Desktop/salmon/2336.counts",
+           "/Users/macmanes/Desktop/salmon/2345.counts",
+           "/Users/macmanes/Desktop/salmon/2346.counts",
+           "/Users/macmanes/Desktop/salmon/2352.counts",
+           "/Users/macmanes/Desktop/salmon/348.counts",
+           "/Users/macmanes/Desktop/salmon/350.counts",
+           "/Users/macmanes/Desktop/salmon/370.counts",
+           "/Users/macmanes/Desktop/salmon/373.counts",
+           "/Users/macmanes/Desktop/salmon/376.counts",
+           "/Users/macmanes/Desktop/salmon/382.counts",    
+           "/Users/macmanes/Desktop/salmon/2341.counts",
+           "/Users/macmanes/Desktop/salmon/2335.counts",           
+           "/Users/macmanes/Desktop/salmon/2925.counts",
+           "/Users/macmanes/Desktop/salmon/2355.counts",
+           "/Users/macmanes/Desktop/salmon/336.counts",
+           "/Users/macmanes/Desktop/salmon/335.counts",
+           "/Users/macmanes/Desktop/salmon/2926.counts"
+)
+
+labels=c("2329","2336","2345","2346","2952","348","350","370","373","376","382",
+          "2341","2335","2925","2355","336","335","2926")
+
+
+data <- readDGE(files)
+
+print(data)
+head(data$counts)
+
+###
+
+group <- c(rep("dry",11), rep("wet",7))
+
+dge = DGEList(counts=data, group=group)
+dge <- estimateCommonDisp(dge)
+dge <- estimateTagwiseDisp(dge)
+
+# make an MA-plot of 0 vs 6 hour
+
+et <- exactTest(dge, pair=c("wet", "dry"))
+summary(dge <- decideTestsDGE(et, p=0.05, adjust="BH"))
+etp <- topTags(et, n=100000)
+etp$table$logFC = -etp$table$logFC
+
+plot(
+  etp$table$logCPM,
+  etp$table$logFC,
+  xlim=c(-3, 20), ylim=c(-12, 12), pch=20, cex=.3,
+  col = ifelse( etp$table$FDR < .2, "red", "black" ) )
+
+# plot MDS
+plotMDS(dge, labels=labels)
+
+# output CSV for 0-6 hr
+write.csv(etp$table, "nema-edgeR-0v6.csv")
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
