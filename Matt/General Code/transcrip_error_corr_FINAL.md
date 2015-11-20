@@ -20,7 +20,7 @@ seecer 0.1.3 (does not take gz files)
     /mnt/data3/macmanes/subsamp/100M_corr/raw.100M.SRR797058_2.fastq.gz
     /mnt/data3/macmanes/subsamp/20M_corr/raw.20M.SRR797058_1.fastq.gz
     /mnt/data3/macmanes/subsamp/20M_corr/raw.20M.SRR797058_2.fastq.gz
-
+git
 
 	sudo mkfs -t ext4 /dev/xvdb
 	sudo mount /dev/xvdb /mnt
