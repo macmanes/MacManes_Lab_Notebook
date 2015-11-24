@@ -925,6 +925,34 @@ subsamp, trimmomatic (seecer output fa)
 
 in `/mnt/data1/error`
 
+BUSCO on AWS:
 
 
+```
+for i in $(ls /mnt/assemblies/trinity*fasta); do
+   F=`basename $i .fasta`;
+   python3 ~/BUSCO_v1.1b1/BUSCO_v1.1b1.py -g $i -m Trans --cpu 36 -o $F -l vertebrata;
+   gzip $i &
+done
+```
 
+pull out prefect reads
+--
+
+```
+for i in $(ls 2M*); do echo $i; sed -n '2p' $i ; done
+```
+
+
+pull out better reads
+--
+
+```
+for i in $(ls 2M*); do echo $i; sed -n '10p' $i ; done
+```
+
+
+```
+export AUGUSTUS_CONFIG_PATH=/home/ubuntu/augustus-3.0.2/config/
+PATH=$PATH:/home/ubuntu/BUSCO_v1.1b1:/home/ubuntu/augustus-3.0.2/bin:/home/ubuntu/augustus-3.0.2/scripts
+```
