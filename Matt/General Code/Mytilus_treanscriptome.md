@@ -305,6 +305,9 @@ cd $HOME/quant
 
 ```
 
+```
+awk '1>$5{next}1' kallisto_muscle/abundance.tsv | wc -l
+```
 
 
 	
