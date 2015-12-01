@@ -63,12 +63,12 @@ git clone git://github.com/pezmaster31/bamtools.git
 cd bamtools && mkdir build && cd build && cmake .. && make
 
 cd
-curl -LO http://bioinf.uni-greifswald.de/augustus/binaries/augustus-3.2.1.tar.gz
-tar -zxf augustus-3.2.1.tar.gz
-cd augustus-3.2.1/
+curl -LO http://bioinf.uni-greifswald.de/augustus/binaries/old/augustus-3.0.2.tar.gz
+tar -zxf augustus-3.0.2.tar.gz
+cd augustus-3.0.2/
 make
 PATH=$PATH:$(pwd)/bin:$(pwd)/scripts
-export AUGUSTUS_CONFIG_PATH=/home/ubuntu/augustus-3.2.1/config/
+export AUGUSTUS_CONFIG_PATH=/home/ubuntu/augustus-3.0.2/config/
 
 cd
 curl -LO ftp://ftp.ncbi.nlm.nih.gov/blast/executables/blast+/LATEST/ncbi-blast-2.2.31+-x64-linux.tar.gz
@@ -90,6 +90,7 @@ sudo chown -R ubuntu:ubuntu /mnt
 
 
 ```
-PATH=$PATH:/home/ubuntu/seqtk:/home/ubuntu/bwa:/home/ubuntu/transrate-1.0.1-linux-x86_64:/home/ubuntu/BUSCO_v1.1b1:/home/ubuntu/augustus-3.2.1/bin:/home/ubuntu/augustus-3.2.1/scripts:/home/ubuntu/ncbi-blast-2.2.31+/bin:/home/ubuntu/TransDecoder:/home/ubuntu/bamtools/bin
-export AUGUSTUS_CONFIG_PATH=/home/ubuntu/augustus-3.2.1/config/
+PATH=$PATH:/home/ubuntu/seqtk:/home/ubuntu/bwa:/home/ubuntu/transrate-1.0.1-linux-x86_64:/home/ubuntu/BUSCO_v1.1b1:/home/ubuntu/augustus-3.0.2/bin:/home/ubuntu/augustus-3.0.2/scripts:/home/ubuntu/ncbi-blast-2.2.31+/bin:/home/ubuntu/TransDecoder:/home/ubuntu/bamtools/bin
+export AUGUSTUS_CONFIG_PATH=/home/ubuntu/augustus-3.0.2/config/
+
 ```

@@ -279,8 +279,8 @@ BAD
 Counting
 
 ```
-mkdir $HOME/quant
-cd $HOME/quant
+mkdir /mnt/quant
+cd /mnt/quant
 kallisto index -i transcripts.idx ../assembly/good.new.MG.lighter.P2.Trinity.fasta
 kallisto quant -t 32 -i transcripts.idx -o kallisto_muscle -b 100 \
 /mnt/reads/mytilus.muscle.lighter25.trimP2_1P.fastq.gz \
