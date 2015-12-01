@@ -929,9 +929,9 @@ BUSCO on AWS:
 
 
 ```
-for i in $(ls /mnt/assemblies/trinity*fasta); do
+for i in $(ls /mnt/assemblies/*fasta); do
    F=`basename $i .fasta`;
-   python3 ~/BUSCO_v1.1b1/BUSCO_v1.1b1.py -g $i -m Trans --cpu 36 -o $F -l vertebrata;
+   python3 ~/BUSCO_v1.1b1/BUSCO_v1.1b1.py -g $i -m Trans --cpu 32 -o $F -l vertebrata;
    gzip $i &
 done
 ```
@@ -956,3 +956,65 @@ for i in $(ls 2M*); do echo $i; sed -n '10p' $i ; done
 export AUGUSTUS_CONFIG_PATH=/home/ubuntu/augustus-3.0.2/config/
 PATH=$PATH:/home/ubuntu/BUSCO_v1.1b1:/home/ubuntu/augustus-3.0.2/bin:/home/ubuntu/augustus-3.0.2/scripts
 ```
+
+
+
+
+SETUP MACHINE
+--
+
+``
+
+sudo apt-get update && sudo apt-get -y upgrade
+
+
+sudo apt-get -y install hmmer cmake tmux git curl bowtie libncurses5-dev samtools gcc make ncbi-blast+ g++ python-dev libboost-iostreams-dev libboost-system-dev libboost-filesystem-dev
+
+cd
+curl -LO http://busco.ezlab.org/files/BUSCO_v1.1b1.tar.gz
+tar -zxf BUSCO_v1.1b1.tar.gz
+cd BUSCO_v1.1b1
+curl -LO http://busco.ezlab.org/files/vertebrata_buscos.tar.gz
+tar -zxf vertebrata_buscos.tar.gz
+PATH=$PATH:$(pwd)
+
+
+cd
+curl -LO http://bioinf.uni-greifswald.de/augustus/binaries/old/augustus-3.0.2.tar.gz
+tar -zxf augustus-3.0.2.tar.gz
+cd augustus-3.0.2/
+make -j7
+PATH=$PATH:$(pwd)/bin:$(pwd)/scripts
+export AUGUSTUS_CONFIG_PATH=/home/ubuntu/augustus-3.0.2/config/
+
+sudo mount /dev/xvdf /mnt  
+sudo chown -R ubuntu:ubuntu /mnt
+
+
+cd /mnt/busco
+
+tmux new -s busco
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -193,9 +193,117 @@ Good, about 60k hits to proteins in the 75k things. this is a pretty good number
 	grep -w -f highexp.in.gill invert.blastp | awk '{print $2}' | awk -F "|" '{print $2}' > highexp.in.gill.gis
 	
 
+final
+--
+
+```
+transrate -a new.MG.lighter.P2.Trinity.fasta -t 20 -o myt -l ../working_reads/corr_trim/mytilus.muscle.lighter25.trimP2_1P.fastq.gz,../working_reads/corr_trim/mytilus.gill.lighter25.trimP2_1P.fastq.gz -r ../working_reads/corr_trim/mytilus.muscle.lighter25.trimP2_2P.fastq.gz,../working_reads/corr_trim/mytilus.gill.lighter25.trimP2_2P.fastq.gz
+/share/transrate-1.0.0-linux-x86_64/lib/app/ruby/lib/ruby/gems/2.2.0/gems/bundler-1.7.12/lib/bundler/runtime.rb:222: warning: Insecure world writable dir /share in PATH, mode 040777
+[ INFO] 2015-12-01 10:21:14 : Loading assembly: new.MG.lighter.P2.Trinity.fasta
+[ INFO] 2015-12-01 10:23:21 : Analysing assembly: new.MG.lighter.P2.Trinity.fasta
+[ INFO] 2015-12-01 10:23:21 : Calculating contig metrics...
+[ INFO] 2015-12-01 10:25:14 : Contig metrics:
+[ INFO] 2015-12-01 10:25:14 : -----------------------------------
+[ INFO] 2015-12-01 10:25:14 : n seqs                       369738
+[ INFO] 2015-12-01 10:25:14 : smallest                        200
+[ INFO] 2015-12-01 10:25:14 : largest                       18179
+[ INFO] 2015-12-01 10:25:14 : n bases                   262407705
+[ INFO] 2015-12-01 10:25:14 : mean len                     709.71
+[ INFO] 2015-12-01 10:25:14 : n under 200                       0
+[ INFO] 2015-12-01 10:25:14 : n over 1k                     72024
+[ INFO] 2015-12-01 10:25:14 : n over 10k                       10
+[ INFO] 2015-12-01 10:25:14 : n with orf                    69649
+[ INFO] 2015-12-01 10:25:14 : mean orf percent              50.93
+[ INFO] 2015-12-01 10:25:14 : n90                             280
+[ INFO] 2015-12-01 10:25:14 : n70                             568
+[ INFO] 2015-12-01 10:25:14 : n50                            1210
+[ INFO] 2015-12-01 10:25:14 : n30                            2081
+[ INFO] 2015-12-01 10:25:14 : n10                            3691
+[ INFO] 2015-12-01 10:25:14 : gc                             0.33
+[ INFO] 2015-12-01 10:25:14 : gc skew                       -0.06
+[ INFO] 2015-12-01 10:25:14 : at skew                       -0.03
+[ INFO] 2015-12-01 10:25:14 : cpg ratio                      1.49
+[ INFO] 2015-12-01 10:25:14 : bases n                           0
+[ INFO] 2015-12-01 10:25:14 : proportion n                    0.0
+[ INFO] 2015-12-01 10:25:14 : linguistic complexity          0.12
+[ INFO] 2015-12-01 10:25:14 : Contig metrics done in 113 seconds
+[ INFO] 2015-12-01 10:25:14 : Calculating read diagnostics...
+[ INFO] 2015-12-01 12:10:54 : Read mapping metrics:
+[ INFO] 2015-12-01 12:10:54 : -----------------------------------
+[ INFO] 2015-12-01 12:10:54 : fragments                 117476516
+[ INFO] 2015-12-01 12:10:54 : fragments mapped          108590228
+[ INFO] 2015-12-01 12:10:54 : p fragments mapped             0.92
+[ INFO] 2015-12-01 12:10:54 : good mappings              91860161
+[ INFO] 2015-12-01 12:10:54 : p good mapping                 0.78
+[ INFO] 2015-12-01 12:10:54 : bad mappings               16730067
+[ INFO] 2015-12-01 12:10:54 : potential bridges             83407
+[ INFO] 2015-12-01 12:10:54 : bases uncovered            38372881
+[ INFO] 2015-12-01 12:10:54 : p bases uncovered              0.15
+[ INFO] 2015-12-01 12:10:54 : contigs uncovbase            266214
+[ INFO] 2015-12-01 12:10:54 : p contigs uncovbase            0.72
+[ INFO] 2015-12-01 12:10:54 : contigs uncovered             46656
+[ INFO] 2015-12-01 12:10:54 : p contigs uncovered            0.13
+[ INFO] 2015-12-01 12:10:54 : contigs lowcovered            57381
+[ INFO] 2015-12-01 12:10:54 : p contigs lowcovered           0.16
+[ INFO] 2015-12-01 12:10:54 : contigs segmented             24796
+[ INFO] 2015-12-01 12:10:54 : p contigs segmented            0.07
+[ INFO] 2015-12-01 12:10:54 : Read metrics done in 6340 seconds
+[ INFO] 2015-12-01 12:10:54 : No reference provided, skipping comparative diagnostics
+[ INFO] 2015-12-01 12:10:55 : TRANSRATE ASSEMBLY SCORE     0.1495
+[ INFO] 2015-12-01 12:10:55 : -----------------------------------
+[ INFO] 2015-12-01 12:10:55 : TRANSRATE OPTIMAL SCORE      0.3813
+[ INFO] 2015-12-01 12:10:55 : TRANSRATE OPTIMAL CUTOFF     0.1315
+[ INFO] 2015-12-01 12:10:56 : good contigs                 267787
+[ INFO] 2015-12-01 12:10:56 : p good contigs                 0.72
+[ INFO] 2015-12-01 12:10:56 : Writing contig metrics for each contig to myt_new.MG.lighter.P2.Trinity.fasta_contigs.csv
+[ INFO] 2015-12-01 12:13:00 : Writing analysis results to myt_assemblies.csv
+```
+
+busco on aws
+
+```
+python3 ~/BUSCO_v1.1b1/BUSCO_v1.1b1.py -o full -in ../assembly/new.MG.lighter.P2.Trinity.fasta -l metazoa -m Trans -c 32
+90% complete both
+
+```
 
 
+Trandecoder
+--
 
+```
+TransDecoder.LongOrfs -t ../assembly/good.new.MG.lighter.P2.Trinity.fasta -S
+BAD
+```
+
+Counting
+
+```
+mkdir $HOME/quant
+cd $HOME/quant
+kallisto index -i transcripts.idx ../assembly/good.new.MG.lighter.P2.Trinity.fasta
+kallisto quant -t 32 -i transcripts.idx -o kallisto_muscle -b 100 \
+/mnt/reads/mytilus.muscle.lighter25.trimP2_1P.fastq.gz \
+/mnt/reads/mytilus.muscle.lighter25.trimP2_2P.fastq.gz
+
+kallisto index -i transcripts.idx ../assembly/good.new.MG.lighter.P2.Trinity.fasta
+kallisto quant -t 32 -i transcripts.idx -o kallisto_gill -b 100 \
+/mnt/reads/mytilus.gill.lighter25.trimP2_1P.fastq.gz \
+/mnt/reads/mytilus.gill.lighter25.trimP2_2P.fastq.gz
+
+
+cd $HOME/quant
+~/salmon-0.5.1/bin/salmon index -t ../assembly/good.new.MG.lighter.P2.Trinity.fasta -i transcripts_index --type quasi -k 31
+~/salmon-0.5.1/bin/salmon quant -p 32 -i transcripts_index -l MSR \
+-1 /mnt/reads/mytilus.gill.lighter25.trimP2_1P.fastq.gz \
+-2 /mnt/reads/mytilus.gill.lighter25.trimP2_2P.fastq.gz -o salmon_gill
+
+~/salmon-0.5.1/bin/salmon index -t ../assembly/good.new.MG.lighter.P2.Trinity.fasta -i transcripts_index --type quasi -k 31
+~/salmon-0.5.1/bin/salmon quant -p 32 -i transcripts_index -l MSR \
+-1 /mnt/reads/mytilus.muscle.lighter25.trimP2_1P.fastq.gz \
+-2 /mnt/reads/mytilus.muscle.lighter25.trimP2_2P.fastq.gz -o salmon_muscle
+
+```
 
 
 
