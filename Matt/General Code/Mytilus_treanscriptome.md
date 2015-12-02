@@ -292,13 +292,12 @@ kallisto quant -t 32 -i transcripts.idx -o kallisto_gill -b 100 \
 /mnt/reads/mytilus.gill.lighter25.trimP2_2P.fastq.gz
 
 
-cd $HOME/quant
+cd /mnt/quant
 ~/salmon-0.5.1/bin/salmon index -t ../assembly/good.new.MG.lighter.P2.Trinity.fasta -i transcripts_index --type quasi -k 31
 ~/salmon-0.5.1/bin/salmon quant -p 32 -i transcripts_index -l MSR \
 -1 /mnt/reads/mytilus.gill.lighter25.trimP2_1P.fastq.gz \
 -2 /mnt/reads/mytilus.gill.lighter25.trimP2_2P.fastq.gz -o salmon_gill
 
-~/salmon-0.5.1/bin/salmon index -t ../assembly/good.new.MG.lighter.P2.Trinity.fasta -i transcripts_index --type quasi -k 31
 ~/salmon-0.5.1/bin/salmon quant -p 32 -i transcripts_index -l MSR \
 -1 /mnt/reads/mytilus.muscle.lighter25.trimP2_1P.fastq.gz \
 -2 /mnt/reads/mytilus.muscle.lighter25.trimP2_2P.fastq.gz -o salmon_muscle
@@ -306,8 +305,43 @@ cd $HOME/quant
 ```
 
 ```
-awk '1>$5{next}1' kallisto_muscle/abundance.tsv | wc -l
+awk '.5>$5{next}1' kallisto_gill/abundance.tsv | awk '{print $1}' | sed  '1d' > TMP.5.gill.list
+awk '.5>$5{next}1' kallisto_muscle/abundance.tsv | awk '{print $1}' | sed  '1d' > TMP.5.muscle.list
+awk '1>$3{next}1' salmon_gill/quant.sf | awk '{print $1}' | sed  '1d' > TMP.5.gill.salmon.list
+awk '1>$3{next}1' salmon_muscle/quant.sf | awk '{print $1}' | sed  '1d' > TMP.5.muscle.salmon.list
+
+cat TMP*list | sort | uniq | sed  '1d' > TMP.5.final.list
+
+
+
 ```
 
+```
+for i in `cat xaa`; do grep --no-group-separator --max-count=1 -A1 -w $i ../assembly/good.new.MG.lighter.P2.Trinity.fasta >> xaa.fa; done &
+for i in `cat xab`; do grep --no-group-separator --max-count=1 -A1 -w $i ../assembly/good.new.MG.lighter.P2.Trinity.fasta >> xab.fa; done &
+for i in `cat xac`; do grep --no-group-separator --max-count=1 -A1 -w $i ../assembly/good.new.MG.lighter.P2.Trinity.fasta >> xac.fa; done &
+for i in `cat xad`; do grep --no-group-separator --max-count=1 -A1 -w $i ../assembly/good.new.MG.lighter.P2.Trinity.fasta >> xad.fa; done &
+for i in `cat xae`; do grep --no-group-separator --max-count=1 -A1 -w $i ../assembly/good.new.MG.lighter.P2.Trinity.fasta >> xae.fa; done &
+for i in `cat xaf`; do grep --no-group-separator --max-count=1 -A1 -w $i ../assembly/good.new.MG.lighter.P2.Trinity.fasta >> xaf.fa; done &
+for i in `cat xag`; do grep --no-group-separator --max-count=1 -A1 -w $i ../assembly/good.new.MG.lighter.P2.Trinity.fasta >> xag.fa; done &
+for i in `cat xah`; do grep --no-group-separator --max-count=1 -A1 -w $i ../assembly/good.new.MG.lighter.P2.Trinity.fasta >> xah.fa; done &
+for i in `cat xai`; do grep --no-group-separator --max-count=1 -A1 -w $i ../assembly/good.new.MG.lighter.P2.Trinity.fasta >> xai.fa; done &
+for i in `cat xaj`; do grep --no-group-separator --max-count=1 -A1 -w $i ../assembly/good.new.MG.lighter.P2.Trinity.fasta >> xaj.fa; done &
 
+
+for i in `cat xak`; do grep --no-group-separator --max-count=1 -A1 -w $i ../assembly/good.new.MG.lighter.P2.Trinity.fasta >> xak.fa; done &
+for i in `cat xal`; do grep --no-group-separator --max-count=1 -A1 -w $i ../assembly/good.new.MG.lighter.P2.Trinity.fasta >> xal.fa; done &
+for i in `cat xam`; do grep --no-group-separator --max-count=1 -A1 -w $i ../assembly/good.new.MG.lighter.P2.Trinity.fasta >> xam.fa; done &
+for i in `cat xan`; do grep --no-group-separator --max-count=1 -A1 -w $i ../assembly/good.new.MG.lighter.P2.Trinity.fasta >> xan.fa; done &
+for i in `cat xao`; do grep --no-group-separator --max-count=1 -A1 -w $i ../assembly/good.new.MG.lighter.P2.Trinity.fasta >> xao.fa; done &
+for i in `cat xap`; do grep --no-group-separator --max-count=1 -A1 -w $i ../assembly/good.new.MG.lighter.P2.Trinity.fasta >> xap.fa; done &
+for i in `cat xaq`; do grep --no-group-separator --max-count=1 -A1 -w $i ../assembly/good.new.MG.lighter.P2.Trinity.fasta >> xaq.fa; done &
+
+```
+
+new transrate
+
+```
+transrate -a ../assembly/TPM.half.MG.Mytilus.fasta -t 32 -o myt -l ../reads/mytilus.muscle.lighter25.trimP2_1P.fastq.gz,../reads/mytilus.gill.lighter25.trimP2_1P.fastq.gz -r ../reads/mytilus.muscle.lighter25.trimP2_2P.fastq.gz,../reads/mytilus.gill.lighter25.trimP2_2P.fastq.gz
+```
 	

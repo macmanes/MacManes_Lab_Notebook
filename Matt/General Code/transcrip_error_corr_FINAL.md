@@ -52,7 +52,7 @@ bfc
 sga
 
 	easy_install -U setuptools
-	pip install khmer
+	sudo pip install khmer
 
 	cd $HOME
 	wget http://sb.cs.cmu.edu/seecer/downloads/SEECER-0.1.3.tar.gz
