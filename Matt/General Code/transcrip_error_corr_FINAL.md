@@ -52,7 +52,7 @@ bfc
 sga
 
 	easy_install -U setuptools
-	sudo pip install khmer
+	pip install khmer
 
 	cd $HOME
 	wget http://sb.cs.cmu.edu/seecer/downloads/SEECER-0.1.3.tar.gz
@@ -996,7 +996,13 @@ cd /mnt/busco
 tmux new -s busco
 
 
-
+```
+for i in $(ls ../assemblies/*fasta); do
+   F=`basename $i .fasta`;
+   python3 /share/BUSCO_v1.1b1/BUSCO_v1.1b1.py -g $i -m Trans --cpu 32 -o $F -l vertebrata;
+   gzip $i &
+done
+```
 
 
 

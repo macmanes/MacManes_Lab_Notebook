@@ -1,6 +1,8 @@
 Mytilus Transcriptome
 --
 
+@(Mytilus Transcriptome)
+
 in `/mouse/Mytilus/raw_reads`
 
 in `/mouse/Mytilus/working_reads/`
@@ -286,21 +288,19 @@ kallisto quant -t 32 -i transcripts.idx -o kallisto_muscle -b 100 \
 /mnt/reads/mytilus.muscle.lighter25.trimP2_1P.fastq.gz \
 /mnt/reads/mytilus.muscle.lighter25.trimP2_2P.fastq.gz
 
-kallisto index -i transcripts.idx ../assembly/good.new.MG.lighter.P2.Trinity.fasta
 kallisto quant -t 32 -i transcripts.idx -o kallisto_gill -b 100 \
 /mnt/reads/mytilus.gill.lighter25.trimP2_1P.fastq.gz \
 /mnt/reads/mytilus.gill.lighter25.trimP2_2P.fastq.gz
 
 
-cd /mnt/quant
 ~/salmon-0.5.1/bin/salmon index -t ../assembly/good.new.MG.lighter.P2.Trinity.fasta -i transcripts_index --type quasi -k 31
 ~/salmon-0.5.1/bin/salmon quant -p 32 -i transcripts_index -l MSR \
--1 /mnt/reads/mytilus.gill.lighter25.trimP2_1P.fastq.gz \
--2 /mnt/reads/mytilus.gill.lighter25.trimP2_2P.fastq.gz -o salmon_gill
+-1 <(gzip -cd /mnt/reads/mytilus.gill.lighter25.trimP2_1P.fastq.gz) \
+-2 <(gzip -cd /mnt/reads/mytilus.gill.lighter25.trimP2_2P.fastq.gz) -o salmon_gill
 
 ~/salmon-0.5.1/bin/salmon quant -p 32 -i transcripts_index -l MSR \
--1 /mnt/reads/mytilus.muscle.lighter25.trimP2_1P.fastq.gz \
--2 /mnt/reads/mytilus.muscle.lighter25.trimP2_2P.fastq.gz -o salmon_muscle
+-1 <(gzip -cd /mnt/reads/mytilus.muscle.lighter25.trimP2_1P.fastq.gz) \
+-2 <(gzip -cd /mnt/reads/mytilus.muscle.lighter25.trimP2_2P.fastq.gz) -o salmon_muscle
 
 ```
 
@@ -343,5 +343,228 @@ new transrate
 
 ```
 transrate -a ../assembly/TPM.half.MG.Mytilus.fasta -t 32 -o myt -l ../reads/mytilus.muscle.lighter25.trimP2_1P.fastq.gz,../reads/mytilus.gill.lighter25.trimP2_1P.fastq.gz -r ../reads/mytilus.muscle.lighter25.trimP2_2P.fastq.gz,../reads/mytilus.gill.lighter25.trimP2_2P.fastq.gz
+
+
 ```
-	
+
+busco `good.TPM.half.MG.Mytilus.fasta`
+---
+
+```
+myt/TPM.half.MG.Mytilus/good.TPM.half.MG.Mytilus.fasta
+#BUSCO was run in mode: genome
+
+Summarized benchmarks in BUSCO notation:
+	C:85%[D:33%],F:3.5%,M:10%,n:843
+
+Representing:
+	721	Complete Single-Copy BUSCOs
+	282	Complete Duplicated BUSCOs
+	30	Fragmented BUSCOs
+	92	Missing BUSCOs
+	843	Total BUSCO groups searched
+```
+
+
+transrate `TPM.half.MG.Mytilus.fasta`
+---
+
+```
+more myt/assemblies.csv
+assembly,n_seqs,smallest,largest,n_bases,mean_len,n_under_200,n_over_1k,n_over_10k,n_with_orf,mean_orf_percent,n90,n70,n50,n30,n10,gc,gc_skew,at_skew,cpg_ratio,bases_n,proportion_n,linguistic_complexity,fragments,fragments_mapped,p_fragments_mapped,good_mappings,p_good_mapping,bad_mappings,potential_bridges,bases_uncovered,p_bases_uncovered,con
+tigs_uncovbase,p_contigs_uncovbase,contigs_uncovered,p_contigs_uncovered,contigs_lowcovered,p_contigs_lowcovered,contigs_segmented,p_contigs_segmented,score,optimal_score,cutoff
+/mnt/assembly/TPM.half.MG.Mytilus.fasta,166787,200,18179,142213401,852.66478,0,44411,9,41454,51.53411,313,828,1531,2396,4050,0.3321,-0.06509,-0.0387,1.4808,0,0.0,0.14324,117476516,107729970,0.91703,91940644,0.78263,15789326,52924,4407753,0.03099,101793,0.61032,3353,0.0201,3567,0.02139,12816,0.07684,0.36232,0.40149,0.30573
+```
+
+
+BUSCO `TPM.half.MG.Mytilus.fasta`
+---
+
+```
+./quant/TPM.half.MG.Mytilus.fasta
+#BUSCO was run in mode: genome
+
+Summarized benchmarks in BUSCO notation:
+	C:88%[D:35%],F:3.6%,M:7.7%,n:843
+
+Representing:
+	747	Complete Single-Copy BUSCOs
+	302	Complete Duplicated BUSCOs
+	31	Fragmented BUSCOs
+	65	Missing BUSCOs
+	843	Total BUSCO groups searched
+```
+
+
+```
+dammit databases --install --busco-group metazoa --database-dir /mnt/dammit/
+dammit annotate ../assembly/TPM.half.MG.Mytilus.fasta --busco-group metazoa --n_threads 36 --database-dir /mnt/dammit/	
+```
+
+TMP calc final assembly
+
+```
+
+kallisto index -i transcripts2.idx ../assembly/Mytilus.MG.fasta
+kallisto quant -t 32 -i transcripts2.idx -o kallisto_muscle2 -b 100 \
+/mnt/reads/mytilus.muscle.lighter25.trimP2_1P.fastq.gz \
+/mnt/reads/mytilus.muscle.lighter25.trimP2_2P.fastq.gz
+
+kallisto quant -t 32 -i transcripts2.idx -o kallisto_gill2 -b 100 \
+/mnt/reads/mytilus.gill.lighter25.trimP2_1P.fastq.gz \
+/mnt/reads/mytilus.gill.lighter25.trimP2_2P.fastq.gz
+
+
+~/salmon-0.5.1/bin/salmon index -t ../assembly/Mytilus.MG.fasta -i transcripts2_index --type quasi -k 31
+~/salmon-0.5.1/bin/salmon quant -p 32 -i transcripts2_index -l MSR \
+-1 <(gzip -cd /mnt/reads/mytilus.gill.lighter25.trimP2_1P.fastq.gz) \
+-2 <(gzip -cd /mnt/reads/mytilus.gill.lighter25.trimP2_2P.fastq.gz) -o salmon_gill2
+
+~/salmon-0.5.1/bin/salmon quant -p 32 -i transcripts2_index -l MSR \
+-1 <(gzip -cd /mnt/reads/mytilus.muscle.lighter25.trimP2_1P.fastq.gz) \
+-2 <(gzip -cd /mnt/reads/mytilus.muscle.lighter25.trimP2_2P.fastq.gz) -o salmon_muscle2
+```
+
+```
+paste salmon_gill2/quant.sf salmon_muscle2/quant.sf | awk '{print $3 "\t" $7}' > salmon.gill.muscle.venn.list
+
+cat salmon.gill.muscle.venn.list | awk '$2 != 0' | awk '$3 != 0' | wc -l
+expressed in both = 104273
+
+cat salmon.gill.muscle.venn.list | awk '$2 != 0' | awk '$3 == 0' | wc -l
+expressed just in gill=55527
+
+cat salmon.gill.muscle.venn.list | awk '$2 == 0' | awk '$3 != 0' | wc -l
+expressed just in muscle=6957
+
+```
+
+
+go stuff
+--
+
+```
+curl -LO ftp://ftp.uniprot.org/pub/databases/uniprot/current_release/knowledgebase/complete/uniprot_sprot.fasta.gz
+gzip -d uniprot_sprot.fasta.gz
+makeblastdb -in uniprot_sprot.fasta -dbtype prot
+blastx -db uniprot_sprot.fasta -query ../assembly/Mytilus.MG.fasta -evalue 1e-20 -num_threads 32 -outfmt 6 -num_alignments 1 - num_descriptions 1 > mg.blastx
+
+awk '{print $1}' ../quant/expressed.in.muscle.gill.list | grep -wf - mg.blastx | awk -F "|" '{print $2}' > just.muscle.blastx &
+
+awk '{print $1}' ../quant/expressed.in.just.gill.list | grep -wf - mg.blastx | awk -F "|" '{print $2}' > just.gill.blastx &
+
+awk '{print $1}' ../quant/expressed.in.both.list | grep -wf - mg.blastx | awk -F "|" '{print $2}' > both.blastx &
+
+
+go to http://amigo1.geneontology.org/cgi-bin/amigo/term_enrichment
+
+```
+
+download GO
+--
+
+`curl -LO ftp://ftp.ebi.ac.uk/pub/databases/GO/goa/UNIPROT/gene_association.goa_ref_uniprot.gz`
+`for i in `cat ../blast/just.muscle.blastx`; do  awk '$2=="'"$i"'" {print $4}' gene_association.goa_ref_uniprot; done`
+
+
+dammit 
+--
+
+`dammit annotate ../assembly/Mytilus.MG.fasta --busco-group metazoa --n_threads 36 --database-dir /mnt/dammit/`
+
+trying new blast
+--
+
+```
+blastx -db uniprot_sprot.fasta -max_target_seqs 1 -evalue 1e-05 -num_threads 1 -outfmt 6 \
+-query xaa > xaa.blastx &
+blastx -db uniprot_sprot.fasta -max_target_seqs 1 -evalue 1e-05 -num_threads 1 -outfmt 6 \
+-query xab > xab.blastx &
+blastx -db uniprot_sprot.fasta -max_target_seqs 1 -evalue 1e-05 -num_threads 1 -outfmt 6 \
+-query xac > xac.blastx &
+blastx -db uniprot_sprot.fasta -max_target_seqs 1 -evalue 1e-05 -num_threads 1 -outfmt 6 \
+-query xad > xad.blastx &
+blastx -db uniprot_sprot.fasta -max_target_seqs 1 -evalue 1e-05 -num_threads 1 -outfmt 6 \
+-query xae > xae.blastx &
+blastx -db uniprot_sprot.fasta -max_target_seqs 1 -evalue 1e-05 -num_threads 1 -outfmt 6 \
+-query xaf > xaf.blastx &
+blastx -db uniprot_sprot.fasta -max_target_seqs 1 -evalue 1e-05 -num_threads 1 -outfmt 6 \
+-query xag > xag.blastx &
+blastx -db uniprot_sprot.fasta -max_target_seqs 1 -evalue 1e-05 -num_threads 1 -outfmt 6 \
+-query xah > xah.blastx &
+blastx -db uniprot_sprot.fasta -max_target_seqs 1 -evalue 1e-05 -num_threads 1 -outfmt 6 \
+-query xai > xai.blastx &
+blastx -db uniprot_sprot.fasta -max_target_seqs 1 -evalue 1e-05 -num_threads 1 -outfmt 6 \
+-query xaj > xaj.blastx &
+blastx -db uniprot_sprot.fasta -max_target_seqs 1 -evalue 1e-05 -num_threads 1 -outfmt 6 \
+-query xak > xak.blastx &
+blastx -db uniprot_sprot.fasta -max_target_seqs 1 -evalue 1e-05 -num_threads 1 -outfmt 6 \
+-query xal > xal.blastx &
+blastx -db uniprot_sprot.fasta -max_target_seqs 1 -evalue 1e-05 -num_threads 1 -outfmt 6 \
+-query xam > xam.blastx &
+blastx -db uniprot_sprot.fasta -max_target_seqs 1 -evalue 1e-05 -num_threads 1 -outfmt 6 \
+-query xan > xan.blastx &
+blastx -db uniprot_sprot.fasta -max_target_seqs 1 -evalue 1e-05 -num_threads 1 -outfmt 6 \
+-query xao > xao.blastx &
+blastx -db uniprot_sprot.fasta -max_target_seqs 1 -evalue 1e-05 -num_threads 1 -outfmt 6 \
+-query xap > xap.blastx &
+
+blastx -db uniprot_sprot.fasta -max_target_seqs 1 -evalue 1e-05 -num_threads 1 -outfmt 6 \
+-query xaq > xaq.blastx &
+blastx -db uniprot_sprot.fasta -max_target_seqs 1 -evalue 1e-05 -num_threads 1 -outfmt 6 \
+-query xar > xar.blastx &
+blastx -db uniprot_sprot.fasta -max_target_seqs 1 -evalue 1e-05 -num_threads 1 -outfmt 6 \
+-query xas > xas.blastx &
+blastx -db uniprot_sprot.fasta -max_target_seqs 1 -evalue 1e-05 -num_threads 1 -outfmt 6 \
+-query xat > xat.blastx &
+blastx -db uniprot_sprot.fasta -max_target_seqs 1 -evalue 1e-05 -num_threads 1 -outfmt 6 \
+-query xau > xau.blastx &
+blastx -db uniprot_sprot.fasta -max_target_seqs 1 -evalue 1e-05 -num_threads 1 -outfmt 6 \
+-query xav > xav.blastx &
+blastx -db uniprot_sprot.fasta -max_target_seqs 1 -evalue 1e-05 -num_threads 1 -outfmt 6 \
+-query xaw > xaw.blastx &
+blastx -db uniprot_sprot.fasta -max_target_seqs 1 -evalue 1e-05 -num_threads 1 -outfmt 6 \
+-query xax > xax.blastx &
+blastx -db uniprot_sprot.fasta -max_target_seqs 1 -evalue 1e-05 -num_threads 1 -outfmt 6 \
+-query xay > xay.blastx &
+blastx -db uniprot_sprot.fasta -max_target_seqs 1 -evalue 1e-05 -num_threads 1 -outfmt 6 \
+-query xaz > xaz.blastx &
+
+
+blastx -db uniprot_sprot.fasta -max_target_seqs 1 -evalue 1e-05 -num_threads 1 -outfmt 6 \
+-query xba > xba.blastx &
+blastx -db uniprot_sprot.fasta -max_target_seqs 1 -evalue 1e-05 -num_threads 1 -outfmt 6 \
+-query xbb > xbb.blastx &
+blastx -db uniprot_sprot.fasta -max_target_seqs 1 -evalue 1e-05 -num_threads 1 -outfmt 6 \
+-query xbc > xbc.blastx &
+blastx -db uniprot_sprot.fasta -max_target_seqs 1 -evalue 1e-05 -num_threads 1 -outfmt 6 \
+-query xbd > xbd.blastx &
+blastx -db uniprot_sprot.fasta -max_target_seqs 1 -evalue 1e-05 -num_threads 1 -outfmt 6 \
+-query xbe > xbe.blastx &
+blastx -db uniprot_sprot.fasta -max_target_seqs 1 -evalue 1e-05 -num_threads 1 -outfmt 6 \
+-query xbf > xbf.blastx &
+blastx -db uniprot_sprot.fasta -max_target_seqs 1 -evalue 1e-05 -num_threads 1 -outfmt 6 \
+-query xbg > xbg.blastx &
+blastx -db uniprot_sprot.fasta -max_target_seqs 1 -evalue 1e-05 -num_threads 1 -outfmt 6 \
+-query xbh > xbh.blastx &
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

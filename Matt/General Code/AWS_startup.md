@@ -81,7 +81,11 @@ git clone https://github.com/TransDecoder/TransDecoder.git
 cd TransDecoder
 make -j4
 
-
+cd
+git clone https://github.com/trinityrnaseq/trinityrnaseq.git
+cd trinityrnaseq
+make -j6
+PATH:$PATH:$(pwd)
 
 sudo mkfs -t ext4 /dev/xvdf
 sudo mount /dev/xvdf /mnt
@@ -90,7 +94,29 @@ sudo chown -R ubuntu:ubuntu /mnt
 
 
 ```
-PATH=$PATH:/home/ubuntu/seqtk:/home/ubuntu/bwa:/home/ubuntu/transrate-1.0.1-linux-x86_64:/home/ubuntu/BUSCO_v1.1b1:/home/ubuntu/augustus-3.0.2/bin:/home/ubuntu/augustus-3.0.2/scripts:/home/ubuntu/ncbi-blast-2.2.31+/bin:/home/ubuntu/TransDecoder:/home/ubuntu/bamtools/bin
+PATH=$PATH:/home/ubuntu/seqtk:/home/ubuntu/bwa:/home/ubuntu/transrate-1.0.1-linux-x86_64:/home/ubuntu/BUSCO_v1.1b1:/home/ubuntu/augustus-3.0.2/bin:/home/ubuntu/augustus-3.0.2/scripts:/home/ubuntu/ncbi-blast-2.2.31+/bin:/home/ubuntu/TransDecoder:/home/ubuntu/bamtools/bin:/home/ubuntu/salmon-0.5.1/bin:/home/ubuntu/trinityrnaseq
+
 export AUGUSTUS_CONFIG_PATH=/home/ubuntu/augustus-3.0.2/config/
+export LD_LIBRARY_PATH=/home/ubuntu/salmon-0.5.1/lib
+
+alias df='df -kTh'
+alias h='history'
+alias c='clear'
+alias gh='history | grep'
+alias ll='logout'
+alias n='nano'
+alias l='ls -lth'
+alias m='more'
+alias vm='vmstat -anwS M 10 5'
+alias ...="../../"
+alias ....="../../../"
+alias mv='mv -i'
+alias cp='cp -i'
+alias targz='tar -zcf'
+alias utargz='tar -zxf'
+alias tn="tmux new -s"
+alias ta="tmux attach -t"
+alias tl="tmux ls"
+alias tk="tmux kill-session -t"
 
 ```

@@ -451,3 +451,135 @@ edgeR Hacking
     summary(de <- decideTestsDGE(et, p=0.05, adjust="BH"))
     topTags(et, n=80)
 
+
+
+```
+for i in $(ls *fasta); do
+   F=`basename $i .fasta`;
+   python3 ~/BUSCO_v1.1b1/BUSCO_v1.1b1.py -g $i -m Trans --cpu 32 -o $F -l metazoa;
+done
+```
+
+trinity 
+--
+
+```
+Trinity --seqType fq --max_memory 30G --inchworm_cpu 10 --trimmomatic \
+--left ../reads/Thomas_McBr3_R1.PF.cor.fq.gz,\
+../reads/Thomas_McOr1_R1.PF.cor.fq.gz \
+--right ../reads/Thomas_McBr3_R2.PF.cor.fq.gz,\
+../reads/Thomas_McOr1_R2.PF.cor.fq.gz \
+--CPU 32 --output mc_lighter_BR3OR1_trinity --group_pairs_distance 999 --full_cleanup
+```
+
+BUSCO for existing assemblies, which were done individually and ask per above;
+-
+
+```
+::::::::::::::
+run_mcbr1.Trinity/short_summary_mcbr1.Trinity
+::::::::::::::
+#Summarized BUSCO benchmarking for file: mcbr1.Trinity.fasta
+#BUSCO was run in mode: genome
+
+Summarized benchmarks in BUSCO notation:
+	C:5.1%[D:1.3%],F:9.7%,M:85%,n:843
+
+Representing:
+	43	Complete Single-Copy BUSCOs
+	11	Complete Duplicated BUSCOs
+	82	Fragmented BUSCOs
+	718	Missing BUSCOs
+	843	Total BUSCO groups searched
+::::::::::::::
+run_mcbr2.Trinity/short_summary_mcbr2.Trinity
+::::::::::::::
+#Summarized BUSCO benchmarking for file: mcbr2.Trinity.fasta
+#BUSCO was run in mode: genome
+
+Summarized benchmarks in BUSCO notation:
+	C:13%[D:4.5%],F:16%,M:69%,n:843
+
+Representing:
+	117	Complete Single-Copy BUSCOs
+	38	Complete Duplicated BUSCOs
+	141	Fragmented BUSCOs
+	585	Missing BUSCOs
+	843	Total BUSCO groups searched
+::::::::::::::
+run_mcbr3.Trinity/short_summary_mcbr3.Trinity
+::::::::::::::
+#Summarized BUSCO benchmarking for file: mcbr3.Trinity.fasta
+#BUSCO was run in mode: genome
+
+Summarized benchmarks in BUSCO notation:
+	C:43%[D:16%],F:19%,M:36%,n:843
+
+Representing:
+	366	Complete Single-Copy BUSCOs
+	143	Complete Duplicated BUSCOs
+	168	Fragmented BUSCOs
+	309	Missing BUSCOs
+	843	Total BUSCO groups searched
+::::::::::::::
+run_mcor1.Trinity/short_summary_mcor1.Trinity
+::::::::::::::
+#Summarized BUSCO benchmarking for file: mcor1.Trinity.fasta
+#BUSCO was run in mode: genome
+
+Summarized benchmarks in BUSCO notation:
+	C:48%[D:13%],F:21%,M:30%,n:843
+
+Representing:
+	410	Complete Single-Copy BUSCOs
+	117	Complete Duplicated BUSCOs
+	180	Fragmented BUSCOs
+	253	Missing BUSCOs
+	843	Total BUSCO groups searched
+::::::::::::::
+run_mcor2.Trinity/short_summary_mcor2.Trinity
+::::::::::::::
+#Summarized BUSCO benchmarking for file: mcor2.Trinity.fasta
+#BUSCO was run in mode: genome
+
+Summarized benchmarks in BUSCO notation:
+	C:46%[D:18%],F:22%,M:30%,n:843
+
+Representing:
+	394	Complete Single-Copy BUSCOs
+	152	Complete Duplicated BUSCOs
+	190	Fragmented BUSCOs
+	259	Missing BUSCOs
+	843	Total BUSCO groups searched
+::::::::::::::
+run_mcor3.Trinity/short_summary_mcor3.Trinity
+::::::::::::::
+#Summarized BUSCO benchmarking for file: mcor3.Trinity.fasta
+#BUSCO was run in mode: genome
+
+Summarized benchmarks in BUSCO notation:
+	C:44%[D:17%],F:20%,M:34%,n:843
+
+Representing:
+	375	Complete Single-Copy BUSCOs
+	144	Complete Duplicated BUSCOs
+	177	Fragmented BUSCOs
+	291	Missing BUSCOs
+	843	Total BUSCO groups searched
+::::::::::::::
+run_Trinity/short_summary_Trinity
+::::::::::::::
+#Summarized BUSCO benchmarking for file: Trinity.fasta
+#BUSCO was run in mode: genome
+
+Summarized benchmarks in BUSCO notation:
+	C:83%[D:53%],F:9.9%,M:6.8%,n:843
+
+Representing:
+	701	Complete Single-Copy BUSCOs
+	449	Complete Duplicated BUSCOs
+	84	Fragmented BUSCOs
+	58	Missing BUSCOs
+	843	Total BUSCO groups searched
+```
+
