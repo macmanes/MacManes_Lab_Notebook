@@ -280,7 +280,7 @@ TR81796-c17_g5_i1    5.577063 3.206451 1.300902e-08 9.979919e-06
 TR175304-c0_g1_i1    5.627497 3.018310 1.987550e-08 1.415846e-05
 TR60579-c0_g5_i1    -7.561631 2.619259 2.691888e-08 1.789747e-05
 TR47584-c0_g1_i2     4.604199 2.512747 7.417330e-08 4.623314e-05
-TR77374-c6_g5_i1     5.501759 1.082553 1.096491e-07 6.432531e-05
+TR77374-c6_g5_i1     5.501759 1.082553 1.096491e-07 6.432531e-10
 TR84396-c1_g1_i2    -3.577602 2.065821 1.333359e-07 7.387550e-05
 TR15087-c1_g1_i1     3.182268 3.701544 1.772699e-07 8.885773e-05
 TR78336-c1_g2_i1     9.430515 1.090855 1.781966e-07 8.885773e-05
@@ -582,4 +582,328 @@ Representing:
 	58	Missing BUSCOs
 	843	Total BUSCO groups searched
 ```
+
+transrate
+--
+
+```
+transrate -a ../assembly/Trinity.fasta -t 6 -o mc_firstjoint_assembly \
+-l ../reads/Thomas_McBr3_R1.PF.cor.fq.gz,../reads/Thomas_McOr1_R1.PF.cor.fq.gz \
+-r ../reads/Thomas_McBr3_R2.PF.cor.fq.gz,../reads/Thomas_McOr1_R2.PF.cor.fq.gz
+```
+
+
+
+
+
+TMP calc final assembly
+
+```
+
+kallisto index -i transcripts2.idx ../assembly/Montastrea.trinity.fasta
+~/salmon-0.5.1/bin/salmon index -t ../assembly/Montastrea.trinity.fasta -i transcripts2_index --type quasi -k 31
+
+
+
+
+
+kallisto quant -t 32 -i transcripts2.idx -o kallisto_McBr1 -b 100 \
+../reads/Thomas_McBr1_R1.PF.cor.fq.gz \
+../reads/Thomas_McBr1_R2.PF.cor.fq.gz
+
+kallisto quant -t 32 -i transcripts2.idx -o kallisto_McBr2 -b 100 \
+../reads/Thomas_McBr2_R1.PF.cor.fq.gz \
+../reads/Thomas_McBr2_R2.PF.cor.fq.gz
+
+kallisto quant -t 32 -i transcripts2.idx -o kallisto_McBr3 -b 100 \
+../reads/Thomas_McBr3_R1.PF.cor.fq.gz \
+../reads/Thomas_McBr3_R2.PF.cor.fq.gz
+
+
+~/salmon-0.5.1/bin/salmon quant -p 32 -i transcripts2_index -l MSR \
+-1 <(gzip -cd ../reads/Thomas_McBr3_R1.PF.cor.fq.gz) \
+-2 <(gzip -cd ../reads/Thomas_McBr3_R2.PF.cor.fq.gz) -o salmon_McBr3
+
+~/salmon-0.5.1/bin/salmon quant -p 32 -i transcripts2_index -l MSR \
+-1 <(gzip -cd ../reads/Thomas_McBr1_R1.PF.cor.fq.gz) \
+-2 <(gzip -cd ../reads/Thomas_McBr1_R2.PF.cor.fq.gz) -o salmon_McBr1
+
+~/salmon-0.5.1/bin/salmon quant -p 32 -i transcripts2_index -l MSR \
+-1 <(gzip -cd ../reads/Thomas_McBr2_R1.PF.cor.fq.gz) \
+-2 <(gzip -cd ../reads/Thomas_McBr2_R2.PF.cor.fq.gz) -o salmon_McBr2
+
+
+
+kallisto quant -t 32 -i transcripts2.idx -o kallisto_McOr1 -b 100 \
+../reads/Thomas_McOr1_R1.PF.cor.fq.gz \
+../reads/Thomas_McOr1_R2.PF.cor.fq.gz
+
+kallisto quant -t 32 -i transcripts2.idx -o kallisto_McOr2 -b 100 \
+../reads/Thomas_McOr2_R1.PF.cor.fq.gz \
+../reads/Thomas_McOr2_R2.PF.cor.fq.gz
+
+kallisto quant -t 32 -i transcripts2.idx -o kallisto_McOr3 -b 100 \
+../reads/Thomas_McOr3_R1.PF.cor.fq.gz \
+../reads/Thomas_McOr3_R2.PF.cor.fq.gz
+
+~/salmon-0.5.1/bin/salmon quant -p 32 -i transcripts2_index -l MSR \
+-1 <(gzip -cd ../reads/Thomas_McOr3_R1.PF.cor.fq.gz) \
+-2 <(gzip -cd ../reads/Thomas_McOr3_R2.PF.cor.fq.gz) -o salmon_McOr3
+
+~/salmon-0.5.1/bin/salmon quant -p 32 -i transcripts2_index -l MSR \
+-1 <(gzip -cd ../reads/Thomas_McOr2_R1.PF.cor.fq.gz) \
+-2 <(gzip -cd ../reads/Thomas_McOr2_R2.PF.cor.fq.gz) -o salmon_McOr2
+
+~/salmon-0.5.1/bin/salmon quant -p 32 -i transcripts2_index -l MSR \
+-1 <(gzip -cd ../reads/Thomas_McOr1_R1.PF.cor.fq.gz) \
+-2 <(gzip -cd ../reads/Thomas_McOr1_R2.PF.cor.fq.gz) -o salmon_McOr1
+
+
+```
+
+filter
+
+```
+
+awk '1>$5{next}1' kallisto_McOr1/abundance.tsv | awk '{print $1}' | sed  '1d' > kallisto.McOr1.list
+awk '1>$5{next}1' kallisto_McOr2/abundance.tsv | awk '{print $1}' | sed  '1d' > kallisto.McOr2.list
+awk '1>$5{next}1' kallisto_McOr3/abundance.tsv | awk '{print $1}' | sed  '1d' > kallisto.McOr3.list
+awk '1>$3{next}1' salmon_McOr3/quant.sf | awk '{print $1}' | sed  '1d' > salmon.McOr3.list
+awk '1>$3{next}1' salmon_McOr2/quant.sf | awk '{print $1}' | sed  '1d' > salmon.McOr2.list
+awk '1>$3{next}1' salmon_McOr1/quant.sf | awk '{print $1}' | sed  '1d' > salmon.McOr1.list
+
+awk '1>$3{next}1' salmon_McBr3/quant.sf | awk '{print $1}' | sed  '1d' > salmon.McBr3.list
+awk '1>$3{next}1' salmon_McBr2/quant.sf | awk '{print $1}' | sed  '1d' > salmon.McBr2.list
+awk '1>$3{next}1' salmon_McBr1/quant.sf | awk '{print $1}' | sed  '1d' > salmon.McBr1.list
+awk '1>$5{next}1' kallisto_McBr1/abundance.tsv | awk '{print $1}' | sed  '1d' > kallisto.McBr1.list
+awk '1>$5{next}1' kallisto_McBr2/abundance.tsv | awk '{print $1}' | sed  '1d' > kallisto.McBr2.list
+awk '1>$5{next}1' kallisto_McBr3/abundance.tsv | awk '{print $1}' | sed  '1d' > kallisto.McBr3.list
+cat *list | sort | uniq | wc -l
+
+cat *list | sort | uniq > highexp
+
+```
+
+
+
+```
+split -l 6000 highexp
+for i in `cat xaa`; do grep --no-group-separator --max-count=1 -A1 -w $i ../assembly/Montastrea.trinity.fasta >> xaa.fa; done &
+for i in `cat xab`; do grep --no-group-separator --max-count=1 -A1 -w $i ../assembly/Montastrea.trinity.fasta >> xab.fa; done &
+for i in `cat xac`; do grep --no-group-separator --max-count=1 -A1 -w $i ../assembly/Montastrea.trinity.fasta >> xac.fa; done &
+for i in `cat xad`; do grep --no-group-separator --max-count=1 -A1 -w $i ../assembly/Montastrea.trinity.fasta >> xad.fa; done &
+for i in `cat xae`; do grep --no-group-separator --max-count=1 -A1 -w $i ../assembly/Montastrea.trinity.fasta >> xae.fa; done &
+for i in `cat xaf`; do grep --no-group-separator --max-count=1 -A1 -w $i ../assembly/Montastrea.trinity.fasta >> xaf.fa; done &
+for i in `cat xag`; do grep --no-group-separator --max-count=1 -A1 -w $i ../assembly/Montastrea.trinity.fasta >> xag.fa; done &
+for i in `cat xah`; do grep --no-group-separator --max-count=1 -A1 -w $i ../assembly/Montastrea.trinity.fasta >> xah.fa; done &
+for i in `cat xai`; do grep --no-group-separator --max-count=1 -A1 -w $i ../assembly/Montastrea.trinity.fasta >> xai.fa; done &
+for i in `cat xaj`; do grep --no-group-separator --max-count=1 -A1 -w $i ../assembly/Montastrea.trinity.fasta >> xaj.fa; done &
+for i in `cat xak`; do grep --no-group-separator --max-count=1 -A1 -w $i ../assembly/Montastrea.trinity.fasta >> xak.fa; done &
+for i in `cat xal`; do grep --no-group-separator --max-count=1 -A1 -w $i ../assembly/Montastrea.trinity.fasta >> xal.fa; done &
+for i in `cat xam`; do grep --no-group-separator --max-count=1 -A1 -w $i ../assembly/Montastrea.trinity.fasta >> xam.fa; done &
+for i in `cat xan`; do grep --no-group-separator --max-count=1 -A1 -w $i ../assembly/Montastrea.trinity.fasta >> xan.fa; done &
+for i in `cat xao`; do grep --no-group-separator --max-count=1 -A1 -w $i ../assembly/Montastrea.trinity.fasta >> xao.fa; done &
+for i in `cat xap`; do grep --no-group-separator --max-count=1 -A1 -w $i ../assembly/Montastrea.trinity.fasta >> xap.fa; done &
+for i in `cat xaq`; do grep --no-group-separator --max-count=1 -A1 -w $i ../assembly/Montastrea.trinity.fasta >> xaq.fa; done &
+for i in `cat xar`; do grep --no-group-separator --max-count=1 -A1 -w $i ../assembly/Montastrea.trinity.fasta >> xar.fa; done &
+for i in `cat xas`; do grep --no-group-separator --max-count=1 -A1 -w $i ../assembly/Montastrea.trinity.fasta >> xas.fa; done &
+for i in `cat xat`; do grep --no-group-separator --max-count=1 -A1 -w $i ../assembly/Montastrea.trinity.fasta >> xat.fa; done &
+for i in `cat xau`; do grep --no-group-separator --max-count=1 -A1 -w $i ../assembly/Montastrea.trinity.fasta >> xau.fa; done &
+for i in `cat xav`; do grep --no-group-separator --max-count=1 -A1 -w $i ../assembly/Montastrea.trinity.fasta >> xav.fa; done &
+for i in `cat xaw`; do grep --no-group-separator --max-count=1 -A1 -w $i ../assembly/Montastrea.trinity.fasta >> xaw.fa; done &
+for i in `cat xax`; do grep --no-group-separator --max-count=1 -A1 -w $i ../assembly/Montastrea.trinity.fasta >> xax.fa; done &
+for i in `cat xay`; do grep --no-group-separator --max-count=1 -A1 -w $i ../assembly/Montastrea.trinity.fasta >> xay.fa; done &
+for i in `cat xaz`; do grep --no-group-separator --max-count=1 -A1 -w $i ../assembly/Montastrea.trinity.fasta >> xaz.fa; done &
+for i in `cat xba`; do grep --no-group-separator --max-count=1 -A1 -w $i ../assembly/Montastrea.trinity.fasta >> xba.fa; done &
+for i in `cat xbb`; do grep --no-group-separator --max-count=1 -A1 -w $i ../assembly/Montastrea.trinity.fasta >> xbb.fa; done &
+for i in `cat xbc`; do grep --no-group-separator --max-count=1 -A1 -w $i ../assembly/Montastrea.trinity.fasta >> xbc.fa; done &
+for i in `cat xbd`; do grep --no-group-separator --max-count=1 -A1 -w $i ../assembly/Montastrea.trinity.fasta >> xbd.fa; done &
+
+cat *fa > ../assembly/Montastrea.trinity.v2.fasta
+
+
+transrate -a /mnt/mc/assembly/Montastrea.trinity.v2.fasta \
+-t 12 -o Montastrea.trinity.v2 \
+-l ../reads/Thomas_McBr3_R1.PF.cor.fq.gz,../reads/Thomas_McBr2_R1.PF.cor.fq.gz,../reads/Thomas_McOr1_R1.PF.cor.fq.gz,../reads/Thomas_McOr3_R1.PF.cor.fq.gz \
+-r ../reads/Thomas_McBr3_R2.PF.cor.fq.gz,../reads/Thomas_McBr2_R2.PF.cor.fq.gz,../reads/Thomas_McOr1_R2.PF.cor.fq.gz,../reads/Thomas_McOr3_R2.PF.cor.fq.gz
+
+
+python3 ~/BUSCO_v1.1b1/BUSCO_v1.1b1.py -g /mnt/mc/assembly/Montastrea.trinity.v2.fasta \
+-m Trans --cpu 22 -o Montastrea.trinity.v2 -l metazoa
+
+```
+BUSCO results
+--
+
+```
+ubuntu@ip-172-31-56-29:/mnt/mc/busco$ more run_Montastrea.trinity.v2/short_summary_Montastrea.trinity.v2
+#Summarized BUSCO benchmarking for file: /mnt/mc/assembly/Montastrea.trinity.v2.fasta
+#BUSCO was run in mode: genome
+
+Summarized benchmarks in BUSCO notation:
+        C:82%[D:43%],F:8.5%,M:9.0%,n:843
+
+Representing:
+        695     Complete Single-Copy BUSCOs
+        369     Complete Duplicated BUSCOs
+        72      Fragmented BUSCOs
+        76      Missing BUSCOs
+        843     Total BUSCO groups searched
+```
+
+dammit
+--
+
+in `/mnt/mc/dammit`
+
+```
+dammit annotate /mnt/mc/assembly/Montastrea.trinity.v2.fasta --busco-group metazoa --n_threads 36 --database-dir /mnt/dammit/
+```
+
+blast
+--
+
+```
+mkdir /mnt/mc/blast && cd /mnt/mc/blast
+ln -s /mnt/blast/uniprot* .
+split -l 11000  /mnt/mc/assembly/Montastrea.trinity.v2.fasta
+
+blastx -db uniprot_sprot.fasta -max_target_seqs 1 -evalue 1e-10 -num_threads 1 -outfmt 6 \
+-query xaa > xaa.blastx &
+blastx -db uniprot_sprot.fasta -max_target_seqs 1 -evalue 1e-10 -num_threads 1 -outfmt 6 \
+-query xab > xab.blastx &
+blastx -db uniprot_sprot.fasta -max_target_seqs 1 -evalue 1e-10 -num_threads 1 -outfmt 6 \
+-query xac > xac.blastx &
+blastx -db uniprot_sprot.fasta -max_target_seqs 1 -evalue 1e-10 -num_threads 1 -outfmt 6 \
+-query xad > xad.blastx &
+blastx -db uniprot_sprot.fasta -max_target_seqs 1 -evalue 1e-10 -num_threads 1 -outfmt 6 \
+-query xae > xae.blastx &
+blastx -db uniprot_sprot.fasta -max_target_seqs 1 -evalue 1e-10 -num_threads 1 -outfmt 6 \
+-query xaf > xaf.blastx &
+blastx -db uniprot_sprot.fasta -max_target_seqs 1 -evalue 1e-10 -num_threads 1 -outfmt 6 \
+-query xag > xag.blastx &
+blastx -db uniprot_sprot.fasta -max_target_seqs 1 -evalue 1e-10 -num_threads 1 -outfmt 6 \
+-query xah > xah.blastx &
+blastx -db uniprot_sprot.fasta -max_target_seqs 1 -evalue 1e-10 -num_threads 1 -outfmt 6 \
+-query xai > xai.blastx &
+blastx -db uniprot_sprot.fasta -max_target_seqs 1 -evalue 1e-10 -num_threads 1 -outfmt 6 \
+-query xaj > xaj.blastx &
+blastx -db uniprot_sprot.fasta -max_target_seqs 1 -evalue 1e-10 -num_threads 1 -outfmt 6 \
+-query xak > xak.blastx &
+blastx -db uniprot_sprot.fasta -max_target_seqs 1 -evalue 1e-10 -num_threads 1 -outfmt 6 \
+-query xal > xal.blastx &
+blastx -db uniprot_sprot.fasta -max_target_seqs 1 -evalue 1e-10 -num_threads 1 -outfmt 6 \
+-query xam > xam.blastx &
+blastx -db uniprot_sprot.fasta -max_target_seqs 1 -evalue 1e-10 -num_threads 1 -outfmt 6 \
+-query xan > xan.blastx &
+blastx -db uniprot_sprot.fasta -max_target_seqs 1 -evalue 1e-10 -num_threads 1 -outfmt 6 \
+-query xao > xao.blastx &
+blastx -db uniprot_sprot.fasta -max_target_seqs 1 -evalue 1e-10 -num_threads 1 -outfmt 6 \
+-query xap > xap.blastx &
+blastx -db uniprot_sprot.fasta -max_target_seqs 1 -evalue 1e-10 -num_threads 1 -outfmt 6 \
+-query xaq > xaq.blastx &
+blastx -db uniprot_sprot.fasta -max_target_seqs 1 -evalue 1e-10 -num_threads 1 -outfmt 6 \
+-query xar > xar.blastx &
+blastx -db uniprot_sprot.fasta -max_target_seqs 1 -evalue 1e-10 -num_threads 1 -outfmt 6 \
+-query xas > xas.blastx &
+blastx -db uniprot_sprot.fasta -max_target_seqs 1 -evalue 1e-10 -num_threads 1 -outfmt 6 \
+-query xat > xat.blastx &
+blastx -db uniprot_sprot.fasta -max_target_seqs 1 -evalue 1e-10 -num_threads 1 -outfmt 6 \
+-query xau > xau.blastx &
+blastx -db uniprot_sprot.fasta -max_target_seqs 1 -evalue 1e-10 -num_threads 1 -outfmt 6 \
+-query xav > xav.blastx &
+
+
+blastx -db uniprot_sprot.fasta -max_target_seqs 1 -evalue 1e-10 -num_threads 1 -outfmt 6 \
+-query xaw > xaw.blastx &
+blastx -db uniprot_sprot.fasta -max_target_seqs 1 -evalue 1e-10 -num_threads 1 -outfmt 6 \
+-query xax > xax.blastx &
+blastx -db uniprot_sprot.fasta -max_target_seqs 1 -evalue 1e-10 -num_threads 1 -outfmt 6 \
+-query xay > xay.blastx &
+blastx -db uniprot_sprot.fasta -max_target_seqs 1 -evalue 1e-10 -num_threads 1 -outfmt 6 \
+-query xaz > xaz.blastx &
+blastx -db uniprot_sprot.fasta -max_target_seqs 1 -evalue 1e-10 -num_threads 1 -outfmt 6 \
+-query xba > xba.blastx &
+blastx -db uniprot_sprot.fasta -max_target_seqs 1 -evalue 1e-10 -num_threads 1 -outfmt 6 \
+-query xbb > xbb.blastx &
+blastx -db uniprot_sprot.fasta -max_target_seqs 1 -evalue 1e-10 -num_threads 1 -outfmt 6 \
+-query xbc > xbc.blastx &
+blastx -db uniprot_sprot.fasta -max_target_seqs 1 -evalue 1e-10 -num_threads 1 -outfmt 6 \
+-query xbd > xbd.blastx &
+blastx -db uniprot_sprot.fasta -max_target_seqs 1 -evalue 1e-10 -num_threads 1 -outfmt 6 \
+-query xbe > xbe.blastx &
+blastx -db uniprot_sprot.fasta -max_target_seqs 1 -evalue 1e-10 -num_threads 1 -outfmt 6 \
+-query xbf > xbf.blastx &
+blastx -db uniprot_sprot.fasta -max_target_seqs 1 -evalue 1e-10 -num_threads 1 -outfmt 6 \
+-query xbg > xbg.blastx &
+
+cat x*blastx > Montastrea.trinity.v2.blastx
+
+```
+
+venn diagram
+--
+
+```
+
+cd /mnt/mc/quant/
+
+~/salmon-0.5.1/bin/salmon index -t /mnt/mc/assembly/Montastrea.trinity.v2.fasta -i transcripts_index --type quasi -k 31
+
+~/salmon-0.5.1/bin/salmon quant -p 4 -i transcripts_index -l MSR \
+-1 <(gzip -cd ../reads/Thomas_McOr*_R1.PF.cor.fq.gz) \
+-2 <(gzip -cd ../reads/Thomas_McOr*_R2.PF.cor.fq.gz) -o salmon_McOr
+
+~/salmon-0.5.1/bin/salmon quant -p 4 -i transcripts_index -l MSR \
+-1 <(gzip -cd ../reads/Thomas_McBr*_R1.PF.cor.fq.gz) \
+-2 <(gzip -cd ../reads/Thomas_McBr*_R2.PF.cor.fq.gz) -o salmon_McBr
+
+
+paste salmon_McBr/quant.sf salmon_McOr/quant.sf | awk '{print $1 "\t" $3 "\t" $7}' > salmon.McBr.McOr.venn.list
+
+cat salmon.McBr.McOr.venn.list | awk '$2 != 0' | awk '$3 != 0' | wc -l
+expressed in both = 169519
+
+cat salmon.McBr.McOr.venn.list | awk '$2 != 0' | awk '$3 == 0' | wc -l
+expressed just in orange=3559
+
+cat salmon.McBr.McOr.venn.list | awk '$2 == 0' | awk '$3 != 0' | wc -l
+expressed just in brown=4857
+
+cat salmon.McBr.McOr.venn.list | awk '$2 != 0' | awk '$3 != 0' | awk '{print $1}' | sed 1d > expressed.in.BROR.list
+cat salmon.McBr.McOr.venn.list | awk '$2 != 0' | awk '$3 == 0' | awk '{print $1}' | sed 1d > expressed.in.justOR.list
+cat salmon.McBr.McOr.venn.list | awk '$2 == 0' | awk '$3 != 0' | awk '{print $1}' | sed 1d > expressed.in.justOR.list
+
+
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
