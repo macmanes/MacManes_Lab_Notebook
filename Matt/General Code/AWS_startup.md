@@ -55,6 +55,8 @@ tar -zxf BUSCO_v1.1b1.tar.gz
 cd BUSCO_v1.1b1
 PATH=$PATH:$(pwd)
 curl -LO http://busco.ezlab.org/files/metazoa_buscos.tar.gz
+curl -LO http://busco.ezlab.org/files/vertebrata_buscos.tar.gz
+tar -zxf vertebrata_buscos.tar.gz
 tar -zxf metazoa_buscos.tar.gz
 
 
@@ -87,7 +89,7 @@ cd trinityrnaseq
 make -j6
 PATH:$PATH:$(pwd)
 
-sudo mkfs -t ext4 /dev/xvdf
+#sudo mkfs -t ext4 /dev/xvdf
 sudo mount /dev/xvdf /mnt
 sudo chown -R ubuntu:ubuntu /mnt
 ```

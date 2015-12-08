@@ -878,12 +878,93 @@ cat salmon.McBr.McOr.venn.list | awk '$2 == 0' | awk '$3 != 0' | awk '{print $1}
 ```
 
 
+I want to eval the GO stuff.. seems like it works better if we bring in model organism UniproKB IDs, thereforw, I will blast to human, DMel, etc to see if this gives us a better answer. 
+
+```
+blastx -db homo -max_target_seqs 1 -evalue 1e-10 -num_threads 1 -outfmt 6 \
+-query xaa > xaa.blastx &
+blastx -db homo -max_target_seqs 1 -evalue 1e-10 -num_threads 1 -outfmt 6 \
+-query xab > xab.blastx &
+blastx -db homo -max_target_seqs 1 -evalue 1e-10 -num_threads 1 -outfmt 6 \
+-query xac > xac.blastx &
+blastx -db homo -max_target_seqs 1 -evalue 1e-10 -num_threads 1 -outfmt 6 \
+-query xad > xad.blastx &
+blastx -db homo -max_target_seqs 1 -evalue 1e-10 -num_threads 1 -outfmt 6 \
+-query xae > xae.blastx &
+blastx -db homo -max_target_seqs 1 -evalue 1e-10 -num_threads 1 -outfmt 6 \
+-query xaf > xaf.blastx &
+blastx -db homo -max_target_seqs 1 -evalue 1e-10 -num_threads 1 -outfmt 6 \
+-query xag > xag.blastx &
+blastx -db homo -max_target_seqs 1 -evalue 1e-10 -num_threads 1 -outfmt 6 \
+-query xah > xah.blastx &
+blastx -db homo -max_target_seqs 1 -evalue 1e-10 -num_threads 1 -outfmt 6 \
+-query xai > xai.blastx &
+blastx -db homo -max_target_seqs 1 -evalue 1e-10 -num_threads 1 -outfmt 6 \
+-query xaj > xaj.blastx &
+blastx -db homo -max_target_seqs 1 -evalue 1e-10 -num_threads 1 -outfmt 6 \
+-query xak > xak.blastx &
+blastx -db homo -max_target_seqs 1 -evalue 1e-10 -num_threads 1 -outfmt 6 \
+-query xal > xal.blastx &
+blastx -db homo -max_target_seqs 1 -evalue 1e-10 -num_threads 1 -outfmt 6 \
+-query xam > xam.blastx &
+blastx -db homo -max_target_seqs 1 -evalue 1e-10 -num_threads 1 -outfmt 6 \
+-query xan > xan.blastx &
+blastx -db homo -max_target_seqs 1 -evalue 1e-10 -num_threads 1 -outfmt 6 \
+-query xao > xao.blastx &
+blastx -db homo -max_target_seqs 1 -evalue 1e-10 -num_threads 1 -outfmt 6 \
+-query xap > xap.blastx &
+blastx -db homo -max_target_seqs 1 -evalue 1e-10 -num_threads 1 -outfmt 6 \
+-query xaq > xaq.blastx &
+blastx -db homo -max_target_seqs 1 -evalue 1e-10 -num_threads 1 -outfmt 6 \
+-query xar > xar.blastx &
+blastx -db homo -max_target_seqs 1 -evalue 1e-10 -num_threads 1 -outfmt 6 \
+-query xas > xas.blastx &
+blastx -db homo -max_target_seqs 1 -evalue 1e-10 -num_threads 1 -outfmt 6 \
+-query xat > xat.blastx &
+blastx -db homo -max_target_seqs 1 -evalue 1e-10 -num_threads 1 -outfmt 6 \
+-query xau > xau.blastx &
+blastx -db homo -max_target_seqs 1 -evalue 1e-10 -num_threads 1 -outfmt 6 \
+-query xav > xav.blastx &
 
 
+blastx -db homo -max_target_seqs 1 -evalue 1e-10 -num_threads 1 -outfmt 6 \
+-query xaw > xaw.blastx &
+blastx -db homo -max_target_seqs 1 -evalue 1e-10 -num_threads 1 -outfmt 6 \
+-query xax > xax.blastx &
+blastx -db homo -max_target_seqs 1 -evalue 1e-10 -num_threads 1 -outfmt 6 \
+-query xay > xay.blastx &
+blastx -db homo -max_target_seqs 1 -evalue 1e-10 -num_threads 1 -outfmt 6 \
+-query xaz > xaz.blastx &
+blastx -db homo -max_target_seqs 1 -evalue 1e-10 -num_threads 1 -outfmt 6 \
+-query xba > xba.blastx &
+blastx -db homo -max_target_seqs 1 -evalue 1e-10 -num_threads 1 -outfmt 6 \
+-query xbb > xbb.blastx &
+blastx -db homo -max_target_seqs 1 -evalue 1e-10 -num_threads 1 -outfmt 6 \
+-query xbc > xbc.blastx &
+blastx -db homo -max_target_seqs 1 -evalue 1e-10 -num_threads 1 -outfmt 6 \
+-query xbd > xbd.blastx &
+blastx -db homo -max_target_seqs 1 -evalue 1e-10 -num_threads 1 -outfmt 6 \
+-query xbe > xbe.blastx &
+blastx -db homo -max_target_seqs 1 -evalue 1e-10 -num_threads 1 -outfmt 6 \
+-query xbf > xbf.blastx &
+blastx -db homo -max_target_seqs 1 -evalue 1e-10 -num_threads 1 -outfmt 6 \
+-query xbg > xbg.blastx &
+```
 
 
+pull down
 
+```
 
+cat *blastx > Montastrea.homo.blastx
+
+awk '{print $1}' ../../quant/expressed.in.justBR.list | grep -wf - Montastrea.homo.blastx | awk -F "|" '{print $2}' > just.BR.homo.blastx &
+
+awk '{print $1}' ../../quant/expressed.in.justOR.list | grep -wf - Montastrea.homo.blastx | awk -F "|" '{print $2}' > just.OR.homo.blastx &
+
+awk '{print $1}' ../../quant/expressed.in.BROR.list | grep -wf - Montastrea.homo.blastx | awk -F "|" '{print $2}' > both.homo.blastx &
+
+```
 
 
 
