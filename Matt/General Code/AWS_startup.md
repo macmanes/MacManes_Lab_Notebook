@@ -39,7 +39,7 @@ tar -zxf v0.5.1.tar.gz
 cd salmon-0.5.1/
 mkdir build
 cd build
-cmake ..
+cmake -DCMAKE_C_COMPILER=$(which gcc-4.9) -DCMAKE_CXX_COMPILER=$(which g++-4.9) ..
 make -j6
 sudo make all install
 
