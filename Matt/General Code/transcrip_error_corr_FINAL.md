@@ -997,14 +997,34 @@ tmux new -s busco
 
 
 ```
-for i in $(ls ../assemblies/*fasta); do
+for i in $(ls trin*fasta); do
    F=`basename $i .fasta`;
-   python3 /share/BUSCO_v1.1b1/BUSCO_v1.1b1.py -g $i -m Trans --cpu 32 -o $F -l vertebrata;
-   gzip $i &
+   python3 /share/BUSCO_v1.1b1/BUSCO_v1.1b1.py -g $i -m Trans --cpu 52 -o $F -l vertebrata;
 done
 ```
+transrate
+
+```
+transrate -t 52 -a \
+trinity_1M.P2.raw.Trinity.fasta,\
+trinity_2M.P2.raw.Trinity.fasta,\
+trinity_5M.P2.raw.Trinity.fasta,\
+trinity_10M.P2.raw.Trinity.fasta,\
+trinity_20M.P2.raw.Trinity.fasta,\
+trinity_40M.P2.raw.Trinity.fasta,\
+trinity_60M.P2.raw.Trinity.fasta,\
+trinity_80M.P2.raw.Trinity.fasta,\
+trinity_100M.P2.raw.Trinity.fasta,\
+1M.trinity_bfc31.Trinity.fasta,\
+2M.trinity_bfc31.Trinity.fasta,\
+5M.trinity_bfc31.Trinity.fasta,\
+10M.trinity_bfc31.Trinity.fasta,\
+20M.trinity_bfc31.Trinity.fasta \
+-l ../reads/SRR797058_1.fastq.gz \
+-r ../reads/SRR797058_2.fastq.gz
 
 
+```
 
 
 
