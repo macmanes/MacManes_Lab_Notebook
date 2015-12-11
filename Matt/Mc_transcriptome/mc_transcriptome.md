@@ -872,8 +872,13 @@ expressed just in brown=4857
 
 cat salmon.McBr.McOr.venn.list | awk '$2 != 0' | awk '$3 != 0' | awk '{print $1}' | sed 1d > expressed.in.BROR.list
 cat salmon.McBr.McOr.venn.list | awk '$2 != 0' | awk '$3 == 0' | awk '{print $1}' | sed 1d > expressed.in.justOR.list
-cat salmon.McBr.McOr.venn.list | awk '$2 == 0' | awk '$3 != 0' | awk '{print $1}' | sed 1d > expressed.in.justOR.list
+cat salmon.McBr.McOr.venn.list | awk '$2 == 0' | awk '$3 != 0' | awk '{print $1}' | sed 1d > expressed.in.justBR.list
 
+awk '{print $1}' ../quant/expressed.in.BROR.list | grep -wf - Montastrea.blastx | awk -F "|" '{print $2}' > just.BROR.blastx &
+
+awk '{print $1}' ../quant/expressed.in.justOR.list | grep -wf - Montastrea.blastx | awk -F "|" '{print $2}' > just.OR.blastx &
+
+awk '{print $1}' ../quant/expressed.in.justBR.list | grep -wf - Montastrea.blastx | awk -F "|" '{print $2}' > just.BR.blastx &
 
 ```
 
