@@ -39,3 +39,22 @@ expressed just in gill=55527
 cat salmon.adultlarva.venn.list | awk '$2 == 0' | awk '$3 != 0' | wc -l
 expressed just in muscle=6957
 ```
+
+
+blast
+
+```
+blastx -db /mnt/mc/blast/homo/homo -max_target_seqs 1 -evalue 1e-10 -num_threads 32 -outfmt 6 -query ../harm2/Harmonia.v1.0.0.fasta.dammit.fasta > out.blastx
+
+blastx -db /mnt/mc/blast/dmel/dmel -max_target_seqs 1 -evalue 1e-10 -num_threads 32 -outfmt 6 -query ../harm2/Harmonia.v1.0.0.fasta.dammit.fasta > dros.blastx
+```
+
+pull down
+
+```
+awk '{print $1}' ../quant/expressed.in.adult.list | grep -wf - dros.blastx | awk -F "|" '{print $2}' > just.adult.blastx &
+
+awk '{print $1}' ../quant/expressed.in.larva.list | grep -wf - dros.blastx | awk -F "|" '{print $2}' > just.larva.blastx &
+
+awk '{print $1}' ../quant/expressed.in.both.list | grep -wf - dros.blastx | awk -F "|" '{print $2}' > both.blastx &
+```
