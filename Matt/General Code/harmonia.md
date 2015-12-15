@@ -58,3 +58,8 @@ awk '{print $1}' ../quant/expressed.in.larva.list | grep -wf - dros.blastx | awk
 
 awk '{print $1}' ../quant/expressed.in.both.list | grep -wf - dros.blastx | awk -F "|" '{print $2}' > both.blastx &
 ```
+
+
+```
+draw.pairwise.venn(area2 = 1922+30630,area1 = 1094+30630,cross.area = 30630, ext.text=T, fill=c("dodger blue", "grey"), lty = "blank", lwd=0,  print.mode = "none",  ext.percent = 0)
+```

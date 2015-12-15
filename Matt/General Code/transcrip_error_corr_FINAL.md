@@ -996,30 +996,38 @@ cd /mnt/busco
 tmux new -s busco
 
 
+in `/mnt/data3/macmanes/error/busco`
+
 ```
-for i in $(ls trin*fasta); do
+for i in $(ls ../assemblies/trin*fasta); do
    F=`basename $i .fasta`;
    python3 /share/BUSCO_v1.1b1/BUSCO_v1.1b1.py -g $i -m Trans --cpu 52 -o $F -l vertebrata;
 done
 ```
 transrate
 
+
+
 ```
 transrate -t 52 -a \
-trinity_1M.P2.raw.Trinity.fasta,\
-trinity_2M.P2.raw.Trinity.fasta,\
-trinity_5M.P2.raw.Trinity.fasta,\
-trinity_10M.P2.raw.Trinity.fasta,\
-trinity_20M.P2.raw.Trinity.fasta,\
-trinity_40M.P2.raw.Trinity.fasta,\
-trinity_60M.P2.raw.Trinity.fasta,\
-trinity_80M.P2.raw.Trinity.fasta,\
-trinity_100M.P2.raw.Trinity.fasta,\
-1M.trinity_bfc31.Trinity.fasta,\
-2M.trinity_bfc31.Trinity.fasta,\
-5M.trinity_bfc31.Trinity.fasta,\
-10M.trinity_bfc31.Trinity.fasta,\
-20M.trinity_bfc31.Trinity.fasta \
+../assemblies/trinity_1M.P2.raw.Trinity.fasta,\
+../assemblies/trinity_2M.P2.raw.Trinity.fasta,\
+../assemblies/trinity_5M.P2.raw.Trinity.fasta,\
+../assemblies/trinity_10M.P2.raw.Trinity.fasta,\
+../assemblies/trinity_20M.P2.raw.Trinity.fasta,\
+../assemblies/trinity_40M.P2.raw.Trinity.fasta,\
+../assemblies/trinity_60M.P2.raw.Trinity.fasta,\
+../assemblies/trinity_80M.P2.raw.Trinity.fasta,\
+../assemblies/trinity_100M.P2.raw.Trinity.fasta,\
+../assemblies/1M.trinity_bfc31.Trinity.fasta,\
+../assemblies/2M.trinity_bfc31.Trinity.fasta,\
+../assemblies/5M.trinity_bfc31.Trinity.fasta,\
+../assemblies/10M.trinity_bfc31.Trinity.fasta,\
+../assemblies/20M.trinity_bfc31.Trinity.fasta,\
+../assemblies/40M.trinity_bfc31.Trinity.fasta,\
+../assemblies/60M.seecer.trinity.Trinity.fasta,\
+../assemblies/80M.seecer.trinity.Trinity.fasta,\
+../assemblies/100M.seecer.trinity.Trinity.fasta \
 -l ../reads/SRR797058_1.fastq.gz \
 -r ../reads/SRR797058_2.fastq.gz
 
