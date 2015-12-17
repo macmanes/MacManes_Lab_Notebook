@@ -999,7 +999,7 @@ tmux new -s busco
 in `/mnt/data3/macmanes/error/busco`
 
 ```
-for i in $(ls ../assemblies/trin*fasta); do
+for i in $(ls ../assemblies/*seecer*fasta); do
    F=`basename $i .fasta`;
    python3 /share/BUSCO_v1.1b1/BUSCO_v1.1b1.py -g $i -m Trans --cpu 52 -o $F -l vertebrata;
 done
@@ -1034,7 +1034,44 @@ transrate -t 52 -a \
 
 ```
 
+merge
+--
 
+```
+seqtk sample -s1023240 ../reads/SRR1659968_1.fastq 20000000 | sed 's_ _-_g' > 20a.subsamp_1.fastq
+seqtk sample -s1023240 ../reads/SRR1659968_2.fastq 20000000 | sed 's_ _-_g' > 20a.subsamp_2.fastq
+
+seqtk sample -s1023340 ../reads/SRR1659968_1.fastq 20000000 | sed 's_ _-_g' > 20b.subsamp_1.fastq
+seqtk sample -s1023340 ../reads/SRR1659968_2.fastq 20000000 | sed 's_ _-_g' > 20b.subsamp_2.fastq
+
+seqtk sample -s1024340 ../reads/SRR1659968_1.fastq 20000000 | sed 's_ _-_g' > 20c.subsamp_1.fastq
+seqtk sample -s1024340 ../reads/SRR1659968_2.fastq 20000000 | sed 's_ _-_g' > 20c.subsamp_2.fastq
+
+seqtk sample -s1025340 ../reads/SRR1659968_1.fastq 20000000 | sed 's_ _-_g' > 20d.subsamp_1.fastq
+seqtk sample -s1025340 ../reads/SRR1659968_2.fastq 20000000 | sed 's_ _-_g' > 20d.subsamp_2.fastq
+
+seqtk sample -s1026340 ../reads/SRR1659968_1.fastq 20000000 | sed 's_ _-_g' > 20e.subsamp_1.fastq
+seqtk sample -s1026340 ../reads/SRR1659968_2.fastq 20000000 | sed 's_ _-_g' > 20e.subsamp_2.fastq
+
+cd ../../merge
+
+seqtk sample -s1021340 ../reads/SRR797058_1.fastq.gz 20000000 | sed 's_ H_-H_g' > 20a.subsamp_1.fastq
+seqtk sample -s1021340 ../reads/SRR797058_2.fastq.gz 20000000 | sed 's_ H_-H_g' > 20a.subsamp_2.fastq
+
+seqtk sample -s1023420 ../reads/SRR797058_1.fastq.gz 20000000 | sed 's_ H_-H_g' > 20b.subsamp_1.fastq
+seqtk sample -s1023420 ../reads/SRR797058_2.fastq.gz 20000000 | sed 's_ H_-H_g' > 20b.subsamp_2.fastq
+
+seqtk sample -s1023403 ../reads/SRR797058_1.fastq.gz 20000000 | sed 's_ H_-H_g' > 20c.subsamp_1.fastq
+seqtk sample -s1023403 ../reads/SRR797058_2.fastq.gz 20000000 | sed 's_ H_-H_g' > 20c.subsamp_2.fastq
+
+seqtk sample -s1023404 ../reads/SRR797058_1.fastq.gz 20000000 | sed 's_ H_-H_g' > 20d.subsamp_1.fastq
+seqtk sample -s1023404 ../reads/SRR797058_2.fastq.gz 20000000 | sed 's_ H_-H_g' > 20d.subsamp_2.fastq
+
+seqtk sample -s1023405 ../reads/SRR797058_1.fastq.gz 20000000 | sed 's_ H_-H_g' > 20e.subsamp_1.fastq
+seqtk sample -s1023405 ../reads/SRR797058_2.fastq.gz 20000000 | sed 's_ H_-H_g' > 20e.subsamp_2.fastq
+
+
+```
 
 
 
