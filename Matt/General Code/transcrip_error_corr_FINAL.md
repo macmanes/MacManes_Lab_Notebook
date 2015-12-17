@@ -1071,8 +1071,11 @@ seqtk sample -s1023405 ../reads/SRR797058_1.fastq.gz 20000000 | sed 's_ H_-H_g' 
 seqtk sample -s1023405 ../reads/SRR797058_2.fastq.gz 20000000 | sed 's_ H_-H_g' > 20e.subsamp_2.fastq
 
 
-for i in a b c d e f; do
-	Trinity --seqType fq --max_memory 20G --trimmomatic --left 20$i.subsamp_1.fastq --right 20$i.subsamp_2.fastq --CPU 6 --output trinity_v$i --inchworm_cpu 6 --full_cleanup --quality_trimming_params "ILLUMINACLIP:/thomas2/matt_test/error/homo/scripts/barcodes.fa:2:40:15 LEADING:2 TRAILING:2 MINLEN:25";
+for i in a; do
+	Trinity --seqType fq --max_memory 20G --trimmomatic \
+	--left 20$i.subsamp_1.fastq --right 20$i.subsamp_2.fastq \
+	--CPU 16 --output trinity_v$i --inchworm_cpu 6 --full_cleanup \
+	--quality_trimming_params "ILLUMINACLIP:/thomas2/matt_test/error/homo/scripts/barcodes.fa:2:40:15 LEADING:2 TRAILING:2 MINLEN:25";
 done
 
 ```
