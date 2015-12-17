@@ -1081,7 +1081,32 @@ done
 ```
 
 
+transrate reference metrics
+--
 
+
+```
+transrate -t 52 -a \
+../assemblies/trinity_1M.P2.raw.Trinity.fasta,\
+../assemblies/trinity_2M.P2.raw.Trinity.fasta,\
+../assemblies/trinity_5M.P2.raw.Trinity.fasta,\
+../assemblies/trinity_10M.P2.raw.Trinity.fasta,\
+../assemblies/trinity_20M.P2.raw.Trinity.fasta,\
+../assemblies/trinity_40M.P2.raw.Trinity.fasta,\
+../assemblies/trinity_60M.P2.raw.Trinity.fasta,\
+../assemblies/trinity_80M.P2.raw.Trinity.fasta,\
+../assemblies/trinity_100M.P2.raw.Trinity.fasta,\
+../assemblies/1M.trinity_bfc31.Trinity.fasta,\
+../assemblies/2M.trinity_bfc31.Trinity.fasta,\
+../assemblies/5M.trinity_bfc31.Trinity.fasta,\
+../assemblies/10M.trinity_bfc31.Trinity.fasta,\
+../assemblies/20M.trinity_bfc31.Trinity.fasta,\
+../assemblies/40M.trinity_bfc31.Trinity.fasta,\
+../assemblies/60M.seecer.trinity.Trinity.fasta,\
+../assemblies/80M.seecer.trinity.Trinity.fasta,\
+../assemblies/100M.seecer.trinity.Trinity.fasta \
+--reference Mus_musculus.GRCm38.pep.all.fa
+```
 
 
 
